@@ -1,0 +1,321 @@
+- id: 10010
+  name: Adventurer
+  rarities:
+    - 1
+    - 2
+    - 3
+  iconUrl: /10010_4.png
+- id: 15014
+  name: Archaic Petra
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15014_4.png
+- id: 10005
+  name: Berserker
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10005_4.png
+- id: 14001
+  name: Blizzard Strayer
+  rarities:
+    - 4
+    - 5
+  iconUrl: /14001_4.png
+- id: 15008
+  name: Bloodstained Chivalry
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15008_4.png
+- id: 10002
+  name: Brave Heart
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10002_4.png
+- id: 15006
+  name: Crimson Witch of Flames
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15006_4.png
+- id: 15025
+  name: Deepwood Memories
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15025_4.png
+- id: 10003
+  name: Defender's Will
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10003_4.png
+- id: 15027
+  name: Desert Pavilion Chronicle
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15027_4.png
+- id: 15024
+  name: Echoes of an Offering
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15024_4.png
+- id: 15020
+  name: Emblem of Severed Fate
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15020_4.png
+- id: 15028
+  name: Flower of Paradise Lost
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15028_4.png
+- id: 15035
+  name: Fragment of Harmonic Whimsy
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15035_4.png
+- id: 10008
+  name: Gambler
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10008_4.png
+- id: 15026
+  name: Gilded Dreams
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15026_4.png
+- id: 15001
+  name: Gladiator's Finale
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15001_4.png
+- id: 15032
+  name: Golden Troupe
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15032_4.png
+- id: 15016
+  name: Heart of Depth
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15016_4.png
+- id: 15021
+  name: Husk of Opulent Dreams
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15021_4.png
+- id: 10007
+  name: Instructor
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10007_4.png
+- id: 14003
+  name: Lavawalker
+  rarities:
+    - 4
+    - 5
+  iconUrl: /14003_4.png
+- id: 10011
+  name: Lucky Dog
+  rarities:
+    - 1
+    - 2
+    - 3
+  iconUrl: /10011_4.png
+- id: 14004
+  name: Maiden Beloved
+  rarities:
+    - 4
+    - 5
+  iconUrl: /14004_4.png
+- id: 15031
+  name: Marechaussee Hunter
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15031_4.png
+- id: 10006
+  name: Martial Artist
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10006_4.png
+- id: 15034
+  name: Nighttime Whispers in the Echoing Woods
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15034_4.png
+- id: 15007
+  name: Noblesse Oblige
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15007_4.png
+- id: 15029
+  name: Nymph's Dream
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15029_4.png
+- id: 15038
+  name: Obsidian Codex
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15038_4.png
+- id: 15022
+  name: Ocean-Hued Clam
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15022_4.png
+- id: 15018
+  name: Pale Flame
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15018_4.png
+- id: 15010
+  name: Prayers for Destiny
+  rarities:
+    - 3
+    - 4
+  iconUrl: /15010_3.png
+- id: 15009
+  name: Prayers for Illumination
+  rarities:
+    - 3
+    - 4
+  iconUrl: /15009_3.png
+- id: 15011
+  name: Prayers for Wisdom
+  rarities:
+    - 3
+    - 4
+  iconUrl: /15011_3.png
+- id: 15013
+  name: Prayers to Springtime
+  rarities:
+    - 3
+    - 4
+  iconUrl: /15013_3.png
+- id: 10001
+  name: Resolution of Sojourner
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10001_4.png
+- id: 15015
+  name: Retracing Bolide
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15015_4.png
+- id: 10012
+  name: Scholar
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10012_4.png
+- id: 15037
+  name: Scroll of the Hero of Cinder City
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15037_4.png
+- id: 15019
+  name: Shimenawa's Reminiscence
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15019_4.png
+- id: 15033
+  name: Song of Days Past
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15033_4.png
+- id: 15017
+  name: Tenacity of the Millelith
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15017_4.png
+- id: 10009
+  name: The Exile
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10009_4.png
+- id: 15005
+  name: Thundering Fury
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15005_4.png
+- id: 14002
+  name: Thundersoother
+  rarities:
+    - 4
+    - 5
+  iconUrl: /14002_4.png
+- id: 10004
+  name: Tiny Miracle
+  rarities:
+    - 3
+    - 4
+  iconUrl: /10004_4.png
+- id: 10013
+  name: Traveling Doctor
+  rarities:
+    - 1
+    - 2
+    - 3
+  iconUrl: /10013_4.png
+- id: 15036
+  name: Unfinished Reverie
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15036_4.png
+- id: 15023
+  name: Vermillion Hereafter
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15023_4.png
+- id: 15002
+  name: Viridescent Venerer
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15002_4.png
+- id: 15030
+  name: Vourukasha's Glow
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15030_4.png
+- id: 15003
+  name: Wanderer's Troupe
+  rarities:
+    - 4
+    - 5
+  iconUrl: /15003_4.png
