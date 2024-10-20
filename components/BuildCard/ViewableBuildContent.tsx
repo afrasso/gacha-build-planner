@@ -1,9 +1,8 @@
-"use client";
-
-import { CardContent } from "@/components/ui/card";
-import { Build } from "@/types";
 import _ from "lodash";
 import Image from "next/image";
+
+import { Build } from "../../types";
+import { CardContent } from "../ui/card";
 
 interface ViewableBuildContentProps {
   build: Build;
@@ -36,7 +35,7 @@ const ViewableBuildContent: React.FC<ViewableBuildContentProps> = ({ build }) =>
               ))}
             </>
           ) : (
-            "Not set"
+            "None set"
           )}
         </div>
         <p>

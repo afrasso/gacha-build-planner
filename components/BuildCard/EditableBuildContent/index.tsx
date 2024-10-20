@@ -1,9 +1,8 @@
 "use client";
 
-import { CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { ArtifactSet, ArtifactType, Build, DesiredStat, Stat, Weapon } from "@/types";
-
+import { ArtifactSet, ArtifactType, Build, DesiredStat, Stat, Weapon } from "../../../types";
+import { CardContent } from "../../ui/card";
+import { Label } from "../../ui/label";
 import ArtifactMainStatSelector from "./ArtifactMainStatSelector";
 import ArtifactSetSelector from "./ArtifactSetSelector";
 import DesiredStatsSelector from "./DesiredStatsSelector";

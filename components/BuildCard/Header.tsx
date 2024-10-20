@@ -1,10 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { CardHeader, CardTitle } from "@/components/ui/card";
-import { Build } from "@/types";
 import { Check, PencilIcon } from "lucide-react";
 import Image from "next/image";
+
+import { Build } from "../../types";
+import { Button } from "../ui/button";
+import { CardHeader, CardTitle } from "../ui/card";
 
 interface HeaderProps {
   build: Build;

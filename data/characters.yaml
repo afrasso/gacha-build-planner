@@ -1,534 +1,540 @@
-- id: 10000005
-  name: Aether
-  element: ELEMENT_NONE
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_NONE
   iconUrl: /10000005.png
-- id: 10000038
-  name: Albedo
-  element: ELEMENT_GEO
+  id: 10000005
+  name: Aether
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_GEO
   iconUrl: /10000038.png
-- id: 10000078
-  name: Alhaitham
-  element: ELEMENT_DENDRO
+  id: 10000038
+  name: Albedo
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_DENDRO
   iconUrl: /10000078.png
-- id: 10000062
-  name: Aloy
-  element: ELEMENT_CRYO
+  id: 10000078
+  name: Alhaitham
   rarity: 5
-  weaponType: WEAPON_BOW
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_CRYO
   iconUrl: /10000062.png
-- id: 10000021
-  name: Amber
-  element: ELEMENT_PYRO
-  rarity: 4
+  id: 10000062
+  name: Aloy
+  rarity: 5
   weaponType: WEAPON_BOW
+- element: ELEMENT_PYRO
   iconUrl: /10000021.png
-- id: 10000057
-  name: Arataki Itto
-  element: ELEMENT_GEO
-  rarity: 5
-  weaponType: WEAPON_CLAYMORE
+  id: 10000021
+  name: Amber
+  rarity: 4
+  weaponType: WEAPON_BOW
+- element: ELEMENT_GEO
   iconUrl: /10000057.png
-- id: 10000096
-  name: Arlecchino
-  element: ELEMENT_PYRO
+  id: 10000057
+  name: Arataki Itto
   rarity: 5
-  weaponType: WEAPON_POLE
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_PYRO
   iconUrl: /10000096.png
-- id: 10000082
-  name: Baizhu
-  element: ELEMENT_DENDRO
+  id: 10000096
+  name: Arlecchino
   rarity: 5
-  weaponType: WEAPON_CATALYST
+  weaponType: WEAPON_POLE
+- element: ELEMENT_DENDRO
   iconUrl: /10000082.png
-- id: 10000014
-  name: Barbara
-  element: ELEMENT_HYDRO
-  rarity: 4
+  id: 10000082
+  name: Baizhu
+  rarity: 5
   weaponType: WEAPON_CATALYST
+- element: ELEMENT_HYDRO
   iconUrl: /10000014.png
-- id: 10000024
-  name: Beidou
-  element: ELEMENT_ELECTRO
+  id: 10000014
+  name: Barbara
   rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_ELECTRO
   iconUrl: /10000024.png
-- id: 10000032
-  name: Bennett
-  element: ELEMENT_PYRO
+  id: 10000024
+  name: Beidou
   rarity: 4
-  weaponType: WEAPON_SWORD_ONE_HAND
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_PYRO
   iconUrl: /10000032.png
-- id: 10000072
-  name: Candace
-  element: ELEMENT_HYDRO
+  id: 10000032
+  name: Bennett
   rarity: 4
-  weaponType: WEAPON_POLE
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_HYDRO
   iconUrl: /10000072.png
-- id: 10000088
-  name: Charlotte
-  element: ELEMENT_CRYO
+  id: 10000072
+  name: Candace
   rarity: 4
-  weaponType: WEAPON_CATALYST
+  weaponType: WEAPON_POLE
+- element: ELEMENT_CRYO
   iconUrl: /10000088.png
-- id: 10000090
-  name: Chevreuse
-  element: ELEMENT_PYRO
+  id: 10000088
+  name: Charlotte
   rarity: 4
-  weaponType: WEAPON_POLE
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_PYRO
   iconUrl: /10000090.png
-- id: 10000094
-  name: Chiori
-  element: ELEMENT_GEO
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000090
+  name: Chevreuse
+  rarity: 4
+  weaponType: WEAPON_POLE
+- element: ELEMENT_GEO
   iconUrl: /10000094.png
-- id: 10000036
-  name: Chongyun
-  element: ELEMENT_CRYO
-  rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  id: 10000094
+  name: Chiori
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_CRYO
   iconUrl: /10000036.png
-- id: 10000098
-  name: Clorinde
-  element: ELEMENT_ELECTRO
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000036
+  name: Chongyun
+  rarity: 4
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_ELECTRO
   iconUrl: /10000098.png
-- id: 10000067
-  name: Collei
-  element: ELEMENT_DENDRO
-  rarity: 4
-  weaponType: WEAPON_BOW
+  id: 10000098
+  name: Clorinde
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_DENDRO
   iconUrl: /10000067.png
-- id: 10000071
-  name: Cyno
-  element: ELEMENT_ELECTRO
-  rarity: 5
-  weaponType: WEAPON_POLE
+  id: 10000067
+  name: Collei
+  rarity: 4
+  weaponType: WEAPON_BOW
+- element: ELEMENT_ELECTRO
   iconUrl: /10000071.png
-- id: 10000079
-  name: Dehya
-  element: ELEMENT_PYRO
+  id: 10000071
+  name: Cyno
   rarity: 5
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_POLE
+- element: ELEMENT_PYRO
   iconUrl: /10000079.png
-- id: 10000016
-  name: Diluc
-  element: ELEMENT_PYRO
+  id: 10000079
+  name: Dehya
   rarity: 5
   weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_PYRO
   iconUrl: /10000016.png
-- id: 10000039
-  name: Diona
-  element: ELEMENT_CRYO
-  rarity: 4
-  weaponType: WEAPON_BOW
+  id: 10000016
+  name: Diluc
+  rarity: 5
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_CRYO
   iconUrl: /10000039.png
-- id: 10000068
-  name: Dori
-  element: ELEMENT_ELECTRO
+  id: 10000039
+  name: Diona
   rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_BOW
+- element: ELEMENT_ELECTRO
   iconUrl: /10000068.png
-- id: 10000099
-  name: Emilie
-  element: ELEMENT_DENDRO
-  rarity: 5
-  weaponType: WEAPON_POLE
+  id: 10000068
+  name: Dori
+  rarity: 4
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_DENDRO
   iconUrl: /10000099.png
-- id: 10000051
-  name: Eula
-  element: ELEMENT_CRYO
+  id: 10000099
+  name: Emilie
   rarity: 5
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_POLE
+- element: ELEMENT_CRYO
   iconUrl: /10000051.png
-- id: 10000076
-  name: Faruzan
-  element: ELEMENT_ANEMO
-  rarity: 4
-  weaponType: WEAPON_BOW
+  id: 10000051
+  name: Eula
+  rarity: 5
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_ANEMO
   iconUrl: /10000076.png
-- id: 10000031
-  name: Fischl
-  element: ELEMENT_ELECTRO
+  id: 10000076
+  name: Faruzan
   rarity: 4
   weaponType: WEAPON_BOW
+- element: ELEMENT_ELECTRO
   iconUrl: /10000031.png
-- id: 10000085
-  name: Freminet
-  element: ELEMENT_CRYO
+  id: 10000031
+  name: Fischl
   rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_BOW
+- element: ELEMENT_CRYO
   iconUrl: /10000085.png
-- id: 10000089
-  name: Furina
-  element: ELEMENT_HYDRO
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000085
+  name: Freminet
+  rarity: 4
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_HYDRO
   iconUrl: /10000089.png
-- id: 10000092
-  name: Gaming
-  element: ELEMENT_PYRO
-  rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  id: 10000089
+  name: Furina
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_PYRO
   iconUrl: /10000092.png
-- id: 10000037
-  name: Ganyu
-  element: ELEMENT_CRYO
-  rarity: 5
-  weaponType: WEAPON_BOW
+  id: 10000092
+  name: Gaming
+  rarity: 4
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_CRYO
   iconUrl: /10000037.png
-- id: 10000055
-  name: Gorou
-  element: ELEMENT_GEO
-  rarity: 4
+  id: 10000037
+  name: Ganyu
+  rarity: 5
   weaponType: WEAPON_BOW
+- element: ELEMENT_GEO
   iconUrl: /10000055.png
-- id: 10000046
-  name: Hu Tao
-  element: ELEMENT_PYRO
-  rarity: 5
-  weaponType: WEAPON_POLE
+  id: 10000055
+  name: Gorou
+  rarity: 4
+  weaponType: WEAPON_BOW
+- element: ELEMENT_PYRO
   iconUrl: /10000046.png
-- id: 10000003
-  name: Jean
-  element: ELEMENT_ANEMO
+  id: 10000046
+  name: Hu Tao
   rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  weaponType: WEAPON_POLE
+- element: ELEMENT_ANEMO
   iconUrl: /10000003.png
-- id: 10000100
-  name: Kachina
-  element: ELEMENT_GEO
-  rarity: 4
-  weaponType: WEAPON_POLE
+  id: 10000003
+  name: Jean
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_GEO
   iconUrl: /10000100.png
-- id: 10000047
-  name: Kaedehara Kazuha
-  element: ELEMENT_ANEMO
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000100
+  name: Kachina
+  rarity: 4
+  weaponType: WEAPON_POLE
+- element: ELEMENT_ANEMO
   iconUrl: /10000047.png
-- id: 10000015
-  name: Kaeya
-  element: ELEMENT_CRYO
-  rarity: 4
+  id: 10000047
+  name: Kaedehara Kazuha
+  rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_CRYO
   iconUrl: /10000015.png
-- id: 10000002
-  name: Kamisato Ayaka
-  element: ELEMENT_CRYO
-  rarity: 5
+  id: 10000015
+  name: Kaeya
+  rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_CRYO
   iconUrl: /10000002.png
-- id: 10000066
-  name: Kamisato Ayato
-  element: ELEMENT_HYDRO
+  id: 10000002
+  name: Kamisato Ayaka
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_HYDRO
   iconUrl: /10000066.png
-- id: 10000081
-  name: Kaveh
-  element: ELEMENT_DENDRO
-  rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  id: 10000066
+  name: Kamisato Ayato
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_DENDRO
   iconUrl: /10000081.png
-- id: 10000042
-  name: Keqing
-  element: ELEMENT_ELECTRO
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000081
+  name: Kaveh
+  rarity: 4
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_ELECTRO
   iconUrl: /10000042.png
-- id: 10000101
-  name: Kinich
-  element: ELEMENT_DENDRO
+  id: 10000042
+  name: Keqing
   rarity: 5
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_DENDRO
   iconUrl: /10000101.png
-- id: 10000061
-  name: Kirara
-  element: ELEMENT_DENDRO
-  rarity: 4
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000101
+  name: Kinich
+  rarity: 5
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_DENDRO
   iconUrl: /10000061.png
-- id: 10000029
-  name: Klee
-  element: ELEMENT_PYRO
-  rarity: 5
-  weaponType: WEAPON_CATALYST
+  id: 10000061
+  name: Kirara
+  rarity: 4
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_PYRO
   iconUrl: /10000029.png
-- id: 10000056
-  name: Kujou Sara
-  element: ELEMENT_ELECTRO
-  rarity: 4
-  weaponType: WEAPON_BOW
+  id: 10000029
+  name: Klee
+  rarity: 5
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_ELECTRO
   iconUrl: /10000056.png
-- id: 10000065
-  name: Kuki Shinobu
-  element: ELEMENT_ELECTRO
+  id: 10000056
+  name: Kujou Sara
   rarity: 4
-  weaponType: WEAPON_SWORD_ONE_HAND
+  weaponType: WEAPON_BOW
+- element: ELEMENT_ELECTRO
   iconUrl: /10000065.png
-- id: 10000074
-  name: Layla
-  element: ELEMENT_CRYO
+  id: 10000065
+  name: Kuki Shinobu
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_CRYO
   iconUrl: /10000074.png
-- id: 10000006
-  name: Lisa
-  element: ELEMENT_ELECTRO
+  id: 10000074
+  name: Layla
   rarity: 4
-  weaponType: WEAPON_CATALYST
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_ELECTRO
   iconUrl: /10000006.png
-- id: 10000007
-  name: Lumine
-  element: ELEMENT_NONE
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000006
+  name: Lisa
+  rarity: 4
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_NONE
   iconUrl: /10000007.png
-- id: 10000083
-  name: Lynette
-  element: ELEMENT_ANEMO
-  rarity: 4
+  id: 10000007
+  name: Lumine
+  rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_ANEMO
   iconUrl: /10000083.png
-- id: 10000084
-  name: Lyney
-  element: ELEMENT_PYRO
-  rarity: 5
-  weaponType: WEAPON_BOW
+  id: 10000083
+  name: Lynette
+  rarity: 4
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_PYRO
   iconUrl: /10000084.png
-- id: 10000080
-  name: Mika
-  element: ELEMENT_CRYO
-  rarity: 4
-  weaponType: WEAPON_POLE
+  id: 10000084
+  name: Lyney
+  rarity: 5
+  weaponType: WEAPON_BOW
+- element: ELEMENT_CRYO
   iconUrl: /10000080.png
-- id: 10000041
-  name: Mona
-  element: ELEMENT_HYDRO
-  rarity: 5
-  weaponType: WEAPON_CATALYST
+  id: 10000080
+  name: Mika
+  rarity: 4
+  weaponType: WEAPON_POLE
+- element: ELEMENT_HYDRO
   iconUrl: /10000041.png
-- id: 10000102
-  name: Mualani
-  element: ELEMENT_HYDRO
+  id: 10000041
+  name: Mona
   rarity: 5
   weaponType: WEAPON_CATALYST
+- element: ELEMENT_HYDRO
   iconUrl: /10000102.png
-- id: 10000073
-  name: Nahida
-  element: ELEMENT_DENDRO
+  id: 10000102
+  name: Mualani
   rarity: 5
   weaponType: WEAPON_CATALYST
+- element: ELEMENT_DENDRO
   iconUrl: /10000073.png
-- id: 10000091
-  name: Navia
-  element: ELEMENT_GEO
+  id: 10000073
+  name: Nahida
   rarity: 5
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_GEO
   iconUrl: /10000091.png
-- id: 10000087
-  name: Neuvillette
-  element: ELEMENT_HYDRO
+  id: 10000091
+  name: Navia
   rarity: 5
-  weaponType: WEAPON_CATALYST
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_HYDRO
   iconUrl: /10000087.png
-- id: 10000070
-  name: Nilou
-  element: ELEMENT_HYDRO
+  id: 10000087
+  name: Neuvillette
   rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_HYDRO
   iconUrl: /10000070.png
-- id: 10000027
-  name: Ningguang
-  element: ELEMENT_GEO
-  rarity: 4
-  weaponType: WEAPON_CATALYST
+  id: 10000070
+  name: Nilou
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_GEO
   iconUrl: /10000027.png
-- id: 10000034
-  name: Noelle
-  element: ELEMENT_GEO
+  id: 10000027
+  name: Ningguang
   rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_GEO
   iconUrl: /10000034.png
-- id: 10000035
-  name: Qiqi
-  element: ELEMENT_CRYO
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
+  id: 10000034
+  name: Noelle
+  rarity: 4
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_CRYO
   iconUrl: /10000035.png
-- id: 10000052
-  name: Raiden Shogun
-  element: ELEMENT_ELECTRO
+  id: 10000035
+  name: Qiqi
   rarity: 5
-  weaponType: WEAPON_POLE
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_ELECTRO
   iconUrl: /10000052.png
-- id: 10000020
-  name: Razor
-  element: ELEMENT_ELECTRO
-  rarity: 4
-  weaponType: WEAPON_CLAYMORE
+  id: 10000052
+  name: Raiden Shogun
+  rarity: 5
+  weaponType: WEAPON_POLE
+- element: ELEMENT_ELECTRO
   iconUrl: /10000020.png
-- id: 10000045
-  name: Rosaria
-  element: ELEMENT_CRYO
-  rarity: 4
-  weaponType: WEAPON_POLE
-  iconUrl: /10000045.png
-- id: 10000054
-  name: Sangonomiya Kokomi
-  element: ELEMENT_HYDRO
-  rarity: 5
-  weaponType: WEAPON_CATALYST
-  iconUrl: /10000054.png
-- id: 10000053
-  name: Sayu
-  element: ELEMENT_ANEMO
+  id: 10000020
+  name: Razor
   rarity: 4
   weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_CRYO
+  iconUrl: /10000045.png
+  id: 10000045
+  name: Rosaria
+  rarity: 4
+  weaponType: WEAPON_POLE
+- element: ELEMENT_HYDRO
+  iconUrl: /10000054.png
+  id: 10000054
+  name: Sangonomiya Kokomi
+  rarity: 5
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_ANEMO
   iconUrl: /10000053.png
-- id: 10000097
-  name: Sethos
-  element: ELEMENT_ELECTRO
+  id: 10000053
+  name: Sayu
   rarity: 4
-  weaponType: WEAPON_BOW
+  weaponType: WEAPON_CLAYMORE
+- element: ELEMENT_ELECTRO
   iconUrl: /10000097.png
-- id: 10000063
-  name: Shenhe
-  element: ELEMENT_CRYO
-  rarity: 5
-  weaponType: WEAPON_POLE
+  id: 10000097
+  name: Sethos
+  rarity: 4
+  weaponType: WEAPON_BOW
+- element: ELEMENT_CRYO
   iconUrl: /10000063.png
-- id: 10000059
-  name: Shikanoin Heizou
-  element: ELEMENT_ANEMO
-  rarity: 4
-  weaponType: WEAPON_CATALYST
+  id: 10000063
+  name: Shenhe
+  rarity: 5
+  weaponType: WEAPON_POLE
+- element: ELEMENT_ANEMO
   iconUrl: /10000059.png
-- id: 10000095
-  name: Sigewinne
-  element: ELEMENT_HYDRO
-  rarity: 5
-  weaponType: WEAPON_BOW
+  id: 10000059
+  name: Shikanoin Heizou
+  rarity: 4
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_HYDRO
   iconUrl: /10000095.png
-- id: 10000043
-  name: Sucrose
-  element: ELEMENT_ANEMO
-  rarity: 4
-  weaponType: WEAPON_CATALYST
+  id: 10000095
+  name: Sigewinne
+  rarity: 5
+  weaponType: WEAPON_BOW
+- element: ELEMENT_ANEMO
   iconUrl: /10000043.png
-- id: 10000033
-  name: Tartaglia
-  element: ELEMENT_HYDRO
-  rarity: 5
-  weaponType: WEAPON_BOW
+  id: 10000043
+  name: Sucrose
+  rarity: 4
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_HYDRO
   iconUrl: /10000033.png
-- id: 10000050
-  name: Thoma
-  element: ELEMENT_PYRO
-  rarity: 4
-  weaponType: WEAPON_POLE
+  id: 10000033
+  name: Tartaglia
+  rarity: 5
+  weaponType: WEAPON_BOW
+- element: ELEMENT_PYRO
   iconUrl: /10000050.png
-- id: 10000069
-  name: Tighnari
-  element: ELEMENT_DENDRO
-  rarity: 5
-  weaponType: WEAPON_BOW
-  iconUrl: /10000069.png
-- id: 10000022
-  name: Venti
-  element: ELEMENT_ANEMO
-  rarity: 5
-  weaponType: WEAPON_BOW
-  iconUrl: /10000022.png
-- id: 10000075
-  name: Wanderer
-  element: ELEMENT_ANEMO
-  rarity: 5
-  weaponType: WEAPON_CATALYST
-  iconUrl: /10000075.png
-- id: 10000086
-  name: Wriothesley
-  element: ELEMENT_CRYO
-  rarity: 5
-  weaponType: WEAPON_CATALYST
-  iconUrl: /10000086.png
-- id: 10000023
-  name: Xiangling
-  element: ELEMENT_PYRO
+  id: 10000050
+  name: Thoma
   rarity: 4
   weaponType: WEAPON_POLE
-  iconUrl: /10000023.png
-- id: 10000093
-  name: Xianyun
-  element: ELEMENT_ANEMO
+- element: ELEMENT_DENDRO
+  iconUrl: /10000069.png
+  id: 10000069
+  name: Tighnari
+  rarity: 5
+  weaponType: WEAPON_BOW
+- element: ELEMENT_ANEMO
+  iconUrl: /10000022.png
+  id: 10000022
+  name: Venti
+  rarity: 5
+  weaponType: WEAPON_BOW
+- element: ELEMENT_ANEMO
+  iconUrl: /10000075.png
+  id: 10000075
+  name: Wanderer
   rarity: 5
   weaponType: WEAPON_CATALYST
+- element: ELEMENT_CRYO
+  iconUrl: /10000086.png
+  id: 10000086
+  name: Wriothesley
+  rarity: 5
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_PYRO
+  iconUrl: /10000023.png
+  id: 10000023
+  name: Xiangling
+  rarity: 4
+  weaponType: WEAPON_POLE
+- element: ELEMENT_ANEMO
   iconUrl: /10000093.png
-- id: 10000026
+  id: 10000093
+  name: Xianyun
+  rarity: 5
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_ANEMO
+  iconUrl: /10000026.png
+  id: 10000026
   name: Xiao
-  element: ELEMENT_ANEMO
   rarity: 5
   weaponType: WEAPON_POLE
-  iconUrl: /10000026.png
-- id: 10000025
+- element: ELEMENT_GEO
+  iconUrl: /10000103.png
+  id: 10000103
+  name: Xilonen
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- element: ELEMENT_HYDRO
+  iconUrl: /10000025.png
+  id: 10000025
   name: Xingqiu
-  element: ELEMENT_HYDRO
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-  iconUrl: /10000025.png
-- id: 10000044
+- element: ELEMENT_PYRO
+  iconUrl: /10000044.png
+  id: 10000044
   name: Xinyan
-  element: ELEMENT_PYRO
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-  iconUrl: /10000044.png
-- id: 10000058
-  name: Yae Miko
-  element: ELEMENT_ELECTRO
-  rarity: 5
-  weaponType: WEAPON_CATALYST
+- element: ELEMENT_ELECTRO
   iconUrl: /10000058.png
-- id: 10000048
+  id: 10000058
+  name: Yae Miko
+  rarity: 5
+  weaponType: WEAPON_CATALYST
+- element: ELEMENT_PYRO
+  iconUrl: /10000048.png
+  id: 10000048
   name: Yanfei
-  element: ELEMENT_PYRO
   rarity: 4
   weaponType: WEAPON_CATALYST
-  iconUrl: /10000048.png
-- id: 10000077
-  name: Yaoyao
-  element: ELEMENT_DENDRO
-  rarity: 4
-  weaponType: WEAPON_POLE
+- element: ELEMENT_DENDRO
   iconUrl: /10000077.png
-- id: 10000060
-  name: Yelan
-  element: ELEMENT_HYDRO
-  rarity: 5
-  weaponType: WEAPON_BOW
-  iconUrl: /10000060.png
-- id: 10000049
-  name: Yoimiya
-  element: ELEMENT_PYRO
-  rarity: 5
-  weaponType: WEAPON_BOW
-  iconUrl: /10000049.png
-- id: 10000064
-  name: Yun Jin
-  element: ELEMENT_GEO
+  id: 10000077
+  name: Yaoyao
   rarity: 4
   weaponType: WEAPON_POLE
+- element: ELEMENT_HYDRO
+  iconUrl: /10000060.png
+  id: 10000060
+  name: Yelan
+  rarity: 5
+  weaponType: WEAPON_BOW
+- element: ELEMENT_PYRO
+  iconUrl: /10000049.png
+  id: 10000049
+  name: Yoimiya
+  rarity: 5
+  weaponType: WEAPON_BOW
+- element: ELEMENT_GEO
   iconUrl: /10000064.png
-- id: 10000030
+  id: 10000064
+  name: Yun Jin
+  rarity: 4
+  weaponType: WEAPON_POLE
+- element: ELEMENT_GEO
+  iconUrl: /10000030.png
+  id: 10000030
   name: Zhongli
-  element: ELEMENT_GEO
   rarity: 5
   weaponType: WEAPON_POLE
-  iconUrl: /10000030.png

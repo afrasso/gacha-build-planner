@@ -1,4 +1,4 @@
-import BuildManagerServerWrapper from "@/components/BuildManagerServerWrapper";
+import BuildManagerServerWrapper from "../components/BuildManagerServerWrapper";
 
 export default function Home() {
   return (
