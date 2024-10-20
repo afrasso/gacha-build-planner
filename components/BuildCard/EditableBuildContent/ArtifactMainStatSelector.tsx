@@ -1,7 +1,7 @@
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MAIN_STATS_BY_ARTIFACT_TYPE } from "@/constants";
-import { ArtifactType, Stat } from "@/types";
+import { MAIN_STATS_BY_ARTIFACT_TYPE } from "../../../constants";
+import { ArtifactType, Stat } from "../../../types";
+import { Label } from "../../ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 
 interface ArtifactMainStatSelectorProps {
   artifactType: ArtifactType;

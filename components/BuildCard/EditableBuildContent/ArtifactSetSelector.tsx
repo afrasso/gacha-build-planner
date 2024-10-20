@@ -1,10 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArtifactSet } from "@/types";
 import { PlusCircle, X } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+
+import { ArtifactSet } from "../../../types";
+import { Button } from "../../ui/button";
+import { Label } from "../../ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 
 interface ArtifactSetSelectorProps {
   artifactSets: ArtifactSet[];

@@ -1,9 +1,10 @@
 "use client";
 
-import BuildCard from "@/components/BuildCard";
-import CharacterSelector from "@/components/CharacterSelector";
-import { ArtifactSet, ArtifactType, Build, Character, Stat, Weapon } from "@/types";
 import { useState } from "react";
+
+import { ArtifactSet, ArtifactType, Build, Character, Stat, Weapon } from "../types";
+import BuildCard from "./BuildCard";
+import CharacterSelector from "./CharacterSelector";
 
 interface BuildManagerProps {
   artifactSets: ArtifactSet[];

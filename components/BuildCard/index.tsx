@@ -1,8 +1,5 @@
-"use client";
-
-import { Card } from "@/components/ui/card";
-import { ArtifactSet, Build, Weapon } from "@/types";
-
+import { ArtifactSet, Build, Weapon } from "../../types";
+import { Card } from "../ui/card";
 import EditableBuildContent from "./EditableBuildContent";
 import Header from "./Header";
 import ViewableBuildContent from "./ViewableBuildContent";

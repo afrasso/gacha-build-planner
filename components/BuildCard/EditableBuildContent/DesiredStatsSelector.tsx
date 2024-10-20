@@ -1,10 +1,11 @@
-import { Button } from "@/components/ui/button";
-import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DesiredStat, Stat } from "@/types";
 import { PlusCircle, X } from "lucide-react";
 import React from "react";
+
+import { DesiredStat, Stat } from "../../../types";
+import { Button } from "../../ui/button";
+import DebouncedNumericInput from "../../ui/custom/DebouncedNumericInput";
+import { Label } from "../../ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 
 interface DesiredStatsSelectorProps {
   desiredStats: DesiredStat[];

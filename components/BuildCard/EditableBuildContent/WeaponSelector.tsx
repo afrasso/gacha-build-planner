@@ -1,7 +1,8 @@
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Weapon } from "@/types";
 import Image from "next/image";
+
+import { Weapon } from "../../../types";
+import { Label } from "../../ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 
 interface WeaponSelectorProps {
   onChange: (selectedWeapon: Weapon) => void;
