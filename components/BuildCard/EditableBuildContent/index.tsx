@@ -1,10 +1,14 @@
 "use client";
 
-import { ArtifactSet, ArtifactType, Build, DesiredStat, Stat, Weapon } from "../../../types";
-import { CardContent } from "../../ui/card";
-import { Label } from "../../ui/label";
-import ArtifactMainStatSelector from "./ArtifactMainStatSelector";
-import ArtifactSetSelector from "./ArtifactSetSelector";
+import { forwardRef, useImperativeHandle, useRef } from "react";
+
+import ISaveableContentHandle from "@/components/iSaveableContentHandle";
+import { CardContent } from "@/components/ui/card";
+import { ArtifactMainStats, ArtifactSet, Build, StatValue, Weapon } from "@/types";
+
+import { ArtifactCollection } from "./ArtifactCollection";
+import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
+import DesiredArtifactSetsSelector from "./DesiredArtifactSetsSelector";
 import DesiredStatsSelector from "./DesiredStatsSelector";
 import WeaponSelector from "./WeaponSelector";
 
@@ -15,48 +19,118 @@ interface EditableBuildContentProps {
   weapons: Weapon[];
 }
 
-const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ artifactSets, build, onUpdate, weapons }) => {
-  const updateWeapon = (weapon: Weapon) => {
-    onUpdate(build.character.id, { weapon });
-  };
+const EditableBuildContent = forwardRef<ISaveableContentHandle, EditableBuildContentProps>(
+  ({ artifactSets, build, onUpdate, weapons }, ref) => {
+    const weaponSelectorRef = useRef<ISaveableContentHandle>(null);
+    const desiredArtifactSetSelectorRef = useRef<ISaveableContentHandle>(null);
+    const desiredArtifactMainStatsSelectorRef = useRef<ISaveableContentHandle>(null);
+    const desiredStatsSelectorRef = useRef<ISaveableContentHandle>(null);
 
-  const updateArtifactSets = (artifactSets: ArtifactSet[]) => {
-    onUpdate(build.character.id, { artifactSets });
-  };
+    const cancel = () => {
+      console.log("Canceling editing of EditableBuildContent.");
+      weaponSelectorRef.current?.cancel();
+      desiredArtifactSetSelectorRef.current?.cancel();
+      desiredArtifactMainStatsSelectorRef.current?.cancel();
+      desiredStatsSelectorRef.current?.cancel();
+    };
 
-  const updateArtifactMainStat = (artifactType: ArtifactType, stat: Stat) => {
-    build.desiredMainStats[artifactType] = stat;
-    onUpdate(build.character.id, { desiredMainStats: build.desiredMainStats });
-  };
+    const save = () => {
+      console.log("Saving EditableBuildContent.");
+      if (
+        !weaponSelectorRef.current ||
+        !desiredArtifactSetSelectorRef.current ||
+        !desiredArtifactMainStatsSelectorRef.current ||
+        !desiredStatsSelectorRef.current
+      ) {
+        console.log("Saving EditableBuildContent failed as children are not mounted.");
+        return false;
+      }
+      if (!validate()) {
+        console.error("Saving EditableBuildContent failed due to validation error.");
+      }
+      return (
+        weaponSelectorRef.current.save() &&
+        desiredArtifactSetSelectorRef.current.save() &&
+        desiredArtifactMainStatsSelectorRef.current.save() &&
+        desiredStatsSelectorRef.current.save()
+      );
+    };
 
-  const updateDesiredStats = (desiredStats: DesiredStat[]) => {
-    onUpdate(build.character.id, { desiredStats });
-  };
+    const validate = () => {
+      console.log("Validating EditableBuildContent.");
+      if (
+        !weaponSelectorRef.current ||
+        !desiredArtifactSetSelectorRef.current ||
+        !desiredArtifactMainStatsSelectorRef.current ||
+        !desiredStatsSelectorRef.current
+      ) {
+        console.log("Validation of EditableBuildContent failed as children are not mounted.");
+        return false;
+      }
+      return (
+        weaponSelectorRef.current.validate() &&
+        desiredArtifactSetSelectorRef.current.validate() &&
+        desiredArtifactMainStatsSelectorRef.current.validate() &&
+        desiredStatsSelectorRef.current.validate()
+      );
+    };
 
-  return (
-    <CardContent>
-      <WeaponSelector onChange={updateWeapon} selectedWeapon={build.weapon} weapons={weapons} />
-      <ArtifactSetSelector
-        artifactSets={artifactSets}
-        onChange={updateArtifactSets}
-        selectedArtifactSets={build.artifactSets}
-      />
-      <div className="mb-4">
-        <Label>Desired Main Stats</Label>
-        {[ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].map((artifactType) => (
-          <ArtifactMainStatSelector
-            artifactType={artifactType}
-            key={artifactType}
-            onChange={(stat) => updateArtifactMainStat(artifactType, stat)}
-            selectedStat={build.desiredMainStats[artifactType]}
+    useImperativeHandle(ref, () => ({
+      cancel,
+      save,
+      validate,
+    }));
+
+    const updateWeapon = (weapon: Weapon) => {
+      onUpdate(build.character.id, { weapon });
+    };
+
+    const updateDesiredArtifactSets = (desiredArtifactSets: ArtifactSet[]) => {
+      onUpdate(build.character.id, { desiredArtifactSets });
+    };
+
+    const updateDesiredArtifactMainStats = (desiredArtifactMainStats: ArtifactMainStats) => {
+      onUpdate(build.character.id, { desiredArtifactMainStats });
+    };
+
+    const updateDesiredStats = (desiredStats: StatValue[]) => {
+      onUpdate(build.character.id, { desiredStats });
+    };
+
+    return (
+      <CardContent>
+        <WeaponSelector
+          onChange={updateWeapon}
+          ref={weaponSelectorRef}
+          selectedWeapon={build.weapon}
+          weapons={weapons}
+        />
+        <DesiredArtifactSetsSelector
+          artifactSets={artifactSets}
+          desiredArtifactSets={build.desiredArtifactSets}
+          onChange={updateDesiredArtifactSets}
+          ref={desiredArtifactSetSelectorRef}
+        />
+        <DesiredArtifactMainStatsSelector
+          desiredArtifactMainStats={build.desiredArtifactMainStats}
+          onChange={updateDesiredArtifactMainStats}
+          ref={desiredArtifactMainStatsSelectorRef}
+        />
+        <div>
+          <DesiredStatsSelector
+            desiredStats={build.desiredStats}
+            onChange={updateDesiredStats}
+            ref={desiredStatsSelectorRef}
           />
-        ))}
-      </div>
-      <div>
-        <DesiredStatsSelector desiredStats={build.desiredStats} onChange={updateDesiredStats} />
-      </div>
-    </CardContent>
-  );
-};
+        </div>
+        <div>
+          <ArtifactCollection />
+        </div>
+      </CardContent>
+    );
+  }
+);
+
+EditableBuildContent.displayName = "EditableBuildContent";
 
 export default EditableBuildContent;

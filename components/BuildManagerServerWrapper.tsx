@@ -1,8 +1,9 @@
 import path from "path";
 
-import { ArtifactSet, Character, Weapon } from "../types";
-import { __datadir } from "../utils/directoryutils";
-import { loadYaml } from "../utils/yamlhelper";
+import { ArtifactSet, Character, Weapon } from "@/types";
+import { __datadir } from "@/utils/directoryutils";
+import { loadYaml } from "@/utils/yamlhelper";
+
 import BuildManager from "./BuildManager";
 
 export default function BuildManagerServerWrapper() {

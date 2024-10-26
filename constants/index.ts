@@ -1,4 +1,4 @@
-import { ArtifactType, Stat } from "../types";
+import { ArtifactType, Stat } from "@/types";
 
 export const MAIN_STATS_BY_ARTIFACT_TYPE = {
   [ArtifactType.CIRCLET]: [

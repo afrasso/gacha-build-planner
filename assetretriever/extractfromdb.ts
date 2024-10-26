@@ -2,10 +2,11 @@ import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
 
-import { __datadir, __publicdir } from "../utils/directoryutils.js";
-import downloadImage from "../utils/downloadimage.js";
-import ensureDirExists from "../utils/ensuredirexists.js";
-import { saveYaml } from "../utils/yamlhelper.js";
+import { __datadir, __publicdir } from "@/utils/directoryutils.js";
+import downloadImage from "@/utils/downloadimage.js";
+import ensureDirExists from "@/utils/ensuredirexists";
+import { saveYaml } from "@/utils/yamlhelper";
+
 import { FailedArtifactIconDownload, FailedCharacterIconDownload, FailedWeaponIconDownload } from "./types";
 
 const extractFromDb = async ({ downloadIcons = false, ids = [] }: { downloadIcons?: boolean; ids?: string[] } = {}) => {

@@ -1,8 +1,8 @@
 import _ from "lodash";
 import Image from "next/image";
 
-import { Build } from "../../types";
-import { CardContent } from "../ui/card";
+import { CardContent } from "@/components/ui/card";
+import { Build } from "@/types";
 
 interface ViewableBuildContentProps {
   build: Build;
@@ -25,9 +25,9 @@ const ViewableBuildContent: React.FC<ViewableBuildContentProps> = ({ build }) =>
         </div>
         <div className="flex items-center">
           <strong className="mr-2">Artifact Sets:</strong>
-          {!_.isEmpty(build.artifactSets) ? (
+          {!_.isEmpty(build.desiredArtifactSets) ? (
             <>
-              {build.artifactSets.map((artifactSet) => (
+              {build.desiredArtifactSets.map((artifactSet) => (
                 <>
                   <Image alt={artifactSet.name} className="mr-2" height={30} src={artifactSet.iconUrl} width={30} />
                   <p className="mr-2">{artifactSet.name}</p>
@@ -38,11 +38,11 @@ const ViewableBuildContent: React.FC<ViewableBuildContentProps> = ({ build }) =>
             "None set"
           )}
         </div>
-        <p>
+        <div>
           <strong className="mr-2">Desired Artifact Main Stats:</strong>
-          {!_.isEmpty(build.desiredMainStats) ? (
+          {!_.isEmpty(build.desiredArtifactMainStats) ? (
             <ul className="list-disc list-inside">
-              {Object.entries(build.desiredMainStats).map(([artifactType, stat]) => (
+              {Object.entries(build.desiredArtifactMainStats).map(([artifactType, stat]) => (
                 <li key={artifactType}>
                   {artifactType}: {stat}
                 </li>
@@ -51,8 +51,8 @@ const ViewableBuildContent: React.FC<ViewableBuildContentProps> = ({ build }) =>
           ) : (
             "None Set"
           )}
-        </p>
-        <p>
+        </div>
+        <div>
           <strong className="mr-2">Desired Stats:</strong>
           {!_.isEmpty(build.desiredStats) ? (
             <ul className="list-disc list-inside">
@@ -65,7 +65,7 @@ const ViewableBuildContent: React.FC<ViewableBuildContentProps> = ({ build }) =>
           ) : (
             "None Set"
           )}
-        </p>
+        </div>
       </div>
     </CardContent>
   );

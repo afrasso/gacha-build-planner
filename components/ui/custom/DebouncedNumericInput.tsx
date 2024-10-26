@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { Input } from "../input";
+import { Input } from "@/components/ui/input";
 
 interface DebouncedNumericInputProps {
   onChange: (value: number) => void;

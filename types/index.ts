@@ -1,10 +1,10 @@
 export interface Artifact {
   iconUrl: string;
   level: number;
-  mainStat: string;
+  mainStat: Stat;
   rarity: number;
-  setKey: string;
-  subStats: string[];
+  setId: string;
+  subStats: StatValue[];
   type: ArtifactType;
 }
 
@@ -16,21 +16,28 @@ export interface ArtifactSet {
 }
 
 export enum ArtifactType {
-  CIRCLET = "Circlet",
-  FLOWER = "Flower",
-  GOBLET = "Goblet",
-  PLUME = "Plume",
-  SANDS = "Sands",
+  CIRCLET = "CIRCLET",
+  FLOWER = "FLOWER",
+  GOBLET = "GOBLET",
+  PLUME = "PLUME",
+  SANDS = "SANDS",
 }
 
 export interface Build {
   artifacts: Artifact[];
-  artifactSets: ArtifactSet[];
   character: Character;
-  desiredMainStats: Record<ArtifactType, Stat>;
-  desiredStats: DesiredStat[];
-  desiredSubStats: string[];
+  desiredArtifactMainStats: ArtifactMainStats;
+  desiredArtifactSets: ArtifactSet[];
+  desiredStats: StatValue[];
   weapon: undefined | Weapon;
+}
+
+export interface ArtifactMainStats {
+  [ArtifactType.CIRCLET]: Stat | undefined;
+  [ArtifactType.FLOWER]: Stat | undefined;
+  [ArtifactType.GOBLET]: Stat | undefined;
+  [ArtifactType.PLUME]: Stat | undefined;
+  [ArtifactType.SANDS]: Stat | undefined;
 }
 
 export interface Character {
@@ -40,11 +47,6 @@ export interface Character {
   name: string;
   rarity: number;
   weaponType: WeaponType;
-}
-
-export interface DesiredStat {
-  stat: Stat | undefined;
-  value: number;
 }
 
 export enum Element {
@@ -60,24 +62,29 @@ export enum Element {
 
 export enum Stat {
   ATK_FLAT = "ATK",
-  ATK_PERCENT = "ATK Percentage",
-  CRIT_DMG = "CRIT DMG",
-  CRIT_RATE = "CRIT Rate",
-  DEF_FLAT = "DEF",
-  DEF_PERCENT = "DEF Percentage",
-  DMG_BONUS_ANEMO = "Anemo DMG Bonus",
-  DMG_BONUS_CRYO = "Cryo DMG Bonus",
-  DMG_BONUS_DENDRO = "Dendro DMG Bonus",
-  DMG_BONUS_ELECTRO = "Electro DMG Bonus",
-  DMG_BONUS_GEO = "Geo DMG Bonus",
-  DMG_BONUS_HYDRO = "Hydro DMG Bonus",
-  DMG_BONUS_PHYSICAL = "Physical DMG Bonus",
-  DMG_BONUS_PYRO = "Pyro DMG Bonus",
-  ELEMENTAL_MASTERY = "Elemental Mastery",
-  ENERGY_RECHARGE = "Energy Recharge",
-  HEALING_BONUS = "Healing Bonus",
-  HP_FLAT = "HP",
-  HP_PERCENT = "HP Percentage",
+  ATK_PERCENT = "ATK_PERCENT",
+  CRIT_DMG = "CRIT_DMG",
+  CRIT_RATE = "CRIT_RATE",
+  DEF_FLAT = "DEF_FLAT",
+  DEF_PERCENT = "DEF_PERCENT",
+  DMG_BONUS_ANEMO = "DMG_BONUS_ANEMO",
+  DMG_BONUS_CRYO = "DMG_BONUS_CRYO",
+  DMG_BONUS_DENDRO = "DMG_BONUS_DENDRO",
+  DMG_BONUS_ELECTRO = "DMG_BONUS_ELECTRO",
+  DMG_BONUS_GEO = "DMG_BONUS_GEO",
+  DMG_BONUS_HYDRO = "DMG_BONUS_HYDRO",
+  DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
+  DMG_BONUS_PYRO = "DMG_BONUS_PYRO",
+  ELEMENTAL_MASTERY = "ELEMENTAL_MASTERY",
+  ENERGY_RECHARGE = "ENERGY_RECHARGE",
+  HEALING_BONUS = "Healing HEALING_BONUS",
+  HP_FLAT = "HP_FLAT",
+  HP_PERCENT = "HP_PERCENT",
+}
+
+export interface StatValue {
+  stat: Stat;
+  value: number;
 }
 
 export interface Weapon {

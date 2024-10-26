@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-import { ArtifactSet, ArtifactType, Build, Character, Stat, Weapon } from "../types";
+import { ArtifactSet, ArtifactType, Build, Character, Stat, Weapon } from "@/types";
+
 import BuildCard from "./BuildCard";
 import CharacterSelector from "./CharacterSelector";
 
@@ -22,11 +23,10 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
         ...builds,
         {
           artifacts: [],
-          artifactSets: [],
           character,
-          desiredMainStats: {} as Record<ArtifactType, Stat>,
+          desiredArtifactMainStats: {} as Record<ArtifactType, Stat>,
+          desiredArtifactSets: [],
           desiredStats: [],
-          desiredSubStats: [],
           weapon: undefined,
         },
       ]);
@@ -55,18 +55,8 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
   const updateDesiredMainStat = (characterId: string, type: string, stat: string) => {
     const build = builds.find((build) => build.character.id === characterId);
     if (build) {
-      const updatedMainStats = { ...build.desiredMainStats, [type]: stat };
-      updateBuild(characterId, { desiredMainStats: updatedMainStats });
-    }
-  };
-
-  const toggleDesiredSubStat = (characterId: string, stat: string) => {
-    const build = builds.find((build) => build.character.id === characterId);
-    if (build) {
-      const updatedSubStats = build.desiredSubStats.includes(stat)
-        ? build.desiredSubStats.filter((s) => s !== stat)
-        : [...build.desiredSubStats, stat];
-      updateBuild(characterId, { desiredSubStats: updatedSubStats });
+      const updatedDesiredArtifactMainStats = { ...build.desiredArtifactMainStats, [type]: stat };
+      updateBuild(characterId, { desiredArtifactMainStats: updatedDesiredArtifactMainStats });
     }
   };
 
@@ -89,7 +79,6 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
             inEditMode={editModeBuilds.includes(build.character.id)}
             key={build.character.id}
             onRemove={removeBuild}
-            onToggleDesiredSubStat={toggleDesiredSubStat}
             onToggleEditMode={toggleEditMode}
             onUpdate={updateBuild}
             onUpdateDesiredMainStat={updateDesiredMainStat}

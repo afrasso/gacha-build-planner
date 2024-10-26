@@ -7,8 +7,10 @@
     "strict": true,
     "skipLibCheck": true,
     "allowJs": true,
-    "noEmit": false
+    "noEmit": false,
+    "paths": {
+      "@/*": ["../*"]
+    }
   },
-  "include": ["assetretriever/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts"]
 }
