@@ -3,8 +3,8 @@ export interface Artifact {
   level: number;
   mainStat: Stat;
   rarity: number;
-  setId: string;
-  subStats: StatValue[];
+  set: ArtifactSet;
+  subStats: Partial<StatValue>[];
   type: ArtifactType;
 }
 
@@ -24,20 +24,26 @@ export enum ArtifactType {
 }
 
 export interface Build {
-  artifacts: Artifact[];
+  artifacts: Partial<BuildArtifacts>;
   character: Character;
-  desiredArtifactMainStats: ArtifactMainStats;
+  desiredArtifactMainStats: Partial<ArtifactMainStats>;
   desiredArtifactSets: ArtifactSet[];
   desiredStats: StatValue[];
   weapon: undefined | Weapon;
 }
 
 export interface ArtifactMainStats {
-  [ArtifactType.CIRCLET]: Stat | undefined;
-  [ArtifactType.FLOWER]: Stat | undefined;
-  [ArtifactType.GOBLET]: Stat | undefined;
-  [ArtifactType.PLUME]: Stat | undefined;
-  [ArtifactType.SANDS]: Stat | undefined;
+  [ArtifactType.GOBLET]: Stat;
+  [ArtifactType.PLUME]: Stat;
+  [ArtifactType.SANDS]: Stat;
+}
+
+export interface BuildArtifacts {
+  [ArtifactType.CIRCLET]: Partial<Artifact>;
+  [ArtifactType.FLOWER]: Partial<Artifact>;
+  [ArtifactType.GOBLET]: Partial<Artifact>;
+  [ArtifactType.PLUME]: Partial<Artifact>;
+  [ArtifactType.SANDS]: Partial<Artifact>;
 }
 
 export interface Character {

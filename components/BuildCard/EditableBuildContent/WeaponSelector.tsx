@@ -38,7 +38,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   };
 
   const renderEditableContent = () => (
-    <>
+    <div className="relative w-full">
       <Select
         onValueChange={(value) => {
           const weapon = weapons.find((weapon) => weapon.id === value);
@@ -47,7 +47,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
         }}
         value={internalSelectedWeapon?.id}
       >
-        <SelectTrigger className="h-10 px-3 py-2 text-left border rounded-md bg-background" isValid={isValid}>
+        <SelectTrigger className="h-10 px-3 py-2 text-left border rounded-md bg-background w-full" isValid={isValid}>
           <SelectValue placeholder={"Select a weapon"} />
         </SelectTrigger>
         <SelectContent>
@@ -61,27 +61,32 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
           ))}
         </SelectContent>
       </Select>
-      {!isValid && <p className="text-red-500 text-sm mt-1">Please select a weapon.</p>}
-    </>
+      {!isValid && <p className="text-red-500 text-sm absolute left-0 top-full mt-1">Please select a weapon.</p>}
+    </div>
   );
 
   const renderNonEditableContent = () => (
-    <div className="h-10 px-3 py-2 text-left flex items-center">
+    <div
+      className="h-10 px-3 py-2 text-left flex items-center w-full rounded-md hover:bg-accent cursor-pointer"
+      onClick={() => handleToggleEdit()}
+    >
       {selectedWeapon ? (
         <>
           <Image alt={selectedWeapon.name} className="mr-2" height={32} src={selectedWeapon.iconUrl} width={32} />
           <span>{selectedWeapon.name}</span>
         </>
       ) : (
-        <span className="text-muted-foreground">No weapon selected</span>
+        <span className="text-muted-foreground">Not selected</span>
       )}
     </div>
   );
 
   return (
-    <div className="mb-4 flex items-center space-x-4">
-      <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
-      <div className="flex-grow">{isEditing ? renderEditableContent() : renderNonEditableContent()}</div>
+    <div className="flex items-center justify-between pb-6">
+      <div className="flex items-center space-x-4 flex-grow mr-4">
+        <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
+        {isEditing ? renderEditableContent() : renderNonEditableContent()}
+      </div>
       <Button className="p-1 flex-shrink-0" onClick={handleToggleEdit} size="sm" variant="ghost">
         {isEditing ? <Check size={16} /> : <Pencil size={16} />}
       </Button>

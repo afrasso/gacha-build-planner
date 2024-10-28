@@ -6,7 +6,7 @@ import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { CardContent } from "@/components/ui/card";
 import { ArtifactMainStats, ArtifactSet, Build, StatValue, Weapon } from "@/types";
 
-import { ArtifactCollection } from "./ArtifactCollection";
+import ArtifactCollection from "./ArtifactCollection";
 import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
 import DesiredArtifactSetsSelector from "./DesiredArtifactSetsSelector";
 import DesiredStatsSelector from "./DesiredStatsSelector";
@@ -99,12 +99,7 @@ const EditableBuildContent = forwardRef<ISaveableContentHandle, EditableBuildCon
 
     return (
       <CardContent>
-        <WeaponSelector
-          onChange={updateWeapon}
-          ref={weaponSelectorRef}
-          selectedWeapon={build.weapon}
-          weapons={weapons}
-        />
+        <WeaponSelector onChange={updateWeapon} selectedWeapon={build.weapon} weapons={weapons} />
         <DesiredArtifactSetsSelector
           artifactSets={artifactSets}
           desiredArtifactSets={build.desiredArtifactSets}
@@ -124,7 +119,7 @@ const EditableBuildContent = forwardRef<ISaveableContentHandle, EditableBuildCon
           />
         </div>
         <div>
-          <ArtifactCollection />
+          <ArtifactCollection artifactSets={artifactSets} />
         </div>
       </CardContent>
     );
