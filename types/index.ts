@@ -9,7 +9,9 @@ export interface Artifact {
 }
 
 export interface ArtifactSet {
+  hasArtifactTypes: Record<ArtifactType, boolean>;
   iconUrl: string;
+  iconUrls: Record<ArtifactType, string>;
   id: string;
   name: string;
   rarities: number[];
@@ -83,7 +85,7 @@ export enum Stat {
   DMG_BONUS_PYRO = "DMG_BONUS_PYRO",
   ELEMENTAL_MASTERY = "ELEMENTAL_MASTERY",
   ENERGY_RECHARGE = "ENERGY_RECHARGE",
-  HEALING_BONUS = "Healing HEALING_BONUS",
+  HEALING_BONUS = "HEALING_BONUS",
   HP_FLAT = "HP_FLAT",
   HP_PERCENT = "HP_PERCENT",
 }

@@ -2,6 +2,7 @@ import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
 
+import { ArtifactType } from "@/types";
 import { __datadir, __publicdir } from "@/utils/directoryutils.js";
 import downloadImage from "@/utils/downloadimage.js";
 import ensureDirExists from "@/utils/ensuredirexists";
@@ -124,7 +125,21 @@ const extractArtifactSets = async ({
 
   for (const dbArtifactSet of dbArtifactSets) {
     artifactSets.push({
+      hasArtifactTypes: {
+        [ArtifactType.CIRCLET]: !!dbArtifactSet.circlet,
+        [ArtifactType.FLOWER]: !!dbArtifactSet.flower,
+        [ArtifactType.GOBLET]: !!dbArtifactSet.goblet,
+        [ArtifactType.PLUME]: !!dbArtifactSet.plume,
+        [ArtifactType.SANDS]: !!dbArtifactSet.sands,
+      },
       iconUrl: getIconUrl(dbArtifactSet),
+      iconUrls: {
+        [ArtifactType.CIRCLET]: `/${dbArtifactSet.id}_3.png`,
+        [ArtifactType.FLOWER]: `/${dbArtifactSet.id}_4.png`,
+        [ArtifactType.GOBLET]: `/${dbArtifactSet.id}_1.png`,
+        [ArtifactType.PLUME]: `/${dbArtifactSet.id}_2.png`,
+        [ArtifactType.SANDS]: `/${dbArtifactSet.id}_5.png`,
+      },
       id: dbArtifactSet.id,
       name: dbArtifactSet.name,
       rarities: dbArtifactSet.rarityList,

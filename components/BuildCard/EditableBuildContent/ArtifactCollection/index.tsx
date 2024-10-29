@@ -16,7 +16,6 @@ interface ArtifactsSelectorProps {
 const ArtifactsSelector: React.FC<ArtifactsSelectorProps> = ({ artifactSets }) => {
   const [buildArtifacts, setBuildArtifacts] = useState<Partial<BuildArtifacts>>();
   const [editingArtifact, setEditingArtifact] = useState<Partial<Artifact>>();
-  // Highlight start
   const [isDialogOpen, setIsDialogOpen] = useState<Record<ArtifactType, boolean>>({
     [ArtifactType.CIRCLET]: false,
     [ArtifactType.FLOWER]: false,
@@ -24,9 +23,8 @@ const ArtifactsSelector: React.FC<ArtifactsSelectorProps> = ({ artifactSets }) =
     [ArtifactType.PLUME]: false,
     [ArtifactType.SANDS]: false,
   });
-  // Highlight end
 
-  const handleSaveArtifact = (artifact: Artifact) => {
+  const handleSaveArtifact = (artifact: Partial<Artifact>) => {
     const newBuildArtifacts = {
       [ArtifactType.CIRCLET]: buildArtifacts?.[ArtifactType.CIRCLET],
       [ArtifactType.FLOWER]: buildArtifacts?.[ArtifactType.FLOWER],
@@ -34,10 +32,10 @@ const ArtifactsSelector: React.FC<ArtifactsSelectorProps> = ({ artifactSets }) =
       [ArtifactType.PLUME]: buildArtifacts?.[ArtifactType.PLUME],
       [ArtifactType.SANDS]: buildArtifacts?.[ArtifactType.SANDS],
     };
-    newBuildArtifacts[artifact.type] = artifact;
+    newBuildArtifacts[artifact.type!] = artifact;
     setBuildArtifacts(newBuildArtifacts);
+    setIsDialogOpen((prev) => ({ ...prev, [artifact.type!]: false }));
     setEditingArtifact(undefined);
-    setIsDialogOpen((prev) => ({ ...prev, [artifact.type]: false }));
   };
 
   const handleEditArtifact = (artifactType: ArtifactType) => {
@@ -114,14 +112,12 @@ const ArtifactsSelector: React.FC<ArtifactsSelectorProps> = ({ artifactSets }) =
                     {buildArtifacts?.[artifactType] ? "Edit" : "Add"} {artifactType} Artifact
                   </DialogTitle>
                 </DialogHeader>
-                {`editingArtifact = ${editingArtifact}`}
-                {
-                  <ArtifactEditor
-                    artifact={editingArtifact || {}}
-                    artifactSets={artifactSets}
-                    onSave={handleSaveArtifact}
-                  />
-                }
+                <ArtifactEditor
+                  artifact={editingArtifact}
+                  artifactSets={artifactSets}
+                  artifactType={artifactType}
+                  onSave={handleSaveArtifact}
+                />
               </DialogContent>
             </Dialog>
           )
