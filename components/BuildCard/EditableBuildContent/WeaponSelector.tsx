@@ -66,10 +66,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   );
 
   const renderNonEditableContent = () => (
-    <div
-      className="h-10 px-3 py-2 text-left flex items-center w-full rounded-md hover:bg-accent cursor-pointer"
-      onClick={() => handleToggleEdit()}
-    >
+    <div className="h-10 px-3 py-2 text-left flex items-center w-full rounded-md">
       {selectedWeapon ? (
         <>
           <Image alt={selectedWeapon.name} className="mr-2" height={32} src={selectedWeapon.iconUrl} width={32} />

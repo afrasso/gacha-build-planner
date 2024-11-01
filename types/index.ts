@@ -8,6 +8,16 @@ export interface Artifact {
   type: ArtifactType;
 }
 
+export enum ArtifactSetBonusType {
+  FOUR_PIECE = "FOUR_PIECE",
+  TWO_PIECE = "TWO_PIECE",
+}
+
+export interface ArtifactSetBonus {
+  artifactSet: ArtifactSet;
+  bonusType: ArtifactSetBonusType;
+}
+
 export interface ArtifactSet {
   hasArtifactTypes: Record<ArtifactType, boolean>;
   iconUrl: string;
@@ -29,7 +39,7 @@ export interface Build {
   artifacts: Partial<BuildArtifacts>;
   character: Character;
   desiredArtifactMainStats: Partial<ArtifactMainStats>;
-  desiredArtifactSets: ArtifactSet[];
+  desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredStats: StatValue[];
   weapon: undefined | Weapon;
 }

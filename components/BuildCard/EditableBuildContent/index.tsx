@@ -4,11 +4,11 @@ import { forwardRef, useImperativeHandle, useRef } from "react";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { CardContent } from "@/components/ui/card";
-import { ArtifactMainStats, ArtifactSet, Build, StatValue, Weapon } from "@/types";
+import { ArtifactMainStats, ArtifactSet, ArtifactSetBonus, Build, StatValue, Weapon } from "@/types";
 
 import ArtifactCollection from "./ArtifactCollection";
 import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
-import DesiredArtifactSetsSelector from "./DesiredArtifactSetsSelector";
+import DesiredArtifactSetBonusSelector from "./DesiredArtifactSetBonusSelector";
 import DesiredStatsSelector from "./DesiredStatsSelector";
 import WeaponSelector from "./WeaponSelector";
 
@@ -85,8 +85,8 @@ const EditableBuildContent = forwardRef<ISaveableContentHandle, EditableBuildCon
       onUpdate(build.character.id, { weapon });
     };
 
-    const updateDesiredArtifactSets = (desiredArtifactSets: ArtifactSet[]) => {
-      onUpdate(build.character.id, { desiredArtifactSets });
+    const updateDesiredArtifactSetBonuses = (desiredArtifactSetBonuses: ArtifactSetBonus[]) => {
+      onUpdate(build.character.id, { desiredArtifactSetBonuses });
     };
 
     const updateDesiredArtifactMainStats = (desiredArtifactMainStats: ArtifactMainStats) => {
@@ -100,11 +100,10 @@ const EditableBuildContent = forwardRef<ISaveableContentHandle, EditableBuildCon
     return (
       <CardContent>
         <WeaponSelector onChange={updateWeapon} selectedWeapon={build.weapon} weapons={weapons} />
-        <DesiredArtifactSetsSelector
+        <DesiredArtifactSetBonusSelector
           artifactSets={artifactSets}
-          desiredArtifactSets={build.desiredArtifactSets}
-          onChange={updateDesiredArtifactSets}
-          ref={desiredArtifactSetSelectorRef}
+          desiredArtifactSetBonuses={build.desiredArtifactSetBonuses}
+          onChange={updateDesiredArtifactSetBonuses}
         />
         <DesiredArtifactMainStatsSelector
           desiredArtifactMainStats={build.desiredArtifactMainStats}
