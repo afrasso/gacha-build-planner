@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Pencil } from "lucide-react";
+import { Check, Pencil, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -20,11 +20,9 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   const [internalSelectedWeapon, setInternalSelectedWeapon] = useState<undefined | Weapon>(selectedWeapon);
   const [isValid, setIsValid] = useState(true);
 
-  const handleToggleEdit = () => {
+  const toggleEditing = () => {
     if (isEditing) {
-      if (!validate()) {
-        setIsValid(false);
-      } else {
+      if (validate()) {
         onChange(internalSelectedWeapon as Weapon);
         setIsEditing(!isEditing);
       }
@@ -33,18 +31,27 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
     }
   };
 
+  const cancel = () => {
+    setInternalSelectedWeapon(selectedWeapon);
+    setIsEditing(false);
+    setIsValid(true);
+  };
+
+  const update = (weapon: Weapon) => {
+    setInternalSelectedWeapon(weapon);
+    setIsValid(true);
+  };
+
   const validate = () => {
-    return !!internalSelectedWeapon;
+    const newIsValid = !!internalSelectedWeapon;
+    setIsValid(newIsValid);
+    return newIsValid;
   };
 
   const renderEditableContent = () => (
     <div className="relative w-full">
       <Select
-        onValueChange={(value) => {
-          const weapon = weapons.find((weapon) => weapon.id === value);
-          setInternalSelectedWeapon(weapon);
-          setIsValid(true);
-        }}
+        onValueChange={(value) => update(weapons.find((weapon) => weapon.id === value)!)}
         value={internalSelectedWeapon?.id}
       >
         <SelectTrigger className="h-10 px-3 py-2 text-left border rounded-md bg-background w-full" isValid={isValid}>
@@ -66,7 +73,10 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   );
 
   const renderNonEditableContent = () => (
-    <div className="h-10 px-3 py-2 text-left flex items-center w-full rounded-md">
+    <div
+      className="h-10 px-3 py-2 text-left flex items-center w-full rounded-md hover:bg-accent cursor-pointer"
+      onClick={toggleEditing}
+    >
       {selectedWeapon ? (
         <>
           <Image alt={selectedWeapon.name} className="mr-2" height={32} src={selectedWeapon.iconUrl} width={32} />
@@ -79,12 +89,19 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   );
 
   return (
-    <div className="flex items-center justify-between pb-6">
+    <div className="flex items-center justify-between pb-6 gap-2">
       <div className="flex items-center space-x-4 flex-grow mr-4">
         <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
         {isEditing ? renderEditableContent() : renderNonEditableContent()}
       </div>
-      <Button className="p-1 flex-shrink-0" onClick={handleToggleEdit} size="sm" variant="ghost">
+      <div className="w-6 h-9 flex-shrink-0">
+        {isEditing && (
+          <Button className="p-1 w-full h-full" onClick={cancel} size="sm" variant="ghost">
+            <X size={16} />
+          </Button>
+        )}
+      </div>
+      <Button className="p-1 flex-shrink-0" onClick={toggleEditing} size="sm" variant="ghost">
         {isEditing ? <Check size={16} /> : <Pencil size={16} />}
       </Button>
     </div>

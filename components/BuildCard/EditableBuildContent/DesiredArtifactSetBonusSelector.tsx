@@ -21,46 +21,46 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   onChange,
 }) => {
   const [isSelectingSet, setIsSelectingSet] = useState(false);
-  const [selectedSet, setSelectedSet] = useState<ArtifactSet | undefined>(undefined);
-  const [selectedBonusType, setSelectedBonusType] = useState<ArtifactSetBonusType | undefined>(undefined);
-  const [isSelectedSetValid, setIsSelectedSetValid] = useState(true);
-  const [isSelectedBonusTypeValid, setIsSelectedBonusTypeValid] = useState(true);
+  const [artifactSet, setArtifactSet] = useState<ArtifactSet | undefined>(undefined);
+  const [bonusType, setBonusType] = useState<ArtifactSetBonusType | undefined>(undefined);
+  const [isArtifactSetValid, setIsArtifactSetValid] = useState(true);
+  const [isBonusTypeValid, setIsBonusTypeValid] = useState(true);
 
-  const handleAddBonusSelector = () => {
+  const addSelector = () => {
     setIsSelectingSet(true);
   };
 
-  const handleSetSelection = (artifactSet: ArtifactSet) => {
-    setSelectedSet(artifactSet);
-    setIsSelectedSetValid(true);
+  const updateSet = (artifactSet: ArtifactSet) => {
+    setArtifactSet(artifactSet);
+    setIsArtifactSetValid(true);
   };
 
-  const handleBonusTypeSelection = (artifactSetBonusType: ArtifactSetBonusType) => {
-    setSelectedBonusType(artifactSetBonusType);
-    setIsSelectedBonusTypeValid(true);
+  const updateBonusType = (artifactSetBonusType: ArtifactSetBonusType) => {
+    setBonusType(artifactSetBonusType);
+    setIsBonusTypeValid(true);
   };
 
-  const cancelSelection = () => {
-    setSelectedSet(undefined);
-    setSelectedBonusType(undefined);
+  const cancel = () => {
+    setArtifactSet(undefined);
+    setBonusType(undefined);
     setIsSelectingSet(false);
-    setIsSelectedSetValid(true);
-    setIsSelectedBonusTypeValid(true);
+    setIsArtifactSetValid(true);
+    setIsBonusTypeValid(true);
   };
 
   const validate = () => {
-    const newIsSelectedSetValid = !!selectedSet;
-    setIsSelectedSetValid(newIsSelectedSetValid);
-    const newIsSelectedBonusTypeValid = !!selectedBonusType;
-    setIsSelectedBonusTypeValid(newIsSelectedBonusTypeValid);
-    return newIsSelectedSetValid && newIsSelectedBonusTypeValid;
+    const newIsSetValid = !!artifactSet;
+    setIsArtifactSetValid(newIsSetValid);
+    const newIsBonusTypeValid = !!bonusType;
+    setIsBonusTypeValid(newIsBonusTypeValid);
+    return newIsSetValid && newIsBonusTypeValid;
   };
 
   const handleConfirmSelection = () => {
     if (validate()) {
-      const bonus: ArtifactSetBonus = { artifactSet: selectedSet!, bonusType: selectedBonusType! };
-      setSelectedSet(undefined);
-      setSelectedBonusType(undefined);
+      const bonus: ArtifactSetBonus = { artifactSet: artifactSet!, bonusType: bonusType! };
+      setArtifactSet(undefined);
+      setBonusType(undefined);
       setIsSelectingSet(false);
       onChange([...desiredArtifactSetBonuses, bonus]);
     }
@@ -92,13 +92,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
     <div className="mb-4">
       <div className="flex items-center justify-between">
         <Label className="text-md font-semibold text-primary whitespace-nowrap">Artifact Sets:</Label>
-        <Button
-          className="p-1 flex-shrink-0"
-          disabled={!canAddBonus()}
-          onClick={handleAddBonusSelector}
-          size="sm"
-          variant="ghost"
-        >
+        <Button className="p-1 flex-shrink-0" disabled={!canAddBonus()} onClick={addSelector} size="sm" variant="ghost">
           <PlusCircle size={16} />
         </Button>
       </div>
@@ -118,10 +112,10 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
             <>
               <Select
                 onValueChange={(value) =>
-                  handleSetSelection(artifactSets.find((artifactSet) => artifactSet.name === value) as ArtifactSet)
+                  updateSet(artifactSets.find((artifactSet) => artifactSet.name === value) as ArtifactSet)
                 }
               >
-                <SelectTrigger className="w-[220px]" isValid={isSelectedSetValid}>
+                <SelectTrigger className="w-[220px]" isValid={isArtifactSetValid}>
                   <SelectValue placeholder="Select an artifact set" />
                 </SelectTrigger>
                 <SelectContent>
@@ -141,8 +135,8 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                   ))}
                 </SelectContent>
               </Select>
-              <Select onValueChange={handleBonusTypeSelection}>
-                <SelectTrigger className="w-[220px]" isValid={isSelectedBonusTypeValid}>
+              <Select onValueChange={updateBonusType}>
+                <SelectTrigger className="w-[220px]" isValid={isBonusTypeValid}>
                   <SelectValue placeholder="Select a bonus type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -158,10 +152,10 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                   ))}
                 </SelectContent>
               </Select>
-              <Button onClick={cancelSelection} size="sm" variant="ghost">
+              <Button onClick={cancel} size="sm" variant="ghost">
                 <X className="h-4 w-4" />
               </Button>
-              {selectedSet && selectedBonusType && (
+              {artifactSet && bonusType && (
                 <Button onClick={handleConfirmSelection} size="sm" variant="ghost">
                   <Check className="h-4 w-4" />
                 </Button>

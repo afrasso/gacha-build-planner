@@ -38,16 +38,10 @@ export enum ArtifactType {
 export interface Build {
   artifacts: Partial<BuildArtifacts>;
   character: Character;
-  desiredArtifactMainStats: Partial<ArtifactMainStats>;
+  desiredArtifactMainStats: DesiredArtifactMainStats;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredStats: StatValue[];
   weapon: undefined | Weapon;
-}
-
-export interface ArtifactMainStats {
-  [ArtifactType.GOBLET]: Stat;
-  [ArtifactType.PLUME]: Stat;
-  [ArtifactType.SANDS]: Stat;
 }
 
 export interface BuildArtifacts {
@@ -66,6 +60,8 @@ export interface Character {
   rarity: number;
   weaponType: WeaponType;
 }
+
+export type DesiredArtifactMainStats = Partial<Record<ArtifactType, Stat>>;
 
 export enum Element {
   ANEMO = "ELEMENT_ANEMO",
