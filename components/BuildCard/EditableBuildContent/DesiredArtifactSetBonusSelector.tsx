@@ -20,14 +20,14 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   desiredArtifactSetBonuses = [],
   onChange,
 }) => {
-  const [isSelectingSet, setIsSelectingSet] = useState(false);
+  const [isAddingSetBonus, setIsAddingSetBonus] = useState(false);
   const [artifactSet, setArtifactSet] = useState<ArtifactSet | undefined>(undefined);
   const [bonusType, setBonusType] = useState<ArtifactSetBonusType | undefined>(undefined);
   const [isArtifactSetValid, setIsArtifactSetValid] = useState(true);
   const [isBonusTypeValid, setIsBonusTypeValid] = useState(true);
 
   const addSelector = () => {
-    setIsSelectingSet(true);
+    setIsAddingSetBonus(true);
   };
 
   const updateSet = (artifactSet: ArtifactSet) => {
@@ -42,10 +42,10 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
 
   const cancel = () => {
     setArtifactSet(undefined);
-    setBonusType(undefined);
-    setIsSelectingSet(false);
     setIsArtifactSetValid(true);
+    setBonusType(undefined);
     setIsBonusTypeValid(true);
+    setIsAddingSetBonus(false);
   };
 
   const validate = () => {
@@ -56,19 +56,19 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
     return newIsSetValid && newIsBonusTypeValid;
   };
 
-  const handleConfirmSelection = () => {
+  const confirm = () => {
     if (validate()) {
       const bonus: ArtifactSetBonus = { artifactSet: artifactSet!, bonusType: bonusType! };
       setArtifactSet(undefined);
       setBonusType(undefined);
-      setIsSelectingSet(false);
+      setIsAddingSetBonus(false);
       onChange([...desiredArtifactSetBonuses, bonus]);
     }
   };
 
   const MAX_TOTAL_BONUS_PIECE_COUNT = 4;
 
-  const handleRemoveBonus = (index: number) => {
+  const remove = (index: number) => {
     onChange(desiredArtifactSetBonuses.filter((bonus, idx) => idx !== index));
   };
 
@@ -102,13 +102,13 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
             <Image alt={bonus.artifactSet.name} height={32} src={bonus.artifactSet.iconUrl} width={32} />
             <span>{bonus.artifactSet.name}</span>
             <span className="text-sm text-muted-foreground">{bonus.bonusType}</span>
-            <Button className="ml-auto" onClick={() => handleRemoveBonus(index)} size="sm" variant="ghost">
+            <Button className="ml-auto" onClick={() => remove(index)} size="sm" variant="ghost">
               <X className="h-4 w-4" />
             </Button>
           </div>
         ))}
         <div className="flex items-center space-x-2 mt-2">
-          {isSelectingSet && (
+          {isAddingSetBonus && (
             <>
               <Select
                 onValueChange={(value) =>
@@ -156,7 +156,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                 <X className="h-4 w-4" />
               </Button>
               {artifactSet && bonusType && (
-                <Button onClick={handleConfirmSelection} size="sm" variant="ghost">
+                <Button onClick={confirm} size="sm" variant="ghost">
                   <Check className="h-4 w-4" />
                 </Button>
               )}
