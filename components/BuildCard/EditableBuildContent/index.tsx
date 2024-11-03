@@ -4,7 +4,16 @@ import { forwardRef, useImperativeHandle, useRef } from "react";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { CardContent } from "@/components/ui/card";
-import { ArtifactMainStats, ArtifactSet, ArtifactSetBonus, Build, StatValue, Weapon } from "@/types";
+import {
+  Artifact,
+  ArtifactSet,
+  ArtifactSetBonus,
+  Build,
+  BuildArtifacts,
+  DesiredArtifactMainStats,
+  StatValue,
+  Weapon,
+} from "@/types";
 
 import ArtifactCollection from "./ArtifactCollection";
 import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
@@ -89,12 +98,16 @@ const EditableBuildContent = forwardRef<ISaveableContentHandle, EditableBuildCon
       onUpdate(build.character.id, { desiredArtifactSetBonuses });
     };
 
-    const updateDesiredArtifactMainStats = (desiredArtifactMainStats: ArtifactMainStats) => {
+    const updateDesiredArtifactMainStats = (desiredArtifactMainStats: DesiredArtifactMainStats) => {
       onUpdate(build.character.id, { desiredArtifactMainStats });
     };
 
     const updateDesiredStats = (desiredStats: StatValue[]) => {
       onUpdate(build.character.id, { desiredStats });
+    };
+
+    const updateArtifacts = (artifacts: BuildArtifacts) => {
+      onUpdate(build.character.id, { artifacts });
     };
 
     return (
@@ -108,17 +121,12 @@ const EditableBuildContent = forwardRef<ISaveableContentHandle, EditableBuildCon
         <DesiredArtifactMainStatsSelector
           desiredArtifactMainStats={build.desiredArtifactMainStats}
           onChange={updateDesiredArtifactMainStats}
-          ref={desiredArtifactMainStatsSelectorRef}
         />
         <div>
-          <DesiredStatsSelector
-            desiredStats={build.desiredStats}
-            onChange={updateDesiredStats}
-            ref={desiredStatsSelectorRef}
-          />
+          <DesiredStatsSelector desiredStats={build.desiredStats} onChange={updateDesiredStats} />
         </div>
         <div>
-          <ArtifactCollection artifactSets={artifactSets} />
+          <ArtifactCollection artifacts={build.artifacts} artifactSets={artifactSets} onUpdate={updateArtifacts} />
         </div>
       </CardContent>
     );
