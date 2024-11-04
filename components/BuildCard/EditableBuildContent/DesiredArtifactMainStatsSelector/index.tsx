@@ -27,7 +27,6 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelecto
               onChange={(stat) => onChange({ ...desiredArtifactMainStats, [artifactType]: stat })}
               stat={desiredArtifactMainStats[artifactType]}
             />
-            {/* {editingStates[artifactType] ? renderEditableContent(artifactType) : renderNonEditableContent(artifactType)} */}
           </div>
         ))}
       </div>

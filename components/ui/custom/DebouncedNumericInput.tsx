@@ -6,13 +6,13 @@ import { Input } from "@/components/ui/input";
 
 interface DebouncedNumericInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   isValid: boolean;
-  onChange: (value: number) => void;
+  onChange: (value: number | undefined) => void;
   value?: number;
 }
 
 const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange, value, ...props }) => {
-  const [stringValue, setStringValue] = useState(value ? value.toString() : "");
-  const [numericValue, setNumericValue] = useState(value || 0);
+  const [stringValue, setStringValue] = useState(value?.toString() || "");
+  const [numericValue, setNumericValue] = useState<number | undefined>(value);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -31,7 +31,7 @@ const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange,
         const inputValue = e.target.value;
         setStringValue(inputValue);
         if (inputValue === "" || inputValue === ".") {
-          setNumericValue(0);
+          setNumericValue(undefined);
         } else {
           const newValue = parseFloat(inputValue);
           if (!isNaN(newValue)) {

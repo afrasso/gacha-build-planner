@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, PlusCircle, X } from "lucide-react";
+import { Check, PlusCircle, Trash2, X } from "lucide-react";
 import React, { useCallback, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ interface DesiredStatsSelectorProps {
 const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStats, onChange }) => {
   const [isAddingDesiredStat, setIsAddingDesiredStat] = useState(false);
   const [stat, setStat] = useState<Stat | undefined>(undefined);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number | undefined>(undefined);
   const [isStatValid, setIsStatValid] = useState(true);
   const [isValueValid, setIsValueValid] = useState(true);
 
@@ -31,7 +31,7 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
   };
 
   const updateValue = useCallback(
-    (value: number) => {
+    (value: number | undefined) => {
       setValue(value);
       setIsValueValid(true);
     },
@@ -49,14 +49,14 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
   const validate = () => {
     const newIsStatValid = !!stat;
     setIsStatValid(newIsStatValid);
-    const newIsValueValid = value >= 0 && value <= 999;
+    const newIsValueValid = value !== undefined && value >= 0 && value < 1000;
     setIsValueValid(newIsValueValid);
     return newIsStatValid && newIsValueValid;
   };
 
   const confirm = () => {
     if (validate()) {
-      const desiredStat: StatValue = { stat: stat!, value };
+      const desiredStat: StatValue = { stat: stat!, value: value! };
       setStat(undefined);
       setValue(0);
       setIsAddingDesiredStat(false);
@@ -75,7 +75,10 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
   return (
     <div className="mb-4">
       <div className="flex items-center justify-between">
-        <Label className="text-md font-semibold text-primary whitespace-nowrap">Desired Stats:</Label>
+        <div>
+          <Label className="text-md font-semibold text-primary whitespace-nowrap">Desired Stats:</Label>
+          {!(desiredStats?.length > 0) && <span className="text-muted-foreground p-6">None selected</span>}
+        </div>
         <Button
           className="p-1 flex-shrink-0"
           disabled={!canAddStatValue()}
@@ -92,7 +95,7 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
             <span>{desiredStat.stat}</span>
             <span className="text-sm text-muted-foreground">{desiredStat.value}</span>
             <Button className="ml-auto" onClick={() => remove(index)} size="sm" variant="ghost">
-              <X className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" />
             </Button>
           </div>
         ))}

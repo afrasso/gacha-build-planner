@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, PlusCircle, X } from "lucide-react";
+import { Check, PlusCircle, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -103,7 +103,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
             <span>{bonus.artifactSet.name}</span>
             <span className="text-sm text-muted-foreground">{bonus.bonusType}</span>
             <Button className="ml-auto" onClick={() => remove(index)} size="sm" variant="ghost">
-              <X className="h-4 w-4" />
+              <Trash2 className="h-4 w-4" />
             </Button>
           </div>
         ))}
