@@ -17,7 +17,12 @@ interface ArtifactEditorProps {
   onUpdate: (artifact: Artifact) => void;
 }
 
-export function ArtifactEditor({ artifact, artifactSets, artifactType, onUpdate }: ArtifactEditorProps) {
+const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
+  artifact,
+  artifactSets,
+  artifactType,
+  onUpdate,
+}: ArtifactEditorProps) => {
   const [internalArtifact, setInternalArtifact] = useState<Partial<Artifact>>(artifact || { type: artifactType });
 
   const setSelectorRef = useRef<ISaveableContentHandle>(null);
@@ -87,4 +92,6 @@ export function ArtifactEditor({ artifact, artifactSets, artifactType, onUpdate 
       </div>
     </>
   );
-}
+};
+
+export default ArtifactEditor;

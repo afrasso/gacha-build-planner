@@ -108,6 +108,4 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   );
 };
 
-WeaponSelector.displayName = "WeaponSelector";
-
 export default WeaponSelector;

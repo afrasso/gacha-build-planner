@@ -168,6 +168,4 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   );
 };
 
-DesiredArtifactSetBonusSelector.displayName = "DesiredArtifactSetsSelector";
-
 export default DesiredArtifactSetBonusSelector;

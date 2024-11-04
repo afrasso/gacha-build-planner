@@ -136,6 +136,4 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
   );
 };
 
-DesiredStatsSelector.displayName = "DesiredStatsSelector";
-
 export default DesiredStatsSelector;

@@ -34,6 +34,4 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelecto
   );
 };
 
-DesiredArtifactMainStatsSelector.displayName = "DesiredArtifactMainStatsSelector";
-
 export default DesiredArtifactMainStatsSelector;

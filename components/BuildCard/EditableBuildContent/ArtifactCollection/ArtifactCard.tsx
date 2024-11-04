@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Artifact, ArtifactType } from "@/types";
+import { forwardRef } from "react";
 
 interface ArtifactCardProps {
   artifact?: Artifact;
@@ -9,7 +10,7 @@ interface ArtifactCardProps {
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, artifactType, onClick }) => {
+const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(({ artifact, artifactType, onClick }, ref) => {
   return (
     <Card className="w-48 h-56 cursor-pointer hover:bg-accent" onClick={onClick}>
       <CardContent className="p-2 flex flex-col h-full">
@@ -62,6 +63,6 @@ const ArtifactCard: React.FC<ArtifactCardProps> = ({ artifact, artifactType, onC
       </CardContent>
     </Card>
   );
-};
+});
 
 export default ArtifactCard;

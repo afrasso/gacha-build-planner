@@ -111,6 +111,4 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatSelector
   return isEditing ? renderEditableContent() : renderNonEditableContent();
 };
 
-DesiredArtifactMainStatsSelector.displayName = "DesiredArtifactMainStatsSelector";
-
 export default DesiredArtifactMainStatsSelector;

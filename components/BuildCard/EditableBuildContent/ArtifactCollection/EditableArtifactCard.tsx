@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Artifact, ArtifactSet, ArtifactType } from "@/types";
 
 import ArtifactCard from "./ArtifactCard";
-import { ArtifactEditor } from "./ArtifactEditor";
+import ArtifactEditor from "./ArtifactEditor";
 
 interface EditableArtifactCardProps {
   artifact?: Artifact;
