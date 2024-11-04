@@ -49,61 +49,77 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   };
 
   const renderEditableContent = () => (
-    <div className="relative w-full">
-      <Select
-        onValueChange={(value) => update(weapons.find((weapon) => weapon.id === value)!)}
-        value={internalSelectedWeapon?.id}
-      >
-        <SelectTrigger className="h-10 px-3 py-2 text-left border rounded-md bg-background w-full" isValid={isValid}>
-          <SelectValue placeholder={"Select a weapon"} />
-        </SelectTrigger>
-        <SelectContent>
-          {weapons.map((weapon) => (
-            <SelectItem key={weapon.id} value={weapon.id}>
-              <div className="flex items-center">
-                <Image alt={weapon.name} className="mr-2" height={32} src={weapon.iconUrl} width={32} />
-                {weapon.name}
-              </div>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      {!isValid && <p className="text-red-500 text-sm absolute left-0 top-full mt-1">Please select a weapon.</p>}
+    <div className="flex flex-grow items-center justify-between gap-2">
+      <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
+      <div className="flex-grow relative">
+        <Select
+          onValueChange={(value) => update(weapons.find((weapon) => weapon.id === value)!)}
+          value={internalSelectedWeapon?.id}
+        >
+          <SelectTrigger
+            aria-describedby={!isValid ? "weapon-error" : undefined}
+            aria-invalid={!isValid}
+            className="h-8 px-3 py-2 text-left text-sm border rounded-md bg-background w-full"
+          >
+            <SelectValue placeholder={"Select a weapon"} />
+          </SelectTrigger>
+          <SelectContent>
+            {weapons.map((weapon) => (
+              <SelectItem key={weapon.id} value={weapon.id}>
+                <div className="flex items-center">
+                  <Image alt={weapon.name} className="mr-2" height={32} src={weapon.iconUrl} width={32} />
+                  {weapon.name}
+                </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        {!isValid && (
+          <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="weapon-error">
+            Please select a weapon.
+          </p>
+        )}
+      </div>
+      <div className="flex ml-2 gap-1">
+        <Button className="p-0 w-6 h-8 flex-shrink-0" onClick={cancel} size="sm" variant="ghost">
+          <X size={16} />
+        </Button>
+        <Button className="p-0 w-6 h-8 flex-shrink-0" onClick={toggleEditing} size="sm" variant="ghost">
+          <Check size={16} />
+        </Button>
+      </div>
     </div>
   );
 
   const renderNonEditableContent = () => (
-    <div
-      className="h-10 px-3 py-2 text-left flex items-center w-full rounded-md hover:bg-accent cursor-pointer"
-      onClick={toggleEditing}
-    >
-      {selectedWeapon ? (
-        <>
-          <Image alt={selectedWeapon.name} className="mr-2" height={32} src={selectedWeapon.iconUrl} width={32} />
-          <span>{selectedWeapon.name}</span>
-        </>
-      ) : (
-        <span className="text-muted-foreground">Not selected</span>
-      )}
+    <div className="flex flex-grow items-center justify-between gap-2">
+      <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
+      <div className="flex-grow flex items-center">
+        <div
+          className="h-8 px-3 py-2 text-left text-sm flex items-center flex-grow rounded-md hover:bg-accent cursor-pointer"
+          onClick={toggleEditing}
+        >
+          {selectedWeapon ? (
+            <>
+              <Image alt={selectedWeapon.name} className="mr-2" height={32} src={selectedWeapon.iconUrl} width={32} />
+              {selectedWeapon.name}
+            </>
+          ) : (
+            <span className="text-muted-foreground">Not selected</span>
+          )}
+        </div>
+        <div className="flex ml-2 gap-1">
+          <Button className="p-0 w-6 h-8 flex-shrink-0" onClick={toggleEditing} size="sm" variant="ghost">
+            {<Pencil size={16} />}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 
   return (
-    <div className="flex items-center justify-between pb-6 gap-2">
-      <div className="flex items-center space-x-4 flex-grow mr-4">
-        <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
-        {isEditing ? renderEditableContent() : renderNonEditableContent()}
-      </div>
-      <div className="w-6 h-9 flex-shrink-0">
-        {isEditing && (
-          <Button className="p-1 w-full h-full" onClick={cancel} size="sm" variant="ghost">
-            <X size={16} />
-          </Button>
-        )}
-      </div>
-      <Button className="p-1 flex-shrink-0" onClick={toggleEditing} size="sm" variant="ghost">
-        {isEditing ? <Check size={16} /> : <Pencil size={16} />}
-      </Button>
+    <div className={`${!isValid ? "mb-6" : ""}`}>
+      {isEditing ? renderEditableContent() : renderNonEditableContent()}
     </div>
   );
 };
