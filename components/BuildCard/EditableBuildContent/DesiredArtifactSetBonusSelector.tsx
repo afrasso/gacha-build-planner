@@ -89,9 +89,9 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   };
 
   return (
-    <div className={`${!isArtifactSetValid || !isBonusTypeValid ? "mb-6" : ""}`}>
+    <div className={`${!isArtifactSetValid || !isBonusTypeValid ? "mb-8" : "mb-2"}`}>
       <div className="flex flex-grow items-center justify-between gap-2">
-        <Label className="text-md font-semibold text-primary whitespace-nowrap">Artifact Set Bonuses:</Label>
+        <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Set Bonuses:</Label>
         <div className="flex-grow flex items-center">
           <div className="flex items-center flex-grow h-8 px-3 py-2 text-left text-sm">
             {!(desiredArtifactSetBonuses?.length > 0) && (

@@ -16,20 +16,19 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelecto
   onChange,
 }) => {
   return (
-    <div className="mb-4">
-      <Label className="text-md font-semibold text-primary whitespace-nowrap mb-2 block">Artifact Main Stats:</Label>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {[ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].map((artifactType) => (
-          <div className="flex flex-col space-y-2" key={artifactType}>
-            <Label className="text-sm font-semibold text-primary whitespace-nowrap">{artifactType}</Label>
-            <DesiredArtifactMainStatSelector
-              mainStats={MAIN_STATS_BY_ARTIFACT_TYPE[artifactType]}
-              onChange={(stat) => onChange({ ...desiredArtifactMainStats, [artifactType]: stat })}
-              stat={desiredArtifactMainStats[artifactType]}
-            />
-          </div>
-        ))}
+    <div className="mb-2">
+      <div className="h-8 items-center flex">
+        <Label className="text-md font-semibold text-primary whitespace-nowrap">Main Stats:</Label>
       </div>
+      {[ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].map((artifactType) => (
+        <DesiredArtifactMainStatSelector
+          artifactType={artifactType}
+          key={artifactType}
+          mainStats={MAIN_STATS_BY_ARTIFACT_TYPE[artifactType]}
+          onChange={(stat) => onChange({ ...desiredArtifactMainStats, [artifactType]: stat })}
+          stat={desiredArtifactMainStats[artifactType]}
+        />
+      ))}
     </div>
   );
 };

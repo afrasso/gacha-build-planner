@@ -50,7 +50,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
 
   const renderEditableContent = () => (
     <div className="flex flex-grow items-center justify-between gap-2">
-      <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
+      <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Weapon:</Label>
       <div className="flex-grow relative">
         <Select
           onValueChange={(value) => update(weapons.find((weapon) => weapon.id === value)!)}
@@ -93,7 +93,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
 
   const renderNonEditableContent = () => (
     <div className="flex flex-grow items-center justify-between gap-2">
-      <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
+      <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Weapon:</Label>
       <div className="flex-grow flex items-center">
         <div
           className="h-8 px-3 text-left text-sm flex items-center flex-grow rounded-md hover:bg-accent cursor-pointer"
@@ -118,7 +118,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   );
 
   return (
-    <div className={`${!isValid ? "mb-6" : ""}`}>
+    <div className={`${!isValid ? "mb-8" : "mb-2"}`}>
       {isEditing ? renderEditableContent() : renderNonEditableContent()}
     </div>
   );
