@@ -49,11 +49,11 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   };
 
   const validate = () => {
-    const newIsSetValid = !!artifactSet;
-    setIsArtifactSetValid(newIsSetValid);
+    const newIsArtifactSetValid = !!artifactSet;
+    setIsArtifactSetValid(newIsArtifactSetValid);
     const newIsBonusTypeValid = !!bonusType;
     setIsBonusTypeValid(newIsBonusTypeValid);
-    return newIsSetValid && newIsBonusTypeValid;
+    return newIsArtifactSetValid && newIsBonusTypeValid;
   };
 
   const confirm = () => {
@@ -68,8 +68,8 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
 
   const MAX_TOTAL_BONUS_PIECE_COUNT = 4;
 
-  const remove = (index: number) => {
-    onChange(desiredArtifactSetBonuses.filter((bonus, idx) => idx !== index));
+  const remove = (setId: string) => {
+    onChange(desiredArtifactSetBonuses.filter((bonus) => bonus.artifactSet.id !== setId));
   };
 
   const getPieceCount = (bonusType: ArtifactSetBonusType) => {
@@ -89,38 +89,75 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   };
 
   return (
-    <div className="mb-4">
-      <div className="flex items-center justify-between">
-        <Label className="text-md font-semibold text-primary whitespace-nowrap">Artifact Sets:</Label>
-        <Button className="p-1 flex-shrink-0" disabled={!canAddBonus()} onClick={addSelector} size="sm" variant="ghost">
-          <PlusCircle size={16} />
-        </Button>
-      </div>
-      <div className="space-y-0">
-        {desiredArtifactSetBonuses.map((bonus, index) => (
-          <div className="flex items-center space-x-2 py-1 rounded" key={bonus.artifactSet.id}>
-            <Image alt={bonus.artifactSet.name} height={32} src={bonus.artifactSet.iconUrl} width={32} />
-            <span>{bonus.artifactSet.name}</span>
-            <span className="text-sm text-muted-foreground">{bonus.bonusType}</span>
-            <Button className="ml-auto" onClick={() => remove(index)} size="sm" variant="ghost">
-              <Trash2 className="h-4 w-4" />
+    <div className={`${!isArtifactSetValid || !isBonusTypeValid ? "mb-6" : ""}`}>
+      <div className="flex flex-grow items-center justify-between gap-2">
+        <Label className="text-md font-semibold text-primary whitespace-nowrap">Artifact Set Bonuses:</Label>
+        <div className="flex-grow flex items-center">
+          <div className="flex items-center flex-grow h-8 px-3 py-2 text-left text-sm">
+            {!(desiredArtifactSetBonuses?.length > 0) && (
+              <span className="text-sm text-muted-foreground">None selected</span>
+            )}
+          </div>
+          <div className="flex ml-2 gap-1">
+            <Button
+              className="p-0 w-6 h-8 flex-shrink-0"
+              disabled={!canAddBonus() || isAddingSetBonus}
+              onClick={addSelector}
+              size="sm"
+              variant="ghost"
+            >
+              <PlusCircle size={16} />
             </Button>
           </div>
+        </div>
+      </div>
+      <div className="flex flex-grow items-center justify-between gap-2">
+        {desiredArtifactSetBonuses.map((bonus) => (
+          <div className="flex-grow flex items-center" key={bonus.artifactSet.id}>
+            <div className="h-8 px-3 text-left text-sm flex items-center flex-grow">
+              <Image
+                alt={bonus.artifactSet.name}
+                class-name="mr-2"
+                height={32}
+                src={bonus.artifactSet.iconUrl}
+                width={32}
+              />
+              {bonus.artifactSet.name}
+              <span className="text-muted-foreground ml-1">({bonus.bonusType})</span>
+            </div>
+            <div className="flex ml-2 gap-1">
+              <Button
+                className="p-0 w-6 h-8 flex-shrink-0"
+                onClick={() => remove(bonus.artifactSet.id)}
+                size="sm"
+                variant="ghost"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         ))}
-        <div className="flex items-center space-x-2 mt-2">
-          {isAddingSetBonus && (
-            <>
+      </div>
+      <div className="flex flex-grow items-center justify-between gap-2">
+        {isAddingSetBonus && (
+          <>
+            <div className="flex-grow relative">
               <Select
                 onValueChange={(value) =>
                   updateSet(artifactSets.find((artifactSet) => artifactSet.name === value) as ArtifactSet)
                 }
               >
-                <SelectTrigger className="w-[220px]" isValid={isArtifactSetValid}>
+                <SelectTrigger
+                  aria-describedby={!isArtifactSetValid ? "artifact-set-error" : undefined}
+                  aria-invalid={!isArtifactSetValid}
+                  className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
+                  isValid={isArtifactSetValid}
+                >
                   <SelectValue placeholder="Select an artifact set" />
                 </SelectTrigger>
                 <SelectContent>
                   {artifactSets.map((artifactSet) => (
-                    <SelectItem className="flex items-center" key={artifactSet.name} value={artifactSet.name}>
+                    <SelectItem key={artifactSet.name} value={artifactSet.name}>
                       <div className="flex items-center">
                         <Image
                           alt={artifactSet.name}
@@ -135,8 +172,20 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                   ))}
                 </SelectContent>
               </Select>
+              {!isArtifactSetValid && (
+                <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="artifact-set-error">
+                  Please select an artifact set.
+                </p>
+              )}
+            </div>
+            <div className="flex-grow relative">
               <Select onValueChange={updateBonusType}>
-                <SelectTrigger className="w-[220px]" isValid={isBonusTypeValid}>
+                <SelectTrigger
+                  aria-describedby={!isBonusTypeValid ? "bonus-type-error" : undefined}
+                  aria-invalid={!isBonusTypeValid}
+                  className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
+                  isValid={isBonusTypeValid}
+                >
                   <SelectValue placeholder="Select a bonus type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -152,17 +201,22 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                   ))}
                 </SelectContent>
               </Select>
-              <Button onClick={cancel} size="sm" variant="ghost">
-                <X className="h-4 w-4" />
-              </Button>
-              {artifactSet && bonusType && (
-                <Button onClick={confirm} size="sm" variant="ghost">
-                  <Check className="h-4 w-4" />
-                </Button>
+              {!isBonusTypeValid && (
+                <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="bonus-type-error">
+                  Please select a bonus type.
+                </p>
               )}
-            </>
-          )}
-        </div>
+            </div>
+            <div className="flex ml-2 gap-1">
+              <Button className="p-0 w-6 h-8 flex-shrink-0" onClick={cancel} size="sm" variant="ghost">
+                <X size={16} />
+              </Button>
+              <Button className="p-0 w-6 h-8 flex-shrink-0" onClick={confirm} size="sm" variant="ghost">
+                <Check size={16} />
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

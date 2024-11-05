@@ -59,7 +59,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
           <SelectTrigger
             aria-describedby={!isValid ? "weapon-error" : undefined}
             aria-invalid={!isValid}
-            className="h-8 px-3 py-2 text-left text-sm border rounded-md bg-background w-full"
+            className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
           >
             <SelectValue placeholder={"Select a weapon"} />
           </SelectTrigger>
@@ -96,7 +96,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
       <Label className="text-md font-semibold text-primary whitespace-nowrap">Weapon:</Label>
       <div className="flex-grow flex items-center">
         <div
-          className="h-8 px-3 py-2 text-left text-sm flex items-center flex-grow rounded-md hover:bg-accent cursor-pointer"
+          className="h-8 px-3 text-left text-sm flex items-center flex-grow rounded-md hover:bg-accent cursor-pointer"
           onClick={toggleEditing}
         >
           {selectedWeapon ? (
