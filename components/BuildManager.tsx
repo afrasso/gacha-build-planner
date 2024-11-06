@@ -50,7 +50,7 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
         characters={characters.filter((character) => !builds.map((build) => build.character.id).includes(character.id))}
         onAdd={addBuild}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
         {builds.map((build) => (
           <BuildCard
             artifactSets={artifactSets}
