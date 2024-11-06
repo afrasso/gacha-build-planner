@@ -14,7 +14,7 @@ interface BuildCardProps {
 
 const BuildCard: React.FC<BuildCardProps> = ({ artifactSets, build, onRemove, onUpdate, weapons }) => {
   return (
-    <Card>
+    <Card className="w-full h-full">
       <Header build={build} onRemove={onRemove} />
       <EditableBuildContent artifactSets={artifactSets} build={build} onUpdate={onUpdate} weapons={weapons} />
     </Card>

@@ -50,7 +50,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
 
   const renderEditableContent = () => (
     <div className="flex flex-grow items-center justify-between gap-2">
-      <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Weapon:</Label>
+      <Label className="text-md font-semibold text-primary whitespace-nowrap w-28">Weapon:</Label>
       <div className="flex-grow relative">
         <Select
           onValueChange={(value) => update(weapons.find((weapon) => weapon.id === value)!)}

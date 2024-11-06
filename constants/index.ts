@@ -1,4 +1,4 @@
-import { ArtifactType, Stat } from "@/types";
+import { ArtifactType, OverallStat, Stat } from "@/types";
 
 export const MAIN_STATS_BY_ARTIFACT_TYPE = {
   [ArtifactType.CIRCLET]: [
@@ -46,4 +46,23 @@ export const SUB_STATS = [
   Stat.ENERGY_RECHARGE,
   Stat.HP_FLAT,
   Stat.HP_PERCENT,
+];
+
+export const ORDER_OVERALL_STATS = [
+  OverallStat.MAX_HP,
+  OverallStat.ATK,
+  OverallStat.DEF,
+  OverallStat.ELEMENTAL_MASTERY,
+  OverallStat.CRIT_RATE,
+  OverallStat.CRIT_DMG,
+  OverallStat.HEALING_BONUS,
+  OverallStat.ENERGY_RECHARGE,
+  OverallStat.DMG_BONUS_PYRO,
+  OverallStat.DMG_BONUS_HYDRO,
+  OverallStat.DMG_BONUS_DENDRO,
+  OverallStat.DMG_BONUS_ELECTRO,
+  OverallStat.DMG_BONUS_ANEMO,
+  OverallStat.DMG_BONUS_CRYO,
+  OverallStat.DMG_BONUS_GEO,
+  OverallStat.DMG_BONUS_PHYSICAL,
 ];

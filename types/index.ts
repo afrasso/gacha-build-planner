@@ -4,7 +4,7 @@ export interface Artifact {
   mainStat: Stat;
   rarity: number;
   set: ArtifactSet;
-  subStats: StatValue[];
+  subStats: StatValue<Stat>[];
   type: ArtifactType;
 }
 
@@ -40,7 +40,7 @@ export interface Build {
   character: Character;
   desiredArtifactMainStats: DesiredArtifactMainStats;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
-  desiredStats: StatValue[];
+  desiredStats: StatValue<OverallStat>[];
   weapon: undefined | Weapon;
 }
 
@@ -56,6 +56,25 @@ export interface Character {
 }
 
 export type DesiredArtifactMainStats = Partial<Record<ArtifactType, Stat>>;
+
+export enum OverallStat {
+  ATK = "ATK",
+  CRIT_DMG = "CRIT_DMG",
+  CRIT_RATE = "CRIT_RATE",
+  DEF = "DEF",
+  DMG_BONUS_ANEMO = "DMG_BONUS_ANEMO",
+  DMG_BONUS_CRYO = "DMG_BONUS_CRYO",
+  DMG_BONUS_DENDRO = "DMG_BONUS_DENDRO",
+  DMG_BONUS_ELECTRO = "DMG_BONUS_ELECTRO",
+  DMG_BONUS_GEO = "DMG_BONUS_GEO",
+  DMG_BONUS_HYDRO = "DMG_BONUS_HYDRO",
+  DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
+  DMG_BONUS_PYRO = "DMG_BONUS_PYRO",
+  ELEMENTAL_MASTERY = "ELEMENTAL_MASTERY",
+  ENERGY_RECHARGE = "ENERGY_RECHARGE",
+  HEALING_BONUS = "HEALING_BONUS",
+  MAX_HP = "MAX_HP",
+}
 
 export enum Element {
   ANEMO = "ELEMENT_ANEMO",
@@ -90,8 +109,8 @@ export enum Stat {
   HP_PERCENT = "HP_PERCENT",
 }
 
-export interface StatValue {
-  stat: Stat;
+export interface StatValue<T extends OverallStat | Stat> {
+  stat: T;
   value: number;
 }
 

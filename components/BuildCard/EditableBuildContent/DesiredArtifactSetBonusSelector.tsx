@@ -66,11 +66,11 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
     }
   };
 
-  const MAX_TOTAL_BONUS_PIECE_COUNT = 4;
-
   const remove = (setId: string) => {
     onChange(desiredArtifactSetBonuses.filter((bonus) => bonus.artifactSet.id !== setId));
   };
+
+  const MAX_TOTAL_BONUS_PIECE_COUNT = 4;
 
   const getPieceCount = (bonusType: ArtifactSetBonusType) => {
     return bonusType === ArtifactSetBonusType.TWO_PIECE ? 2 : 4;
@@ -93,7 +93,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
       <div className="flex flex-grow items-center justify-between gap-2">
         <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Set Bonuses:</Label>
         <div className="flex-grow flex items-center">
-          <div className="flex items-center flex-grow h-8 px-3 py-2 text-left text-sm">
+          <div className="flex items-center flex-grow h-8 px-3 text-left text-sm">
             {!(desiredArtifactSetBonuses?.length > 0) && (
               <span className="text-sm text-muted-foreground">None selected</span>
             )}
@@ -111,7 +111,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
           </div>
         </div>
       </div>
-      <div className="flex flex-grow items-center justify-between gap-2">
+      <div className="flex flex-col justify-between">
         {desiredArtifactSetBonuses.map((bonus) => (
           <div className="flex-grow flex items-center" key={bonus.artifactSet.id}>
             <div className="h-8 px-3 text-left text-sm flex items-center flex-grow">
