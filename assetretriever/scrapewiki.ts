@@ -3,9 +3,10 @@ import * as cheerio from "cheerio";
 import _ from "lodash";
 import path from "path";
 
-import { __publicdir } from "../utils/directoryutils.js";
-import downloadImage from "../utils/downloadimage.js";
-import ensureDirExists from "../utils/ensuredirexists.js";
+import { __publicdir } from "@/utils/directoryutils.js";
+import downloadImage from "@/utils/downloadimage.js";
+import ensureDirExists from "@/utils/ensuredirexists.js";
+
 import { FailedArtifactIconDownload, FailedCharacterIconDownload, FailedWeaponIconDownload } from "./types";
 
 const scrape = async ({

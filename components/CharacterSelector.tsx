@@ -4,9 +4,9 @@ import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-import { Character } from "../types";
-import { Button } from "./ui/button"; // Import your button component
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Button } from "@/components/ui/button"; // Import your button component
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Character } from "@/types";
 
 interface CharacterSelectorProps {
   characters: Character[];

@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { InputHTMLAttributes, useEffect, useState } from "react";
 
-import { Input } from "../input";
+import { Input } from "@/components/ui/input";
 
-interface DebouncedNumericInputProps {
-  onChange: (value: number) => void;
+interface DebouncedNumericInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+  isValid: boolean;
+  onChange: (value: number | undefined) => void;
   value?: number;
 }
 
-const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange, value }) => {
-  const [stringValue, setStringValue] = useState(value ? value.toString() : "");
-  const [numericValue, setNumericValue] = useState(value || 0);
+const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange, value, ...props }) => {
+  const [stringValue, setStringValue] = useState(value?.toString() || "");
+  const [numericValue, setNumericValue] = useState<number | undefined>(value);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -25,26 +26,17 @@ const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange,
 
   return (
     <Input
-      max="500"
-      min="0"
+      {...props}
       onChange={(e) => {
         const inputValue = e.target.value;
         setStringValue(inputValue);
         if (inputValue === "" || inputValue === ".") {
-          setNumericValue(0);
+          setNumericValue(undefined);
         } else {
           const newValue = parseFloat(inputValue);
           if (!isNaN(newValue)) {
-            if (newValue < 0) {
-              setStringValue("0");
-              setNumericValue(0);
-            } else if (newValue > 500) {
-              setStringValue("500");
-              setNumericValue(500);
-            } else {
-              setStringValue(newValue.toString());
-              setNumericValue(newValue);
-            }
+            setStringValue(newValue.toString());
+            setNumericValue(newValue);
           }
         }
       }}
@@ -54,7 +46,6 @@ const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange,
           e.preventDefault();
         }
       }}
-      step="0.1"
       type="number"
       value={stringValue}
     />

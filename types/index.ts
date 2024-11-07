@@ -1,37 +1,50 @@
 export interface Artifact {
   iconUrl: string;
   level: number;
-  mainStat: string;
+  mainStat: Stat;
   rarity: number;
-  setKey: string;
-  subStats: string[];
+  set: ArtifactSet;
+  subStats: StatValue<Stat>[];
   type: ArtifactType;
 }
 
+export enum ArtifactSetBonusType {
+  FOUR_PIECE = "FOUR_PIECE",
+  TWO_PIECE = "TWO_PIECE",
+}
+
+export interface ArtifactSetBonus {
+  artifactSet: ArtifactSet;
+  bonusType: ArtifactSetBonusType;
+}
+
 export interface ArtifactSet {
+  hasArtifactTypes: Record<ArtifactType, boolean>;
   iconUrl: string;
+  iconUrls: Record<ArtifactType, string>;
   id: string;
   name: string;
   rarities: number[];
 }
 
 export enum ArtifactType {
-  CIRCLET = "Circlet",
-  FLOWER = "Flower",
-  GOBLET = "Goblet",
-  PLUME = "Plume",
-  SANDS = "Sands",
+  CIRCLET = "CIRCLET",
+  FLOWER = "FLOWER",
+  GOBLET = "GOBLET",
+  PLUME = "PLUME",
+  SANDS = "SANDS",
 }
 
 export interface Build {
-  artifacts: Artifact[];
-  artifactSets: ArtifactSet[];
+  artifacts: BuildArtifacts;
   character: Character;
-  desiredMainStats: Record<ArtifactType, Stat>;
-  desiredStats: DesiredStat[];
-  desiredSubStats: string[];
+  desiredArtifactMainStats: DesiredArtifactMainStats;
+  desiredArtifactSetBonuses: ArtifactSetBonus[];
+  desiredStats: StatValue<OverallStat>[];
   weapon: undefined | Weapon;
 }
+
+export type BuildArtifacts = Partial<Record<ArtifactType, Artifact>>;
 
 export interface Character {
   element: Element;
@@ -42,9 +55,25 @@ export interface Character {
   weaponType: WeaponType;
 }
 
-export interface DesiredStat {
-  stat: Stat | undefined;
-  value: number;
+export type DesiredArtifactMainStats = Partial<Record<ArtifactType, Stat>>;
+
+export enum OverallStat {
+  ATK = "ATK",
+  CRIT_DMG = "CRIT_DMG",
+  CRIT_RATE = "CRIT_RATE",
+  DEF = "DEF",
+  DMG_BONUS_ANEMO = "DMG_BONUS_ANEMO",
+  DMG_BONUS_CRYO = "DMG_BONUS_CRYO",
+  DMG_BONUS_DENDRO = "DMG_BONUS_DENDRO",
+  DMG_BONUS_ELECTRO = "DMG_BONUS_ELECTRO",
+  DMG_BONUS_GEO = "DMG_BONUS_GEO",
+  DMG_BONUS_HYDRO = "DMG_BONUS_HYDRO",
+  DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
+  DMG_BONUS_PYRO = "DMG_BONUS_PYRO",
+  ELEMENTAL_MASTERY = "ELEMENTAL_MASTERY",
+  ENERGY_RECHARGE = "ENERGY_RECHARGE",
+  HEALING_BONUS = "HEALING_BONUS",
+  MAX_HP = "MAX_HP",
 }
 
 export enum Element {
@@ -60,24 +89,29 @@ export enum Element {
 
 export enum Stat {
   ATK_FLAT = "ATK",
-  ATK_PERCENT = "ATK Percentage",
-  CRIT_DMG = "CRIT DMG",
-  CRIT_RATE = "CRIT Rate",
-  DEF_FLAT = "DEF",
-  DEF_PERCENT = "DEF Percentage",
-  DMG_BONUS_ANEMO = "Anemo DMG Bonus",
-  DMG_BONUS_CRYO = "Cryo DMG Bonus",
-  DMG_BONUS_DENDRO = "Dendro DMG Bonus",
-  DMG_BONUS_ELECTRO = "Electro DMG Bonus",
-  DMG_BONUS_GEO = "Geo DMG Bonus",
-  DMG_BONUS_HYDRO = "Hydro DMG Bonus",
-  DMG_BONUS_PHYSICAL = "Physical DMG Bonus",
-  DMG_BONUS_PYRO = "Pyro DMG Bonus",
-  ELEMENTAL_MASTERY = "Elemental Mastery",
-  ENERGY_RECHARGE = "Energy Recharge",
-  HEALING_BONUS = "Healing Bonus",
-  HP_FLAT = "HP",
-  HP_PERCENT = "HP Percentage",
+  ATK_PERCENT = "ATK_PERCENT",
+  CRIT_DMG = "CRIT_DMG",
+  CRIT_RATE = "CRIT_RATE",
+  DEF_FLAT = "DEF_FLAT",
+  DEF_PERCENT = "DEF_PERCENT",
+  DMG_BONUS_ANEMO = "DMG_BONUS_ANEMO",
+  DMG_BONUS_CRYO = "DMG_BONUS_CRYO",
+  DMG_BONUS_DENDRO = "DMG_BONUS_DENDRO",
+  DMG_BONUS_ELECTRO = "DMG_BONUS_ELECTRO",
+  DMG_BONUS_GEO = "DMG_BONUS_GEO",
+  DMG_BONUS_HYDRO = "DMG_BONUS_HYDRO",
+  DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
+  DMG_BONUS_PYRO = "DMG_BONUS_PYRO",
+  ELEMENTAL_MASTERY = "ELEMENTAL_MASTERY",
+  ENERGY_RECHARGE = "ENERGY_RECHARGE",
+  HEALING_BONUS = "HEALING_BONUS",
+  HP_FLAT = "HP_FLAT",
+  HP_PERCENT = "HP_PERCENT",
+}
+
+export interface StatValue<T extends OverallStat | Stat> {
+  stat: T;
+  value: number;
 }
 
 export interface Weapon {

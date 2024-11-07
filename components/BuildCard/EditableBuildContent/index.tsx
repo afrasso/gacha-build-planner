@@ -1,60 +1,69 @@
 "use client";
 
-import { ArtifactSet, ArtifactType, Build, DesiredStat, Stat, Weapon } from "../../../types";
-import { CardContent } from "../../ui/card";
-import { Label } from "../../ui/label";
-import ArtifactMainStatSelector from "./ArtifactMainStatSelector";
-import ArtifactSetSelector from "./ArtifactSetSelector";
+import { CardContent } from "@/components/ui/card";
+import {
+  ArtifactSet,
+  ArtifactSetBonus,
+  Build,
+  BuildArtifacts,
+  DesiredArtifactMainStats,
+  StatValue,
+  Weapon,
+} from "@/types";
+
+import ArtifactCollection from "./ArtifactCollection";
+import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
+import DesiredArtifactSetBonusSelector from "./DesiredArtifactSetBonusSelector";
 import DesiredStatsSelector from "./DesiredStatsSelector";
 import WeaponSelector from "./WeaponSelector";
 
 interface EditableBuildContentProps {
   artifactSets: ArtifactSet[];
   build: Build;
-  onUpdate: (characterKey: string, updates: Partial<Build>) => void;
+  onUpdate: (buildId: string, build: Partial<Build>) => void;
   weapons: Weapon[];
 }
 
 const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ artifactSets, build, onUpdate, weapons }) => {
   const updateWeapon = (weapon: Weapon) => {
-    onUpdate(build.character.id, { weapon });
+    const buildId = build.character.id;
+    onUpdate(buildId, { weapon });
   };
 
-  const updateArtifactSets = (artifactSets: ArtifactSet[]) => {
-    onUpdate(build.character.id, { artifactSets });
+  const updateDesiredArtifactSetBonuses = (desiredArtifactSetBonuses: ArtifactSetBonus[]) => {
+    const buildId = build.character.id;
+    onUpdate(buildId, { character: build.character, desiredArtifactSetBonuses });
   };
 
-  const updateArtifactMainStat = (artifactType: ArtifactType, stat: Stat) => {
-    build.desiredMainStats[artifactType] = stat;
-    onUpdate(build.character.id, { desiredMainStats: build.desiredMainStats });
+  const updateDesiredArtifactMainStats = (desiredArtifactMainStats: DesiredArtifactMainStats) => {
+    const buildId = build.character.id;
+    onUpdate(buildId, { character: build.character, desiredArtifactMainStats });
   };
 
-  const updateDesiredStats = (desiredStats: DesiredStat[]) => {
-    onUpdate(build.character.id, { desiredStats });
+  const updateDesiredStats = (desiredStats: StatValue[]) => {
+    const buildId = build.character.id;
+    onUpdate(buildId, { character: build.character, desiredStats });
+  };
+
+  const updateArtifacts = (artifacts: BuildArtifacts) => {
+    const buildId = build.character.id;
+    onUpdate(buildId, { character: build.character, artifacts });
   };
 
   return (
     <CardContent>
       <WeaponSelector onChange={updateWeapon} selectedWeapon={build.weapon} weapons={weapons} />
-      <ArtifactSetSelector
+      <DesiredArtifactSetBonusSelector
         artifactSets={artifactSets}
-        onChange={updateArtifactSets}
-        selectedArtifactSets={build.artifactSets}
+        desiredArtifactSetBonuses={build.desiredArtifactSetBonuses}
+        onChange={updateDesiredArtifactSetBonuses}
       />
-      <div className="mb-4">
-        <Label>Desired Main Stats</Label>
-        {[ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].map((artifactType) => (
-          <ArtifactMainStatSelector
-            artifactType={artifactType}
-            key={artifactType}
-            onChange={(stat) => updateArtifactMainStat(artifactType, stat)}
-            selectedStat={build.desiredMainStats[artifactType]}
-          />
-        ))}
-      </div>
-      <div>
-        <DesiredStatsSelector desiredStats={build.desiredStats} onChange={updateDesiredStats} />
-      </div>
+      <DesiredArtifactMainStatsSelector
+        desiredArtifactMainStats={build.desiredArtifactMainStats}
+        onChange={updateDesiredArtifactMainStats}
+      />
+      <DesiredStatsSelector desiredStats={build.desiredStats} onChange={updateDesiredStats} />
+      <ArtifactCollection artifacts={build.artifacts} artifactSets={artifactSets} onUpdate={updateArtifacts} />
     </CardContent>
   );
 };

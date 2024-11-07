@@ -1,78 +1,187 @@
-import { PlusCircle, X } from "lucide-react";
-import React from "react";
+"use client";
 
-import { DesiredStat, Stat } from "../../../types";
-import { Button } from "../../ui/button";
-import DebouncedNumericInput from "../../ui/custom/DebouncedNumericInput";
-import { Label } from "../../ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
+import { Check, PlusCircle, Trash2, X } from "lucide-react";
+import React, { useCallback, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ORDER_OVERALL_STATS } from "@/constants";
+import { OverallStat, StatValue } from "@/types";
 
 interface DesiredStatsSelectorProps {
-  desiredStats: DesiredStat[];
-  onChange: (desiredStats: DesiredStat[]) => void;
+  desiredStats: StatValue<OverallStat>[];
+  onChange: (desiredStats: StatValue<OverallStat>[]) => void;
 }
 
 const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStats, onChange }) => {
-  const handleAddDesiredStat = () => {
-    onChange([...desiredStats, { stat: undefined, value: 0 } as DesiredStat]);
+  const [isAddingDesiredStat, setIsAddingDesiredStat] = useState(false);
+  const [stat, setStat] = useState<OverallStat | undefined>(undefined);
+  const [value, setValue] = useState<number | undefined>(undefined);
+  const [isStatValid, setIsStatValid] = useState(true);
+  const [isValueValid, setIsValueValid] = useState(true);
+
+  const addSelector = () => {
+    setIsAddingDesiredStat(true);
   };
 
-  const handleUpdateDesiredStatStat = (stat: Stat, index: number) => {
-    const updatedDesiredStats = [...desiredStats];
-    updatedDesiredStats[index].stat = stat;
-    onChange(updatedDesiredStats);
+  const updateStat = (stat: OverallStat) => {
+    setStat(stat);
+    setIsStatValid(true);
   };
 
-  const handleUpdateDesiredStatValue = (value: number, index: number) => {
-    const updatedDesiredStats = [...desiredStats];
-    updatedDesiredStats[index].value = value;
-    onChange(updatedDesiredStats);
+  const updateValue = useCallback(
+    (value: number | undefined) => {
+      setValue(value);
+      setIsValueValid(true);
+    },
+    [setValue, setIsValueValid]
+  );
+
+  const cancel = () => {
+    setStat(undefined);
+    setIsStatValid(true);
+    setValue(undefined);
+    setIsValueValid(true);
+    setIsAddingDesiredStat(false);
   };
 
-  const handleRemoveDesiredStat = (index: number) => {
-    const newDesiredStats = desiredStats.filter((desiredStat, idx) => idx !== index);
-    onChange(newDesiredStats);
+  const validate = () => {
+    const newIsStatValid = !!stat;
+    setIsStatValid(newIsStatValid);
+    const newIsValueValid = value !== undefined && value >= 0 && value < 1000;
+    setIsValueValid(newIsValueValid);
+    return newIsStatValid && newIsValueValid;
+  };
+
+  const confirm = () => {
+    if (validate()) {
+      const desiredStat: StatValue<OverallStat> = { stat: stat!, value: value! };
+      setStat(undefined);
+      setValue(undefined);
+      setIsAddingDesiredStat(false);
+      onChange([...desiredStats, desiredStat]);
+    }
+  };
+
+  const remove = (stat: OverallStat) => {
+    onChange(desiredStats.filter((desiredStat) => desiredStat.stat !== stat));
+  };
+
+  const canAddStatValue = () => {
+    return desiredStats.length < Object.values(OverallStat).length;
+  };
+
+  const getOrderedRemainingStats = () => {
+    return Object.values(OverallStat)
+      .filter((stat) => !desiredStats.map((desiredStat) => desiredStat.stat).includes(stat))
+      .sort((stat1, stat2) => ORDER_OVERALL_STATS.indexOf(stat1) - ORDER_OVERALL_STATS.indexOf(stat2));
+  };
+
+  const getOrderedDesiredStats = () => {
+    return desiredStats.sort(
+      (stat1, stat2) => ORDER_OVERALL_STATS.indexOf(stat1.stat) - ORDER_OVERALL_STATS.indexOf(stat2.stat)
+    );
   };
 
   return (
-    <>
-      <Label>Desired Stats</Label>
-      <div className="flex flex-wrap items-center gap-4">
-        {desiredStats.map((desiredStat, index) => (
-          <div className="flex items-center" key={index}>
-            <Select
-              onValueChange={(stat) => handleUpdateDesiredStatStat(stat as Stat, index)}
-              value={desiredStat.stat?.toString()}
+    <div className={`${!isStatValid || !isValueValid ? "mb-8" : "mb-2"}`}>
+      <div className="flex flex-grow items-center justify-between gap-2">
+        <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Desired Stats:</Label>
+        <div className="flex-grow flex items-center">
+          <div className="flex items-center flex-grow h-8 px-3 py-2 text-left text-sm">
+            {!(desiredStats?.length > 0) && <span className="text-sm text-muted-foreground">None selected</span>}
+          </div>
+          <div className="flex ml-2 gap-1">
+            <Button
+              className="p-0 w-6 h-8 flex-shrink-0"
+              disabled={!canAddStatValue()}
+              onClick={addSelector}
+              size="sm"
+              variant="ghost"
             >
-              <SelectTrigger className="w-[220px]">
-                <SelectValue placeholder="Select a stat">
-                  {<div className="flex items-center">{desiredStat.stat || ""}</div>}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {Object.values(Stat).map((stat) => (
-                  <SelectItem className="flex items-center" key={stat} value={stat}>
-                    <div className="flex items-center">{stat}</div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <DebouncedNumericInput
-              onChange={(value: number) => handleUpdateDesiredStatValue(value, index)}
-              value={desiredStat.value}
-            />
-            <Button className="h-9 w-9 ml-2" onClick={() => handleRemoveDesiredStat(index)} size="icon" variant="ghost">
-              <X className="h-4 w-4" />
-              <span className="sr-only">Remove desired stat</span>
+              <PlusCircle size={16} />
             </Button>
           </div>
-        ))}
-        <Button className="h-9 w-9 ml-2" onClick={handleAddDesiredStat} size="icon" variant="ghost">
-          <PlusCircle className="h-4 w-4" />
-          <span className="sr-only">Add desired stat</span>
-        </Button>
+        </div>
       </div>
-    </>
+      <div className="flex flex-col justify-between">
+        {getOrderedDesiredStats().map((desiredStat) => (
+          <div className="flex-grow flex items-center" key={desiredStat.stat}>
+            <div className="h-8 px-3 text-sm flex items-center justify-between w-full">
+              <div>{desiredStat.stat}</div>
+              <div className="text-sm text-muted-foreground">{desiredStat.value}</div>
+            </div>
+            <div className="flex ml-2 gap-1">
+              <Button
+                className="p-0 w-6 h-8 flex-shrink-0"
+                onClick={() => remove(desiredStat.stat)}
+                size="sm"
+                variant="ghost"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div>
+        <div className="flex flex-grow items-center justify-between gap-2">
+          {isAddingDesiredStat && (
+            <>
+              <div className="flex-grow relative">
+                <Select onValueChange={updateStat}>
+                  <SelectTrigger
+                    aria-describedby={!isStatValid ? "stat-error" : undefined}
+                    aria-invalid={!isStatValid}
+                    className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
+                    isValid={isStatValid}
+                  >
+                    <SelectValue placeholder="Select a stat" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {getOrderedRemainingStats().map((stat) => (
+                      <SelectItem className="flex items-center" key={stat} value={stat}>
+                        {stat}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {!isStatValid && (
+                  <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="stat-error">
+                    Please select a stat.
+                  </p>
+                )}
+              </div>
+              <div className="flex-grow relative">
+                <DebouncedNumericInput
+                  aria-describedby={!isValueValid ? "value-error" : undefined}
+                  aria-invalid={!isValueValid}
+                  className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
+                  isValid={isValueValid}
+                  onChange={updateValue}
+                  value={value}
+                />
+                {!isValueValid && (
+                  <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="bonus-type-error">
+                    Please enter a value less than 1000.
+                  </p>
+                )}
+              </div>
+              <div className="flex ml-2 gap-1">
+                <Button className="p-0 w-6 h-8 flex-shrink-0" onClick={cancel} size="sm" variant="ghost">
+                  <X size={16} />
+                </Button>
+                <Button className="p-0 w-6 h-8 flex-shrink-0" onClick={confirm} size="sm" variant="ghost">
+                  <Check size={16} />
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
