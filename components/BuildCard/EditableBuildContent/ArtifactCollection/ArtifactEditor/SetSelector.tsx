@@ -44,20 +44,25 @@ const SetSelector = forwardRef<ISaveableContentHandle, SetSelectorProps>(
     };
 
     return (
-      <>
-        <div>
-          <Label className="text-s font-semibold" htmlFor="artifact-set">
-            Set
-          </Label>
+      <div className={`${!isValid ? "mb-8" : "mb-2"}`}>
+        <Label className="text-s font-semibold" htmlFor="artifact-set">
+          Set
+        </Label>
+        <div className="flex-grow relative">
           <Select onValueChange={onSetChange} value={set?.id}>
-            <SelectTrigger className="h-8" id="artifact-set" isValid={isValid}>
+            <SelectTrigger
+              aria-describedby={!isValid ? "error" : undefined}
+              aria-invalid={!isValid}
+              className="h-8"
+              isValid={isValid}
+            >
               <SelectValue placeholder="Select set" />
             </SelectTrigger>
             <SelectContent>
               {artifactSets
                 .filter((artifactSet) => artifactSet.hasArtifactTypes[artifactType])
                 .map((artifactSet) => (
-                  <SelectItem className="flex items-center" key={artifactSet.id} value={artifactSet.id}>
+                  <SelectItem key={artifactSet.id} value={artifactSet.id}>
                     <div className="flex items-center">
                       <Image
                         alt={artifactSet.name}
@@ -72,9 +77,13 @@ const SetSelector = forwardRef<ISaveableContentHandle, SetSelectorProps>(
                 ))}
             </SelectContent>
           </Select>
+          {!isValid && (
+            <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="error">
+              Please select an artifact set.
+            </p>
+          )}
         </div>
-        <div className="h-6">{!isValid && <p className="text-red-500 text-sm">Please select an artifact set.</p>}</div>
-      </>
+      </div>
     );
   }
 );

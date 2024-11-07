@@ -39,13 +39,18 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
     };
 
     return (
-      <>
-        <div>
-          <Label className="text-s font-semibold" htmlFor="main-stat">
-            Main Stat
-          </Label>
+      <div className={`${!isValid ? "mb-8" : "mb-2"}`}>
+        <Label className="text-s font-semibold" htmlFor="main-stat">
+          Main Stat
+        </Label>
+        <div className="flex-grow relative">
           <Select onValueChange={onMainStatChange} value={mainStat}>
-            <SelectTrigger className="h-8" id="main-stat" isValid={isValid}>
+            <SelectTrigger
+              aria-describedby={!isValid ? "error" : undefined}
+              aria-invalid={!isValid}
+              className="h-8"
+              isValid={isValid}
+            >
               <SelectValue placeholder="Select main stat" />
             </SelectTrigger>
             <SelectContent>
@@ -56,9 +61,9 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
               ))}
             </SelectContent>
           </Select>
+          {!isValid && <p className="text-red-500 text-sm mt-1 absolute left-0 top-full">Please select a main stat.</p>}
         </div>
-        <div className="h-6">{!isValid && <p className="text-red-500 text-sm">Please select a main stat.</p>}</div>
-      </>
+      </div>
     );
   }
 );
