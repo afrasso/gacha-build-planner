@@ -7,6 +7,7 @@ import {
   Build,
   BuildArtifacts,
   DesiredArtifactMainStats,
+  OverallStat,
   StatValue,
   Weapon,
 } from "@/types";
@@ -40,14 +41,14 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ artifactSet
     onUpdate(buildId, { character: build.character, desiredArtifactMainStats });
   };
 
-  const updateDesiredStats = (desiredStats: StatValue[]) => {
+  const updateDesiredStats = (desiredStats: StatValue<OverallStat>[]) => {
     const buildId = build.character.id;
     onUpdate(buildId, { character: build.character, desiredStats });
   };
 
   const updateArtifacts = (artifacts: BuildArtifacts) => {
     const buildId = build.character.id;
-    onUpdate(buildId, { character: build.character, artifacts });
+    onUpdate(buildId, { artifacts, character: build.character });
   };
 
   return (
