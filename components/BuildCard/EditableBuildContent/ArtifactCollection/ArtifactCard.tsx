@@ -10,9 +10,9 @@ interface ArtifactCardProps {
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(({ artifact, artifactType, onClick }) => {
+const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(({ artifact, artifactType, onClick }, ref) => {
   return (
-    <Card className="w-48 h-56 cursor-pointer hover:bg-accent" onClick={onClick}>
+    <Card className="w-48 h-56 cursor-pointer hover:bg-accent" onClick={onClick} ref={ref}>
       <CardContent className="p-2 flex flex-col h-full">
         {artifact ? (
           <>
