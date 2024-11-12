@@ -1,9 +1,5 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_SECRET) {
-  throw new Error("Missing Google OAuth credentials");
-}
 
 function getEnvVariable(key: string): string {
   const value = process.env[key];
@@ -13,13 +9,15 @@ function getEnvVariable(key: string): string {
   return value;
 }
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: getEnvVariable("GOOGLE_CLIENT_ID"),
       clientSecret: getEnvVariable("GOOGLE_SECRET"),
     }),
   ],
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

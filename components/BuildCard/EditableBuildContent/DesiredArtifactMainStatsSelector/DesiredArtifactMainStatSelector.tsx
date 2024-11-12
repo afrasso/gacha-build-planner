@@ -100,14 +100,20 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatSelector
 
   const renderNonEditableContent = () => {
     return (
-      <div className="flex flex-grow items-center justify-between gap-2">
+      <div className="flex flex-grow items-center justify-between gap-2" data-testid={artifactType}>
         <Label className="text-sm font-semibold text-primary whitespace-nowrap w-24 pl-4">{artifactType}:</Label>
         <div className="flex flex-grow items-center">
           <div
             className="h-8 px-3 text-left text-sm flex items-center flex-grow rounded-md hover:bg-accent cursor-pointer"
             onClick={edit}
           >
-            {internalStat ? <span>{internalStat}</span> : <span className="text-muted-foreground">Not selected</span>}
+            {internalStat ? (
+              <span data-testid="stat-populated">{internalStat}</span>
+            ) : (
+              <span className="text-muted-foreground" data-testid="stat-not-populated">
+                Not selected
+              </span>
+            )}
           </div>
           <Button
             className="p-0 w-6 h-8 flex-shrink-0"

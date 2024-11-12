@@ -114,6 +114,12 @@ export interface StatValue<T extends OverallStat | Stat> {
   value: number;
 }
 
+export interface Plan {
+  builds: Build[];
+  id: string;
+  userId: string;
+}
+
 export interface Weapon {
   iconUrl: string;
   id: string;
@@ -128,4 +134,9 @@ export enum WeaponType {
   CLAYMORE = "WEAPON_CLAYMORE",
   POLEARM = "WEAPON_POLE",
   SWORD = "WEAPON_SWORD_ONE_HAND",
+}
+
+export interface User {
+  email: string;
+  id: string;
 }

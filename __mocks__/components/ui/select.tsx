@@ -13,7 +13,7 @@ export const Select = ({
   );
 };
 
-export const SelectContent = ({ children, ...props }: React.PropsWithChildren<unknown>) => {
+export const SelectContent = ({ children, ...props }: React.PropsWithChildren) => {
   return <React.Fragment {...props}>{children}</React.Fragment>;
 };
 
@@ -25,7 +25,7 @@ export const SelectItem = ({ children, value, ...props }: React.PropsWithChildre
   );
 };
 
-export const SelectTrigger = ({ children, ...props }: React.PropsWithChildren<unknown>) => {
+export const SelectTrigger = ({ children, ...props }: React.PropsWithChildren) => {
   return <React.Fragment {...props}>{children}</React.Fragment>;
 };
 
