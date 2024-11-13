@@ -1,9 +1,7 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-import { savePlan } from "@/lib/db";
 import { ArtifactSet, Build, Character, Weapon } from "@/types";
 
 import BuildCard from "./BuildCard";
@@ -16,21 +14,9 @@ interface BuildManagerProps {
 }
 
 const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, weapons }) => {
-  const { data: session } = useSession();
   const [builds, setBuilds] = useState<Build[]>([]);
 
-  const saveToDatabase = () => {
-    if (session && session.user?.email) {
-      console.log("I'm logged in!");
-      console.log(JSON.stringify(session));
-      savePlan({ email: session.user?.email, plan: { builds } });
-    } else {
-      console.log("Not logged in!");
-    }
-  };
-
   const addBuild = (character: Character) => {
-    saveToDatabase();
     if (character && !builds.some((b) => b.character.id === character.id)) {
       setBuilds([
         ...builds,
@@ -47,7 +33,6 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
   };
 
   const updateBuild = (buildId: string, updates: Partial<Build>) => {
-    saveToDatabase();
     const characterId = buildId;
     setBuilds((builds) =>
       builds.map((build) => (build.character.id === characterId ? { ...build, ...updates } : build))
@@ -55,7 +40,6 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
   };
 
   const removeBuild = (buildId: string) => {
-    saveToDatabase();
     const characterId = buildId;
     setBuilds((builds) => builds.filter((build) => build.character.id !== characterId));
   };
