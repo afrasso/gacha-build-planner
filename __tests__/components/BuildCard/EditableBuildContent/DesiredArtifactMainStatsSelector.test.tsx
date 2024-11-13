@@ -1,8 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 import React from "react";
-import { vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import DesiredArtifactMainStatsSelector from "@/components/BuildCard/EditableBuildContent/DesiredArtifactMainStatsSelector";
 import { ArtifactType, DesiredArtifactMainStats, Stat } from "@/types";
@@ -59,26 +57,6 @@ describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
       const emptyContent = within(mainStatSelector).getByTestId("stat-populated");
       expect(emptyContent).toBeInTheDocument();
       expect(emptyContent).toHaveTextContent(`${desiredArtifactMainStats[artifactType]}`);
-    });
-  });
-
-  it.skip("does not call onChange when a main stat is selected", async () => {
-    const initialDesiredArtifactMainStats = generateArtifactMainStats();
-    renderComponent(initialDesiredArtifactMainStats);
-
-    const sandsSelect = screen.getByTestId(ArtifactType.SANDS);
-    await userEvent.selectOptions(sandsSelect, Stat.DEF_PERCENT);
-
-    expect(mockOnChange).not.toHaveBeenCalled();
-  });
-
-  it.skip("does calls onChange when the component is saved", async () => {
-    const initialDesiredArtifactMainStats = generateArtifactMainStats();
-    const sandsSelect = screen.getByTestId(ArtifactType.SANDS);
-    await userEvent.selectOptions(sandsSelect, Stat.DEF_PERCENT);
-    expect(mockOnChange).toHaveBeenCalledWith({
-      ...initialDesiredArtifactMainStats,
-      [ArtifactType.SANDS]: Stat.DEF_PERCENT,
     });
   });
 });

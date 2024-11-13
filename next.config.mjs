@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    esmExternals: false, // Disable ESM Externals for better compatibility with mocks
-  },
   async headers() {
     return [
       {
@@ -20,10 +17,6 @@ const nextConfig = {
       },
     ];
   },
-  images: {
-    domains: ["static.wikia.nocookie.net"],
-  },
-  reactStrictMode: false, // Disable React Strict Mode for testing
 };
 
 export default nextConfig;
