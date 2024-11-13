@@ -1,24 +1,7 @@
-import NextAuth, { AuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth";
 
-function getEnvVariable(key: string): string {
-  const value = process.env[key];
-  if (!value) {
-    throw new Error(`Missing environment variable: ${key}`);
-  }
-  return value;
-}
-
-const authOptions: AuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: getEnvVariable("GOOGLE_CLIENT_ID"),
-      clientSecret: getEnvVariable("GOOGLE_SECRET"),
-    }),
-  ],
-};
+import { authOptions } from "@/auth";
 
 const handler = NextAuth(authOptions);
 
-export const GET = handler;
-export const POST = handler;
+export { handler as GET, handler as POST };
