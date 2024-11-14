@@ -8,8 +8,8 @@
     "depcheck": "depcheck --ignores=\"postcss\"",
     "dev": "next dev",
     "lint": "next lint",
-    "migrate-local": "dotenvx run -f .env.local -- node-pg-migrate",
-    "migrate": "node-pg-migrate",
+    "migrate-local": "dotenvx run -f .env.local -- node-pg-migrate up",
+    "migrate": "node-pg-migrate up",
     "retrieve-assets": "tsx --tsconfig assetretriever/tsconfig.json assetretriever/index.ts",
     "start": "next start",
     "test": "npm run depcheck && npm run lint && cross-env NODE_ENV=development vitest"
