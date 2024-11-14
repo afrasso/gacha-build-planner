@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import { getServerSession } from "@/lib/sessionhelper";
 import { createUser, getUserByEmail } from "@/repositories/userRepository";
 import { User } from "@/types";
+import { getBaseUrl } from "@/utils/urlhelper";
 
 import { GET, POST } from "../../../app/api/users/route"; // Adjust path based on your structure
 
@@ -33,7 +34,7 @@ describe("/api/users", () => {
       mockGetUserByEmail.mockReturnValue(user);
 
       const mockRequest: NextRequest = {
-        url: "http://localhost:3000/api/users",
+        url: `${getBaseUrl()}/api/users`,
       } as NextRequest;
       const response = await GET(mockRequest);
 
@@ -43,11 +44,11 @@ describe("/api/users", () => {
       expect(response.status).toBe(200);
       const responseBody = await response.json();
       expect(responseBody._embedded.users.length).toBe(1);
-      expect(responseBody._embedded.users[0]._links.self.href).toBe(`http://localhost:3000/api/users/${id}`);
+      expect(responseBody._embedded.users[0]._links.self.href).toBe(`${getBaseUrl()}/api/users/${id}`);
       expect(responseBody._embedded.users[0]._links.self.id).toBe(id);
       expect(responseBody._embedded.users[0].email).toBe(email);
       expect(responseBody._embedded.users[0].id).toBe(id);
-      expect(responseBody._links.self.href).toBe("http://localhost:3000/api/users");
+      expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users`);
     });
 
     describe("when the query string contains an email that matches the session email", () => {
@@ -60,7 +61,7 @@ describe("/api/users", () => {
         mockGetUserByEmail.mockReturnValue(user);
 
         const mockRequest: NextRequest = {
-          url: `http://localhost:3000/api/users?email=${email}`,
+          url: `${getBaseUrl()}/api/users?email=${email}`,
         } as NextRequest;
         const response = await GET(mockRequest);
 
@@ -70,11 +71,11 @@ describe("/api/users", () => {
         expect(response.status).toBe(200);
         const responseBody = await response.json();
         expect(responseBody._embedded.users.length).toBe(1);
-        expect(responseBody._embedded.users[0]._links.self.href).toBe(`http://localhost:3000/api/users/${id}`);
+        expect(responseBody._embedded.users[0]._links.self.href).toBe(`${getBaseUrl()}/api/users/${id}`);
         expect(responseBody._embedded.users[0]._links.self.id).toBe(id);
         expect(responseBody._embedded.users[0].email).toBe(email);
         expect(responseBody._embedded.users[0].id).toBe(id);
-        expect(responseBody._links.self.href).toBe("http://localhost:3000/api/users");
+        expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users`);
       });
     });
 
@@ -88,7 +89,7 @@ describe("/api/users", () => {
         mockGetUserByEmail.mockReturnValue(user);
 
         const mockRequest: NextRequest = {
-          url: `http://localhost:3000/api/users?email=${email}`,
+          url: `${getBaseUrl()}/api/users?email=${email}`,
         } as NextRequest;
         const response = await GET(mockRequest);
 
@@ -98,7 +99,7 @@ describe("/api/users", () => {
         expect(response.status).toBe(200);
         const responseBody = await response.json();
         expect(responseBody._embedded.users.length).toBe(0);
-        expect(responseBody._links.self.href).toBe("http://localhost:3000/api/users");
+        expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users`);
       });
     });
   });
@@ -117,13 +118,13 @@ describe("/api/users", () => {
 
           const mockRequest: NextRequest = {
             json: async () => ({ email }),
-            url: "http://localhost:3000/api/users",
+            url: `${getBaseUrl()}/api/users`,
           } as NextRequest;
           const response = await POST(mockRequest);
 
           expect(response.status).toBe(201);
           const responseBody = await response.json();
-          expect(responseBody._links.self.href).toBe(`http://localhost:3000/api/users/${id}`);
+          expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users/${id}`);
           expect(responseBody._links.self.id).toBe(id);
           expect(responseBody.email).toBe(email);
           expect(responseBody.id).toBe(id);
@@ -142,7 +143,7 @@ describe("/api/users", () => {
 
           const mockRequest: NextRequest = {
             json: async () => ({ email }),
-            url: "http://localhost:3000/api/users",
+            url: `${getBaseUrl()}/api/users`,
           } as NextRequest;
           const response = await POST(mockRequest);
 
@@ -164,7 +165,7 @@ describe("/api/users", () => {
 
           const mockRequest: NextRequest = {
             json: async () => ({ email }),
-            url: "http://localhost:3000/api/users",
+            url: `${getBaseUrl()}/api/users`,
           } as NextRequest;
           const response = await POST(mockRequest);
 
@@ -184,7 +185,7 @@ describe("/api/users", () => {
 
           const mockRequest: NextRequest = {
             json: async () => ({ email }),
-            url: "http://localhost:3000/api/users",
+            url: `${getBaseUrl()}/api/users`,
           } as NextRequest;
           const response = await POST(mockRequest);
 
