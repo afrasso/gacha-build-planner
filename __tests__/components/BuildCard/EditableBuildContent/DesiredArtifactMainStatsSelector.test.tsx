@@ -1,90 +1,62 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, within } from "@testing-library/react";
 import React from "react";
-import "@testing-library/jest-dom";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import DesiredArtifactMainStatsSelector from "@/components/BuildCard/EditableBuildContent/DesiredArtifactMainStatsSelector";
-import ISaveableContentHandle from "@/components/iSaveableContentHandle";
-import { ArtifactMainStats, ArtifactType, Stat } from "@/types";
+import { ArtifactType, DesiredArtifactMainStats, Stat } from "@/types";
 
-jest.mock("@/components/ui/label");
-jest.mock("@/components/ui/select");
+vi.mock("@/components/ui/button");
+vi.mock("@/components/ui/label");
+vi.mock("@/components/ui/select");
+vi.mock("lucide-react");
 
 describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
-  const mockOnChange = jest.fn();
-
-  const generateArtifactMainStats = () => {
-    return {} as ArtifactMainStats;
-  };
-
-  const renderComponent = (desiredArtifactMainStats: ArtifactMainStats) => {
-    const ref = React.createRef<ISaveableContentHandle>();
+  const mockOnChange = vi.fn();
+  const renderComponent = (desiredArtifactMainStats: DesiredArtifactMainStats = {}) => {
     render(
-      <DesiredArtifactMainStatsSelector
-        desiredArtifactMainStats={desiredArtifactMainStats}
-        onChange={mockOnChange}
-        ref={ref}
-      />
+      <DesiredArtifactMainStatsSelector desiredArtifactMainStats={desiredArtifactMainStats} onChange={mockOnChange} />
     );
-    return ref;
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it("renders correctly", () => {
-    const initialDesiredArtifactMainStats = generateArtifactMainStats();
-    renderComponent(initialDesiredArtifactMainStats);
+  it("renders correctly with no initial values", () => {
+    renderComponent();
 
-    expect(screen.getByText("Desired Artifact Main Stats")).toBeInTheDocument();
-    expect(screen.getByTestId(ArtifactType.SANDS)).toBeInTheDocument();
-    expect(screen.getByTestId(ArtifactType.SANDS)).toHaveValue(undefined);
-    expect(screen.getByTestId(ArtifactType.GOBLET)).toBeInTheDocument();
-    expect(screen.getByTestId(ArtifactType.GOBLET)).toHaveValue(undefined);
-    expect(screen.getByTestId(ArtifactType.CIRCLET)).toBeInTheDocument();
-    expect(screen.getByTestId(ArtifactType.CIRCLET)).toHaveValue(undefined);
+    const label = screen.getByTestId("main-stats-label");
+    expect(label).toBeInTheDocument();
+    expect(label).toHaveTextContent("Main Stats:");
+
+    [ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].forEach((artifactType) => {
+      const mainStatSelector = screen.getByTestId(artifactType);
+      expect(mainStatSelector).toBeInTheDocument();
+      const emptyContent = within(mainStatSelector).getByTestId("stat-not-populated");
+      expect(emptyContent).toBeInTheDocument();
+      expect(emptyContent).toHaveTextContent("Not selected");
+    });
   });
 
-  it("displays provided initial values", () => {
-    const initialDesiredArtifactMainStats = generateArtifactMainStats();
-    initialDesiredArtifactMainStats[ArtifactType.SANDS] = Stat.ATK_PERCENT;
-    initialDesiredArtifactMainStats[ArtifactType.GOBLET] = Stat.DMG_BONUS_PYRO;
-    initialDesiredArtifactMainStats[ArtifactType.CIRCLET] = Stat.CRIT_RATE;
+  it("renders correctly with initial values", () => {
+    const desiredArtifactMainStats: DesiredArtifactMainStats = {
+      [ArtifactType.CIRCLET]: Stat.CRIT_RATE,
+      [ArtifactType.GOBLET]: Stat.DMG_BONUS_PYRO,
+      [ArtifactType.SANDS]: Stat.ATK_PERCENT,
+    };
 
-    renderComponent(initialDesiredArtifactMainStats);
+    renderComponent(desiredArtifactMainStats);
 
-    expect(screen.getByTestId(ArtifactType.SANDS)).toBeInTheDocument();
-    expect(screen.getByTestId(ArtifactType.SANDS)).toHaveValue(initialDesiredArtifactMainStats[ArtifactType.SANDS]);
-    expect(screen.getByTestId(ArtifactType.GOBLET)).toBeInTheDocument();
-    expect(screen.getByTestId(ArtifactType.GOBLET)).toHaveValue(initialDesiredArtifactMainStats[ArtifactType.GOBLET]);
-    expect(screen.getByTestId(ArtifactType.CIRCLET)).toBeInTheDocument();
-    expect(screen.getByTestId(ArtifactType.CIRCLET)).toHaveValue(initialDesiredArtifactMainStats[ArtifactType.CIRCLET]);
-  });
+    const label = screen.getByTestId("main-stats-label");
+    expect(label).toBeInTheDocument();
+    expect(label).toHaveTextContent("Main Stats:");
 
-  it("does not call onChange when a main stat is selected", async () => {
-    const initialDesiredArtifactMainStats = generateArtifactMainStats();
-    renderComponent(initialDesiredArtifactMainStats);
-
-    const sandsSelect = screen.getByTestId(ArtifactType.SANDS);
-    await userEvent.selectOptions(sandsSelect, Stat.DEF_PERCENT);
-
-    expect(mockOnChange).not.toHaveBeenCalled();
-  });
-
-  it("does calls onChange when the component is saved", async () => {
-    const initialDesiredArtifactMainStats = generateArtifactMainStats();
-    const ref = renderComponent(initialDesiredArtifactMainStats);
-    expect(ref.current).toBeDefined();
-    expect(ref.current?.save).toBeInstanceOf(Function);
-
-    const sandsSelect = screen.getByTestId(ArtifactType.SANDS);
-    await userEvent.selectOptions(sandsSelect, Stat.DEF_PERCENT);
-    const saveResult = ref.current?.save();
-    expect(saveResult).toBe(true);
-    expect(mockOnChange).toHaveBeenCalledWith({
-      ...initialDesiredArtifactMainStats,
-      [ArtifactType.SANDS]: Stat.DEF_PERCENT,
+    [ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].forEach((artifactType) => {
+      const mainStatSelector = screen.getByTestId(artifactType);
+      expect(mainStatSelector).toBeInTheDocument();
+      const emptyContent = within(mainStatSelector).getByTestId("stat-populated");
+      expect(emptyContent).toBeInTheDocument();
+      expect(emptyContent).toHaveTextContent(`${desiredArtifactMainStats[artifactType]}`);
     });
   });
 });

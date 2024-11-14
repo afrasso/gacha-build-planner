@@ -18,7 +18,9 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelecto
   return (
     <div className="mb-2">
       <div className="h-8 items-center flex">
-        <Label className="text-md font-semibold text-primary whitespace-nowrap">Main Stats:</Label>
+        <Label className="text-md font-semibold text-primary whitespace-nowrap" data-testid="main-stats-label">
+          Main Stats:
+        </Label>
       </div>
       {[ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].map((artifactType) => (
         <DesiredArtifactMainStatSelector
