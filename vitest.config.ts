@@ -18,6 +18,9 @@ export default defineConfig({
       },
     },
     environment: "jsdom",
+    environmentOptions: {
+      NODE_ENV: "development", // Forces React to use the development build
+    },
     globals: true,
     setupFiles: ["./setupTests.ts"],
     watch: false,
