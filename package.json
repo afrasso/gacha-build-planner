@@ -12,7 +12,7 @@
     "migrate": "dotenvx run -- node-pg-migrate",
     "retrieve-assets": "tsx --tsconfig assetretriever/tsconfig.json assetretriever/index.ts",
     "start": "next start",
-    "test": "npm run depcheck && npm run lint && vitest"
+    "test": "npm run depcheck && npm run lint && cross-env NODE_ENV=development vitest"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.2",
@@ -50,6 +50,7 @@
     "@vitejs/plugin-react": "^4.3.3",
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
+    "cross-env": "^7.0.3",
     "depcheck": "^1.4.7",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
