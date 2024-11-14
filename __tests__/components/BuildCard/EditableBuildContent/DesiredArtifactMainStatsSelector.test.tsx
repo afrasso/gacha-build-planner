@@ -1,5 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import React from "react";
+import React, { act } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import DesiredArtifactMainStatsSelector from "@/components/BuildCard/EditableBuildContent/DesiredArtifactMainStatsSelector";
@@ -12,18 +12,20 @@ vi.mock("lucide-react");
 
 describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
   const mockOnChange = vi.fn();
-  const renderComponent = (desiredArtifactMainStats: DesiredArtifactMainStats = {}) => {
-    render(
-      <DesiredArtifactMainStatsSelector desiredArtifactMainStats={desiredArtifactMainStats} onChange={mockOnChange} />
-    );
+  const renderComponent = async (desiredArtifactMainStats: DesiredArtifactMainStats = {}) => {
+    await act(async () => {
+      render(
+        <DesiredArtifactMainStatsSelector desiredArtifactMainStats={desiredArtifactMainStats} onChange={mockOnChange} />
+      );
+    });
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("renders correctly with no initial values", () => {
-    renderComponent();
+  it("renders correctly with no initial values", async () => {
+    await renderComponent();
 
     const label = screen.getByTestId("main-stats-label");
     expect(label).toBeInTheDocument();
@@ -38,14 +40,14 @@ describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
     });
   });
 
-  it("renders correctly with initial values", () => {
+  it("renders correctly with initial values", async () => {
     const desiredArtifactMainStats: DesiredArtifactMainStats = {
       [ArtifactType.CIRCLET]: Stat.CRIT_RATE,
       [ArtifactType.GOBLET]: Stat.DMG_BONUS_PYRO,
       [ArtifactType.SANDS]: Stat.ATK_PERCENT,
     };
 
-    renderComponent(desiredArtifactMainStats);
+    await renderComponent(desiredArtifactMainStats);
 
     const label = screen.getByTestId("main-stats-label");
     expect(label).toBeInTheDocument();

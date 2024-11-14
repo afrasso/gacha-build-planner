@@ -10,6 +10,13 @@ export default defineConfig({
     },
   },
   test: {
+    deps: {
+      optimizer: {
+        web: {
+          include: ["react", "react-dom", "@testing-library/react"],
+        },
+      },
+    },
     environment: "jsdom",
     globals: true,
     setupFiles: ["./setupTests.ts"],
