@@ -20,8 +20,8 @@ export async function GET(request: Request, { params }: { params: { userId: stri
   const plans = await getPlansByUserId({ userId });
   const apiPlans: API.Plan[] = plans.map((plan) => ({
     _links: {
-      self: { href: `${getBaseUrl()}/users/${userId}/plans/${plan.id}` },
-      user: { href: `${getBaseUrl()}/users/${userId}` },
+      self: { href: `${getBaseUrl()}/api/users/${userId}/plans/${plan.id}`, id: plan.id },
+      user: { href: `${getBaseUrl()}/api/users/${userId}`, id: userId },
     },
     builds: plan.builds,
     id: plan.id,
@@ -33,7 +33,7 @@ export async function GET(request: Request, { params }: { params: { userId: stri
     },
     _links: {
       self: {
-        href: `${getBaseUrl()}/users/${userId}/plans`,
+        href: `${getBaseUrl()}/api/users/${userId}/plans`,
       },
     },
   };
@@ -53,7 +53,7 @@ export async function POST(request: Request, { params }: { params: { userId: str
   }
 
   const plans = await getPlansByUserId({ userId });
-  if (plans) {
+  if (plans && plans.length > 0) {
     return NextResponse.json(
       { message: "A plan for that user already exists. At this time, no more than one plan is supported." },
       { status: 400 }
@@ -63,7 +63,10 @@ export async function POST(request: Request, { params }: { params: { userId: str
   const planRequest = await request.json();
   const plan = await createPlanForUser({ plan: planRequest, userId });
   const apiPlan: API.Plan = {
-    _links: { self: { href: `${getBaseUrl()}/users/${user.id}/plans/${plan.id}`, id: plan.id } },
+    _links: {
+      self: { href: `${getBaseUrl()}/api/users/${userId}/plans/${plan.id}`, id: plan.id },
+      user: { href: `${getBaseUrl()}/api/users/${userId}`, id: userId },
+    },
     builds: plan.builds,
     id: plan.id,
   };

@@ -17,9 +17,9 @@ export async function GET(request: Request, { params }: { params: { userId: stri
   }
 
   const apiUser: API.User = {
-    _links: { self: { href: `${getBaseUrl()}/users/${user.id}`, id: user.id } },
+    _links: { self: { href: `${getBaseUrl()}/api/users/${userId}`, id: userId } },
     email: user.email,
-    id: user.id,
+    id: userId,
   };
 
   return NextResponse.json(apiUser, { status: 200 });
@@ -45,9 +45,9 @@ export async function PUT(request: Request, { params }: { params: { userId: stri
   }
 
   const apiUser: API.User = {
-    _links: { self: { href: `${getBaseUrl()}/users/${user.id}`, id: user.id } },
+    _links: { self: { href: `${getBaseUrl()}/api/users/${userId}`, id: userId } },
     email: user.email,
-    id: user.id,
+    id: userId,
   };
 
   return NextResponse.json(apiUser, { status: 200 });
