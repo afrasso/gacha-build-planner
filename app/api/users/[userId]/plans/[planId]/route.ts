@@ -24,11 +24,11 @@ export async function GET(request: Request, { params }: { params: { planId: stri
 
   const apiPlan: API.Plan = {
     _links: {
-      self: { href: `${getBaseUrl()}/users/${userId}/plans/${plan.id}` },
-      user: { href: `${getBaseUrl()}/users/${userId}` },
+      self: { href: `${getBaseUrl()}/api/users/${userId}/plans/${planId}`, id: planId },
+      user: { href: `${getBaseUrl()}/api/users/${userId}`, id: userId },
     },
     builds: plan.builds,
-    id: plan.id,
+    id: planId,
   };
 
   return NextResponse.json(apiPlan, { status: 200 });
@@ -45,13 +45,18 @@ export async function PUT(request: Request, { params }: { params: { planId: stri
     return NextResponse.json({ error: "This action is forbidden." }, { status: 403 });
   }
 
+  const plan = await getPlanById({ id: planId });
+  if (!plan || plan.userId !== userId) {
+    return NextResponse.json({ error: "This action is forbidden." }, { status: 403 });
+  }
+
   const planRequest = await request.json();
   await updatePlan({ id: planId, plan: planRequest });
 
   const apiPlan: API.Plan = {
     _links: {
-      self: { href: `${getBaseUrl()}/users/${userId}/plans/${planId}` },
-      user: { href: `${getBaseUrl()}/users/${userId}` },
+      self: { href: `${getBaseUrl()}/api/users/${user.id}/plans/${planId}`, id: planId },
+      user: { href: `${getBaseUrl()}/api/users/${userId}`, id: userId },
     },
     builds: planRequest.builds,
     id: planId,

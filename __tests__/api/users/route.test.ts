@@ -8,12 +8,11 @@ vi.mock("@/repositories/userRepository");
 import { NextRequest } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
+import { GET, POST } from "@/app/api/users/route";
 import { getServerSession } from "@/lib/sessionhelper";
 import { createUser, getUserByEmail } from "@/repositories/userRepository";
 import { User } from "@/types";
 import { getBaseUrl } from "@/utils/urlhelper";
-
-import { GET, POST } from "../../../app/api/users/route"; // Adjust path based on your structure
 
 const mockGetServerSession = getServerSession as Mock;
 const mockCreateUser = createUser as Mock;
@@ -25,12 +24,12 @@ describe("/api/users", () => {
   });
 
   describe("GET", () => {
-    it("returns a list containing only the user that matches the session email", async () => {
+    it("should return a list containing only the user associated with the current session", async () => {
       const email = uuidv4();
-      const id = uuidv4();
+      const userId = uuidv4();
 
       mockGetServerSession.mockReturnValue({ user: { email } });
-      const user: User = { email, id };
+      const user: User = { email, id: userId };
       mockGetUserByEmail.mockReturnValue(user);
 
       const mockRequest: NextRequest = {
@@ -44,20 +43,20 @@ describe("/api/users", () => {
       expect(response.status).toBe(200);
       const responseBody = await response.json();
       expect(responseBody._embedded.users.length).toBe(1);
-      expect(responseBody._embedded.users[0]._links.self.href).toBe(`${getBaseUrl()}/api/users/${id}`);
-      expect(responseBody._embedded.users[0]._links.self.id).toBe(id);
+      expect(responseBody._embedded.users[0]._links.self.href).toBe(`${getBaseUrl()}/api/users/${userId}`);
+      expect(responseBody._embedded.users[0]._links.self.id).toBe(userId);
       expect(responseBody._embedded.users[0].email).toBe(email);
-      expect(responseBody._embedded.users[0].id).toBe(id);
+      expect(responseBody._embedded.users[0].id).toBe(userId);
       expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users`);
     });
 
-    describe("when the query string contains an email that matches the session email", () => {
-      it("returns a list containing only the user that matches the session email", async () => {
+    describe("when the query string matches the current session", () => {
+      it("should return a list containing only the user associated with the current session", async () => {
         const email = uuidv4();
-        const id = uuidv4();
+        const userId = uuidv4();
 
         mockGetServerSession.mockReturnValue({ user: { email } });
-        const user: User = { email, id };
+        const user: User = { email, id: userId };
         mockGetUserByEmail.mockReturnValue(user);
 
         const mockRequest: NextRequest = {
@@ -71,21 +70,21 @@ describe("/api/users", () => {
         expect(response.status).toBe(200);
         const responseBody = await response.json();
         expect(responseBody._embedded.users.length).toBe(1);
-        expect(responseBody._embedded.users[0]._links.self.href).toBe(`${getBaseUrl()}/api/users/${id}`);
-        expect(responseBody._embedded.users[0]._links.self.id).toBe(id);
+        expect(responseBody._embedded.users[0]._links.self.href).toBe(`${getBaseUrl()}/api/users/${userId}`);
+        expect(responseBody._embedded.users[0]._links.self.id).toBe(userId);
         expect(responseBody._embedded.users[0].email).toBe(email);
-        expect(responseBody._embedded.users[0].id).toBe(id);
+        expect(responseBody._embedded.users[0].id).toBe(userId);
         expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users`);
       });
     });
 
-    describe("when the query string contains an email that matches the session email", () => {
-      it("it should return an empty list of users", async () => {
+    describe("when the query string does not match the current session", () => {
+      it("should return an empty list of users", async () => {
         const email = uuidv4();
-        const id = uuidv4();
+        const userId = uuidv4();
 
         mockGetServerSession.mockReturnValue({ user: { email: uuidv4() } });
-        const user: User = { email, id };
+        const user: User = { email, id: userId };
         mockGetUserByEmail.mockReturnValue(user);
 
         const mockRequest: NextRequest = {
@@ -105,14 +104,14 @@ describe("/api/users", () => {
   });
 
   describe("POST", () => {
-    describe("when a user associated with the session email does not exist", () => {
-      describe("and the request body matches the session email", () => {
-        it("creates a new user and returns it", async () => {
+    describe("when a user associated with the current session does not exist", () => {
+      describe("and the request body matches the current session", () => {
+        it("should create a new user and return it", async () => {
           const email = uuidv4();
-          const id = uuidv4();
+          const userId = uuidv4();
 
           mockGetServerSession.mockReturnValue({ user: { email } });
-          const user: User = { email, id };
+          const user: User = { email, id: userId };
           mockGetUserByEmail.mockReturnValue(undefined);
           mockCreateUser.mockReturnValue(user);
 
@@ -124,20 +123,20 @@ describe("/api/users", () => {
 
           expect(response.status).toBe(201);
           const responseBody = await response.json();
-          expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users/${id}`);
-          expect(responseBody._links.self.id).toBe(id);
+          expect(responseBody._links.self.href).toBe(`${getBaseUrl()}/api/users/${userId}`);
+          expect(responseBody._links.self.id).toBe(userId);
           expect(responseBody.email).toBe(email);
-          expect(responseBody.id).toBe(id);
+          expect(responseBody.id).toBe(userId);
         });
       });
 
-      describe("and the request body doesn't match the session email", () => {
-        it("returns a 403", async () => {
+      describe("and the request body does not match the current session", () => {
+        it("should return a 403", async () => {
           const email = uuidv4();
-          const id = uuidv4();
+          const userId = uuidv4();
 
           mockGetServerSession.mockReturnValue({ user: { email: uuidv4() } });
-          const user: User = { email, id };
+          const user: User = { email, id: userId };
           mockGetUserByEmail.mockReturnValue(undefined);
           mockCreateUser.mockReturnValue(user);
 
@@ -152,14 +151,14 @@ describe("/api/users", () => {
       });
     });
 
-    describe("when a user associated with the session email already exists", () => {
-      describe("and the request body matches the session email", () => {
-        it("returns a 400", async () => {
+    describe("when a user associated with the current session already exists", () => {
+      describe("and the request body matches the current session", () => {
+        it("should return a 400", async () => {
           const email = uuidv4();
-          const id = uuidv4();
+          const userId = uuidv4();
 
           mockGetServerSession.mockReturnValue({ user: { email } });
-          const user: User = { email, id };
+          const user: User = { email, id: userId };
           mockGetUserByEmail.mockReturnValue(user);
           mockCreateUser.mockReturnValue(user);
 
@@ -173,13 +172,13 @@ describe("/api/users", () => {
         });
       });
 
-      describe("and the request body doesn't match the session email", () => {
-        it("returns a 403", async () => {
+      describe("and the request body does not match the current session", () => {
+        it("should return a 403", async () => {
           const email = uuidv4();
-          const id = uuidv4();
+          const userId = uuidv4();
 
           mockGetServerSession.mockReturnValue({ user: { email: uuidv4() } });
-          const user: User = { email, id };
+          const user: User = { email, id: userId };
           mockGetUserByEmail.mockReturnValue(undefined);
           mockCreateUser.mockReturnValue(user);
 
