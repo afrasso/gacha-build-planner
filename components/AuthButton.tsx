@@ -1,19 +1,27 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
+import { useAuthContext } from "../contexts/AuthContext";
+
 export default function AuthButton() {
-  const { data: session } = useSession();
+  const { logout, user } = useAuthContext();
   const router = useRouter();
 
-  if (session) {
+  if (user) {
     return (
       <div className="flex items-center gap-4">
-        <span>Signed in as {session.user?.email}</span>
-        <Button onClick={() => signOut()}>Sign out</Button>
+        <span>Signed in as {user.email}</span>
+        <Button
+          onClick={async () => {
+            await logout();
+            router.push("/");
+          }}
+        >
+          Sign out
+        </Button>
       </div>
     );
   }
