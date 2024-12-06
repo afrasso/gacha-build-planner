@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuthContext } from "@/contexts/AuthContext";
 
+import { initiateDiscordOauthSignIn, initiateFacebookOauthSignIn, initiateGoogleOauthSignIn } from "../actions/auth";
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +22,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = await login(email, password);
+    const success = await login({ email, password });
     if (success) {
       router.push("/");
     } else {
@@ -36,6 +38,27 @@ export default function LoginPage() {
   const updatePassword = (email: string) => {
     setIsLoginError(false);
     setPassword(email);
+  };
+
+  const signInWithDiscord = async () => {
+    const success = await initiateDiscordOauthSignIn();
+    if (success) {
+      router.push("/");
+    }
+  };
+
+  const signInWithFacebook = async () => {
+    const success = await initiateFacebookOauthSignIn();
+    if (success) {
+      router.push("/");
+    }
+  };
+
+  const signInWithGoogle = async () => {
+    const success = await initiateGoogleOauthSignIn();
+    if (success) {
+      router.push("/");
+    }
   };
 
   return (
@@ -68,14 +91,28 @@ export default function LoginPage() {
           </form>
         </CardContent>
         <CardFooter className="gap-2 justify-center">
-          {/* <Button className="w-full" onClick={() => signIn("google")}> */}
-          <Button className="hover:bg-transparent focus:bg-transparent" size="icon" variant="ghost">
+          <Button
+            className="hover:bg-transparent focus:bg-transparent"
+            onClick={signInWithDiscord}
+            size="icon"
+            variant="ghost"
+          >
             <FaDiscord className="w-8 h-8 text-[#7289da]" />
           </Button>
-          <Button className="hover:bg-transparent focus:bg-transparent" size="icon" variant="ghost">
+          <Button
+            className="hover:bg-transparent focus:bg-transparent"
+            onClick={signInWithFacebook}
+            size="icon"
+            variant="ghost"
+          >
             <FaFacebook className="w-8 h-8 text-[#1877f2]" />
           </Button>
-          <Button className="hover:bg-transparent focus:bg-transparent" size="icon" variant="ghost">
+          <Button
+            className="hover:bg-transparent focus:bg-transparent"
+            onClick={signInWithGoogle}
+            size="icon"
+            variant="ghost"
+          >
             <FcGoogle className="w-8 h-8" />
           </Button>
         </CardFooter>

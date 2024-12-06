@@ -4,7 +4,8 @@ import localFont from "next/font/local";
 
 import "./globals.css";
 
-import ClientLayout from "@/components/ClientLayout";
+import { AuthProvider } from "@/contexts/AuthContext";
+import getEnvVariable from "@/utils/getenvvariable";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
   title: "Genshin Impact Build Manager",
 };
 
+const apiUrl = getEnvVariable("API_URL");
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ClientLayout>{children}</ClientLayout>
+        <AuthProvider apiUrl={apiUrl}>{children}</AuthProvider>
       </body>
     </html>
   );

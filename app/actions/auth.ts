@@ -1,38 +1,37 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export async function validateToken(token: string) {
-  console.log(`validating token ${token}`);
+import getEnvVariable from "@/utils/getenvvariable";
 
-  if (!token) {
-    return { success: false, user: null };
-  }
+// export async function validateToken(token: string) {
+//   if (!token) {
+//     return { success: false, user: null };
+//   }
 
-  try {
-    const response = await fetch(`${process.env.API_URL}/auth/tokens/validate`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
+//   try {
+//     const response = await fetch(`${getEnvVariable("API_URL")}/auth/tokens/validate`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         "Content-Type": "application/json",
+//       },
+//       method: "POST",
+//     });
 
-    if (response.ok) {
-      const userData = await response.json();
-      return { success: true, user: userData };
-    } else {
-      return { success: false, user: null };
-    }
-  } catch (error) {
-    console.error("Error validating token:", error);
-    return { success: false, user: null };
-  }
-}
+//     if (response.ok) {
+//       const userData = await response.json();
+//       return { success: true, user: userData };
+//     } else {
+//       return { success: false, user: null };
+//     }
+//   } catch (error) {
+//     console.error("Error validating token:", error);
+//     return { success: false, user: null };
+//   }
+// }
 
 export async function login(email: string, password: string) {
-  console.log(`logging in with ${email}:${password}`);
-
   try {
     const response = await fetch(`${process.env.API_URL}/auth/tokens`, {
       body: JSON.stringify({ email, password }),
@@ -67,4 +66,18 @@ export async function logout() {
 export async function getToken() {
   const token = cookies().get("token")?.value;
   return token;
+}
+
+export async function initiateDiscordOauthSignIn() {
+  return redirect(`${getEnvVariable("API_URL")}/auth/discord/`);
+}
+
+export async function initiateFacebookOauthSignIn() {
+  return redirect(`${getEnvVariable("API_URL")}/auth/facebook/`);
+}
+
+export async function initiateGoogleOauthSignIn() {
+  const response = await redirect(`${getEnvVariable("API_URL")}/auth/google/`);
+  console.log(JSON.stringify(response));
+  return response;
 }

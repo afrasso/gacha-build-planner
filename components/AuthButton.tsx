@@ -16,7 +16,7 @@ export default function AuthButton() {
         <span>Signed in as {user.email}</span>
         <Button
           onClick={async () => {
-            await logout();
+            logout();
             router.push("/");
           }}
         >
