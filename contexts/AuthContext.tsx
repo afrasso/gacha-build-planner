@@ -34,6 +34,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
         body: JSON.stringify({ password, username: email }),
         headers: {
           "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "1",
         },
         method: "POST",
       });
@@ -42,11 +43,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
         throw new Error("Login failed");
       }
 
-      const data = await response.json();
-      const authToken = data.access_token;
-      setToken(authToken);
-      validateToken(authToken);
-      localStorage.setItem("auth_token", authToken);
+      const responseBody = await response.json();
+      setToken(responseBody.access_token);
+      setUser(responseBody.user);
+      localStorage.setItem("token", responseBody.access_token);
       return true;
     } catch (err) {
       console.error("Login error:", err);
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
   const logout = useCallback(() => {
     setUser(null);
     setToken(undefined);
-    localStorage.removeItem("auth_token");
+    localStorage.removeItem("token");
   }, []);
 
   const validateToken = useCallback(
@@ -66,13 +66,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
         const response = await fetch(`${apiUrl}/auth/tokens/validate`, {
           headers: {
             Authorization: `Bearer ${authToken}`,
+            "ngrok-skip-browser-warning": "1",
           },
           method: "GET",
         });
 
         if (response.ok) {
-          const { user } = await response.json();
-          setUser({ email: user.email, id: user.id });
+          const responseBody = await response.json();
+          setUser(responseBody.user);
           return true;
         } else {
           logout();
@@ -98,6 +99,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
         ...options.headers,
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "1",
       },
     };
 
@@ -105,7 +107,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
   };
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("auth_token");
+    const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
       validateToken(storedToken);

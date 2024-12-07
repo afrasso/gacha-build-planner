@@ -59,7 +59,8 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
           if (!response.ok) {
             throw new Error("Unexpected response when retrieving plan");
           }
-          const plans: Plan[] = await response.json();
+          const responseBody = await response.json();
+          const plans: Plan[] = responseBody._embedded.plans;
           if (plans && plans.length > 0 && plans[0] && plans[0].builds && plans[0].builds.length > 0) {
             const plan = plans[0];
             setPlanId(plan.id);
