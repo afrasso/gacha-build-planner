@@ -52,13 +52,11 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
     const validateSubStats = () => {
       const newAreSubStatsValid = subStats && subStats.length >= MIN_SUB_STATS;
       setAreSubStatsValid(newAreSubStatsValid);
-      console.log(`Setting areSubStatsValid=${newAreSubStatsValid}`);
       return newAreSubStatsValid;
     };
 
     const addSelector = () => {
       setAreSubStatsValid(true);
-      console.log(`Setting areSubStatsValid=true`);
       setIsSelectorPresent(true);
     };
 
@@ -76,7 +74,6 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
     );
 
     const cancelSelector = () => {
-      console.log(`areSubStatsValid=${areSubStatsValid}`);
       setIsSelectorPresent(false);
       setIsSelectorPresenceValid(true);
       setStat(undefined);
@@ -103,7 +100,6 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
         setValue(undefined);
         setIsValueValid(true);
         setAreSubStatsValid(true);
-        console.log(`Setting areSubStatsValid=true`);
         onUpdate([...subStats, subStat]);
       }
     };
