@@ -1,7 +1,11 @@
+import { Suspense } from "react";
+
 import getEnvVariable from "@/utils/getenvvariable";
 
 import AuthCallbackClient from "./AuthCallbackClient";
 
 export default function AuthCallbackPage() {
-  return <AuthCallbackClient apiUrl={getEnvVariable("API_URL")} />;
+  <Suspense fallback={<div>Loading...</div>}>
+    return <AuthCallbackClient apiUrl={getEnvVariable("API_URL")} />;
+  </Suspense>;
 }
