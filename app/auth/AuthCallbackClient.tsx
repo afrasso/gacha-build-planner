@@ -6,10 +6,10 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 interface AuthCallbackClientProps {
-  apiUrl: string;
+  callbackUrl: string;
 }
 
-export default function AuthCallbackClient({ apiUrl }: AuthCallbackClientProps) {
+export default function AuthCallbackClient({ callbackUrl }: AuthCallbackClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | undefined>();
@@ -24,7 +24,8 @@ export default function AuthCallbackClient({ apiUrl }: AuthCallbackClientProps) 
   useEffect(() => {
     const handleAuthorizationCode = async (code: string) => {
       try {
-        const response = await fetch(`${apiUrl}/auth/google/tokens`, {
+        console.log(callbackUrl);
+        const response = await fetch(callbackUrl, {
           body: JSON.stringify({ code }),
           headers: { "Content-Type": "application/json" },
           method: "POST",
@@ -35,7 +36,7 @@ export default function AuthCallbackClient({ apiUrl }: AuthCallbackClientProps) 
         }
 
         const data = await response.json();
-        localStorage.setItem("auth_token", data.access_token);
+        localStorage.setItem("token", data.access_token);
         router.push("/");
       } catch (err) {
         console.error("Error exchanging code for token:", err);
@@ -52,7 +53,7 @@ export default function AuthCallbackClient({ apiUrl }: AuthCallbackClientProps) 
       setError("No authorization code was found in the URL.");
       setIsLoading(false);
     }
-  }, [code, isLoading, apiUrl, router]);
+  }, [callbackUrl, code, isLoading, router]);
 
   if (error) {
     return (

@@ -13,7 +13,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: ({ email, password }: { email: string; password: string }) => Promise<boolean>;
   logout: () => void;
-  user: null | User;
+  user: undefined | User;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,8 +24,8 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) => {
-  const [user, setUser] = useState<null | User>(null);
   const [token, setToken] = useState<string | undefined>();
+  const [user, setUser] = useState<undefined | User>();
   const pathname = usePathname();
 
   const login = async ({ email, password }: { email: string; password: string }): Promise<boolean> => {
@@ -44,8 +44,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
       }
 
       const responseBody = await response.json();
-      setToken(responseBody.access_token);
-      setUser(responseBody.user);
       localStorage.setItem("token", responseBody.access_token);
       return true;
     } catch (err) {
@@ -55,7 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
   };
 
   const logout = useCallback(() => {
-    setUser(null);
+    setUser(undefined);
     setToken(undefined);
     localStorage.removeItem("token");
   }, []);
@@ -73,6 +71,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
 
         if (response.ok) {
           const responseBody = await response.json();
+          setToken(authToken);
           setUser(responseBody.user);
           return true;
         } else {
@@ -109,7 +108,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ apiUrl, children }) 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
-      setToken(storedToken);
       validateToken(storedToken);
     }
   }, [pathname, validateToken]);
