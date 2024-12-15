@@ -7,7 +7,7 @@ import AuthCallbackClient from "../../AuthCallbackClient";
 export default function AuthCallbackPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <AuthCallbackClient callbackUrl={`${getEnvVariable("API_URL")}/auth/google/tokens`} />
+      <AuthCallbackClient callbackUrl={`${getEnvVariable("API_URL")}/auth/facebook/tokens`} />
     </Suspense>
   );
 }
