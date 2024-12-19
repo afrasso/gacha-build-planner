@@ -1,142 +1,73 @@
-export interface Artifact {
-  iconUrl: string;
-  level: number;
-  mainStat: Stat;
-  rarity: number;
-  set: ArtifactSet;
-  subStats: StatValue<Stat>[];
-  type: ArtifactType;
-}
+import Ajv from "ajv";
 
-export enum ArtifactSetBonusType {
-  FOUR_PIECE = "FOUR_PIECE",
-  TWO_PIECE = "TWO_PIECE",
-}
+import {
+  ArtifactSchema,
+  ArtifactSetBonusSchema,
+  ArtifactSetBonusTypeSchema,
+  ArtifactSetSchema,
+  ArtifactTypeSchema,
+  BuildArtifactsSchema,
+  DesiredArtifactMainStatsSchema,
+} from "./artifact";
+import { Build, BuildSchema, BuildSetSchema } from "./build";
+import { CharacterSchema, ElementSchema } from "./character";
+import { PlanSchema } from "./plan";
+import { OverallStatSchema, OverallStatValueSchema, StatSchema, StatValueSchema } from "./stat";
+import { WeaponSchema, WeaponTypeSchema } from "./weapon";
 
-export interface ArtifactSetBonus {
-  artifactSet: ArtifactSet;
-  bonusType: ArtifactSetBonusType;
-}
+export * from "./artifact";
+export * from "./build";
+export * from "./character";
+export * from "./plan";
+export * from "./stat";
+export * from "./user";
+export * from "./weapon";
 
-export interface ArtifactSet {
-  hasArtifactTypes: Record<ArtifactType, boolean>;
-  iconUrl: string;
-  iconUrls: Record<ArtifactType, string>;
-  id: string;
-  name: string;
-  rarities: number[];
-}
+const ajv = new Ajv({ allErrors: true });
 
-export enum ArtifactType {
-  CIRCLET = "CIRCLET",
-  FLOWER = "FLOWER",
-  GOBLET = "GOBLET",
-  PLUME = "PLUME",
-  SANDS = "SANDS",
-}
+ajv.addSchema(ArtifactSchema);
+ajv.addSchema(ArtifactSetSchema);
+ajv.addSchema(ArtifactSetBonusSchema);
+ajv.addSchema(ArtifactSetBonusTypeSchema);
+ajv.addSchema(ArtifactTypeSchema);
+ajv.addSchema(BuildArtifactsSchema);
+ajv.addSchema(DesiredArtifactMainStatsSchema);
 
-export interface Build {
-  artifacts: BuildArtifacts;
-  character: Character;
-  desiredArtifactMainStats: DesiredArtifactMainStats;
-  desiredArtifactSetBonuses: ArtifactSetBonus[];
-  desiredStats: StatValue<OverallStat>[];
-  weapon: undefined | Weapon;
-}
+ajv.addSchema(BuildSchema);
+ajv.addSchema(BuildSetSchema);
 
-export type BuildArtifacts = Partial<Record<ArtifactType, Artifact>>;
+ajv.addSchema(CharacterSchema);
+ajv.addSchema(ElementSchema);
 
-export interface Character {
-  element: Element;
-  iconUrl: string;
-  id: string;
-  name: string;
-  rarity: number;
-  weaponType: WeaponType;
-}
+ajv.addSchema(PlanSchema);
 
-export type DesiredArtifactMainStats = Partial<Record<ArtifactType, Stat>>;
+ajv.addSchema(OverallStatSchema);
+ajv.addSchema(OverallStatValueSchema);
+ajv.addSchema(StatSchema);
+ajv.addSchema(StatValueSchema);
 
-export enum OverallStat {
-  ATK = "ATK",
-  CRIT_DMG = "CRIT_DMG",
-  CRIT_RATE = "CRIT_RATE",
-  DEF = "DEF",
-  DMG_BONUS_ANEMO = "DMG_BONUS_ANEMO",
-  DMG_BONUS_CRYO = "DMG_BONUS_CRYO",
-  DMG_BONUS_DENDRO = "DMG_BONUS_DENDRO",
-  DMG_BONUS_ELECTRO = "DMG_BONUS_ELECTRO",
-  DMG_BONUS_GEO = "DMG_BONUS_GEO",
-  DMG_BONUS_HYDRO = "DMG_BONUS_HYDRO",
-  DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
-  DMG_BONUS_PYRO = "DMG_BONUS_PYRO",
-  ELEMENTAL_MASTERY = "ELEMENTAL_MASTERY",
-  ENERGY_RECHARGE = "ENERGY_RECHARGE",
-  HEALING_BONUS = "HEALING_BONUS",
-  MAX_HP = "MAX_HP",
-}
+ajv.addSchema(WeaponSchema);
+ajv.addSchema(WeaponTypeSchema);
 
-export enum Element {
-  ANEMO = "ELEMENT_ANEMO",
-  CRYO = "ELEMENT_CRYO",
-  DENDRO = "ELEMENT_DENDRO",
-  ELECTRO = "ELEMENT_ELECTRO",
-  GEO = "ELEMENT_GEO",
-  HYDRO = "ELEMENT_HYDRO",
-  NONE = "ELEMENT_NONE",
-  PYRO = "ELEMENT_PYRO",
-}
+export const validateBuilds = (data: unknown): Build[] => {
+  const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/BuildSet");
 
-export enum Stat {
-  ATK_FLAT = "ATK",
-  ATK_PERCENT = "ATK_PERCENT",
-  CRIT_DMG = "CRIT_DMG",
-  CRIT_RATE = "CRIT_RATE",
-  DEF_FLAT = "DEF_FLAT",
-  DEF_PERCENT = "DEF_PERCENT",
-  DMG_BONUS_ANEMO = "DMG_BONUS_ANEMO",
-  DMG_BONUS_CRYO = "DMG_BONUS_CRYO",
-  DMG_BONUS_DENDRO = "DMG_BONUS_DENDRO",
-  DMG_BONUS_ELECTRO = "DMG_BONUS_ELECTRO",
-  DMG_BONUS_GEO = "DMG_BONUS_GEO",
-  DMG_BONUS_HYDRO = "DMG_BONUS_HYDRO",
-  DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
-  DMG_BONUS_PYRO = "DMG_BONUS_PYRO",
-  ELEMENTAL_MASTERY = "ELEMENTAL_MASTERY",
-  ENERGY_RECHARGE = "ENERGY_RECHARGE",
-  HEALING_BONUS = "HEALING_BONUS",
-  HP_FLAT = "HP_FLAT",
-  HP_PERCENT = "HP_PERCENT",
-}
+  if (!validate) {
+    throw new Error("Unpexected error: validateBuilds is not available.");
+  }
 
-export interface StatValue<T extends OverallStat | Stat> {
-  stat: T;
-  value: number;
-}
+  const valid = validate(data);
 
-export interface Plan {
-  builds: Build[];
-  id: string;
-  userId: string;
-}
+  if (!valid) {
+    // Access the errors
+    console.error("Validation errors:", validate.errors);
 
-export interface Weapon {
-  iconUrl: string;
-  id: string;
-  name: string;
-  rarity: number;
-  type: WeaponType;
-}
+    // Optionally, format the errors for better readability
+    const formattedErrors = ajv.errorsText(validate.errors, { separator: "\n" });
+    console.error("Formatted Errors:\n", formattedErrors);
 
-export enum WeaponType {
-  BOW = "WEAPON_BOW",
-  CATALYST = "WEAPON_CATALYST",
-  CLAYMORE = "WEAPON_CLAYMORE",
-  POLEARM = "WEAPON_POLE",
-  SWORD = "WEAPON_SWORD_ONE_HAND",
-}
+    throw new Error("Data validation failed.");
+  }
 
-export interface User {
-  email: string;
-  id: string;
-}
+  return (data as { builds: Build[] }).builds;
+};

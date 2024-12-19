@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { ArtifactSet, Build, Weapon } from "@/types";
 
+import BuildSatisfactionComponent from "./BuildSatisfactionComponent";
 import EditableBuildContent from "./EditableBuildContent";
 import Header from "./Header";
 
@@ -16,6 +17,7 @@ const BuildCard: React.FC<BuildCardProps> = ({ artifactSets, build, onRemove, on
   return (
     <Card className="w-full h-full">
       <Header build={build} onRemove={onRemove} />
+      <BuildSatisfactionComponent build={build} />
       <EditableBuildContent artifactSets={artifactSets} build={build} onUpdate={onUpdate} weapons={weapons} />
     </Card>
   );

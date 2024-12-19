@@ -36,7 +36,7 @@ const extractCharacters = async ({
     characters.push({
       element: dbCharacter.elementType,
       iconUrl: `/${dbCharacter.id}.png`,
-      id: dbCharacter.id,
+      id: String(dbCharacter.id),
       name: dbCharacter.name,
       rarity: dbCharacter.rarity,
       weaponType: dbCharacter.weaponType,
@@ -82,7 +82,7 @@ const extractWeapons = async ({
   for (const dbWeapon of dbWeapons) {
     weapons.push({
       iconUrl: `/${dbWeapon.id}.png`,
-      id: dbWeapon.id,
+      id: String(dbWeapon.id),
       name: dbWeapon.name,
       rarity: dbWeapon.rarity,
       type: dbWeapon.weaponType,
@@ -140,7 +140,7 @@ const extractArtifactSets = async ({
         [ArtifactType.PLUME]: `/${dbArtifactSet.id}_2.png`,
         [ArtifactType.SANDS]: `/${dbArtifactSet.id}_5.png`,
       },
-      id: dbArtifactSet.id,
+      id: String(dbArtifactSet.id),
       name: dbArtifactSet.name,
       rarities: dbArtifactSet.rarityList,
     });

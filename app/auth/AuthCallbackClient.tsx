@@ -24,7 +24,6 @@ export default function AuthCallbackClient({ callbackUrl }: AuthCallbackClientPr
   useEffect(() => {
     const handleAuthorizationCode = async (code: string) => {
       try {
-        console.log(callbackUrl);
         const response = await fetch(callbackUrl, {
           body: JSON.stringify({ code }),
           headers: { "Content-Type": "application/json" },

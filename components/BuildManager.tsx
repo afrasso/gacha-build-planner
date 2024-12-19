@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from "react";
 
+import { updateBuildsWithGameData } from "@/buildhelpers/updatebuildswithgamedata";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { ArtifactSet, Build, Character, Plan, Weapon } from "@/types";
+import { validateGOOD } from "@/goodtypes";
+import { ArtifactSet, Build, Character, Plan, validateBuilds, Weapon } from "@/types";
 
 import BuildCard from "./BuildCard";
 import CharacterSelector from "./CharacterSelector";
+import ImportExportComponent from "./ImportExportComponent";
+import ImportGameDataComponent from "./ImportGameDataComponent";
 
 interface BuildManagerProps {
   artifactSets: ArtifactSet[];
@@ -112,8 +116,45 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
     savePlan();
   }, [authFetch, builds, isAuthenticated, planId, user]);
 
+  const handleImport = (data: unknown) => {
+    const builds = validateBuilds(data);
+    setBuilds(builds);
+  };
+
+  const handleGameDataImport = (data: unknown) => {
+    const { artifacts: goodArtifacts, characters: goodCharacters, weapons: goodWeapons } = validateGOOD(data);
+    setBuilds(
+      updateBuildsWithGameData({
+        artifactSets,
+        builds,
+        characters,
+        goodArtifacts,
+        goodCharacters,
+        goodWeapons,
+        weapons,
+      })
+    );
+  };
+
+  const handleExport = () => {
+    const dataStr = JSON.stringify({ builds });
+    const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+    const exportFileDefaultName = "gacha-build-planner-data.json";
+
+    const linkElement = document.createElement("a");
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
+    linkElement.click();
+  };
+
   return (
-    <div>
+    <>
+      <div className="mb-8">
+        <ImportExportComponent onExport={handleExport} onImport={handleImport} />
+      </div>
+      <div className="mb-8">
+        <ImportGameDataComponent onImport={handleGameDataImport} />
+      </div>
       <CharacterSelector
         characters={characters.filter((character) => !builds.map((build) => build.character.id).includes(character.id))}
         onAdd={addBuild}
@@ -130,7 +171,7 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
           />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
