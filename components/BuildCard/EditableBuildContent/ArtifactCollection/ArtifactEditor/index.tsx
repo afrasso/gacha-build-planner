@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Button } from "@/components/ui/button";
@@ -23,7 +24,9 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
   artifactType,
   onUpdate,
 }: ArtifactEditorProps) => {
-  const [internalArtifact, setInternalArtifact] = useState<Partial<Artifact>>(artifact || { type: artifactType });
+  const [internalArtifact, setInternalArtifact] = useState<Partial<Artifact>>(
+    artifact || { id: uuidv4(), type: artifactType }
+  );
 
   const setSelectorRef = useRef<ISaveableContentHandle>(null);
   const mainStatSelectorRef = useRef<ISaveableContentHandle>(null);

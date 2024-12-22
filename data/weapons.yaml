@@ -1,995 +1,1781 @@
 - iconUrl: /11515.png
   id: '11515'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.441024
   name: Absolution
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12416.png
   id: '12416'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Akuoumaru
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /15410.png
   id: '15410'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Alley Hunter
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /11414.png
   id: '11414'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.55128
   name: Amenoma Kageuchi
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15502.png
   id: '15502'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: Amos' Bow
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /14101.png
   id: '14101'
+  maxLvlStats:
+    ATK: 185.42615999999998
+    mainStat: 0
   name: Apprentice's Notes
   rarity: 1
   type: WEAPON_CATALYST
 - iconUrl: /15508.png
   id: '15508'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.882048
   name: Aqua Simulacra
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /11501.png
   id: '11501'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.41346
   name: Aquila Favonia
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14427.png
   id: '14427'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Ash-Graven Drinking Horn
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /14511.png
   id: '14511'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 264.61440000000005
   name: A Thousand Floating Dreams
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /14426.png
   id: '14426'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Ballad of the Boundless Blue
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /13424.png
   id: '13424'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.27564
   name: Ballad of the Fjords
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /12511.png
   id: '12511'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.330768
   name: Beacon of the Reed Sea
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /13101.png
   id: '13101'
+  maxLvlStats:
+    ATK: 185.42615999999998
+    mainStat: 0
   name: Beginner's Protector
   rarity: 1
   type: WEAPON_POLE
 - iconUrl: /14408.png
   id: '14408'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.55128
   name: Blackcliff Agate
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /11408.png
   id: '11408'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.36752
   name: Blackcliff Longsword
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13404.png
   id: '13404'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.55128
   name: Blackcliff Pole
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /12408.png
   id: '12408'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.55128
   name: Blackcliff Slasher
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /15408.png
   id: '15408'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.36752
   name: Blackcliff Warbow
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /13303.png
   id: '13303'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 354.37940000000003
+    mainStat: 0.46919900200000003
   name: Black Tassel
   rarity: 3
   type: WEAPON_POLE
 - iconUrl: /12302.png
   id: '12302'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 354.37940000000003
+    mainStat: 187.4352
   name: Bloodtainted Greatsword
   rarity: 3
   type: WEAPON_CLAYMORE
 - iconUrl: /13507.png
   id: '13507'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 740.5801544000001
+    mainStat: 0.165384
   name: Calamity Queller
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /14513.png
   id: '14513'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.220512
   name: Cashflow Supervision
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /15431.png
   id: '15431'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Chain Breaker
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /11415.png
   id: '11415'
+  mainStat: DEF_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.689711002
   name: Cinnabar Spindle
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15426.png
   id: '15426'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Cloudforged
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /15407.png
   id: '15407'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.689711002
   name: Compound Bow
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /11301.png
   id: '11301'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.35190040000000006
   name: Cool Steel
   rarity: 3
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14515.png
   id: '14515'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 740.5801544000001
+    mainStat: 0.165384
   name: Crane's Echoing Call
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /13403.png
   id: '13403'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.344857798
   name: Crescent Pike
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /13512.png
   id: '13512'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.220512
   name: Crimson Moon's Semblance
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /11304.png
   id: '11304'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 140.5764
   name: Dark Iron Sword
   rarity: 3
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13405.png
   id: '13405'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.36752
   name: Deathmatch
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /12305.png
   id: '12305'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.35190040000000006
   name: Debate Club
   rarity: 3
   type: WEAPON_CLAYMORE
 - iconUrl: /13426.png
   id: '13426'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Dialogues of the Desert Sages
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /14413.png
   id: '14413'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.55128
   name: Dodoco Tales
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /13401.png
   id: '13401'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 220.512
   name: Dragon's Bane
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /13409.png
   id: '13409'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.689711002
   name: Dragonspine Spear
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /11101.png
   id: '11101'
+  maxLvlStats:
+    ATK: 185.42615999999998
+    mainStat: 0
   name: Dull Blade
   rarity: 1
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12431.png
   id: '12431'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Earth Shaker
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /15503.png
   id: '15503'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.55128
   name: Elegy for the End
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /14304.png
   id: '14304'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 448.2215814
+    mainStat: 93.7176
   name: Emerald Orb
   rarity: 3
   type: WEAPON_CATALYST
 - iconUrl: /15418.png
   id: '15418'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: End of the Line
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /13509.png
   id: '13509'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.55128
   name: Engulfing Lightning
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /14506.png
   id: '14506'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: Everlasting Moonglow
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /14409.png
   id: '14409'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.55128
   name: Eye of Perception
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /15411.png
   id: '15411'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Fading Twilight
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /12513.png
   id: '12513'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 740.5801544000001
+    mainStat: 0.110256
   name: Fang of the Mountain King
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /14401.png
   id: '14401'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: Favonius Codex
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /12401.png
   id: '12401'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.6125318020000001
   name: Favonius Greatsword
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /13407.png
   id: '13407'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Favonius Lance
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /11401.png
   id: '11401'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.6125318020000001
   name: Favonius Sword
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15401.png
   id: '15401'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.6125318020000001
   name: Favonius Warbow
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /12301.png
   id: '12301'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.35190040000000006
   name: Ferrous Shadow
   rarity: 3
   type: WEAPON_CLAYMORE
 - iconUrl: /11413.png
   id: '11413'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: Festering Desire
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11305.png
   id: '11305'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.35190040000000006
   name: Fillet Blade
   rarity: 3
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11425.png
   id: '11425'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Finale of the Deep
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11426.png
   id: '11426'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: Fleuve Cendre Ferryman
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14425.png
   id: '14425'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Flowing Purity
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /11431.png
   id: '11431'
+  mainStat: DEF_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.689711002
   name: Flute of Ezpitzal
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13431.png
   id: '13431'
+  mainStat: DEF_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.5172844000000001
   name: Footprint of the Rainbow
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /12417.png
   id: '12417'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Forest Regalia
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /11503.png
   id: '11503'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 198.46080000000003
   name: Freedom-Sworn
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14412.png
   id: '14412'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Frostbearer
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /12430.png
   id: '12430'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Fruitful Hook
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /14417.png
   id: '14417'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: Fruit of Fulfillment
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /14414.png
   id: '14414'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Hakushin Ring
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /13302.png
   id: '13302'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 448.2215814
+    mainStat: 0.23460179800000003
   name: Halberd
   rarity: 3
   type: WEAPON_POLE
 - iconUrl: /15414.png
   id: '15414'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.55128
   name: Hamayumi
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /11510.png
   id: '11510'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.330768
   name: Haran Geppaku Futsu
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11302.png
   id: '11302'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.468588
   name: Harbinger of Dawn
   rarity: 3
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15101.png
   id: '15101'
+  maxLvlStats:
+    ATK: 185.42615999999998
+    mainStat: 0
   name: Hunter's Bow
   rarity: 1
   type: WEAPON_BOW
 - iconUrl: /15511.png
   id: '15511'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.441024
   name: Hunter's Path
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /15419.png
   id: '15419'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Ibis Piercer
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /13201.png
   id: '13201'
+  maxLvlStats:
+    ATK: 243.22624000000002
+    mainStat: 0
   name: Iron Point
   rarity: 2
   type: WEAPON_POLE
 - iconUrl: /11407.png
   id: '11407'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Iron Sting
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14505.png
   id: '14505'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: Jadefall's Splendor
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /11416.png
   id: '11416'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Kagotsurube Isshin
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14509.png
   id: '14509'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.661536
   name: Kagura's Verity
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /12414.png
   id: '12414'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: Katsuragikiri Nagamasa
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /11511.png
   id: '11511'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.661536
   name: Key of Khaj-Nisut
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15417.png
   id: '15417'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.55128
   name: King's Squire
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /13414.png
   id: '13414'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 110.256
   name: Kitain Cross Spear
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /11512.png
   id: '11512'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.882048
   name: Light of Foliar Incision
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11405.png
   id: '11405'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Lion's Roar
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12410.png
   id: '12410'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Lithic Blade
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /13406.png
   id: '13406'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Lithic Spear
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /14502.png
   id: '14502'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.330768
   name: Lost Prayer to the Sacred Winds
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /13513.png
   id: '13513'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.330768
   name: Lumidouce Elegy
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /12412.png
   id: '12412'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.55128
   name: Luxurious Sea-Lord
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /14301.png
   id: '14301'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 354.37940000000003
+    mainStat: 187.4352
   name: Magic Guide
   rarity: 3
   type: WEAPON_CATALYST
 - iconUrl: /12418.png
   id: '12418'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 110.256
   name: Mailed Flower
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /12415.png
   id: '12415'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Makhaira Aquamarine
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /14407.png
   id: '14407'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 110.256
   name: Mappa Mare
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /14504.png
   id: '14504'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: Memory of Dust
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /15305.png
   id: '15305'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 448.2215814
+    mainStat: 0.31239200000000006
   name: Messenger
   rarity: 3
   type: WEAPON_BOW
 - iconUrl: /13419.png
   id: '13419'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Missive Windspear
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /11509.png
   id: '11509'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.441024
   name: Mistsplitter Reforged
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15412.png
   id: '15412'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.5172844000000001
   name: Mitternachts Waltz
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /13417.png
   id: '13417'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 110.256
   name: Moonpiercer
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /13430.png
   id: '13430'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Mountain-Bracing Bolt
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /15416.png
   id: '15416'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Mouun's Moon
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /14415.png
   id: '14415'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Oathsworn Eye
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /12201.png
   id: '12201'
+  maxLvlStats:
+    ATK: 243.22624000000002
+    mainStat: 0
   name: Old Merc's Pal
   rarity: 2
   type: WEAPON_CLAYMORE
 - iconUrl: /14303.png
   id: '14303'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.39049000000000006
   name: Otherworldly Story
   rarity: 3
   type: WEAPON_CATALYST
 - iconUrl: /11516.png
   id: '11516'
+  mainStat: DEF_PERCENT
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.82692
   name: Peak Patrol Song
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14201.png
   id: '14201'
+  maxLvlStats:
+    ATK: 243.22624000000002
+    mainStat: 0
   name: Pocket Grimoire
   rarity: 2
   type: WEAPON_CATALYST
 - iconUrl: /15507.png
   id: '15507'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.330768
   name: Polar Star
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /12427.png
   id: '12427'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.55128
   name: Portable Power Saw
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /15415.png
   id: '15415'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Predator
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /11505.png
   id: '11505'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.441024
   name: Primordial Jade Cutter
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13505.png
   id: '13505'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.220512
   name: Primordial Jade Winged-Spear
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /11419.png
   id: '11419'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Prized Isshin Blade
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13427.png
   id: '13427'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Prospector's Drill
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /14406.png
   id: '14406'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Prototype Amber
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /12406.png
   id: '12406'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Prototype Archaic
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /15406.png
   id: '15406'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Prototype Crescent
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /11406.png
   id: '11406'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.344857798
   name: Prototype Rancour
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13402.png
   id: '13402'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: Prototype Starglitter
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /12405.png
   id: '12405'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Rainslasher
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /15427.png
   id: '15427'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Range Gauge
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /15301.png
   id: '15301'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 448.2215814
+    mainStat: 93.7176
   name: Raven Bow
   rarity: 3
   type: WEAPON_BOW
 - iconUrl: /15303.png
   id: '15303'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 354.37940000000003
+    mainStat: 0.46919900200000003
   name: Recurve Bow
   rarity: 3
   type: WEAPON_BOW
 - iconUrl: /12510.png
   id: '12510'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.882048
   name: Redhorn Stonethresher
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /13425.png
   id: '13425'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Rightful Reward
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /14431.png
   id: '14431'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Ring of Yaxche
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /15404.png
   id: '15404'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Royal Bow
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /12404.png
   id: '12404'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Royal Greatsword
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /14404.png
   id: '14404'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Royal Grimoire
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /11404.png
   id: '11404'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Royal Longsword
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13408.png
   id: '13408'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Royal Spear
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /15405.png
   id: '15405'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Rust
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /15403.png
   id: '15403'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Sacrificial Bow
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /14403.png
   id: '14403'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 220.512
   name: Sacrificial Fragments
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /12403.png
   id: '12403'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Sacrificial Greatsword
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /14424.png
   id: '14424'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.36752
   name: Sacrificial Jade
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /11403.png
   id: '11403'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 0.6125318020000001
   name: Sacrificial Sword
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11417.png
   id: '11417'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Sapwood Blade
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15424.png
   id: '15424'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.18376
   name: Scion of the Blazing Sun
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /15201.png
   id: '15201'
+  maxLvlStats:
+    ATK: 243.22624000000002
+    mainStat: 0
   name: Seasoned Hunter's Bow
   rarity: 2
   type: WEAPON_BOW
 - iconUrl: /12409.png
   id: '12409'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.27564
   name: Serpent Spine
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /15302.png
   id: '15302'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.468588
   name: Sharpshooter's Oath
   rarity: 3
   type: WEAPON_BOW
 - iconUrl: /15513.png
   id: '15513'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.661536
   name: Silvershower Heartstrings
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /11201.png
   id: '11201'
+  maxLvlStats:
+    ATK: 243.22624000000002
+    mainStat: 0
   name: Silver Sword
   rarity: 2
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12306.png
   id: '12306'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.43918640000000003
   name: Skyrider Greatsword
   rarity: 3
   type: WEAPON_CLAYMORE
 - iconUrl: /11306.png
   id: '11306'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 354.37940000000003
+    mainStat: 0.520651802
   name: Skyrider Sword
   rarity: 3
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14501.png
   id: '14501'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.330768
   name: Skyward Atlas
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /11502.png
   id: '11502'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.55128
   name: Skyward Blade
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15501.png
   id: '15501'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.220512
   name: Skyward Harp
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /12501.png
   id: '12501'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.36752
   name: Skyward Pride
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /13502.png
   id: '13502'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.36752
   name: Skyward Spine
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /15304.png
   id: '15304'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 354.37940000000003
+    mainStat: 0.31239200000000006
   name: Slingshot
   rarity: 3
   type: WEAPON_BOW
 - iconUrl: /12411.png
   id: '12411'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.344857798
   name: Snow-Tombed Starsilver
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /14405.png
   id: '14405'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.27564
   name: Solar Pearl
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /12503.png
   id: '12503'
+  mainStat: DMG_BONUS_PHYSICAL
+  maxLvlStats:
+    ATK: 740.5801544000001
+    mainStat: 0.20673
   name: Song of Broken Pines
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /15425.png
   id: '15425'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Song of Stillness
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /11513.png
   id: '11513'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.882048
   name: Splendor of Tranquil Waters
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13501.png
   id: '13501'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.661536
   name: Staff of Homa
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /13511.png
   id: '13511'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.441024
   name: Staff of the Scarlet Sands
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /11430.png
   id: '11430'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.27564
   name: Sturdy Bone
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11504.png
   id: '11504'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: Summit Shaper
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14516.png
   id: '14516'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.882048
   name: Surf's Up
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /11412.png
   id: '11412'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 440.19358980000004
+    mainStat: 0.35190040000000006
   name: Sword of Descension
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11428.png
   id: '11428'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Sword of Narzissenkreuz
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12424.png
   id: '12424'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.18376
   name: Talking Stick
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /11410.png
   id: '11410'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 620.0329535
+    mainStat: 55.12794487200001
   name: The Alley Flash
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12402.png
   id: '12402'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: The Bell
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /11409.png
   id: '11409'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.27564
   name: The Black Sword
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /13415.png
   id: '13415'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.45940000000000003
   name: '"The Catch"'
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /11427.png
   id: '11427'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: The Dockhand's Assistant
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15512.png
   id: '15512'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.661536
   name: The First Great Magic
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /11402.png
   id: '11402'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: The Flute
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /15402.png
   id: '15402'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: The Stringless
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /12504.png
   id: '12504'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: The Unforged
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /15409.png
   id: '15409'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.27564
   name: The Viridescent Hunt
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /14402.png
   id: '14402'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.55128
   name: The Widsith
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /14302.png
   id: '14302'
+  mainStat: HP_PERCENT
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.35190040000000006
   name: Thrilling Tales of Dragon Slayers
   rarity: 3
   type: WEAPON_CATALYST
 - iconUrl: /15509.png
   id: '15509'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.661536
   name: Thundering Pulse
   rarity: 5
   type: WEAPON_BOW
 - iconUrl: /12425.png
   id: '12425'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.41346
   name: Tidal Shadow
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /14514.png
   id: '14514'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.882048
   name: Tome of the Eternal Flow
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /11422.png
   id: '11422'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Toukabou Shigure
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /11303.png
   id: '11303'
+  mainStat: DEF_PERCENT
+  maxLvlStats:
+    ATK: 448.2215814
+    mainStat: 0.29278940200000003
   name: Traveler's Handy Sword
   rarity: 3
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /14512.png
   id: '14512'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.441024
   name: Tulaytullah's Remembrance
   rarity: 5
   type: WEAPON_CATALYST
 - iconUrl: /14305.png
   id: '14305'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 448.2215814
+    mainStat: 0.15619600000000003
   name: Twin Nephrite
   rarity: 3
   type: WEAPON_CATALYST
 - iconUrl: /12426.png
   id: '12426'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: '"Ultimate Overlord''s Mega Magic Sword"'
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /11514.png
   id: '11514'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 0.882048
   name: Uraku Misugiri
   rarity: 5
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12512.png
   id: '12512'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 0.220512
   name: Verdict
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /13504.png
   id: '13504'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: Vortex Vanquisher
   rarity: 5
   type: WEAPON_POLE
 - iconUrl: /14416.png
   id: '14416'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Wandering Evenstar
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /12101.png
   id: '12101'
+  maxLvlStats:
+    ATK: 185.42615999999998
+    mainStat: 0
   name: Waster Greatsword
   rarity: 1
   type: WEAPON_CLAYMORE
 - iconUrl: /13416.png
   id: '13416'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 620.0329535
+    mainStat: 0.13782
   name: Wavebreaker's Fin
   rarity: 4
   type: WEAPON_POLE
 - iconUrl: /12407.png
   id: '12407'
+  mainStat: DEF_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.5172844000000001
   name: Whiteblind
   rarity: 4
   type: WEAPON_CLAYMORE
 - iconUrl: /12303.png
   id: '12303'
+  mainStat: DEF_PERCENT
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.43918640000000003
   name: White Iron Greatsword
   rarity: 3
   type: WEAPON_CLAYMORE
 - iconUrl: /13301.png
   id: '13301'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 401.2935898
+    mainStat: 0.234294
   name: White Tassel
   rarity: 3
   type: WEAPON_POLE
 - iconUrl: /15413.png
   id: '15413'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Windblume Ode
   rarity: 4
   type: WEAPON_BOW
 - iconUrl: /14410.png
   id: '14410'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 0.30626819800000005
   name: Wine and Song
   rarity: 4
   type: WEAPON_CATALYST
 - iconUrl: /11424.png
   id: '11424'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 0.27564
   name: Wolf-Fang
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /12502.png
   id: '12502'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 0.49615200000000004
   name: Wolf's Gravestone
   rarity: 5
   type: WEAPON_CLAYMORE
 - iconUrl: /11418.png
   id: '11418'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
   name: Xiphos' Moonlight
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND

@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 import {
   Artifact as GOODArtifact,
   Character as GOODCharacter,
@@ -23,7 +25,7 @@ export const updateBuildsWithGameData = ({
   goodCharacters: GOODCharacter[];
   goodWeapons: GOODWeapon[];
   weapons: Weapon[];
-}): Build[] => {
+}): { artifacts: Artifact[]; builds: Build[] } => {
   const getNewBuild = (goodCharacterName: string): Build => {
     const character = characters.find((character) => toPascalCase(character.name) === goodCharacterName);
     if (!character) {
@@ -99,7 +101,8 @@ export const updateBuildsWithGameData = ({
       throw new Error(`Could not find the artifact set ${goodArtifact.setKey}`);
     }
     return {
-      iconUrl: "", // TODO: Make this a lookup on set rather than a field on the artifact itself.
+      iconUrl: "", // TODO: Make this a lookup on set rather than a field on the artifact itself.\
+      id: uuidv4(),
       level: goodArtifact.level,
       mainStat: mapEnumsByKey(GOODStat, Stat, goodArtifact.mainStatKey),
       rarity: goodArtifact.rarity,
@@ -157,5 +160,7 @@ export const updateBuildsWithGameData = ({
     }
   });
 
-  return updatedBuilds;
+  const artifacts = goodArtifacts.filter((goodArtifact) => goodArtifact.location === "").map(mapGOODArtifactToArtifact);
+
+  return { artifacts, builds: updatedBuilds };
 };

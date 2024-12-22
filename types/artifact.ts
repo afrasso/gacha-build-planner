@@ -2,6 +2,7 @@ import { Stat, StatValue } from "./stat";
 
 export interface Artifact {
   iconUrl: string;
+  id: string;
   level: number;
   mainStat: Stat;
   rarity: number;

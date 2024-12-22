@@ -1,540 +1,1080 @@
-- element: ELEMENT_NONE
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_NONE
   iconUrl: /10000005.png
   id: '10000005'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 212.397192
+    DEF: 682.521525
+    HP: 10874.914859
   name: Aether
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_GEO
+- ascensionStat: DMG_BONUS_GEO
+  element: ELEMENT_GEO
   iconUrl: /10000038.png
   id: '10000038'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 251.13729899999998
+    DEF: 876.1519817999999
+    HP: 13225.583558400001
   name: Albedo
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_DENDRO
+- ascensionStat: DMG_BONUS_DENDRO
+  element: ELEMENT_DENDRO
   iconUrl: /10000078.png
   id: '10000078'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 313.3236758
+    DEF: 781.6197942900001
+    HP: 13348.0427932
   name: Alhaitham
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_CRYO
+- ascensionStat: DMG_BONUS_CRYO
+  element: ELEMENT_CRYO
   iconUrl: /10000062.png
   id: '10000062'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 233.91645604
+    DEF: 676.3278456
+    HP: 10898.8604972
   name: Aloy
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_PYRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_PYRO
   iconUrl: /10000021.png
   id: '10000021'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 223.0170516
+    DEF: 600.6189420000001
+    HP: 9461.1761118
   name: Amber
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_GEO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_GEO
   iconUrl: /10000057.png
   id: '10000057'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 227.21946100000002
+    DEF: 959.15585376
+    HP: 12858.206654000001
   name: Arataki Itto
   rarity: 5
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_PYRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_PYRO
   iconUrl: /10000096.png
   id: '10000096'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 342.0250874
+    DEF: 764.7115981500001
+    HP: 13103.1246236
   name: Arlecchino
   rarity: 5
   weaponType: WEAPON_POLE
-- element: ELEMENT_DENDRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_DENDRO
   iconUrl: /10000082.png
   id: '10000082'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 192.53859490000002
+    DEF: 499.56034050000005
+    HP: 13348.0427932
   name: Baizhu
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_HYDRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_HYDRO
   iconUrl: /10000014.png
   id: '10000014'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 159.29789399999999
+    DEF: 668.8710945
+    HP: 9787.4235531
   name: Barbara
   rarity: 4
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_ELECTRO
+- ascensionStat: DMG_BONUS_ELECTRO
+  element: ELEMENT_ELECTRO
   iconUrl: /10000024.png
   id: '10000024'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 225.14102152
+    DEF: 648.39544875
+    HP: 13049.897870800001
   name: Beidou
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_PYRO
+- ascensionStat: ENERGY_RECHARGE
+  element: ELEMENT_PYRO
   iconUrl: /10000032.png
   id: '10000032'
+  maxLvlStats:
+    ascensionStat: 0.2667
+    ATK: 191.15747280000002
+    DEF: 771.2493232500001
+    HP: 12397.4035882
   name: Bennett
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_HYDRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_HYDRO
   iconUrl: /10000072.png
   id: '10000072'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 212.397192
+    DEF: 682.521525
+    HP: 10874.914859
   name: Candace
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_CRYO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_CRYO
   iconUrl: /10000088.png
   id: '10000088'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 173.10371048
+    DEF: 546.01722
+    HP: 10766.1657119
   name: Charlotte
   rarity: 4
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_PYRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_PYRO
   iconUrl: /10000090.png
   id: '10000090'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 193.28144472
+    DEF: 604.71407115
+    HP: 11962.4064649
   name: Chevreuse
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_GEO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_GEO
   iconUrl: /10000094.png
   id: '10000094'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 322.89081300000004
+    DEF: 953.0074188000001
+    HP: 11437.6807651
   name: Chiori
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_CRYO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_CRYO
   iconUrl: /10000036.png
   id: '10000036'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 223.0170516
+    DEF: 648.39544875
+    HP: 10983.66434006
   name: Chongyun
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_ELECTRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_ELECTRO
   iconUrl: /10000098.png
   id: '10000098'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 337.2415138
+    DEF: 783.9254574000001
+    HP: 12956.173074450002
   name: Clorinde
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_DENDRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_DENDRO
   iconUrl: /10000067.png
   id: '10000067'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 199.65335947999998
+    DEF: 600.6189420000001
+    HP: 9787.4235531
   name: Collei
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_ELECTRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_ELECTRO
   iconUrl: /10000071.png
   id: '10000071'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 318.1072494
+    DEF: 859.24378566
+    HP: 12490.8290496
   name: Cyno
   rarity: 5
   weaponType: WEAPON_POLE
-- element: ELEMENT_PYRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_PYRO
   iconUrl: /10000079.png
   id: '10000079'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 265.4879998
+    DEF: 627.90892029
+    HP: 15674.765654400002
   name: Dehya
   rarity: 5
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_PYRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_PYRO
   iconUrl: /10000016.png
   id: '10000016'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 334.849732
+    DEF: 783.9254574000001
+    HP: 12980.665588799999
   name: Diluc
   rarity: 5
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_CRYO
+- ascensionStat: DMG_BONUS_CRYO
+  element: ELEMENT_CRYO
   iconUrl: /10000039.png
   id: '10000039'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 212.397192
+    DEF: 600.6189420000001
+    HP: 9569.925258899999
   name: Diona
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_ELECTRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_ELECTRO
   iconUrl: /10000068.png
   id: '10000068'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 223.0170516
+    DEF: 723.4728165
+    HP: 12397.4035882
   name: Dori
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_DENDRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_DENDRO
   iconUrl: /10000099.png
   id: '10000099'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 334.849732
+    DEF: 730.1266515000001
+    HP: 13568.469685400001
   name: Emilie
   rarity: 5
   weaponType: WEAPON_POLE
-- element: ELEMENT_CRYO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_CRYO
   iconUrl: /10000051.png
   id: '10000051'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 342.0250874
+    DEF: 750.87761949
+    HP: 13225.583558400001
   name: Eula
   rarity: 5
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_ANEMO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ANEMO
   iconUrl: /10000076.png
   id: '10000076'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 196.4674026
+    DEF: 627.919803
+    HP: 9569.925258899999
   name: Faruzan
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_ELECTRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ELECTRO
   iconUrl: /10000031.png
   id: '10000031'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 244.25677079999997
+    DEF: 593.79372675
+    HP: 9189.3029266
   name: Fischl
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_CRYO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_CRYO
   iconUrl: /10000085.png
   id: '10000085'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 254.87663039999998
+    DEF: 708.45734295
+    HP: 12071.155412
   name: Freminet
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_HYDRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_HYDRO
   iconUrl: /10000089.png
   id: '10000089'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 243.96194960000003
+    DEF: 695.5417048500001
+    HP: 15307.388350000001
   name: Furina
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_PYRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_PYRO
   iconUrl: /10000092.png
   id: '10000092'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 301.60400863999996
+    DEF: 702.99717075
+    HP: 11418.66071195
   name: Gaming
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_CRYO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_CRYO
   iconUrl: /10000037.png
   id: '10000037'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 334.849732
+    DEF: 630.2145834
+    HP: 9796.728784
   name: Ganyu
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_GEO
+- ascensionStat: DMG_BONUS_GEO
+  element: ELEMENT_GEO
   iconUrl: /10000055.png
   id: '10000055'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 182.66158612
+    DEF: 648.39544875
+    HP: 9569.925258899999
   name: Gorou
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_PYRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_PYRO
   iconUrl: /10000046.png
   id: '10000046'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 106.4343801
+    DEF: 876.1519817999999
+    HP: 15552.3066196
   name: Hu Tao
   rarity: 5
   weaponType: WEAPON_POLE
-- element: ELEMENT_ANEMO
+- ascensionStat: HEALING_BONUS
+  element: ELEMENT_ANEMO
   iconUrl: /10000003.png
   id: '10000003'
+  maxLvlStats:
+    ascensionStat: 0.2215
+    ATK: 239.17838000000003
+    DEF: 768.5543700000001
+    HP: 14695.093175999998
   name: Jean
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_GEO
+- ascensionStat: DMG_BONUS_GEO
+  element: ELEMENT_GEO
   iconUrl: /10000100.png
   id: '10000100'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 216.64513184
+    DEF: 792.4074905250001
+    HP: 11799.2822268
   name: Kachina
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_ANEMO
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_ANEMO
   iconUrl: /10000047.png
   id: '10000047'
+  maxLvlStats:
+    ascensionStat: 115.2
+    ATK: 296.58119320000003
+    DEF: 806.9820885
+    HP: 13348.0427932
   name: Kaedehara Kazuha
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_CRYO
+- ascensionStat: ENERGY_RECHARGE
+  element: ELEMENT_CRYO
   iconUrl: /10000015.png
   id: '10000015'
+  maxLvlStats:
+    ascensionStat: 0.2667
+    ATK: 223.0170516
+    DEF: 791.724969
+    HP: 11636.1591236
   name: Kaeya
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_CRYO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_CRYO
   iconUrl: /10000002.png
   id: '10000002'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 342.0250874
+    DEF: 783.9254574000001
+    HP: 12858.206654000001
   name: Kamisato Ayaka
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_HYDRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_HYDRO
   iconUrl: /10000066.png
   id: '10000066'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 298.972975
+    DEF: 768.5543700000001
+    HP: 13715.4200976
   name: Kamisato Ayato
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_DENDRO
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_DENDRO
   iconUrl: /10000081.png
   id: '10000081'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 233.6369112
+    DEF: 750.7736775
+    HP: 11962.4064649
   name: Kaveh
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_ELECTRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_ELECTRO
   iconUrl: /10000042.png
   id: '10000042'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 322.89081300000004
+    DEF: 799.2965448000001
+    HP: 13103.1246236
   name: Keqing
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_DENDRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_DENDRO
   iconUrl: /10000101.png
   id: '10000101'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 332.4579502
+    DEF: 801.6022079100001
+    HP: 12858.206654000001
   name: Kinich
   rarity: 5
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_DENDRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_DENDRO
   iconUrl: /10000061.png
   id: '10000061'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 223.0170516
+    DEF: 546.01722
+    HP: 12179.90470957
   name: Kirara
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_PYRO
+- ascensionStat: DMG_BONUS_PYRO
+  element: ELEMENT_PYRO
   iconUrl: /10000029.png
   id: '10000029'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 310.931894
+    DEF: 614.843496
+    HP: 10286.5650232
   name: Klee
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_ELECTRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ELECTRO
   iconUrl: /10000056.png
   id: '10000056'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 195.40541564
+    DEF: 627.919803
+    HP: 9569.925258899999
   name: Kujou Sara
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_ELECTRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_ELECTRO
   iconUrl: /10000065.png
   id: '10000065'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 212.397192
+    DEF: 750.7736775
+    HP: 12288.654441100001
   name: Kuki Shinobu
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_CRYO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_CRYO
   iconUrl: /10000074.png
   id: '10000074'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 216.64513184
+    DEF: 655.2206639999999
+    HP: 11092.4131532
   name: Layla
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_ELECTRO
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_ELECTRO
   iconUrl: /10000006.png
   id: '10000006'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 231.51293628000002
+    DEF: 573.3180810000001
+    HP: 9569.925258899999
   name: Lisa
   rarity: 4
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_NONE
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_NONE
   iconUrl: /10000007.png
   id: '10000007'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 212.397192
+    DEF: 682.521525
+    HP: 10874.914859
   name: Lumine
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_ANEMO
+- ascensionStat: DMG_BONUS_ANEMO
+  element: ELEMENT_ANEMO
   iconUrl: /10000083.png
   id: '10000083'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 231.51293628000002
+    DEF: 711.869957273
+    HP: 12397.4035882
   name: Lynette
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_PYRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_PYRO
   iconUrl: /10000084.png
   id: '10000084'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 318.1072494
+    DEF: 537.988059
+    HP: 11021.319632000002
   name: Lyney
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_CRYO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_CRYO
   iconUrl: /10000080.png
   id: '10000080'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 223.0170516
+    DEF: 713.234993625
+    HP: 12506.152435299999
   name: Mika
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_HYDRO
+- ascensionStat: ENERGY_RECHARGE
+  element: ELEMENT_HYDRO
   iconUrl: /10000041.png
   id: '10000041'
+  maxLvlStats:
+    ascensionStat: 0.32
+    ATK: 287.01405600000004
+    DEF: 653.2712145
+    HP: 10409.023958000002
   name: Mona
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_HYDRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_HYDRO
   iconUrl: /10000102.png
   id: '10000102'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 181.7755668
+    DEF: 570.26734254
+    HP: 15184.929315200003
   name: Mualani
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_DENDRO
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_DENDRO
   iconUrl: /10000073.png
   id: '10000073'
+  maxLvlStats:
+    ascensionStat: 115.2
+    ATK: 298.972975
+    DEF: 630.2145834
+    HP: 10360.0405293
   name: Nahida
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_GEO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_GEO
   iconUrl: /10000091.png
   id: '10000091'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 351.5922196
+    DEF: 793.1481098400001
+    HP: 12650.02580006
   name: Navia
   rarity: 5
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_HYDRO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_HYDRO
   iconUrl: /10000087.png
   id: '10000087'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 208.32436678
+    DEF: 576.4157775000001
+    HP: 14695.093175999998
   name: Neuvillette
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_HYDRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_HYDRO
   iconUrl: /10000070.png
   id: '10000070'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 229.6112428
+    DEF: 728.5895427600001
+    HP: 15184.929315200003
   name: Nilou
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_GEO
+- ascensionStat: DMG_BONUS_GEO
+  element: ELEMENT_GEO
   iconUrl: /10000027.png
   id: '10000027'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 212.397192
+    DEF: 573.3180810000001
+    HP: 9787.4235531
   name: Ningguang
   rarity: 4
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_GEO
+- ascensionStat: DEF_PERCENT
+  element: ELEMENT_GEO
   iconUrl: /10000034.png
   id: '10000034'
+  maxLvlStats:
+    ascensionStat: 0.3
+    ATK: 191.15747280000002
+    DEF: 798.55018425
+    HP: 12071.155412
   name: Noelle
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_CRYO
+- ascensionStat: HEALING_BONUS
+  element: ELEMENT_CRYO
   iconUrl: /10000035.png
   id: '10000035'
+  maxLvlStats:
+    ascensionStat: 0.2215
+    ATK: 287.01405600000004
+    DEF: 922.2652440000002
+    HP: 12368.369914800001
   name: Qiqi
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_ELECTRO
+- ascensionStat: ENERGY_RECHARGE
+  element: ELEMENT_ELECTRO
   iconUrl: /10000052.png
   id: '10000052'
+  maxLvlStats:
+    ascensionStat: 0.32
+    ATK: 337.2415138
+    DEF: 789.30533799
+    HP: 12907.189733140001
   name: Raiden Shogun
   rarity: 5
   weaponType: WEAPON_POLE
-- element: ELEMENT_ELECTRO
+- ascensionStat: DMG_BONUS_PHYSICAL
+  element: ELEMENT_ELECTRO
   iconUrl: /10000020.png
   id: '10000020'
+  maxLvlStats:
+    ascensionStat: 0.3
+    ATK: 233.6369112
+    DEF: 750.7736775
+    HP: 11962.4064649
   name: Razor
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_CRYO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_CRYO
   iconUrl: /10000045.png
   id: '10000045'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 240.00882496
+    DEF: 709.822386
+    HP: 12288.654441100001
   name: Rosaria
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_HYDRO
+- ascensionStat: DMG_BONUS_HYDRO
+  element: ELEMENT_HYDRO
   iconUrl: /10000054.png
   id: '10000054'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 234.39481640000002
+    DEF: 657.11398635
+    HP: 13470.501828000002
   name: Sangonomiya Kokomi
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_ANEMO
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_ANEMO
   iconUrl: /10000053.png
   id: '10000053'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 244.25677079999997
+    DEF: 744.630992124
+    HP: 11853.657417800001
   name: Sayu
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_ELECTRO
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_ELECTRO
   iconUrl: /10000097.png
   id: '10000097'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 227.26499543999998
+    DEF: 559.6676505
+    HP: 9787.4235531
   name: Sethos
   rarity: 4
   weaponType: WEAPON_BOW
-- element: ELEMENT_CRYO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_CRYO
   iconUrl: /10000063.png
   id: '10000063'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 303.7565386
+    DEF: 830.0387196
+    HP: 12992.91143967
   name: Shenhe
   rarity: 5
   weaponType: WEAPON_POLE
-- element: ELEMENT_ANEMO
+- ascensionStat: DMG_BONUS_ANEMO
+  element: ELEMENT_ANEMO
   iconUrl: /10000059.png
   id: '10000059'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 225.14102152
+    DEF: 683.88656805
+    HP: 10657.416864800001
   name: Shikanoin Heizou
   rarity: 4
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_HYDRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_HYDRO
   iconUrl: /10000095.png
   id: '10000095'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 192.53859490000002
+    DEF: 499.56034050000005
+    HP: 13348.0427932
   name: Sigewinne
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_ANEMO
+- ascensionStat: DMG_BONUS_ANEMO
+  element: ELEMENT_ANEMO
   iconUrl: /10000043.png
   id: '10000043'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 169.9177536
+    DEF: 702.99717075
+    HP: 9243.67751666
   name: Sucrose
   rarity: 4
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_HYDRO
+- ascensionStat: DMG_BONUS_HYDRO
+  element: ELEMENT_HYDRO
   iconUrl: /10000033.png
   id: '10000033'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 301.3647568
+    DEF: 814.6676322000001
+    HP: 13103.1246236
   name: Tartaglia
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_PYRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_PYRO
   iconUrl: /10000050.png
   id: '10000050'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 201.77733240000003
+    DEF: 750.7736775
+    HP: 10331.1695235
   name: Thoma
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_DENDRO
+- ascensionStat: DMG_BONUS_DENDRO
+  element: ELEMENT_DENDRO
   iconUrl: /10000069.png
   id: '10000069'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 267.8797916
+    DEF: 630.2145834
+    HP: 10849.87711806
   name: Tighnari
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_ANEMO
+- ascensionStat: ENERGY_RECHARGE
+  element: ELEMENT_ANEMO
   iconUrl: /10000022.png
   id: '10000022'
+  maxLvlStats:
+    ascensionStat: 0.32
+    ATK: 263.096218
+    DEF: 668.6423019
+    HP: 10531.4833928
   name: Venti
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_ANEMO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_ANEMO
   iconUrl: /10000075.png
   id: '10000075'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 327.6743806
+    DEF: 607.1579523
+    HP: 10164.105888400001
   name: Wanderer
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_CRYO
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_CRYO
   iconUrl: /10000086.png
   id: '10000086'
+  maxLvlStats:
+    ascensionStat: 0.884
+    ATK: 310.931894
+    DEF: 763.17448941
+    HP: 13592.9609628
   name: Wriothesley
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_PYRO
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_PYRO
   iconUrl: /10000023.png
   id: '10000023'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 225.14102152
+    DEF: 668.8710945
+    HP: 10874.914859
   name: Xiangling
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_ANEMO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ANEMO
   iconUrl: /10000093.png
   id: '10000093'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 334.849732
+    DEF: 572.57300565
+    HP: 10409.023958000002
   name: Xianyun
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_ANEMO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_ANEMO
   iconUrl: /10000026.png
   id: '10000026'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 349.20043780000003
+    DEF: 799.2965448000001
+    HP: 12735.747219200002
   name: Xiao
   rarity: 5
   weaponType: WEAPON_POLE
-- element: ELEMENT_GEO
+- ascensionStat: DEF_PERCENT
+  element: ELEMENT_GEO
   iconUrl: /10000103.png
   id: '10000103'
+  maxLvlStats:
+    ascensionStat: 0.36
+    ATK: 275.05513700000006
+    DEF: 929.9507877000001
+    HP: 12405.10724307
   name: Xilonen
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_HYDRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_HYDRO
   iconUrl: /10000025.png
   id: '10000025'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 201.77733240000003
+    DEF: 757.5988927500001
+    HP: 10222.420242440001
   name: Xingqiu
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
-- element: ELEMENT_PYRO
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_PYRO
   iconUrl: /10000044.png
   id: '10000044'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 248.50471064000004
+    DEF: 798.55018425
+    HP: 11201.1621003
   name: Xinyan
   rarity: 4
   weaponType: WEAPON_CLAYMORE
-- element: ELEMENT_ELECTRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_ELECTRO
   iconUrl: /10000058.png
   id: '10000058'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 339.6332956
+    DEF: 568.7302338000001
+    HP: 10372.286467560001
   name: Yae Miko
   rarity: 5
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_PYRO
+- ascensionStat: DMG_BONUS_PYRO
+  element: ELEMENT_PYRO
   iconUrl: /10000048.png
   id: '10000048'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 240.00882496
+    DEF: 586.9685115000001
+    HP: 9352.42703074
   name: Yanfei
   rarity: 4
   weaponType: WEAPON_CATALYST
-- element: ELEMENT_DENDRO
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_DENDRO
   iconUrl: /10000077.png
   id: '10000077'
+  maxLvlStats:
+    ascensionStat: 0.24
+    ATK: 212.397192
+    DEF: 750.7736775
+    HP: 12288.654441100001
   name: Yaoyao
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_HYDRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_HYDRO
   iconUrl: /10000060.png
   id: '10000060'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 243.96194960000003
+    DEF: 547.97926581
+    HP: 14450.174906400001
   name: Yelan
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_PYRO
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_PYRO
   iconUrl: /10000049.png
   id: '10000049'
+  maxLvlStats:
+    ascensionStat: 0.242
+    ATK: 322.89081300000004
+    DEF: 614.843496
+    HP: 10164.105888400001
   name: Yoimiya
   rarity: 5
   weaponType: WEAPON_BOW
-- element: ELEMENT_GEO
+- ascensionStat: ENERGY_RECHARGE
+  element: ELEMENT_GEO
   iconUrl: /10000064.png
   id: '10000064'
+  maxLvlStats:
+    ascensionStat: 0.2667
+    ATK: 191.15747280000002
+    DEF: 734.3931609000001
+    HP: 10657.416864800001
   name: Yun Jin
   rarity: 4
   weaponType: WEAPON_POLE
-- element: ELEMENT_GEO
+- ascensionStat: DMG_BONUS_GEO
+  element: ELEMENT_GEO
   iconUrl: /10000030.png
   id: '10000030'
+  maxLvlStats:
+    ascensionStat: 0.288
+    ATK: 251.137289
+    DEF: 737.8121952
+    HP: 14695.093175999998
   name: Zhongli
   rarity: 5
   weaponType: WEAPON_POLE

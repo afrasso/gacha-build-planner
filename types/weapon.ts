@@ -1,6 +1,13 @@
+import { Stat } from "./stat";
+
 export interface Weapon {
   iconUrl: string;
   id: string;
+  mainStat: Stat;
+  maxLvlStats: {
+    ATK: number;
+    mainStat: number;
+  };
   name: string;
   rarity: number;
   type: WeaponType;
@@ -12,6 +19,14 @@ export const WeaponSchema = {
   properties: {
     iconUrl: { type: "string" },
     id: { type: "string" },
+    mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
+    maxLvlStats: {
+      properties: {
+        ATK: { type: "number" },
+        mainStat: { type: "number" },
+      },
+      type: "object",
+    },
     name: { type: "string" },
     rarity: { type: "number" },
     type: { $ref: "https://gacha-build-planner.vercel.app/schemas/WeaponType" },

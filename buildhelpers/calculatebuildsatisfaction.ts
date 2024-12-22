@@ -8,6 +8,8 @@ import {
   OverallStat,
 } from "@/types";
 
+import { calculateStats } from "./calculatestats";
+
 interface ArtifactMainStatsSatisfactionResult {
   artifactMainStats: Partial<Record<ArtifactType, boolean>>;
   satisfaction: boolean;
@@ -31,6 +33,7 @@ export interface BuildSatisfactionResult {
 }
 
 export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
+  console.log(build.artifacts);
   const calculateArtifactMainStatSatisfaction = ({
     artifacts,
     desiredArtifactMainStats,
@@ -59,7 +62,7 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
 
     return {
       artifactMainStats,
-      satisfaction: artifactTypes.every((type) => artifactMainStats[type]),
+      satisfaction: Object.values(artifactMainStats).every((result) => result),
     };
   };
 
@@ -80,21 +83,27 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
   };
 
   const calculateArtifactSetBonusesSatisfaction = (): ArtifactSetBonusesSatisfactionResult => {
-    const artifactSetIds = build.desiredArtifactSetBonuses.map((setBonus) => setBonus.artifactSet.id);
     const setBonuses = build.desiredArtifactSetBonuses.reduce((acc, setBonus) => {
       acc[setBonus.artifactSet.id] = calculateArtifactSetBonusSatisfaction({ artifacts: build.artifacts, setBonus });
       return acc;
     }, {} as Record<string, boolean>);
+
     return {
-      satisfaction: artifactSetIds.every((artifactSetId) => setBonuses[artifactSetId]),
+      satisfaction: Object.values(setBonuses).every((result) => result),
       setBonuses,
     };
   };
 
   const calculateStatsSatisfaction = (): StatsSatisfactionResult => {
+    const calculatedStats = calculateStats({ build });
+    const stats = build.desiredStats.reduce((acc, stat) => {
+      acc[stat.stat] = stat.value <= calculatedStats[stat.stat];
+      return acc;
+    }, {} as Record<OverallStat, boolean>);
+
     return {
-      satisfaction: true,
-      stats: { [OverallStat.ATK]: true },
+      satisfaction: Object.values(stats).every((result) => result),
+      stats,
     };
   };
 
@@ -106,7 +115,9 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
     artifactMainStatsSatisfaction,
     artifactSetBonusesSatisfaction,
     satisfaction:
-      artifactMainStatsSatisfaction.satisfaction && artifactSetBonusesSatisfaction.satisfaction && statsSatisfaction,
+      artifactMainStatsSatisfaction.satisfaction &&
+      artifactSetBonusesSatisfaction.satisfaction &&
+      statsSatisfaction.satisfaction,
     statsSatisfaction,
   };
 };

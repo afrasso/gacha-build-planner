@@ -1,9 +1,17 @@
+import { Stat } from "./stat";
 import { WeaponType } from "./weapon";
 
 export interface Character {
+  ascensionStat: Stat;
   element: Element;
   iconUrl: string;
   id: string;
+  maxLvlStats: {
+    ascensionStat: number;
+    ATK: number;
+    DEF: number;
+    HP: number;
+  };
   name: string;
   rarity: number;
   weaponType: WeaponType;
@@ -13,9 +21,19 @@ export const CharacterSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/Character",
   additionalProperties: false,
   properties: {
+    ascensionStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
     element: { $ref: "https://gacha-build-planner.vercel.app/schemas/Element" },
     iconUrl: { type: "string" },
     id: { type: "string" },
+    maxLvlStats: {
+      properties: {
+        ascensionStat: { type: "number" },
+        ATK: { type: "number" },
+        DEF: { type: "number" },
+        HP: { type: "number" },
+      },
+      type: "object",
+    },
     name: { type: "string" },
     rarity: { type: "number" },
     weaponType: { $ref: "https://gacha-build-planner.vercel.app/schemas/WeaponType" },

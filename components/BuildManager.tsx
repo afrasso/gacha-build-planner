@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { updateBuildsWithGameData } from "@/buildhelpers/updatebuildswithgamedata";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { validateGOOD } from "@/goodtypes";
-import { ArtifactSet, Build, Character, Plan, validateBuilds, Weapon } from "@/types";
+import { Artifact, ArtifactSet, Build, Character, Plan, validateBuilds, Weapon } from "@/types";
 
+import ArtifactList from "./ArtifactList";
 import BuildCard from "./BuildCard";
 import CharacterSelector from "./CharacterSelector";
 import ImportExportComponent from "./ImportExportComponent";
@@ -21,6 +22,7 @@ interface BuildManagerProps {
 const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, weapons }) => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
 
+  const [artifacts, setArtifacts] = useState<Artifact[]>([]);
   const [builds, setBuilds] = useState<Build[]>([]);
   const [planId, setPlanId] = useState<string | undefined>();
 
@@ -123,17 +125,17 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
 
   const handleGameDataImport = (data: unknown) => {
     const { artifacts: goodArtifacts, characters: goodCharacters, weapons: goodWeapons } = validateGOOD(data);
-    setBuilds(
-      updateBuildsWithGameData({
-        artifactSets,
-        builds,
-        characters,
-        goodArtifacts,
-        goodCharacters,
-        goodWeapons,
-        weapons,
-      })
-    );
+    const { artifacts: unassignedArtifacts, builds: updatedBuilds } = updateBuildsWithGameData({
+      artifactSets,
+      builds,
+      characters,
+      goodArtifacts,
+      goodCharacters,
+      goodWeapons,
+      weapons,
+    });
+    setBuilds(updatedBuilds);
+    setArtifacts(unassignedArtifacts);
   };
 
   const handleExport = () => {
@@ -171,6 +173,7 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
           />
         ))}
       </div>
+      <ArtifactList artifacts={artifacts} builds={builds} />
     </>
   );
 };

@@ -7,7 +7,7 @@ import { Artifact, ArtifactType } from "@/types";
 interface ArtifactCardProps {
   artifact?: Artifact;
   artifactType: ArtifactType;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(({ artifact, artifactType, onClick }, ref) => {
