@@ -6,59 +6,57 @@ import {
   BuildArtifacts,
   DesiredArtifactMainStats,
   OverallStat,
+  Stat,
 } from "@/types";
 
 import { calculateStats } from "./calculatestats";
 
-interface ArtifactMainStatsSatisfactionResult {
-  artifactMainStats: Partial<Record<ArtifactType, boolean>>;
+export interface ArtifactMainStatsSatisfactionResult {
+  artifactMainStats: Record<
+    ArtifactType,
+    {
+      desiredMainStat: Stat;
+      satisfaction: boolean;
+    }
+  >;
   satisfaction: boolean;
 }
 
-interface ArtifactSetBonusesSatisfactionResult {
+export interface ArtifactSetBonusesSatisfactionResult {
   satisfaction: boolean;
-  setBonuses: Record<string, boolean>;
+  setBonuses: {
+    desiredSetId: string;
+    desiredBonusType: ArtifactSetBonusType;
+    satisfaction: boolean;
+  }[];
 }
 
-interface StatsSatisfactionResult {
+export interface StatsSatisfactionResult {
   satisfaction: boolean;
-  stats: Partial<Record<OverallStat, boolean>>;
+  stats: Record<OverallStat, { desiredStatValue: number; satisfaction: boolean }>;
 }
 
 export interface BuildSatisfactionResult {
-  artifactMainStats: ArtifactMainStatsSatisfactionResult;
-  artifactSetBonuses: ArtifactSetBonusesSatisfactionResult;
-  satisfaction: boolean;
-  stats: StatsSatisfactionResult;
+  artifactMainStatsSatisfaction: ArtifactMainStatsSatisfactionResult;
+  artifactSetBonusesSatisfaction: ArtifactSetBonusesSatisfactionResult;
+  overallSatisfaction: boolean;
+  statsSatisfaction: StatsSatisfactionResult;
 }
 
-export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
-  console.log(build.artifacts);
-  const calculateArtifactMainStatSatisfaction = ({
-    artifacts,
-    desiredArtifactMainStats,
-    type,
-  }: {
-    artifacts: BuildArtifacts;
-    desiredArtifactMainStats: DesiredArtifactMainStats;
-    type: ArtifactType;
-  }): boolean => {
-    if (!desiredArtifactMainStats[type]) {
-      return true;
-    }
-    return !!(artifacts[type] && desiredArtifactMainStats[type] === artifacts[type].mainStat);
-  };
-
+export const calculateBuildSatisfaction = ({ build }: { build: Build }): BuildSatisfactionResult => {
   const calculateArtifactMainStatsSatisfaction = (): ArtifactMainStatsSatisfactionResult => {
-    const artifactTypes = [ArtifactType.CIRCLET, ArtifactType.GOBLET, ArtifactType.SANDS];
-    const artifactMainStats: Partial<Record<ArtifactType, boolean>> = artifactTypes.reduce((acc, type) => {
-      acc[type] = calculateArtifactMainStatSatisfaction({
-        artifacts: build.artifacts,
-        desiredArtifactMainStats: build.desiredArtifactMainStats,
-        type: type,
-      });
-      return acc;
-    }, {} as Partial<Record<ArtifactType, boolean>>);
+    const artifactMainStats = [ArtifactType.CIRCLET, ArtifactType.GOBLET, ArtifactType.SANDS].reduce(
+      (acc, artifactType) => {
+        if (build.desiredArtifactMainStats[artifactType]) {
+          acc[artifactType] = {
+            desiredMainStat: build.desiredArtifactMainStats[artifactType],
+            satisfaction: build.desiredArtifactMainStats[artifactType] === build.artifacts[artifactType]?.mainStat,
+          };
+        }
+        return acc;
+      },
+      {} as ArtifactMainStatsSatisfactionResult["artifactMainStats"]
+    );
 
     return {
       artifactMainStats,
@@ -83,13 +81,14 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
   };
 
   const calculateArtifactSetBonusesSatisfaction = (): ArtifactSetBonusesSatisfactionResult => {
-    const setBonuses = build.desiredArtifactSetBonuses.reduce((acc, setBonus) => {
-      acc[setBonus.artifactSet.id] = calculateArtifactSetBonusSatisfaction({ artifacts: build.artifacts, setBonus });
-      return acc;
-    }, {} as Record<string, boolean>);
+    const setBonuses = build.desiredArtifactSetBonuses.map((setBonus) => ({
+      desiredSetId: setBonus.artifactSet.id,
+      desiredBonusType: setBonus.bonusType,
+      satisfaction: calculateArtifactSetBonusSatisfaction({ artifacts: build.artifacts, setBonus }),
+    }));
 
     return {
-      satisfaction: Object.values(setBonuses).every((result) => result),
+      satisfaction: setBonuses.every((setBonus) => setBonus.satisfaction),
       setBonuses,
     };
   };
@@ -97,9 +96,12 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
   const calculateStatsSatisfaction = (): StatsSatisfactionResult => {
     const calculatedStats = calculateStats({ build });
     const stats = build.desiredStats.reduce((acc, stat) => {
-      acc[stat.stat] = stat.value <= calculatedStats[stat.stat];
+      acc[stat.stat] = {
+        desiredStatValue: stat.value,
+        satisfaction: stat.value <= calculatedStats[stat.stat],
+      };
       return acc;
-    }, {} as Record<OverallStat, boolean>);
+    }, {} as StatsSatisfactionResult["stats"]);
 
     return {
       satisfaction: Object.values(stats).every((result) => result),
@@ -114,7 +116,7 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }) => {
   return {
     artifactMainStatsSatisfaction,
     artifactSetBonusesSatisfaction,
-    satisfaction:
+    overallSatisfaction:
       artifactMainStatsSatisfaction.satisfaction &&
       artifactSetBonusesSatisfaction.satisfaction &&
       statsSatisfaction.satisfaction,

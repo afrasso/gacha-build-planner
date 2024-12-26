@@ -54,7 +54,7 @@ export const validateGOOD = (data: unknown): { artifacts: Artifact[]; characters
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/GOOD");
 
   if (!validate) {
-    throw new Error("Unpexected error: validateBuilds is not available.");
+    throw new Error("Unpexected error: validateGOOD is not available.");
   }
 
   const valid = validate(data);

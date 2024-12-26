@@ -13,7 +13,8 @@ export interface Artifact {
 
 export const ArtifactSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/Artifact",
-  additionalProperties: false,
+  // TODO: Fix this
+  // additionalProperties: false
   properties: {
     level: { type: "integer" },
     mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
@@ -29,6 +30,12 @@ export const ArtifactSchema = {
   type: "object",
 };
 
+export const ArtifactArraySchema = {
+  $id: "https://gacha-build-planner.vercel.app/schemas/ArtifactArray",
+  items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Artifact" },
+  type: "array",
+};
+
 export interface ArtifactSet {
   hasArtifactTypes: Record<ArtifactType, boolean>;
   iconUrl: string;
@@ -40,7 +47,8 @@ export interface ArtifactSet {
 
 export const ArtifactSetSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/ArtifactSet",
-  additionalProperties: false,
+  // TODO: Fix this
+  // additionalProperties: false,
   properties: {
     hasArtifactTypes: {
       properties: {

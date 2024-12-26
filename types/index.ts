@@ -1,6 +1,8 @@
 import Ajv from "ajv";
 
 import {
+  Artifact,
+  ArtifactArraySchema,
   ArtifactSchema,
   ArtifactSetBonusSchema,
   ArtifactSetBonusTypeSchema,
@@ -9,9 +11,9 @@ import {
   BuildArtifactsSchema,
   DesiredArtifactMainStatsSchema,
 } from "./artifact";
-import { Build, BuildSchema, BuildSetSchema } from "./build";
+import { Build, BuildArraySchema, BuildSchema } from "./build";
 import { CharacterSchema, ElementSchema } from "./character";
-import { PlanSchema } from "./plan";
+import { Plan, PlanSchema } from "./plan";
 import { OverallStatSchema, OverallStatValueSchema, StatSchema, StatValueSchema } from "./stat";
 import { WeaponSchema, WeaponTypeSchema } from "./weapon";
 
@@ -26,6 +28,7 @@ export * from "./weapon";
 const ajv = new Ajv({ allErrors: true });
 
 ajv.addSchema(ArtifactSchema);
+ajv.addSchema(ArtifactArraySchema);
 ajv.addSchema(ArtifactSetSchema);
 ajv.addSchema(ArtifactSetBonusSchema);
 ajv.addSchema(ArtifactSetBonusTypeSchema);
@@ -34,7 +37,7 @@ ajv.addSchema(BuildArtifactsSchema);
 ajv.addSchema(DesiredArtifactMainStatsSchema);
 
 ajv.addSchema(BuildSchema);
-ajv.addSchema(BuildSetSchema);
+ajv.addSchema(BuildArraySchema);
 
 ajv.addSchema(CharacterSchema);
 ajv.addSchema(ElementSchema);
@@ -49,8 +52,25 @@ ajv.addSchema(StatValueSchema);
 ajv.addSchema(WeaponSchema);
 ajv.addSchema(WeaponTypeSchema);
 
+export const validateArtifacts = (data: unknown): Artifact[] => {
+  const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/ArtifactArray");
+
+  if (!validate) {
+    throw new Error("Unpexected error: validateArtifacts is not available.");
+  }
+
+  const valid = validate(data);
+
+  if (!valid) {
+    console.error("Validation errors:", validate.errors);
+    throw new Error("Data validation failed.");
+  }
+
+  return data as Artifact[];
+};
+
 export const validateBuilds = (data: unknown): Build[] => {
-  const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/BuildSet");
+  const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/BuildArray");
 
   if (!validate) {
     throw new Error("Unpexected error: validateBuilds is not available.");
@@ -59,15 +79,26 @@ export const validateBuilds = (data: unknown): Build[] => {
   const valid = validate(data);
 
   if (!valid) {
-    // Access the errors
     console.error("Validation errors:", validate.errors);
-
-    // Optionally, format the errors for better readability
-    const formattedErrors = ajv.errorsText(validate.errors, { separator: "\n" });
-    console.error("Formatted Errors:\n", formattedErrors);
-
     throw new Error("Data validation failed.");
   }
 
-  return (data as { builds: Build[] }).builds;
+  return data as Build[];
+};
+
+export const validatePlan = (data: unknown): Plan => {
+  const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/Plan");
+
+  if (!validate) {
+    throw new Error("Unpexected error: validatePlan is not available.");
+  }
+
+  const valid = validate(data);
+
+  if (!valid) {
+    console.error("Validation errors:", validate.errors);
+    throw new Error("Data validation failed.");
+  }
+
+  return data as Plan;
 };

@@ -30,15 +30,8 @@ export const BuildSchema = {
   type: "object",
 };
 
-export const BuildSetSchema = {
-  $id: "https://gacha-build-planner.vercel.app/schemas/BuildSet",
-  additionalProperties: false,
-  properties: {
-    builds: {
-      items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Build" },
-      type: "array",
-    },
-  },
-  required: ["builds"],
-  type: "object",
+export const BuildArraySchema = {
+  $id: "https://gacha-build-planner.vercel.app/schemas/BuildArray",
+  items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Build" },
+  type: "array",
 };
