@@ -7,23 +7,24 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Weapon } from "@/types";
+import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 
 interface WeaponSelectorProps {
-  onChange: (selectedWeapon: Weapon) => void;
-  selectedWeapon: undefined | Weapon;
-  weapons: Weapon[];
+  onChange: (selectedWeaponId: string) => void;
+  selectedWeaponId: string | undefined;
 }
 
-const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapon, weapons }) => {
+const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeaponId }) => {
+  const { getWeapon, weapons } = useGenshinDataContext();
+
   const [isEditing, setIsEditing] = useState(false);
-  const [internalSelectedWeapon, setInternalSelectedWeapon] = useState<undefined | Weapon>(selectedWeapon);
+  const [internalSelectedWeaponId, setInternalSelectedWeaponId] = useState<string | undefined>(selectedWeaponId);
   const [isValid, setIsValid] = useState(true);
 
   const toggleEditing = () => {
     if (isEditing) {
       if (validate()) {
-        onChange(internalSelectedWeapon as Weapon);
+        onChange(internalSelectedWeaponId!);
         setIsEditing(!isEditing);
       }
     } else {
@@ -32,18 +33,18 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
   };
 
   const cancel = () => {
-    setInternalSelectedWeapon(selectedWeapon);
+    setInternalSelectedWeaponId(selectedWeaponId);
     setIsEditing(false);
     setIsValid(true);
   };
 
-  const update = (weapon: Weapon) => {
-    setInternalSelectedWeapon(weapon);
+  const update = (weaponId: string) => {
+    setInternalSelectedWeaponId(weaponId);
     setIsValid(true);
   };
 
   const validate = () => {
-    const newIsValid = !!internalSelectedWeapon;
+    const newIsValid = !!internalSelectedWeaponId;
     setIsValid(newIsValid);
     return newIsValid;
   };
@@ -52,10 +53,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
     <div className="flex flex-grow items-center justify-between gap-2">
       <Label className="text-md font-semibold text-primary whitespace-nowrap w-28">Weapon:</Label>
       <div className="flex-grow relative">
-        <Select
-          onValueChange={(value) => update(weapons.find((weapon) => weapon.id === value)!)}
-          value={internalSelectedWeapon?.id}
-        >
+        <Select onValueChange={(value) => update(value)} value={internalSelectedWeaponId}>
           <SelectTrigger
             aria-describedby={!isValid ? "weapon-error" : undefined}
             aria-invalid={!isValid}
@@ -99,10 +97,16 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
           className="h-8 px-3 text-left text-sm flex items-center flex-grow rounded-md hover:bg-accent cursor-pointer"
           onClick={toggleEditing}
         >
-          {selectedWeapon ? (
+          {selectedWeaponId ? (
             <>
-              <Image alt={selectedWeapon.name} className="mr-2" height={32} src={selectedWeapon.iconUrl} width={32} />
-              {selectedWeapon.name}
+              <Image
+                alt={getWeapon(selectedWeaponId).name}
+                className="mr-2"
+                height={32}
+                src={getWeapon(selectedWeaponId).iconUrl}
+                width={32}
+              />
+              {getWeapon(selectedWeaponId).name}
             </>
           ) : (
             <span className="text-muted-foreground">Not selected</span>

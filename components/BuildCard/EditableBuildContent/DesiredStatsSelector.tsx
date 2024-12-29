@@ -11,11 +11,12 @@ import { ORDER_OVERALL_STATS } from "@/constants";
 import { OverallStat, StatValue } from "@/types";
 
 interface DesiredStatsSelectorProps {
+  currentStats: Record<OverallStat, number>;
   desiredStats: StatValue<OverallStat>[];
   onChange: (desiredStats: StatValue<OverallStat>[]) => void;
 }
 
-const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStats, onChange }) => {
+const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ currentStats, desiredStats, onChange }) => {
   const [isAddingDesiredStat, setIsAddingDesiredStat] = useState(false);
   const [stat, setStat] = useState<OverallStat | undefined>(undefined);
   const [value, setValue] = useState<number | undefined>(undefined);
@@ -28,6 +29,7 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
 
   const updateStat = (stat: OverallStat) => {
     setStat(stat);
+    setValue(currentStats[stat]);
     setIsStatValid(true);
   };
 
@@ -50,7 +52,7 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
   const validate = () => {
     const newIsStatValid = !!stat;
     setIsStatValid(newIsStatValid);
-    const newIsValueValid = value !== undefined && value >= 0 && value < 1000;
+    const newIsValueValid = value !== undefined && value >= 0 && value < 100000;
     setIsValueValid(newIsValueValid);
     return newIsStatValid && newIsValueValid;
   };

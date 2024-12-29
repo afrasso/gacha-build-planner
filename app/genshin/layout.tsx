@@ -1,8 +1,9 @@
+import path from "path";
+
 import { GenshinDataProvider } from "@/contexts/genshin/GenshinDataContext";
 import { ArtifactSet, Character, Weapon } from "@/types";
 import { __datadir } from "@/utils/directoryutils";
 import { loadYaml } from "@/utils/yamlhelper";
-import path from "path";
 
 const characters: Character[] = loadYaml<Character[]>(path.join(__datadir, "characters.yaml"));
 const weapons: Weapon[] = loadYaml<Weapon[]>(path.join(__datadir, "weapons.yaml"));

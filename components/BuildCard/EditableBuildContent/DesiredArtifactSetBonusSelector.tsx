@@ -7,32 +7,33 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArtifactSet, ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
+import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
 
 interface DesiredArtifactSetBonusSelectorProps {
-  artifactSets: ArtifactSet[];
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   onChange: (desiredArtifactSetBonuses: ArtifactSetBonus[]) => void;
 }
 
 const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorProps> = ({
-  artifactSets,
   desiredArtifactSetBonuses = [],
   onChange,
 }) => {
+  const { artifactSets, getArtifactSet } = useGenshinDataContext();
+
   const [isAddingSetBonus, setIsAddingSetBonus] = useState(false);
-  const [artifactSet, setArtifactSet] = useState<ArtifactSet | undefined>(undefined);
+  const [setId, setSetId] = useState<string | undefined>(undefined);
   const [bonusType, setBonusType] = useState<ArtifactSetBonusType | undefined>(undefined);
-  const [isArtifactSetValid, setIsArtifactSetValid] = useState(true);
+  const [isSetValid, setIsSetValid] = useState(true);
   const [isBonusTypeValid, setIsBonusTypeValid] = useState(true);
 
   const addSelector = () => {
     setIsAddingSetBonus(true);
   };
 
-  const updateSet = (artifactSet: ArtifactSet) => {
-    setArtifactSet(artifactSet);
-    setIsArtifactSetValid(true);
+  const updateSetId = (setId: string) => {
+    setSetId(setId);
+    setIsSetValid(true);
   };
 
   const updateBonusType = (artifactSetBonusType: ArtifactSetBonusType) => {
@@ -41,25 +42,25 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   };
 
   const cancel = () => {
-    setArtifactSet(undefined);
-    setIsArtifactSetValid(true);
+    setSetId(undefined);
+    setIsSetValid(true);
     setBonusType(undefined);
     setIsBonusTypeValid(true);
     setIsAddingSetBonus(false);
   };
 
   const validate = () => {
-    const newIsArtifactSetValid = !!artifactSet;
-    setIsArtifactSetValid(newIsArtifactSetValid);
+    const newIsSetValid = !!setId;
+    setIsSetValid(newIsSetValid);
     const newIsBonusTypeValid = !!bonusType;
     setIsBonusTypeValid(newIsBonusTypeValid);
-    return newIsArtifactSetValid && newIsBonusTypeValid;
+    return newIsSetValid && newIsBonusTypeValid;
   };
 
   const confirm = () => {
     if (validate()) {
-      const bonus: ArtifactSetBonus = { artifactSet: artifactSet!, bonusType: bonusType! };
-      setArtifactSet(undefined);
+      const bonus: ArtifactSetBonus = { bonusType: bonusType!, setId: setId! };
+      setSetId(undefined);
       setBonusType(undefined);
       setIsAddingSetBonus(false);
       onChange([...desiredArtifactSetBonuses, bonus]);
@@ -67,7 +68,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   };
 
   const remove = (setId: string) => {
-    onChange(desiredArtifactSetBonuses.filter((bonus) => bonus.artifactSet.id !== setId));
+    onChange(desiredArtifactSetBonuses.filter((bonus) => bonus.setId !== setId));
   };
 
   const MAX_TOTAL_BONUS_PIECE_COUNT = 4;
@@ -89,7 +90,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   };
 
   return (
-    <div className={`${!isArtifactSetValid || !isBonusTypeValid ? "mb-8" : "mb-2"}`}>
+    <div className={`${!isSetValid || !isBonusTypeValid ? "mb-8" : "mb-2"}`}>
       <div className="flex flex-grow items-center justify-between gap-2">
         <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Set Bonuses:</Label>
         <div className="flex-grow flex items-center">
@@ -112,52 +113,45 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
         </div>
       </div>
       <div className="flex flex-col justify-between">
-        {desiredArtifactSetBonuses.map((bonus) => (
-          <div className="flex-grow flex items-center" key={bonus.artifactSet.id}>
-            <div className="h-8 px-3 text-left text-sm flex items-center flex-grow">
-              <Image
-                alt={bonus.artifactSet.name}
-                class-name="mr-2"
-                height={32}
-                src={bonus.artifactSet.iconUrl}
-                width={32}
-              />
-              {bonus.artifactSet.name}
-              <span className="text-muted-foreground ml-1">({bonus.bonusType})</span>
+        {desiredArtifactSetBonuses.map((bonus) => {
+          const artifactSet = getArtifactSet(bonus.setId);
+          return (
+            <div className="flex-grow flex items-center" key={bonus.setId}>
+              <div className="h-8 px-3 text-left text-sm flex items-center flex-grow">
+                <Image alt={artifactSet.name} class-name="mr-2" height={32} src={artifactSet.iconUrl} width={32} />
+                {artifactSet.name}
+                <span className="text-muted-foreground ml-1">({bonus.bonusType})</span>
+              </div>
+              <div className="flex ml-2 gap-1">
+                <Button
+                  className="p-0 w-6 h-8 flex-shrink-0"
+                  onClick={() => remove(bonus.setId)}
+                  size="sm"
+                  variant="ghost"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-            <div className="flex ml-2 gap-1">
-              <Button
-                className="p-0 w-6 h-8 flex-shrink-0"
-                onClick={() => remove(bonus.artifactSet.id)}
-                size="sm"
-                variant="ghost"
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className="flex flex-grow items-center justify-between gap-2">
         {isAddingSetBonus && (
           <>
             <div className="flex-grow relative">
-              <Select
-                onValueChange={(value) =>
-                  updateSet(artifactSets.find((artifactSet) => artifactSet.name === value) as ArtifactSet)
-                }
-              >
+              <Select onValueChange={(value) => updateSetId(value)}>
                 <SelectTrigger
-                  aria-describedby={!isArtifactSetValid ? "artifact-set-error" : undefined}
-                  aria-invalid={!isArtifactSetValid}
+                  aria-describedby={!isSetValid ? "artifact-set-error" : undefined}
+                  aria-invalid={!isSetValid}
                   className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
-                  isValid={isArtifactSetValid}
+                  isValid={isSetValid}
                 >
                   <SelectValue placeholder="Select an artifact set" />
                 </SelectTrigger>
                 <SelectContent>
                   {artifactSets.map((artifactSet) => (
-                    <SelectItem key={artifactSet.name} value={artifactSet.name}>
+                    <SelectItem key={artifactSet.id} value={artifactSet.id}>
                       <div className="flex items-center">
                         <Image
                           alt={artifactSet.name}
@@ -172,7 +166,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                   ))}
                 </SelectContent>
               </Select>
-              {!isArtifactSetValid && (
+              {!isSetValid && (
                 <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="artifact-set-error">
                   Please select an artifact set.
                 </p>

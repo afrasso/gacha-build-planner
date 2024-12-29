@@ -1,12 +1,11 @@
 import { Stat, StatValue } from "./stat";
 
 export interface Artifact {
-  iconUrl: string;
   id: string;
   level: number;
   mainStat: Stat;
   rarity: number;
-  set: ArtifactSet;
+  setId: string;
   subStats: StatValue<Stat>[];
   type: ArtifactType;
 }
@@ -19,14 +18,14 @@ export const ArtifactSchema = {
     level: { type: "integer" },
     mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
     rarity: { type: "integer" },
-    set: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactSet" },
+    setId: { type: "string" },
     subStats: {
       items: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatValue" },
       type: "array",
     },
     type: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactType" },
   },
-  required: ["mainStat", "set", "subStats"],
+  required: ["mainStat", "setId", "subStats"],
   type: "object",
 };
 
@@ -80,18 +79,18 @@ export const ArtifactSetSchema = {
 };
 
 export interface ArtifactSetBonus {
-  artifactSet: ArtifactSet;
   bonusType: ArtifactSetBonusType;
+  setId: string;
 }
 
 export const ArtifactSetBonusSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/ArtifactSetBonus",
   additionalProperties: false,
   properties: {
-    artifactSet: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactSet" },
     bonusType: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactSetBonusType" },
+    setId: { type: "string" },
   },
-  required: ["artifactSet", "bonusType"],
+  required: ["bonusType", "setId"],
   type: "object",
 };
 

@@ -1,15 +1,13 @@
 import { ArtifactSetBonus, BuildArtifacts, DesiredArtifactMainStats } from "./artifact";
-import { Character } from "./character";
 import { OverallStat, StatValue } from "./stat";
-import { Weapon } from "./weapon";
 
 export interface Build {
   artifacts: BuildArtifacts;
-  character: Character;
+  characterId: string;
   desiredArtifactMainStats: DesiredArtifactMainStats;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredStats: StatValue<OverallStat>[];
-  weapon: undefined | Weapon;
+  weaponId?: string;
 }
 
 export const BuildSchema = {
@@ -17,16 +15,16 @@ export const BuildSchema = {
   additionalProperties: false,
   properties: {
     artifacts: { $ref: "https://gacha-build-planner.vercel.app/schemas/BuildArtifacts" },
-    character: { $ref: "https://gacha-build-planner.vercel.app/schemas/Character" },
+    characterId: { type: "string" },
     desiredArtifactMainStats: { $ref: "https://gacha-build-planner.vercel.app/schemas/DesiredArtifactMainStats" },
     desiredArtifactSetBonuses: {
       items: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactSetBonus" },
       type: "array",
     },
     desiredStats: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStatValue" }, type: "array" },
-    weapon: { $ref: "https://gacha-build-planner.vercel.app/schemas/Weapon" },
+    weaponId: { type: "string" },
   },
-  required: ["artifacts", "character", "desiredArtifactMainStats", "desiredArtifactSetBonuses", "desiredStats"],
+  required: ["artifacts", "characterId", "desiredArtifactMainStats", "desiredArtifactSetBonuses", "desiredStats"],
   type: "object",
 };
 

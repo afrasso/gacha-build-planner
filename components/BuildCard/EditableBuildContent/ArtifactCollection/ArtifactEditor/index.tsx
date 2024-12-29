@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Button } from "@/components/ui/button";
-import { Artifact, ArtifactSet, ArtifactType, Stat, StatValue } from "@/types";
+import { Artifact, ArtifactType, Stat, StatValue } from "@/types";
 
 import MainStatSelector from "./MainStatSelector";
 import SetSelector from "./SetSelector";
@@ -13,17 +13,11 @@ import SubStatsSelector from "./SubStatsSelector";
 
 interface ArtifactEditorProps {
   artifact?: Partial<Artifact>;
-  artifactSets: ArtifactSet[];
   artifactType: ArtifactType;
   onUpdate: (artifact: Artifact) => void;
 }
 
-const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
-  artifact,
-  artifactSets,
-  artifactType,
-  onUpdate,
-}: ArtifactEditorProps) => {
+const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType, onUpdate }: ArtifactEditorProps) => {
   const [internalArtifact, setInternalArtifact] = useState<Partial<Artifact>>(
     artifact || { id: uuidv4(), type: artifactType }
   );
@@ -38,8 +32,8 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
     }
   };
 
-  const updateSet = (set: ArtifactSet) => {
-    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, set }));
+  const updateSetId = (setId: string) => {
+    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, setId }));
   };
 
   const updateMainStat = (mainStat: Stat) => {
@@ -60,11 +54,10 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
   return (
     <div>
       <SetSelector
-        artifactSets={artifactSets}
         artifactType={artifactType}
-        onUpdate={updateSet}
+        onUpdate={updateSetId}
         ref={setSelectorRef}
-        set={internalArtifact.set}
+        setId={internalArtifact?.setId}
       />
       <MainStatSelector
         artifactType={artifactType}

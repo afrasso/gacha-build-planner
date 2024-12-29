@@ -1,11 +1,11 @@
+import { calculateBuildSatisfaction } from "@/buildhelpers/calculatebuildsatisfaction";
 import { Card } from "@/components/ui/card";
+import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { ArtifactSet, Build, Weapon } from "@/types";
 
 import BuildSatisfactionComponent from "./BuildSatisfactionComponent";
 import EditableBuildContent from "./EditableBuildContent";
 import Header from "./Header";
-import { calculateStats } from "@/buildhelpers/calculatestats";
-import { calculateBuildSatisfaction } from "@/buildhelpers/calculatebuildsatisfaction";
 
 interface BuildCardProps {
   artifactSets: ArtifactSet[];
@@ -15,16 +15,17 @@ interface BuildCardProps {
   weapons: Weapon[];
 }
 
-const BuildCard: React.FC<BuildCardProps> = ({ artifactSets, build, onRemove, onUpdate, weapons }) => {
-  const stats = calculateStats({ build });
-  // const filteredStats = Object.entries(stats).filter((entry) => entry[1] > 0);
-  const satisfactionResults = calculateBuildSatisfaction({ build });
+const BuildCard: React.FC<BuildCardProps> = ({ build, onRemove, onUpdate }) => {
+  const genshinDataContext = useGenshinDataContext();
+  const { artifactSets } = genshinDataContext;
+
+  const satisfactionResults = calculateBuildSatisfaction({ build, genshinDataContext });
 
   return (
     <Card className="w-full h-full">
-      <Header build={build} onRemove={onRemove} isSatisfied={satisfactionResults.overallSatisfaction} />
+      <Header build={build} isSatisfied={satisfactionResults.overallSatisfaction} onRemove={onRemove} />
       <BuildSatisfactionComponent result={satisfactionResults} />
-      <EditableBuildContent artifactSets={artifactSets} build={build} onUpdate={onUpdate} weapons={weapons} />
+      <EditableBuildContent artifactSets={artifactSets} build={build} onUpdate={onUpdate} />
     </Card>
   );
 };

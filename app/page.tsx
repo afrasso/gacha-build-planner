@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
   return (
@@ -10,35 +12,47 @@ export default function Home() {
         <p className="text-xl text-center mb-12">Choose your game to start planning your builds.</p>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <Card>
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Genshin Impact</CardTitle>
               <CardDescription>Plan your character builds for Teyvat</CardDescription>
             </CardHeader>
             <CardContent className="flex items-center justify-center">
-              <img src="/genshin/logo.png" alt="Genshin Impact" className="max-w-full h-48 max-h-full object-contain" />
+              <div className="relative w-full aspect-[16/9]">
+                <Image
+                  alt="Genshin Impact"
+                  className="object-contain"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  src="/genshin/logo.png"
+                />
+              </div>
             </CardContent>
             <CardFooter>
-              <Link href="/genshin" className="w-full">
+              <Link className="w-full" href="/genshin">
                 <Button className="w-full">Go to Genshin Impact Planner</Button>
               </Link>
             </CardFooter>
           </Card>
 
-          <Card>
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Honkai: Star Rail</CardTitle>
               <CardDescription>Optimize your team for the cosmic journey</CardDescription>
             </CardHeader>
             <CardContent className="flex items-center justify-center">
-              <img
-                src="/starrail/logo.png"
-                alt="Honkai: Star Rail"
-                className="max-w-full h-48 max-h-full object-contain"
-              />
+              <div className="relative w-full aspect-[16/9]">
+                <Image
+                  alt="Honkai: Star Rail"
+                  className="object-contain"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  src="/starrail/logo.png"
+                />
+              </div>
             </CardContent>
             <CardFooter>
-              <Link href="/starrail" className="w-full">
+              <Link className="w-full" href="/starrail">
                 <Button className="w-full">Go to Star Rail Planner</Button>
               </Link>
             </CardFooter>

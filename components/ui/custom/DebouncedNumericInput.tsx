@@ -12,34 +12,33 @@ interface DebouncedNumericInputProps extends Omit<InputHTMLAttributes<HTMLInputE
 
 const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange, value, ...props }) => {
   const [stringValue, setStringValue] = useState(value?.toString() || "");
-  const [numericValue, setNumericValue] = useState<number | undefined>(value);
+
+  useEffect(() => {
+    setStringValue(value?.toString() || "");
+  }, [value]);
 
   useEffect(() => {
     const handler = setTimeout(() => {
+      const numericValue = stringValue === "" ? undefined : parseFloat(stringValue);
       onChange(numericValue);
     }, 300);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [numericValue, onChange]);
+  }, [stringValue, onChange]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (inputValue === "" || inputValue === "." || !isNaN(parseFloat(inputValue))) {
+      setStringValue(inputValue);
+    }
+  };
 
   return (
     <Input
       {...props}
-      onChange={(e) => {
-        const inputValue = e.target.value;
-        setStringValue(inputValue);
-        if (inputValue === "" || inputValue === ".") {
-          setNumericValue(undefined);
-        } else {
-          const newValue = parseFloat(inputValue);
-          if (!isNaN(newValue)) {
-            setStringValue(newValue.toString());
-            setNumericValue(newValue);
-          }
-        }
-      }}
+      onChange={handleChange}
       onKeyDown={(e) => {
         if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {
           // Prevent typing 'e', 'E', '+' or '-'.

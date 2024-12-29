@@ -2,6 +2,7 @@ import Image from "next/image";
 import { forwardRef } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { Artifact, ArtifactType } from "@/types";
 
 interface ArtifactCardProps {
@@ -11,16 +12,25 @@ interface ArtifactCardProps {
 }
 
 const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(({ artifact, artifactType, onClick }, ref) => {
+  const { getArtifactSet } = useGenshinDataContext();
+  const artifactSet = artifact?.setId ? getArtifactSet(artifact.setId) : undefined;
+
   return (
     <Card className="w-48 h-56 cursor-pointer hover:bg-accent" onClick={onClick} ref={ref}>
       <CardContent className="p-2 flex flex-col h-full">
-        {artifact ? (
+        {artifact && artifactSet ? (
           <>
-            <p className="text-xs text-muted-foreground mb-1 text-center">{artifactType}</p>
+            <p className="text-xs text-muted-foreground mb-1 text-center">
+              Type: {artifactType}
+              {/* <br></br>
+              Level: {artifact.level}
+              <br></br>
+              ID: {artifact.id} */}
+            </p>
             <div className="flex items-start mb-2">
-              <Image alt={artifact.set.name} className="rounded-md" height={48} src={artifact.set.iconUrl} width={48} />
+              <Image alt={artifactSet.name} className="rounded-md" height={48} src={artifactSet.iconUrl} width={48} />
               <div className="ml-2 flex-1">
-                <h3 className="font-semibold text-sm leading-tight line-clamp-2">{artifact.set.name}</h3>
+                <h3 className="font-semibold text-sm leading-tight line-clamp-2">{artifactSet.name}</h3>
               </div>
             </div>
             <p className="font-medium text-sm text-center mb-2 rounded p-1">{artifact.mainStat}</p>

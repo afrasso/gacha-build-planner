@@ -1,39 +1,42 @@
+import { Crown, Hourglass, Wine } from "lucide-react";
 import React from "react";
+
 import {
   ArtifactMainStatsSatisfactionResult,
   ArtifactSetBonusesSatisfactionResult,
   BuildSatisfactionResult,
   StatsSatisfactionResult,
 } from "@/buildhelpers/calculatebuildsatisfaction";
-import { ArtifactType, OverallStat } from "@/types";
-import SatisfactionIcon from "./SatisfactionIcon";
+import ImageWithTooltip from "@/components/ui/custom/ImageWithTooltip";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import ImageWithTooltip from "../ui/custom/ImageWithTooltip";
-import { Crown, Hourglass, Wine } from "lucide-react";
+import { ArtifactType, OverallStat } from "@/types";
+
+import SatisfactionIcon from "./SatisfactionIcon";
 
 interface BuildSatisfactionDisplayProps {
   result: BuildSatisfactionResult;
 }
 
 const ArtifactSetBonusesDisplay: React.FC<{ result: ArtifactSetBonusesSatisfactionResult }> = ({ result }) => {
-  const { artifactSetsById } = useGenshinDataContext();
+  const { getArtifactSet } = useGenshinDataContext();
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      {result.setBonuses.map((setBonusSatisfaction) => (
-        <div key={setBonusSatisfaction.desiredSetId} className="flex items-center gap-2 mb-2">
-          <ImageWithTooltip
-            alt={artifactSetsById[setBonusSatisfaction.desiredSetId].name}
-            height={32}
-            src={artifactSetsById[setBonusSatisfaction.desiredSetId].iconUrl}
-            width={32}
-            tooltipText={`${artifactSetsById[setBonusSatisfaction.desiredSetId].name}, ${
-              setBonusSatisfaction.desiredBonusType
-            }`}
-          />
-          <SatisfactionIcon isSatisfied={setBonusSatisfaction.satisfaction} />
-        </div>
-      ))}
+      {result.setBonuses.map((setBonusSatisfaction) => {
+        const artifactSet = getArtifactSet(setBonusSatisfaction.desiredSetId);
+        return (
+          <div className="flex items-center gap-2 mb-2" key={setBonusSatisfaction.desiredSetId}>
+            <ImageWithTooltip
+              alt={artifactSet.name}
+              height={32}
+              src={artifactSet.iconUrl}
+              tooltipText={`${artifactSet.name}, ${setBonusSatisfaction.desiredBonusType}`}
+              width={32}
+            />
+            <SatisfactionIcon isSatisfied={setBonusSatisfaction.satisfaction} />
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -97,18 +100,21 @@ const getStatIconUrl = (stat: OverallStat): string => {
 const StatsDisplay: React.FC<{ result: StatsSatisfactionResult }> = ({ result }) => {
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      {Object.entries(result.stats).map(([desiredStat, { desiredStatValue, satisfaction }]) => (
-        <div key={desiredStat} className="flex items-center gap-2 mb-2">
-          <ImageWithTooltip
-            alt={desiredStat}
-            height={32}
-            src={getStatIconUrl(desiredStat as OverallStat)}
-            width={32}
-            tooltipText={`${desiredStat}: ${desiredStatValue}`}
-          />
-          <SatisfactionIcon isSatisfied={satisfaction} />
-        </div>
-      ))}
+      {Object.entries(result.stats).map(([desiredStat, { actualStatValue, desiredStatValue, satisfaction }]) => {
+        const comparatorSymbol = actualStatValue >= desiredStatValue ? ">=" : "<";
+        return (
+          <div className="flex items-center gap-2 mb-2" key={desiredStat}>
+            <ImageWithTooltip
+              alt={desiredStat}
+              height={32}
+              src={getStatIconUrl(desiredStat as OverallStat)}
+              tooltipText={`${desiredStat}: ${actualStatValue} ${comparatorSymbol} ${desiredStatValue}`}
+              width={32}
+            />
+            <SatisfactionIcon isSatisfied={satisfaction} />
+          </div>
+        );
+      })}
     </div>
   );
 };

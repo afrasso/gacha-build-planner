@@ -1,10 +1,10 @@
+import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
   ArtifactSetBonus,
   ArtifactSetBonusType,
   ArtifactType,
   Build,
   BuildArtifacts,
-  DesiredArtifactMainStats,
   OverallStat,
   Stat,
 } from "@/types";
@@ -25,15 +25,15 @@ export interface ArtifactMainStatsSatisfactionResult {
 export interface ArtifactSetBonusesSatisfactionResult {
   satisfaction: boolean;
   setBonuses: {
-    desiredSetId: string;
     desiredBonusType: ArtifactSetBonusType;
+    desiredSetId: string;
     satisfaction: boolean;
   }[];
 }
 
 export interface StatsSatisfactionResult {
   satisfaction: boolean;
-  stats: Record<OverallStat, { desiredStatValue: number; satisfaction: boolean }>;
+  stats: Record<OverallStat, { actualStatValue: number; desiredStatValue: number; satisfaction: boolean }>;
 }
 
 export interface BuildSatisfactionResult {
@@ -43,7 +43,15 @@ export interface BuildSatisfactionResult {
   statsSatisfaction: StatsSatisfactionResult;
 }
 
-export const calculateBuildSatisfaction = ({ build }: { build: Build }): BuildSatisfactionResult => {
+export const calculateBuildSatisfaction = ({
+  build,
+  genshinDataContext,
+  relaxSetCriteria = false,
+}: {
+  build: Build;
+  genshinDataContext: GenshinDataContext;
+  relaxSetCriteria?: boolean;
+}): BuildSatisfactionResult => {
   const calculateArtifactMainStatsSatisfaction = (): ArtifactMainStatsSatisfactionResult => {
     const artifactMainStats = [ArtifactType.CIRCLET, ArtifactType.GOBLET, ArtifactType.SANDS].reduce(
       (acc, artifactType) => {
@@ -60,7 +68,7 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }): BuildSa
 
     return {
       artifactMainStats,
-      satisfaction: Object.values(artifactMainStats).every((result) => result),
+      satisfaction: Object.values(artifactMainStats).every((result) => result.satisfaction),
     };
   };
 
@@ -71,19 +79,20 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }): BuildSa
     artifacts: BuildArtifacts;
     setBonus: ArtifactSetBonus;
   }): boolean => {
-    const matchingArtifacts = Object.values(artifacts).filter(
-      (artifact) => artifact.set.id === setBonus.artifactSet.id
-    );
-    if (matchingArtifacts.length >= 4) {
+    const matchingArtifacts = Object.values(artifacts).filter((artifact) => artifact.setId === setBonus.setId);
+    if (matchingArtifacts.length >= 4 || (relaxSetCriteria && matchingArtifacts.length >= 3)) {
       return true;
     }
-    return setBonus.bonusType === ArtifactSetBonusType.TWO_PIECE && matchingArtifacts.length >= 2;
+    return (
+      setBonus.bonusType === ArtifactSetBonusType.TWO_PIECE &&
+      (matchingArtifacts.length >= 2 || (relaxSetCriteria && matchingArtifacts.length >= 1))
+    );
   };
 
   const calculateArtifactSetBonusesSatisfaction = (): ArtifactSetBonusesSatisfactionResult => {
     const setBonuses = build.desiredArtifactSetBonuses.map((setBonus) => ({
-      desiredSetId: setBonus.artifactSet.id,
       desiredBonusType: setBonus.bonusType,
+      desiredSetId: setBonus.setId,
       satisfaction: calculateArtifactSetBonusSatisfaction({ artifacts: build.artifacts, setBonus }),
     }));
 
@@ -94,9 +103,10 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }): BuildSa
   };
 
   const calculateStatsSatisfaction = (): StatsSatisfactionResult => {
-    const calculatedStats = calculateStats({ build });
+    const calculatedStats = calculateStats({ build, genshinDataContext });
     const stats = build.desiredStats.reduce((acc, stat) => {
       acc[stat.stat] = {
+        actualStatValue: calculatedStats[stat.stat],
         desiredStatValue: stat.value,
         satisfaction: stat.value <= calculatedStats[stat.stat],
       };
@@ -104,7 +114,7 @@ export const calculateBuildSatisfaction = ({ build }: { build: Build }): BuildSa
     }, {} as StatsSatisfactionResult["stats"]);
 
     return {
-      satisfaction: Object.values(stats).every((result) => result),
+      satisfaction: Object.values(stats).every((stat) => stat.satisfaction),
       stats,
     };
   };

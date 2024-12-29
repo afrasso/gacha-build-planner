@@ -1,15 +1,15 @@
 "use client";
 
+import { updateBuildsWithGameData } from "@/buildhelpers/updatebuildswithgamedata";
 import ImportExportComponent from "@/components/ImportExportComponent";
 import ImportGameDataComponent from "@/components/ImportGameDataComponent";
-import { Plan, validatePlan } from "@/types";
-import { validateGOOD } from "@/goodtypes";
-import { updateBuildsWithGameData } from "@/buildhelpers/updatebuildswithgamedata";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { useStorageContext } from "@/contexts/StorageContext";
+import { validateGOOD } from "@/goodtypes";
+import { Plan, validatePlan } from "@/types";
 
 export default function Home() {
-  const { artifactSets, characters, weapons } = useGenshinDataContext();
+  const genshinDataContext = useGenshinDataContext();
   const { loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
 
   const handleExport = () => {
@@ -34,13 +34,11 @@ export default function Home() {
     const { artifacts: goodArtifacts, characters: goodCharacters, weapons: goodWeapons } = validateGOOD(data);
     const builds = loadBuilds();
     const { artifacts: unassignedArtifacts, builds: updatedBuilds } = updateBuildsWithGameData({
-      artifactSets,
       builds,
-      characters,
+      genshinDataContext,
       goodArtifacts,
       goodCharacters,
       goodWeapons,
-      weapons,
     });
     saveBuilds(updatedBuilds);
     saveArtifacts(unassignedArtifacts);

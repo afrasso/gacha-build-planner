@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 
 interface ImageWithTooltipProps {
-  src: string;
   alt: string;
-  width: number;
   height: number;
+  src: string;
   tooltipText?: string;
+  width: number;
 }
 
-const ImageWithTooltip: React.FC<ImageWithTooltipProps> = ({ tooltipText, ...props }) => {
+const ImageWithTooltip: React.FC<ImageWithTooltipProps> = ({ alt, tooltipText, ...props }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [tooltipStyle, setTooltipStyle] = useState({});
   const imageRef = useRef<HTMLDivElement>(null);
@@ -21,11 +21,11 @@ const ImageWithTooltip: React.FC<ImageWithTooltipProps> = ({ tooltipText, ...pro
       const tooltipBounds = tooltipRef.current.getBoundingClientRect();
 
       // In a perfect world, the tooltip would be positioned centered below the image.
-      let imgCenter = imageBounds.left + imageBounds.width / 2;
+      const imgCenter = imageBounds.left + imageBounds.width / 2;
       // Calculate the left position of the tooltip relative to the location of the image.
       let tooltipLeft = imgCenter - tooltipBounds.width / 2 - imageBounds.left;
       // Calculate the top position of the tooltip relative to the location of the image.
-      let tooltipTop = imageBounds.height;
+      const tooltipTop = imageBounds.height;
 
       // Adjust the horizontal position if off-screen to the left.
       if (tooltipLeft + imageBounds.left < 10) {
@@ -59,15 +59,15 @@ const ImageWithTooltip: React.FC<ImageWithTooltipProps> = ({ tooltipText, ...pro
   return (
     <div
       className="relative inline-block"
-      ref={imageRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      ref={imageRef}
     >
-      <Image {...props} />
+      <Image alt={alt} {...props} />
       {tooltipText && isHovered && (
         <span
-          ref={tooltipRef}
           className="absolute bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap z-10 pointer-events-none transition-opacity duration-300"
+          ref={tooltipRef}
           style={tooltipStyle}
         >
           {tooltipText}

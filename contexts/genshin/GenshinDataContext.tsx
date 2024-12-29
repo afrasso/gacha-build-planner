@@ -1,16 +1,19 @@
 "use client";
 
-import { ArtifactSet, Character, Weapon } from "@/types";
 import React, { createContext, useContext } from "react";
 
-interface GenshinDataContextType {
+import { ArtifactSet, Character, Weapon } from "@/types";
+
+export interface GenshinDataContext {
   artifactSets: ArtifactSet[];
-  artifactSetsById: Record<string, ArtifactSet>;
   characters: Character[];
+  getArtifactSet: (id: string) => ArtifactSet;
+  getCharacter: (id: string) => Character;
+  getWeapon: (id: string) => Weapon;
   weapons: Weapon[];
 }
 
-const GenshinDataContext = createContext<GenshinDataContextType | undefined>(undefined);
+const GenshinDataContext = createContext<GenshinDataContext | undefined>(undefined);
 
 interface GenshinDataProviderProps {
   artifactSets: ArtifactSet[];
@@ -30,8 +33,42 @@ export const GenshinDataProvider: React.FC<GenshinDataProviderProps> = ({
     return acc;
   }, {} as Record<string, ArtifactSet>);
 
+  const getArtifactSet = (id: string): ArtifactSet => {
+    const artifactSet = artifactSetsById[id];
+    if (!artifactSet) {
+      throw new Error(`Could not find artifact set ${id}`);
+    }
+    return artifactSet;
+  };
+
+  const charactersById = characters.reduce((acc, character) => {
+    acc[character.id] = character;
+    return acc;
+  }, {} as Record<string, Character>);
+
+  const getCharacter = (id: string): Character => {
+    const character = charactersById[id];
+    if (!character) {
+      throw new Error(`Could not find character ${id}`);
+    }
+    return character;
+  };
+
+  const weaponsById = weapons.reduce((acc, weapon) => {
+    acc[weapon.id] = weapon;
+    return acc;
+  }, {} as Record<string, Weapon>);
+
+  const getWeapon = (id: string): Weapon => {
+    const weapon = weaponsById[id];
+    if (!weapon) {
+      throw new Error(`Could not find weapon ${id}`);
+    }
+    return weapon;
+  };
+
   return (
-    <GenshinDataContext.Provider value={{ artifactSets, artifactSetsById, characters, weapons }}>
+    <GenshinDataContext.Provider value={{ artifactSets, characters, getArtifactSet, getCharacter, getWeapon, weapons }}>
       {children}
     </GenshinDataContext.Provider>
   );

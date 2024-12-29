@@ -6,9 +6,9 @@ import "./globals.css";
 
 import Header from "@/components/Header";
 import { AuthProvider } from "@/contexts/AuthContext";
-import getEnvVariable from "@/utils/getenvvariable";
-import { ThemeProvider } from "@/contexts/ThemeContext";
 import { StorageProvider } from "@/contexts/StorageContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import getEnvVariable from "@/utils/getenvvariable";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

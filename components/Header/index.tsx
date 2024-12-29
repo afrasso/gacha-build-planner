@@ -8,11 +8,11 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { User } from "@/types";
 
+import { ThemeToggle } from "../ThemeToggle";
 import DesktopMenu from "./DesktopMenu";
 import { menuContents } from "./MenuContent";
 import MobileMenu from "./MobileMenu";
 import ProfileMenu from "./ProfileMenu";
-import { ThemeToggle } from "../ThemeToggle";
 
 // Mock user data - replace with actual user data in your implementation
 const mockUser: User = {

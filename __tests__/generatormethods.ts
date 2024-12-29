@@ -9,12 +9,10 @@ import {
   ArtifactSetBonusType,
   ArtifactType,
   Build,
-  Element,
   OverallStat,
   Plan,
   Stat,
   StatValue,
-  WeaponType,
 } from "@/types";
 
 import { getRandomElement, getRandomEnumValue } from "./testhelpers";
@@ -51,11 +49,11 @@ export const generateSubStats = (): StatValue<Stat>[] => {
 
 export const generateArtifact = (type: ArtifactType): Artifact => {
   return {
-    iconUrl: uuidv4(),
+    id: uuidv4(),
     level: Math.random(),
     mainStat: getRandomElement(MAIN_STATS_BY_ARTIFACT_TYPE[type]),
     rarity: Math.random(),
-    set: generateArtifactSet(),
+    setId: uuidv4(),
     subStats: generateSubStats(),
     type,
   };
@@ -67,14 +65,7 @@ export const generateBuild = (): Build => {
     [ArtifactType.GOBLET]: generateArtifact(ArtifactType.GOBLET),
     [ArtifactType.SANDS]: generateArtifact(ArtifactType.SANDS),
   };
-  const character = {
-    element: getRandomEnumValue(Element),
-    iconUrl: uuidv4(),
-    id: uuidv4(),
-    name: uuidv4(),
-    rarity: Math.random(),
-    weaponType: getRandomEnumValue(WeaponType),
-  };
+  const characterId = uuidv4();
   const desiredArtifactMainStats = {
     [ArtifactType.CIRCLET]: getRandomElement(MAIN_STATS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET]),
     [ArtifactType.GOBLET]: getRandomElement(MAIN_STATS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET]),
@@ -82,21 +73,15 @@ export const generateBuild = (): Build => {
   };
   const desiredArtifactSetBonuses: ArtifactSetBonus[] = [
     {
-      artifactSet: generateArtifactSet(),
       bonusType: getRandomEnumValue(ArtifactSetBonusType),
+      setId: uuidv4(),
     },
   ];
   const desiredStats = Object.values(OverallStat).map((stat) => ({ stat, value: Math.random() }));
-  const weapon = {
-    iconUrl: uuidv4(),
-    id: uuidv4(),
-    name: uuidv4(),
-    rarity: Math.random(),
-    type: getRandomEnumValue(WeaponType),
-  };
-  return { artifacts, character, desiredArtifactMainStats, desiredArtifactSetBonuses, desiredStats, weapon };
+  const weaponId = uuidv4();
+  return { artifacts, characterId, desiredArtifactMainStats, desiredArtifactSetBonuses, desiredStats, weaponId };
 };
 
 export const generatePlan = ({ planId, userId }: { planId: string; userId: string }): Plan => {
-  return { builds: _.times(3, generateBuild), id: planId, userId };
+  return { artifacts: [], builds: _.times(3, generateBuild), id: planId, userId };
 };

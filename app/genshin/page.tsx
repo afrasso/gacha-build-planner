@@ -1,7 +1,8 @@
+import { ArrowUpDown, Flower, Wrench } from "lucide-react";
 import Link from "next/link";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown, Wrench, Flower } from "lucide-react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
             <p>Optimize your team compositions and individual character builds.</p>
           </CardContent>
           <CardFooter>
-            <Link href="/genshin/builds" className="w-full">
+            <Link className="w-full" href="/genshin/builds">
               <Button className="w-full">Go to Builds</Button>
             </Link>
           </CardFooter>
@@ -35,7 +36,7 @@ export default function Home() {
             <p>Manage your artifact collection and find the best pieces for your characters.</p>
           </CardContent>
           <CardFooter>
-            <Link href="/genshin/artifacts" className="w-full">
+            <Link className="w-full" href="/genshin/artifacts">
               <Button className="w-full">View Artifacts</Button>
             </Link>
           </CardFooter>
@@ -51,7 +52,7 @@ export default function Home() {
             <p>Save your progress or import data from external sources.</p>
           </CardContent>
           <CardFooter>
-            <Link href="/genshin/importexport" className="w-full">
+            <Link className="w-full" href="/genshin/importexport">
               <Button className="w-full">Manage Data</Button>
             </Link>
           </CardFooter>

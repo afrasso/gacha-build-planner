@@ -35,13 +35,16 @@ const extractCharacters = async ({
   for (const dbCharacter of dbCharacters) {
     const maxLvlStats = dbCharacter.stats(90);
 
+    const ascensionStat = mapStat(dbCharacter.substatType);
+    const ascensionStatValue = calculateStatValue({ rawValue: maxLvlStats.specialized, stat: ascensionStat });
+
     const character = {
-      ascensionStat: mapStat(dbCharacter.substatType),
+      ascensionStat,
       element: dbCharacter.elementType,
       iconUrl: `/${dbCharacter.id}.png`,
       id: String(dbCharacter.id),
       maxLvlStats: {
-        ascensionStat: maxLvlStats.specialized,
+        ascensionStat: ascensionStatValue,
         ATK: maxLvlStats.attack,
         DEF: maxLvlStats.defense,
         HP: maxLvlStats.hp,
@@ -100,14 +103,17 @@ const extractWeapons = async ({
   for (const dbWeapon of dbWeapons) {
     const maxLvlStats = dbWeapon.stats(getMaxLevel(dbWeapon.rarity));
 
+    const mainStat = mapStat(dbWeapon.mainStatType);
+    const mainStatValue = calculateStatValue({ rawValue: maxLvlStats.specialized, stat: mainStat });
+
     try {
       weapons.push({
         iconUrl: `/${dbWeapon.id}.png`,
         id: String(dbWeapon.id),
-        mainStat: mapStat(dbWeapon.mainStatType),
+        mainStat,
         maxLvlStats: {
           ATK: maxLvlStats.attack,
-          mainStat: maxLvlStats.specialized,
+          mainStat: mainStatValue,
         },
         name: dbWeapon.name,
         rarity: dbWeapon.rarity,
@@ -278,6 +284,19 @@ const mapStat = (stat: string | undefined) => {
   }
 
   return mappedStat;
+};
+
+const calculateStatValue = ({ rawValue, stat }: { rawValue: number | undefined; stat: Stat | undefined }) => {
+  if (!stat || !rawValue) {
+    return;
+  }
+
+  // Currently, all possible ascension stats or weapon main stats other than Elemental Masery are percentages, which are
+  // stored in genshinDB as a fraction of 1.
+  if (stat === Stat.ELEMENTAL_MASTERY) {
+    return rawValue;
+  }
+  return rawValue * 100;
 };
 
 const downloadIcon = async ({

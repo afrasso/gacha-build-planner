@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
+import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
   Artifact as GOODArtifact,
   Character as GOODCharacter,
@@ -7,25 +8,23 @@ import {
   Stat as GOODStat,
   Weapon as GOODWeapon,
 } from "@/goodtypes";
-import { Artifact, ArtifactSet, ArtifactType, Build, Character, Stat, StatValue, Weapon } from "@/types";
+import { Artifact, ArtifactType, Build, Stat, StatValue, Weapon } from "@/types";
 
 export const updateBuildsWithGameData = ({
-  artifactSets,
   builds,
-  characters,
+  genshinDataContext,
   goodArtifacts,
   goodCharacters,
   goodWeapons,
-  weapons,
 }: {
-  artifactSets: ArtifactSet[];
   builds: Build[];
-  characters: Character[];
+  genshinDataContext: GenshinDataContext;
   goodArtifacts: GOODArtifact[];
   goodCharacters: GOODCharacter[];
   goodWeapons: GOODWeapon[];
-  weapons: Weapon[];
 }): { artifacts: Artifact[]; builds: Build[] } => {
+  const { artifactSets, characters, getCharacter, weapons } = genshinDataContext;
+
   const getNewBuild = (goodCharacterName: string): Build => {
     const character = characters.find((character) => toPascalCase(character.name) === goodCharacterName);
     if (!character) {
@@ -33,16 +32,17 @@ export const updateBuildsWithGameData = ({
     }
     return {
       artifacts: {},
-      character,
+      characterId: character.id,
       desiredArtifactMainStats: {},
       desiredArtifactSetBonuses: [],
       desiredStats: [],
-      weapon: undefined,
+      weaponId: undefined,
     };
   };
 
   const updateBuildWithGameData = (build: Build): Build => {
-    const goodCharacterName = toPascalCase(build.character.name);
+    const character = getCharacter(build.characterId);
+    const goodCharacterName = toPascalCase(character.name);
     const goodCharacter = goodCharacters.find((goodCharacter) => goodCharacter.key === goodCharacterName);
     if (goodCharacter) {
       updateBuildWithGOODArtifacts({
@@ -91,7 +91,7 @@ export const updateBuildsWithGameData = ({
       return build;
     }
 
-    build.weapon = mapGOODWeapon(goodWeapon);
+    build.weaponId = mapGOODWeapon(goodWeapon).id;
     return build;
   };
 
@@ -101,12 +101,11 @@ export const updateBuildsWithGameData = ({
       throw new Error(`Could not find the artifact set ${goodArtifact.setKey}`);
     }
     return {
-      iconUrl: "", // TODO: Make this a lookup on set rather than a field on the artifact itself.\
       id: uuidv4(),
       level: goodArtifact.level,
       mainStat: mapEnumsByKey(GOODStat, Stat, goodArtifact.mainStatKey),
       rarity: goodArtifact.rarity,
-      set: artifactSet, // TODO: Make this a lookup on set rather than a field on the artifact itself, and replace this with an ID.
+      setId: artifactSet.id,
       subStats: goodArtifact.substats.map(mapGOODSubstat),
       type: mapEnumsByKey(GOODSlot, ArtifactType, goodArtifact.slotKey),
     };
@@ -124,7 +123,6 @@ export const updateBuildsWithGameData = ({
     if (!weapon) {
       throw new Error(`Could not find the weapon ${goodWeapon.key}`);
     }
-    // TODO: Separate out weapon definitions from weapon instances.
     return weapon;
   };
 
@@ -147,18 +145,20 @@ export const updateBuildsWithGameData = ({
       .replace(/(?:^|[\s_\-])(\w)/g, (_, c) => c.toUpperCase());
   };
 
-  const updatedBuilds = builds.map(updateBuildWithGameData);
+  const updatedBuilds = goodCharacters ? builds : builds.map(updateBuildWithGameData);
 
-  goodCharacters.forEach((goodCharacter) => {
-    if (
-      !builds.find((build) => build.character.name.replace(/\s+/g, "") === goodCharacter.key) &&
-      !goodCharacter.key.startsWith("Traveler")
-    ) {
-      const build = getNewBuild(goodCharacter.key);
-      updateBuildWithGameData(build);
-      updatedBuilds.push(build);
-    }
-  });
+  if (goodCharacters) {
+    goodCharacters.forEach((goodCharacter) => {
+      if (
+        !builds.find((build) => getCharacter(build.characterId).name.replace(/\s+/g, "") === goodCharacter.key) &&
+        !goodCharacter.key.startsWith("Traveler")
+      ) {
+        const build = getNewBuild(goodCharacter.key);
+        updateBuildWithGameData(build);
+        updatedBuilds.push(build);
+      }
+    });
+  }
 
   const artifacts = goodArtifacts.filter((goodArtifact) => goodArtifact.location === "").map(mapGOODArtifactToArtifact);
 

@@ -24,7 +24,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isLoggedIn, menuContents, onLog
   return (
     <div className="flex flex-col bg-background border-b divide-y border-t overflow-y-auto">
       {menuContents.map((menuContent) => (
-        <div key={menuContent.key} className="flex flex-col divide-y">
+        <div className="flex flex-col divide-y" key={menuContent.key}>
           <Button className="text-md font-semibold h-14" onClick={() => router.push(menuContent.href)} variant="ghost">
             {menuContent.title}
           </Button>
@@ -32,8 +32,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isLoggedIn, menuContents, onLog
             menuContent.subMenuContents.map((subMenuContent) => (
               <Button
                 className="text-md h-12"
-                onClick={() => router.push(subMenuContent.href)}
                 key={subMenuContent.key}
+                onClick={() => router.push(subMenuContent.href)}
                 variant="ghost"
               >
                 {subMenuContent.title}
@@ -45,6 +45,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isLoggedIn, menuContents, onLog
         <span className="text-md font-semibold h-14 flex items-center justify-center">Account</span>
         {isLoggedIn ? (
           <>
+            <div>{JSON.stringify(user)}</div>
             <Button className="w-full text-md h-12" onClick={() => router.push("/profile")} variant="ghost">
               <User className="mr-2 h-4 w-4" />
               Profile
