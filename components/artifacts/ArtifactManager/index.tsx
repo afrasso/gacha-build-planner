@@ -5,15 +5,14 @@ import { useEffect, useState } from "react";
 import {
   AggregatedArtifactSatisfactionResults,
   calculateSatisfactionForArtifacts,
-} from "@/buildhelpers/calculatesatisfactionforartifacts";
+} from "@/calculators/calculatesatisfactionforartifacts";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { useStorageContext } from "@/contexts/StorageContext";
 import { ArtifactType, Build, Stat } from "@/types";
 
-import { Button } from "../ui/button";
-import { Progress } from "../ui/progress";
 import ArtifactSatisfactionComponent from "./ArtifactSatisfactionComponent";
-// import { ArtifactSatisfaction } from "./types";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 const ArtifactManager: React.FC = () => {
   const genshinDataContext = useGenshinDataContext();
@@ -24,8 +23,8 @@ const ArtifactManager: React.FC = () => {
   const [progress, setProgress] = useState<number>();
 
   useEffect(() => {
-    const loadedArtifacts = loadArtifacts();
-    const loadedBuilds = loadBuilds();
+    const loadedArtifacts = loadArtifacts().value || [];
+    const loadedBuilds = loadBuilds().value || [];
     setArtifactSatisfactions(loadedArtifacts.map((artifact) => ({ artifact })));
     setBuilds(loadedBuilds);
   }, [loadArtifacts, loadBuilds]);

@@ -1,3 +1,5 @@
+export type BuildStats = Record<OverallStat, number>;
+
 export enum OverallStat {
   ATK = "ATK",
   CRIT_DMG = "CRIT_DMG",
@@ -41,7 +43,9 @@ export const OverallStatSchema = {
 };
 
 export enum Stat {
-  ATK_FLAT = "ATK",
+  // TODO: This is a bug; it should have been ATK_FLAT but now it exists; fix this.
+  ATK = "ATK",
+  ATK_FLAT = "ATK_FLAT",
   ATK_PERCENT = "ATK_PERCENT",
   CRIT_DMG = "CRIT_DMG",
   CRIT_RATE = "CRIT_RATE",
@@ -66,6 +70,7 @@ export const StatSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/Stat",
   enum: [
     "ATK",
+    "ATK_FLAT",
     "ATK_PERCENT",
     "CRIT_DMG",
     "CRIT_RATE",

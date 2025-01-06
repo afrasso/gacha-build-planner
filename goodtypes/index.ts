@@ -70,5 +70,11 @@ export const validateGOOD = (data: unknown): { artifacts: Artifact[]; characters
     throw new Error("Data validation failed.");
   }
 
-  return data as { artifacts: Artifact[]; characters: Character[]; weapons: Weapon[] };
+  const validatedData = data as { artifacts: Artifact[]; characters: Character[]; weapons: Weapon[] };
+
+  return {
+    artifacts: validatedData.artifacts || [],
+    characters: validatedData.characters || [],
+    weapons: validatedData.weapons || [],
+  };
 };

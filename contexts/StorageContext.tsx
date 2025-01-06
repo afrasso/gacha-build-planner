@@ -1,26 +1,46 @@
 "use client";
 
+import React, { createContext, useContext, useEffect, useState } from "react";
+
 import { Artifact, Build, validateArtifacts, validateBuilds } from "@/types";
-import React, { createContext, useContext } from "react";
 // import { useAuthContext } from "./AuthContext";
 
 interface StorageContextType {
-  loadArtifacts: () => Artifact[];
-  loadBuilds: () => Build[];
+  loadArtifact: (id: string) => StorageRetrievalResult<Artifact>;
+  loadArtifacts: () => StorageRetrievalResult<Artifact[]>;
+  loadBuild: (characterId: string) => StorageRetrievalResult<Build>;
+  loadBuilds: () => StorageRetrievalResult<Build[]>;
   saveArtifacts: (artifacts: Artifact[]) => void;
   saveBuilds: (builds: Build[]) => void;
 }
 
 const StorageContext = createContext<StorageContextType | undefined>(undefined);
 
+export enum StorageRetrievalStatus {
+  FOUND = "FOUND",
+  LOADING = "LOADING",
+  NOT_FOUND = "NOT_FOUND",
+}
+
+export interface StorageRetrievalResult<T> {
+  status: StorageRetrievalStatus;
+  value?: T;
+}
+
 interface StorageProviderProps {
   children: React.ReactNode;
 }
 
 export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) => {
+  const [isClient, setIsClient] = useState(false);
+
   // const { authFetch, isAuthenticated, user } = useAuthContext();
 
-  const loadArtifacts = () => {
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const getArtifactsFromLocalStorage = (): Artifact[] => {
     const artifactsJson = localStorage.getItem("artifacts");
     if (!artifactsJson) {
       return [];
@@ -30,7 +50,51 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return artifacts;
   };
 
-  const loadBuilds = () => {
+  const getBuildsFromLocalStorage = (): Build[] => {
+    const buildsJson = localStorage.getItem("builds");
+    if (!buildsJson) {
+      return [];
+    }
+    const parsedBuilds = JSON.parse(buildsJson);
+    const builds = validateBuilds(parsedBuilds);
+    return builds;
+  };
+
+  const loadArtifact = (id: string): StorageRetrievalResult<Artifact> => {
+    if (!isClient) {
+      return { status: StorageRetrievalStatus.LOADING };
+    }
+    const artifacts = getArtifactsFromLocalStorage();
+    const artifact = artifacts.find((artifact) => artifact.id === id);
+    if (!artifact) {
+      return { status: StorageRetrievalStatus.NOT_FOUND };
+    }
+    return { status: StorageRetrievalStatus.FOUND, value: artifact };
+  };
+
+  const loadArtifacts = (): StorageRetrievalResult<Artifact[]> => {
+    if (!isClient) {
+      return { status: StorageRetrievalStatus.LOADING };
+    }
+    return { status: StorageRetrievalStatus.FOUND, value: getArtifactsFromLocalStorage() };
+  };
+
+  const loadBuild = (characterId: string): StorageRetrievalResult<Build> => {
+    if (!isClient) {
+      return { status: StorageRetrievalStatus.LOADING };
+    }
+    const builds = getBuildsFromLocalStorage();
+    const build = builds.find((build) => build.characterId === characterId);
+    if (!build) {
+      return { status: StorageRetrievalStatus.NOT_FOUND };
+    }
+    return { status: StorageRetrievalStatus.FOUND, value: build };
+  };
+
+  const loadBuilds = (): StorageRetrievalResult<Build[]> => {
+    if (!isClient) {
+      return { status: StorageRetrievalStatus.LOADING };
+    }
     // const loadPlan = async () => {
     //   if (isAuthenticated) {
     //     try {
@@ -54,14 +118,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     //   }
     // };
 
-    const buildsJson = localStorage.getItem("builds");
-    if (!buildsJson) {
-      console.log("CLEARING BUILDS");
-      return [];
-    }
-    const parsedBuilds = JSON.parse(buildsJson);
-    const builds = validateBuilds(parsedBuilds);
-    return builds;
+    return { status: StorageRetrievalStatus.FOUND, value: getBuildsFromLocalStorage() };
   };
 
   const saveArtifacts = (artifacts: Artifact[]) => {
@@ -108,7 +165,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
   };
 
   return (
-    <StorageContext.Provider value={{ loadArtifacts, loadBuilds, saveArtifacts, saveBuilds }}>
+    <StorageContext.Provider value={{ loadArtifact, loadArtifacts, loadBuild, loadBuilds, saveArtifacts, saveBuilds }}>
       {children}
     </StorageContext.Provider>
   );

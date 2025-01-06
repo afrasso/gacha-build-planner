@@ -7,6 +7,7 @@ export interface Build {
   desiredArtifactMainStats: DesiredArtifactMainStats;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredStats: StatValue<OverallStat>[];
+  lastUpdatedDate?: Date;
   weaponId?: string;
 }
 

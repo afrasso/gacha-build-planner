@@ -23,6 +23,8 @@ export const updateBuildsWithGameData = ({
   goodCharacters: GOODCharacter[];
   goodWeapons: GOODWeapon[];
 }): { artifacts: Artifact[]; builds: Build[] } => {
+  console.log(goodCharacters.length);
+
   const { artifactSets, characters, getCharacter, weapons } = genshinDataContext;
 
   const getNewBuild = (goodCharacterName: string): Build => {
@@ -41,8 +43,12 @@ export const updateBuildsWithGameData = ({
   };
 
   const updateBuildWithGameData = (build: Build): Build => {
+    console.log(goodCharacters.length);
+    console.log(build);
     const character = getCharacter(build.characterId);
+    console.log(character);
     const goodCharacterName = toPascalCase(character.name);
+    console.log(goodCharacterName);
     const goodCharacter = goodCharacters.find((goodCharacter) => goodCharacter.key === goodCharacterName);
     if (goodCharacter) {
       updateBuildWithGOODArtifacts({

@@ -1,8 +1,8 @@
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { Artifact, ArtifactType, Build } from "@/types";
 
-import { calculateBuildSatisfaction } from "./calculatebuildsatisfaction";
-import { rollArtifact } from "./rollartifact";
+import { rollArtifact } from "./artifactmetrics/simulations/rollartifact";
+import { calculateBuildSatisfaction } from "./buildsatisfaction";
 
 interface ArtifactSatisfactionResult {
   satisfied: number;

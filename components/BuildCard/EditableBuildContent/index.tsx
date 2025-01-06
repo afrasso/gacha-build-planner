@@ -1,6 +1,5 @@
 "use client";
 
-import { calculateStats } from "@/buildhelpers/calculatestats";
 import { CardContent } from "@/components/ui/card";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
@@ -18,6 +17,7 @@ import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector
 import DesiredArtifactSetBonusSelector from "./DesiredArtifactSetBonusSelector";
 import DesiredStatsSelector from "./DesiredStatsSelector";
 import WeaponSelector from "./WeaponSelector";
+import { calculateStats } from "@/calculators/stats";
 
 interface EditableBuildContentProps {
   artifactSets: ArtifactSet[];

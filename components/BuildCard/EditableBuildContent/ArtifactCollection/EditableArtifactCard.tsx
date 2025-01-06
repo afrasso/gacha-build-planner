@@ -5,8 +5,8 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Artifact, ArtifactType } from "@/types";
 
-import ArtifactCard from "./ArtifactCard";
 import ArtifactEditor from "./ArtifactEditor";
+import ArtifactCard from "@/components/artifacts/ArtifactCard";
 
 interface EditableArtifactCardProps {
   artifact?: Artifact;

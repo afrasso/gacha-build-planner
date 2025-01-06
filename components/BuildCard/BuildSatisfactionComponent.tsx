@@ -6,7 +6,7 @@ import {
   ArtifactSetBonusesSatisfactionResult,
   BuildSatisfactionResult,
   StatsSatisfactionResult,
-} from "@/buildhelpers/calculatebuildsatisfaction";
+} from "@/calculators/buildsatisfaction";
 import ImageWithTooltip from "@/components/ui/custom/ImageWithTooltip";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { ArtifactType, OverallStat } from "@/types";

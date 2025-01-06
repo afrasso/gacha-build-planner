@@ -1,6 +1,6 @@
 "use client";
 
-import { updateBuildsWithGameData } from "@/buildhelpers/updatebuildswithgamedata";
+import { updateBuildsWithGameData } from "@/calculators/updatebuildswithgamedata";
 import ImportExportComponent from "@/components/ImportExportComponent";
 import ImportGameDataComponent from "@/components/ImportGameDataComponent";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
@@ -8,12 +8,12 @@ import { useStorageContext } from "@/contexts/StorageContext";
 import { validateGOOD } from "@/goodtypes";
 import { Plan, validatePlan } from "@/types";
 
-export default function Home() {
+export default function ImportExportPage() {
   const genshinDataContext = useGenshinDataContext();
   const { loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
 
   const handleExport = () => {
-    const plan: Plan = { artifacts: loadArtifacts(), builds: loadBuilds() };
+    const plan: Plan = { artifacts: loadArtifacts().value || [], builds: loadBuilds().value || [] };
     const dataStr = JSON.stringify(plan);
     const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
     const exportFileDefaultName = "gacha-build-planner-data.json";
@@ -31,8 +31,11 @@ export default function Home() {
   };
 
   const handleGOODImport = (data: unknown) => {
+    console.log("validating good");
     const { artifacts: goodArtifacts, characters: goodCharacters, weapons: goodWeapons } = validateGOOD(data);
-    const builds = loadBuilds();
+    console.log("loading builds");
+    const builds = loadBuilds().value || [];
+    console.log("updating builds with game data");
     const { artifacts: unassignedArtifacts, builds: updatedBuilds } = updateBuildsWithGameData({
       builds,
       genshinDataContext,

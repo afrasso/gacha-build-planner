@@ -1,6 +1,6 @@
-import ArtifactManager from "@/components/ArtifactManager";
+import ArtifactManager from "@/components/artifacts/ArtifactManager";
 
-export default function Home() {
+export default function ArtifactManagerPage() {
   return (
     <main className="p-8">
       <ArtifactManager />

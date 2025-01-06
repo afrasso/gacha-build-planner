@@ -1,13 +1,13 @@
+import { useRouter } from "next/navigation";
 import React from "react";
 
 import {
   AggregatedArtifactSatisfactionResults,
   ArtifactSatisfactionResultsByBuild,
-} from "@/buildhelpers/calculatesatisfactionforartifacts";
-// TODO: Move the ArtifactCard component on it's own since it's now used in multiple places.
-import ArtifactCard from "@/components/BuildCard/EditableBuildContent/ArtifactCollection/ArtifactCard";
+} from "@/calculators/calculatesatisfactionforartifacts";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import ArtifactCard from "@/components/artifacts/ArtifactCard";
 
 interface ArtifactSatisfactionComponentProps {
   artifactSatisfaction: AggregatedArtifactSatisfactionResults;
@@ -18,8 +18,8 @@ const SatisfactionDetails = ({ satisfactionDetails }: { satisfactionDetails: Art
   return (
     <div>
       {Object.entries(satisfactionDetails)
-        .filter(([buildId, result]) => result.satisfied > 0)
-        .sort((a, b) => b[1].satisfied - a[1].satisfied)
+        .filter(([, result]) => result.satisfied > 0)
+        .sort(([, resultA], [, resultB]) => resultB.satisfied - resultA.satisfied)
         .slice(0, 5)
         .map(([buildId, result]) => (
           <p key={buildId}>{`${getCharacter(buildId).name}: ${Math.round(
@@ -31,19 +31,18 @@ const SatisfactionDetails = ({ satisfactionDetails }: { satisfactionDetails: Art
 };
 
 const ArtifactSatisfactionComponent: React.FC<ArtifactSatisfactionComponentProps> = ({ artifactSatisfaction }) => {
+  const router = useRouter();
   const { artifact, maxSatisfaction, satisfactionResults } = artifactSatisfaction;
   const satisfactionPercentage = ((maxSatisfaction || 0) * 100).toFixed(2);
 
-  if (artifact.id === "d742f9d5-3bf3-4a32-851a-b268bc4b816c") {
-    console.log(artifact);
-    console.log(maxSatisfaction);
-    console.log(satisfactionResults);
-  }
+  const routeToArtifact = () => {
+    router.push(`/genshin/artifacts/${artifact.id}`);
+  };
 
   return (
     <div className="w-full max-w-xs bg-gray-800 bg-opacity-50 border border-gray-700 rounded-lg shadow-md overflow-hidden flex flex-col items-center">
       <div className="p-2 flex justify-center">
-        <ArtifactCard artifact={artifact} artifactType={artifact.type} />
+        <ArtifactCard artifact={artifact} artifactType={artifact.type} onClick={routeToArtifact} />
       </div>
       <TooltipProvider delayDuration={300}>
         <Tooltip>
