@@ -15,7 +15,13 @@ import {
 import { Build, BuildArraySchema, BuildSchema } from "./build";
 import { CharacterSchema, ElementSchema } from "./character";
 import { Plan, PlanSchema } from "./plan";
-import { OverallStatSchema, OverallStatValueSchema, StatSchema, StatValueSchema } from "./stat";
+import {
+  DesiredOverallStatSchema,
+  OverallStatSchema,
+  OverallStatValueSchema,
+  StatSchema,
+  StatValueSchema,
+} from "./stat";
 import { WeaponSchema, WeaponTypeSchema } from "./weapon";
 
 export * from "./artifact";
@@ -46,6 +52,7 @@ ajv.addSchema(ElementSchema);
 
 ajv.addSchema(PlanSchema);
 
+ajv.addSchema(DesiredOverallStatSchema);
 ajv.addSchema(OverallStatSchema);
 ajv.addSchema(OverallStatValueSchema);
 ajv.addSchema(StatSchema);

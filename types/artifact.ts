@@ -30,7 +30,7 @@ export const ArtifactSchema = {
     },
     type: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactType" },
   },
-  required: ["id", "level", "mainStat", "setId", "subStats", "type"],
+  required: ["id", "level", "mainStat", "rarity", "setId", "subStats", "type"],
   type: "object",
 };
 

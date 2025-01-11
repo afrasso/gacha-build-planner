@@ -1,5 +1,25 @@
 export type BuildStats = Record<OverallStat, number>;
 
+export type DesiredOverallStat = {
+  excessUseful: boolean;
+  priority: number;
+  stat: OverallStat;
+  value: number;
+};
+
+export const DesiredOverallStatSchema = {
+  $id: "https://gacha-build-planner.vercel.app/schemas/DesiredOverallStat",
+  additionalProperties: false,
+  properties: {
+    excessUseful: { type: "boolean" },
+    priority: { type: "number" },
+    stat: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStat" },
+    value: { type: "number" },
+  },
+  required: ["excessUseful", "priority", "stat", "value"],
+  type: "object",
+};
+
 export enum OverallStat {
   ATK = "ATK",
   CRIT_DMG = "CRIT_DMG",

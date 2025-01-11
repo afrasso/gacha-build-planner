@@ -1,5 +1,6 @@
 "use client";
 
+import { calculateStats } from "@/calculators/stats";
 import { CardContent } from "@/components/ui/card";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
@@ -8,16 +9,14 @@ import {
   Build,
   BuildArtifacts,
   DesiredArtifactMainStats,
-  OverallStat,
-  StatValue,
+  DesiredOverallStat,
 } from "@/types";
 
 import ArtifactCollection from "./ArtifactCollection";
 import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
 import DesiredArtifactSetBonusSelector from "./DesiredArtifactSetBonusSelector";
-import DesiredStatsSelector from "./DesiredStatsSelector";
+import DesiredOverallStatsSelector from "./DesiredOverallStatsSelector";
 import WeaponSelector from "./WeaponSelector";
-import { calculateStats } from "@/calculators/stats";
 
 interface EditableBuildContentProps {
   artifactSets: ArtifactSet[];
@@ -41,8 +40,8 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUp
     onUpdate(build.characterId, { desiredArtifactMainStats });
   };
 
-  const updateDesiredStats = (desiredStats: StatValue<OverallStat>[]) => {
-    onUpdate(build.characterId, { desiredStats });
+  const updateDesiredOverallStats = (desiredOverallStats: DesiredOverallStat[]) => {
+    onUpdate(build.characterId, { desiredOverallStats });
   };
 
   const updateArtifacts = (artifacts: BuildArtifacts) => {
@@ -60,10 +59,10 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUp
         desiredArtifactMainStats={build.desiredArtifactMainStats}
         onChange={updateDesiredArtifactMainStats}
       />
-      <DesiredStatsSelector
+      <DesiredOverallStatsSelector
         currentStats={currentStats}
-        desiredStats={build.desiredStats}
-        onChange={updateDesiredStats}
+        desiredStats={build.desiredOverallStats || []}
+        onChange={updateDesiredOverallStats}
       />
       <ArtifactCollection artifacts={build.artifacts} onUpdate={updateArtifacts} />
     </CardContent>

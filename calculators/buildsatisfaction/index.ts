@@ -7,6 +7,8 @@ import { calculateArtifactSetBonusesSatisfaction } from "./artifactsetbonuses";
 import { calculateTargetStatsSatisfaction } from "./targetstats";
 import { BuildSatisfactionResult, TargetStatsStrategy } from "./types";
 
+export * from "./types";
+
 const getTargetStats = ({
   desiredStats,
   stats,
@@ -24,12 +26,12 @@ export const calculateBuildSatisfaction = ({
   artifacts,
   build,
   genshinDataContext,
-  targetStatsStrategy,
+  targetStatsStrategy = TargetStatsStrategy.CURRENT,
 }: {
   artifacts?: BuildArtifacts;
   build: Build;
   genshinDataContext: GenshinDataContext;
-  targetStatsStrategy: TargetStatsStrategy;
+  targetStatsStrategy?: TargetStatsStrategy;
 }): BuildSatisfactionResult => {
   const artifactMainStatsSatisfaction = calculateArtifactMainStatsSatisfaction({
     artifacts: build.artifacts,

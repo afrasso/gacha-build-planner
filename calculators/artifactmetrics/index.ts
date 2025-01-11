@@ -42,7 +42,7 @@ const calculateMetric = <M extends keyof ArtifactMetricResultMap>({
   }
 };
 
-export const updateMetrics = ({
+export const updateMetrics = async ({
   artifact,
   builds,
   callback = () => {},
@@ -52,14 +52,13 @@ export const updateMetrics = ({
 }: {
   artifact: Artifact;
   builds: Build[];
-  callback: (progress: number) => void;
+  callback?: (progress: number) => void;
   genshinDataContext: GenshinDataContext;
   iterations: number;
   metric: ArtifactMetric;
-}): void => {
+}): Promise<void> => {
   callback(0);
   for (const [index, build] of builds.entries()) {
-    console.log("starting build for " + build.characterId);
     if (!artifact.metrics) {
       artifact.metrics = {
         [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: {},
@@ -81,13 +80,12 @@ export const updateMetrics = ({
         result: calculateMetric({ artifact, build, callback, genshinDataContext, iterations, metric }),
       };
     }
-    const progress = index / builds.length;
-    console.log("progress _should_ be at " + progress);
-    callback(progress);
+    const progress = (index + 1) / builds.length;
+    await callback(progress);
   }
 };
 
-export const updateAllMetrics = ({
+export const updateAllMetrics = async ({
   artifact,
   builds,
   callback = () => {},
@@ -99,19 +97,16 @@ export const updateAllMetrics = ({
   callback?: (progress: number) => void;
   genshinDataContext: GenshinDataContext;
   iterations: number;
-}): void => {
-  callback(0);
+}): Promise<void> => {
   const metrics = getEnumValues(ArtifactMetric);
   for (const [index, metric] of getEnumValues(ArtifactMetric).entries()) {
-    console.log("starting metric " + metric);
-    updateMetrics({
+    await updateMetrics({
       artifact,
       builds,
-      callback: (p) => (index + p) / metrics.length,
+      callback: async (p) => await callback((index + p) / metrics.length),
       genshinDataContext,
       iterations,
       metric,
     });
-    console.log("finishing metric " + metric);
   }
 };

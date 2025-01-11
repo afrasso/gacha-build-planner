@@ -38,6 +38,7 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                 />
                 <div className="ml-2 flex-1">
                   <h3 className={`font-semibold ${textSize1} leading-tight line-clamp-2`}>{artifactSet.name}</h3>
+                  <span className="text-sm text-muted-foreground">Level {artifact.level}</span>
                 </div>
               </div>
               <p className={`font-medium ${textSize1} text-center mb-2 rounded p-1`}>{artifact.mainStat}</p>

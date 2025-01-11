@@ -2,10 +2,11 @@ import { Crown, Hourglass, Wine } from "lucide-react";
 import React from "react";
 
 import {
-  ArtifactMainStatsSatisfactionResult,
-  ArtifactSetBonusesSatisfactionResult,
+  ArtifactMainStatSatisfactionDetails,
+  ArtifactSetBonusSatisfactionDetails,
   BuildSatisfactionResult,
-  StatsSatisfactionResult,
+  SatisfactionResult,
+  StatSatisfactionDetails,
 } from "@/calculators/buildsatisfaction";
 import ImageWithTooltip from "@/components/ui/custom/ImageWithTooltip";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
@@ -17,12 +18,14 @@ interface BuildSatisfactionDisplayProps {
   result: BuildSatisfactionResult;
 }
 
-const ArtifactSetBonusesDisplay: React.FC<{ result: ArtifactSetBonusesSatisfactionResult }> = ({ result }) => {
+const ArtifactSetBonusesDisplay: React.FC<{ result: SatisfactionResult<ArtifactSetBonusSatisfactionDetails> }> = ({
+  result,
+}) => {
   const { getArtifactSet } = useGenshinDataContext();
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      {result.setBonuses.map((setBonusSatisfaction) => {
+      {result.details.map((setBonusSatisfaction) => {
         const artifactSet = getArtifactSet(setBonusSatisfaction.desiredSetId);
         return (
           <div className="flex items-center gap-2 mb-2" key={setBonusSatisfaction.desiredSetId}>
@@ -41,33 +44,39 @@ const ArtifactSetBonusesDisplay: React.FC<{ result: ArtifactSetBonusesSatisfacti
   );
 };
 
-const ArtifactMainStatsDisplay: React.FC<{ result: ArtifactMainStatsSatisfactionResult }> = ({ result }) => {
+const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMainStatSatisfactionDetails> }> = ({
+  result,
+}) => {
+  const mainStatSatisfactions = Object.fromEntries(
+    result.details.map((mainStatSatisfaction) => [mainStatSatisfaction.artifactType, mainStatSatisfaction])
+  );
+
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      {result.artifactMainStats.SANDS && (
+      {mainStatSatisfactions[ArtifactType.SANDS] && (
         <div className="flex items-center gap-2 mb-2">
           <Hourglass size={32} />
           <SatisfactionIcon
-            isSatisfied={result.artifactMainStats.SANDS.satisfaction}
-            tooltipText={`${ArtifactType.SANDS}: ${result.artifactMainStats.SANDS.desiredMainStat}`}
+            isSatisfied={mainStatSatisfactions[ArtifactType.SANDS].satisfaction}
+            tooltipText={`${ArtifactType.SANDS}: ${mainStatSatisfactions[ArtifactType.SANDS].desiredMainStat}`}
           />
         </div>
       )}
-      {result.artifactMainStats.GOBLET && (
+      {mainStatSatisfactions[ArtifactType.GOBLET] && (
         <div className="flex items-center gap-2 mb-2">
           <Wine size={32} />
           <SatisfactionIcon
-            isSatisfied={result.artifactMainStats.GOBLET.satisfaction}
-            tooltipText={`${ArtifactType.GOBLET}: ${result.artifactMainStats.GOBLET.desiredMainStat}`}
+            isSatisfied={mainStatSatisfactions[ArtifactType.GOBLET].satisfaction}
+            tooltipText={`${ArtifactType.GOBLET}: ${mainStatSatisfactions[ArtifactType.GOBLET].desiredMainStat}`}
           />
         </div>
       )}
-      {result.artifactMainStats.CIRCLET && (
+      {mainStatSatisfactions[ArtifactType.CIRCLET] && (
         <div className="flex items-center gap-2 mb-2">
           <Crown size={32} />
           <SatisfactionIcon
-            isSatisfied={result.artifactMainStats.CIRCLET.satisfaction}
-            tooltipText={`${ArtifactType.CIRCLET}: ${result.artifactMainStats.CIRCLET.desiredMainStat}`}
+            isSatisfied={mainStatSatisfactions[ArtifactType.CIRCLET].satisfaction}
+            tooltipText={`${ArtifactType.CIRCLET}: ${mainStatSatisfactions[ArtifactType.CIRCLET].desiredMainStat}`}
           />
         </div>
       )}
@@ -97,21 +106,21 @@ const getStatIconUrl = (stat: OverallStat): string => {
   return statToUrlMapping[stat];
 };
 
-const StatsDisplay: React.FC<{ result: StatsSatisfactionResult }> = ({ result }) => {
+const StatsDisplay: React.FC<{ result: SatisfactionResult<StatSatisfactionDetails> }> = ({ result }) => {
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      {Object.entries(result.stats).map(([desiredStat, { actualStatValue, desiredStatValue, satisfaction }]) => {
-        const comparatorSymbol = actualStatValue >= desiredStatValue ? ">=" : "<";
+      {result.details.map((statSatisfaction) => {
+        const comparatorSymbol = statSatisfaction.statValue >= statSatisfaction.targetStatValue ? ">=" : "<";
         return (
-          <div className="flex items-center gap-2 mb-2" key={desiredStat}>
+          <div className="flex items-center gap-2 mb-2" key={statSatisfaction.targetStat}>
             <ImageWithTooltip
-              alt={desiredStat}
+              alt={statSatisfaction.targetStat}
               height={32}
-              src={getStatIconUrl(desiredStat as OverallStat)}
-              tooltipText={`${desiredStat}: ${actualStatValue} ${comparatorSymbol} ${desiredStatValue}`}
+              src={getStatIconUrl(statSatisfaction.targetStat)}
+              tooltipText={`${statSatisfaction.targetStat}: ${statSatisfaction.statValue} ${comparatorSymbol} ${statSatisfaction.targetStatValue}`}
               width={32}
             />
-            <SatisfactionIcon isSatisfied={satisfaction} />
+            <SatisfactionIcon isSatisfied={statSatisfaction.satisfaction} />
           </div>
         );
       })}

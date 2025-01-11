@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MAIN_STATS_BY_ARTIFACT_TYPE } from "@/constants";
 import { ArtifactType, Stat } from "@/types";
+
 interface MainStatSelectorProps {
   artifactType: ArtifactType;
   mainStat?: Stat;

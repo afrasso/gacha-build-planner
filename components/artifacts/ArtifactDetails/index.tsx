@@ -1,8 +1,7 @@
 "use client";
 
-import throttle from "lodash.throttle";
 import { notFound } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { updateAllMetrics } from "@/calculators/artifactmetrics";
 import ArtifactCard from "@/components/artifacts/ArtifactCard";
@@ -32,7 +31,9 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   const [buildsRetrievalStatus, setBuildsRetrievalStatus] = useState<StorageRetrievalStatus>(
     StorageRetrievalStatus.LOADING
   );
-  const [progress, setProgress] = useState<number>();
+  const [progress, setProgress] = useState<number>(0);
+  const [complete, setComplete] = useState<boolean>(false);
+
   const [topBuildsMetric, setTopBuildsMetric] = useState<ArtifactMetric>(ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS);
 
   useEffect(() => {
@@ -44,12 +45,11 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
     setBuildsRetrievalStatus(buildsRetrievalResult.status);
   }, [artifactId, loadArtifact, loadBuilds]);
 
-  const updateProgress = useCallback(
-    () =>
-      throttle((p) => {
-        console.log("progress at " + p);
-        setProgress(p);
-      }, 300),
+  const callback = useCallback(
+    async (p: number) => {
+      await new Promise<void>((resolve) => setTimeout(resolve, 0));
+      setProgress(p);
+    },
     [setProgress]
   );
 
@@ -68,47 +68,64 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
     throw new Error("Unexpected event: artifact was not found after loading.");
   }
 
-  const updateMetrics = () => {
-    console.log("update all metrics start...");
-    updateAllMetrics({ artifact, builds, callback: updateProgress, genshinDataContext, iterations: 1 });
+  const logMetrics = (metricType: ArtifactMetric) => {
+    const metrics = artifact.metrics?.[metricType];
+    if (!metrics) {
+      console.log(`${metricType} is undefined`);
+    }
+    const topMetrics = Object.entries(metrics!)
+      .filter((x) => x[1].result)
+      .sort((a, b) => b[1].result - a[1].result);
+    console.log(topMetrics);
+    console.log(builds.filter((b) => topMetrics.map((x) => x[0]).includes(b.characterId)));
+  };
+
+  const updateMetrics = async () => {
+    await updateAllMetrics({ artifact, builds, callback, genshinDataContext, iterations: 100 });
+    setComplete(true);
     setArtifact((prev) => {
       if (!prev) {
         return prev;
       }
       return { ...prev, metrics: artifact.metrics };
     });
-    console.log("update all metrics finish...");
+    logMetrics(ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS);
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <Button onClick={updateMetrics}>Update metric calculations</Button>
-      <Progress className="w-[60%]" value={progress} />
+      <Progress className="w-[60%]" value={progress * 100} />
+      <div>Progress: {Math.round(progress * 100)}%</div>
       <h1 className="text-3xl font-bold mb-6">Artifact Details</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <ArtifactCard artifact={artifact} artifactType={artifact!.type} size="large" />
         </div>
-        <div>
-          <ArtifactMetrics artifact={artifact!} />
+        {complete && (
+          <div>
+            <ArtifactMetrics artifact={artifact!} />
+          </div>
+        )}
+      </div>
+      {complete && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-4">Top Builds for This Artifact</h2>
+          <Select onValueChange={(metric) => setTopBuildsMetric(metric as ArtifactMetric)}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a metric" />
+            </SelectTrigger>
+            <SelectContent>
+              {getEnumValues(ArtifactMetric).map((metric) => (
+                <SelectItem key={metric} value={metric}>
+                  {metric}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {/* <TopBuilds artifact={artifact!} builds={builds} topBuildsMetric={topBuildsMetric} /> */}
         </div>
-      </div>
-      <div className="mt-12">
-        <h2 className="text-2xl font-semibold mb-4">Top Builds for This Artifact</h2>
-        <Select onValueChange={(metric) => setTopBuildsMetric(metric as ArtifactMetric)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select a metric" />
-          </SelectTrigger>
-          <SelectContent>
-            {getEnumValues(ArtifactMetric).map((metric) => (
-              <SelectItem key={metric} value={metric}>
-                {metric}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <TopBuilds artifact={artifact!} builds={builds} topBuildsMetric={topBuildsMetric} />
-      </div>
+      )}
     </div>
   );
 };

@@ -10,6 +10,8 @@ import { Artifact, ArtifactType, Stat, StatValue } from "@/types";
 import MainStatSelector from "./MainStatSelector";
 import SetSelector from "./SetSelector";
 import SubStatsSelector from "./SubStatsSelector";
+import RaritySelector from "./RaritySelector";
+import LevelSelector from "./LevelSelector";
 
 interface ArtifactEditorProps {
   artifact?: Partial<Artifact>;
@@ -36,6 +38,14 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType,
     setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, setId }));
   };
 
+  const updateRarity = (rarity: number) => {
+    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, rarity }));
+  };
+
+  const updateLevel = (level: number) => {
+    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, level }));
+  };
+
   const updateMainStat = (mainStat: Stat) => {
     setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, mainStat }));
   };
@@ -59,6 +69,8 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType,
         ref={setSelectorRef}
         setId={internalArtifact?.setId}
       />
+      <RaritySelector rarity={internalArtifact.rarity} onUpdate={updateRarity} />
+      <LevelSelector level={internalArtifact.level} onUpdate={updateLevel} />
       <MainStatSelector
         artifactType={artifactType}
         mainStat={internalArtifact.mainStat}

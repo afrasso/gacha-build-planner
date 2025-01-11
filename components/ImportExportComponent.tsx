@@ -24,6 +24,9 @@ const ImportExportComponent: React.FC<ImportExportComponentProps> = ({ onExport,
       reader.onload = (e) => {
         try {
           const importedData = JSON.parse(e.target?.result as string);
+
+          console.log(importedData);
+
           onImport(importedData);
         } catch (error) {
           console.error("Error parsing imported data:", error);

@@ -2,15 +2,22 @@
 
 import React, { InputHTMLAttributes, useEffect, useState } from "react";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "../input";
 
 interface DebouncedNumericInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
-  isValid: boolean;
+  className?: string;
+  isValid?: boolean;
   onChange: (value: number | undefined) => void;
   value?: number;
 }
 
-const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange, value, ...props }) => {
+const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({
+  className = "",
+  isValid = true,
+  onChange,
+  value,
+  ...props
+}) => {
   const [stringValue, setStringValue] = useState(value?.toString() || "");
 
   useEffect(() => {
@@ -38,6 +45,8 @@ const DebouncedNumericInput: React.FC<DebouncedNumericInputProps> = ({ onChange,
   return (
     <Input
       {...props}
+      className={`text-right ${className}`}
+      isValid={isValid}
       onChange={handleChange}
       onKeyDown={(e) => {
         if (e.key === "e" || e.key === "E" || e.key === "+" || e.key === "-") {

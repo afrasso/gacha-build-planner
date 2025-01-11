@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { useStorageContext } from "@/contexts/StorageContext";
+import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
 import { Build, Character } from "@/types";
 
 import BuildCard from "./BuildCard";
@@ -19,8 +19,31 @@ const BuildManager = () => {
   const { loadBuilds, saveBuilds } = useStorageContext();
 
   const [builds, setBuilds] = useState<Build[]>([]);
+  const [buildsRetrievalStatus, setBuildsRetrievalStatus] = useState<StorageRetrievalStatus>(
+    StorageRetrievalStatus.LOADING
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [isReorderDialogOpen, setIsReorderDialogOpen] = useState(false);
+
+  useEffect(() => {
+    const buildsRetrievalResult = loadBuilds();
+    const loadedBuilds = loadBuilds().value || [];
+    setBuildsRetrievalStatus(buildsRetrievalResult.status);
+    setBuilds(loadedBuilds);
+    if (buildsRetrievalResult.status === StorageRetrievalStatus.FOUND) {
+      setIsLoading(false);
+    }
+  }, [authFetch, isAuthenticated, loadBuilds, user]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      saveBuilds(builds);
+    }
+  }, [authFetch, builds, isAuthenticated, isLoading, saveBuilds, user]);
+
+  if (buildsRetrievalStatus === StorageRetrievalStatus.LOADING) {
+    return <div>Loading builds...</div>;
+  }
 
   const addBuild = (character: Character) => {
     if (character && !builds.some((build) => build.characterId === character.id)) {
@@ -52,18 +75,6 @@ const BuildManager = () => {
   const handleReorderBuilds = (newOrder: Build[]) => {
     setBuilds(newOrder);
   };
-
-  useEffect(() => {
-    const loadedBuilds = loadBuilds();
-    setBuilds(loadedBuilds);
-    setIsLoading(false);
-  }, [authFetch, isAuthenticated, loadBuilds, user]);
-
-  useEffect(() => {
-    if (!isLoading) {
-      saveBuilds(builds);
-    }
-  }, [authFetch, builds, isAuthenticated, isLoading, saveBuilds, user]);
 
   return (
     <>

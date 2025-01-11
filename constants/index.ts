@@ -1,6 +1,15 @@
 import { ArtifactTier, ArtifactType, OverallStat, Stat } from "@/types";
 
-export const ARTIFACT_TIER_NUMERIC_RATINGS = {
+// Source: https://genshin-impact.fandom.com/wiki/Artifact/Stats
+export const ARTIFACT_MAX_LEVEL_BY_RARITY: Record<number, number> = {
+  1: 4,
+  2: 4,
+  3: 12,
+  4: 16,
+  5: 20,
+};
+
+export const ARTIFACT_TIER_NUMERIC_RATINGS: Record<ArtifactTier, number> = {
   [ArtifactTier.F]: 0,
   [ArtifactTier.D]: 1,
   [ArtifactTier.C]: 2,
@@ -13,7 +22,7 @@ export const ARTIFACT_TIER_NUMERIC_RATINGS = {
 };
 
 export const ARTIFACT_TIER_NUMERIC_RATING_REVERSE_LOOKUP = Object.fromEntries(
-  Object.entries(ARTIFACT_TIER_NUMERIC_RATINGS).map(([key, value]) => [parseInt(value), key])
+  Object.entries(ARTIFACT_TIER_NUMERIC_RATINGS).map(([key, value]) => [value, key])
 );
 
 // Source: https://keqingmains.com/misc/artifacts/

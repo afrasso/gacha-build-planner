@@ -76,15 +76,21 @@ export const calculateArtifactBuildSatisfaction = ({
   calculationType: SatisfactionCalculationType;
   genshinDataContext: GenshinDataContext;
   iterations: number;
-}): number => {
+}): number | undefined => {
+  if (
+    !build.desiredArtifactMainStats ||
+    Object.values(build.desiredArtifactMainStats).every((stat) => !stat) ||
+    !build.desiredStats ||
+    build.desiredStats.length === 0
+  ) {
+    return;
+  }
   let satisfactionCount = 0;
+  const targetStatsStrategy = getTargetStatsStrategy({ calculationType });
   for (let i = 0; i < iterations; i++) {
-    satisfactionCount += calculateBuildSatisfaction({
-      artifacts: getArtifactsForCalculation({ artifact, build, calculationType }),
-      build,
-      genshinDataContext,
-      targetStatsStrategy: getTargetStatsStrategy({ calculationType }),
-    }).overallSatisfaction
+    const artifacts = getArtifactsForCalculation({ artifact, build, calculationType });
+    satisfactionCount += calculateBuildSatisfaction({ artifacts, build, genshinDataContext, targetStatsStrategy })
+      .overallSatisfaction
       ? 1
       : 0;
   }
