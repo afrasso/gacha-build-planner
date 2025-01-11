@@ -10,20 +10,20 @@ export const ARTIFACT_MAX_LEVEL_BY_RARITY: Record<number, number> = {
 };
 
 export const ARTIFACT_TIER_NUMERIC_RATINGS: Record<ArtifactTier, number> = {
-  [ArtifactTier.F]: 0,
-  [ArtifactTier.D]: 1,
-  [ArtifactTier.C]: 2,
-  [ArtifactTier.B]: 3,
   [ArtifactTier.A]: 4,
+  [ArtifactTier.B]: 3,
+  [ArtifactTier.C]: 2,
+  [ArtifactTier.D]: 1,
+  [ArtifactTier.F]: 0,
   [ArtifactTier.S]: 5,
   [ArtifactTier.SS]: 6,
   [ArtifactTier.SSS]: 7,
   [ArtifactTier.SSS_PLUS]: 8,
 };
 
-export const ARTIFACT_TIER_NUMERIC_RATING_REVERSE_LOOKUP = Object.fromEntries(
+export const ARTIFACT_TIER_NUMERIC_RATING_REVERSE_LOOKUP: Record<number, ArtifactTier> = Object.fromEntries(
   Object.entries(ARTIFACT_TIER_NUMERIC_RATINGS).map(([key, value]) => [value, key])
-);
+) as Record<number, ArtifactTier>;
 
 // Source: https://keqingmains.com/misc/artifacts/
 // These odds assume the artifact source is a domain.

@@ -1,14 +1,15 @@
-import ArtifactMetrics from "@/components/artifacts/ArtifactManager/ArtifactMetrics";
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Artifact, ArtifactMetric, ArtifactMetricResultMap, ArtifactTier, Build } from "@/types";
+import { Artifact, ArtifactMetric, ArtifactMetricResultMap, Build } from "@/types";
 import { getEnumValues } from "@/utils/getenumvalues";
 
 import { calculateArtifactBuildSatisfaction } from "./calculateartifactbuildsatisfaction";
-import { calculatePlusMinusForArtifact, calculateTierRatingForArtifact } from "./index_old";
+import { calculateArtifactPlusMinus } from "./calculateartifactplusminus";
+import { calculateArtifactTierRating } from "./calculateartifacttierrating";
 
 const calculateMetric = <M extends keyof ArtifactMetricResultMap>({
   artifact,
   build,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   callback,
   genshinDataContext,
   iterations,
@@ -34,9 +35,9 @@ const calculateMetric = <M extends keyof ArtifactMetricResultMap>({
         iterations,
       }) as ArtifactMetricResultMap[M];
     case ArtifactMetric.ROLL_PLUS_MINUS:
-      return calculatePlusMinusForArtifact({ artifact, build }) as ArtifactMetricResultMap[M];
+      return calculateArtifactPlusMinus({ artifact, build, iterations }) as ArtifactMetricResultMap[M];
     case ArtifactMetric.TIER_RATING:
-      return calculateTierRatingForArtifact({ artifact, build }) as ArtifactMetricResultMap[M];
+      return calculateArtifactTierRating({ artifact, build, iterations }) as ArtifactMetricResultMap[M];
     default:
       throw new Error(`The artifact metric ${metric} is not currently supported.`);
   }

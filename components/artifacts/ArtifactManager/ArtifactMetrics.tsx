@@ -48,12 +48,11 @@ const ArtifactMetrics: React.FC<ArtifactMetricsProps> = ({ artifact }) => {
   );
 };
 
-const MetricCard: React.FC<{ title: string; value: number | string | undefined }> = ({ title, value }) =>
-  value && (
-    <div className="bg-secondary p-4 rounded-lg">
-      <h3 className="text-lg font-medium mb-2">{title}</h3>
-      <p className="text-2xl font-bold">{value}</p>
-    </div>
-  );
+const MetricCard: React.FC<{ title: string; value?: number | string }> = ({ title, value = "N/A" }) => (
+  <div className="bg-secondary p-4 rounded-lg">
+    <h3 className="text-lg font-medium mb-2">{title}</h3>
+    <p className="text-2xl font-bold">{value}</p>
+  </div>
+);
 
 export default ArtifactMetrics;

@@ -1,19 +1,20 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { updateAllMetrics } from "@/calculators/artifactmetrics";
 import ArtifactCard from "@/components/artifacts/ArtifactCard";
 import ArtifactMetrics from "@/components/artifacts/ArtifactManager/ArtifactMetrics";
-import TopBuilds from "./TopBuilds";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
 import { Artifact, ArtifactMetric, Build } from "@/types";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getEnumValues } from "@/utils/getenumvalues";
+
+import TopBuilds from "./TopBuilds";
 
 interface ArtifactDetailsProps {
   artifactId: string;
@@ -68,18 +69,6 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
     throw new Error("Unexpected event: artifact was not found after loading.");
   }
 
-  const logMetrics = (metricType: ArtifactMetric) => {
-    const metrics = artifact.metrics?.[metricType];
-    if (!metrics) {
-      console.log(`${metricType} is undefined`);
-    }
-    const topMetrics = Object.entries(metrics!)
-      .filter((x) => x[1].result)
-      .sort((a, b) => b[1].result - a[1].result);
-    console.log(topMetrics);
-    console.log(builds.filter((b) => topMetrics.map((x) => x[0]).includes(b.characterId)));
-  };
-
   const updateMetrics = async () => {
     await updateAllMetrics({ artifact, builds, callback, genshinDataContext, iterations: 100 });
     setComplete(true);
@@ -89,7 +78,6 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       }
       return { ...prev, metrics: artifact.metrics };
     });
-    logMetrics(ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS);
   };
 
   return (

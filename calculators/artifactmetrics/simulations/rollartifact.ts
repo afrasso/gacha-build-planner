@@ -74,10 +74,6 @@ const getRandomInitialSubStats = ({ mainStat, rarity }: { mainStat: Stat; rarity
 };
 
 const rollSubStat = (stat: Stat): StatValue<Stat> => {
-  const arr = SUB_STAT_ROLL_VALUES_BY_RARITY[5][stat];
-  if (!arr) {
-    console.log("null array! stat=" + stat);
-  }
   const value = getRandomValue(SUB_STAT_ROLL_VALUES_BY_RARITY[5][stat]!);
 
   return { stat, value };

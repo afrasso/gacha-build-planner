@@ -18,7 +18,7 @@ export const ArtifactSchema = {
   // additionalProperties: false
   properties: {
     id: { type: "string" },
-    lastUpdatedDate: { type: "string", format: "date-time" },
+    lastUpdatedDate: { format: "date-time", type: "string" },
     level: { type: "integer" },
     mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
     metrics: { type: "object" },

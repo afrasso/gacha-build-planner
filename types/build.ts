@@ -8,6 +8,7 @@ export interface Build {
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredOverallStats: DesiredOverallStat[];
   desiredStats: StatValue<OverallStat>[];
+  lastUpdatedDate?: Date;
   weaponId?: string;
 }
 
@@ -27,6 +28,7 @@ export const BuildSchema = {
       type: "array",
     },
     desiredStats: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStatValue" }, type: "array" },
+    lastUpdatedDate: { format: "date-time", type: "string" },
     weaponId: { type: "string" },
   },
   required: ["characterId"],

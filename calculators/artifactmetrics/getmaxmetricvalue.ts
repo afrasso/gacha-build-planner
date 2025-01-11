@@ -9,10 +9,16 @@ import {
 } from "@/types";
 
 const getMaxNumericMetricValue = (results: ArtifactMetricResult<number>[]): number => {
-  return Math.max(...results.map((result) => result.result));
+  if (!results || results.length === 0) {
+    return 0;
+  }
+  return Math.max(...results.map((result) => result.result || 0));
 };
 
 const getMaxTierRatingMetricValue = (results: ArtifactMetricResult<ArtifactTier>[]): ArtifactTier => {
+  if (!results || results.length === 0) {
+    return ArtifactTier.F;
+  }
   return reverseLookupArtifactTierNumericRating(
     Math.max(...results.map((result) => result.result).map(lookupArtifactTierNumericRating))
   );

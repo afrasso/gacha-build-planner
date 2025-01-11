@@ -31,11 +31,8 @@ export default function ImportExportPage() {
   };
 
   const handleGOODImport = (data: unknown) => {
-    console.log("validating good");
     const { artifacts: goodArtifacts, characters: goodCharacters, weapons: goodWeapons } = validateGOOD(data);
-    console.log("loading builds");
     const builds = loadBuilds().value || [];
-    console.log("updating builds with game data");
     const { artifacts: unassignedArtifacts, builds: updatedBuilds } = updateBuildsWithGameData({
       builds,
       genshinDataContext,
