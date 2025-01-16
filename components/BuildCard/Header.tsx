@@ -23,6 +23,18 @@ const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove }) => {
   };
 
   const character = getCharacter(build.characterId);
+  const formattedLastUpdatedDate = build.lastUpdatedDate
+    ? new Date(build.lastUpdatedDate).toLocaleString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+        timeZoneName: "short",
+      })
+    : undefined;
 
   return (
     <CardHeader className="p-4">
@@ -39,6 +51,9 @@ const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove }) => {
           <SatisfactionIcon isSatisfied={isSatisfied} />
         </div>
       </CardTitle>
+      <span className="text-xs text-muted-foreground">
+        {formattedLastUpdatedDate ? `Last updated on ${formattedLastUpdatedDate}` : "Never updated"}
+      </span>
     </CardHeader>
   );
 };

@@ -11,6 +11,7 @@ import ArtifactCard from "@/components/artifacts/ArtifactCard";
 
 interface ArtifactSatisfactionComponentProps {
   artifactSatisfaction: AggregatedArtifactSatisfactionResults;
+  showMetrics: boolean;
 }
 
 const SatisfactionDetails = ({ satisfactionDetails }: { satisfactionDetails: ArtifactSatisfactionResultsByBuild }) => {
@@ -30,7 +31,10 @@ const SatisfactionDetails = ({ satisfactionDetails }: { satisfactionDetails: Art
   );
 };
 
-const ArtifactSatisfactionComponent: React.FC<ArtifactSatisfactionComponentProps> = ({ artifactSatisfaction }) => {
+const ArtifactSatisfactionComponent: React.FC<ArtifactSatisfactionComponentProps> = ({
+  artifactSatisfaction,
+  showMetrics,
+}) => {
   const router = useRouter();
   const { artifact, maxSatisfaction, satisfactionResults } = artifactSatisfaction;
   const satisfactionPercentage = ((maxSatisfaction || 0) * 100).toFixed(2);
@@ -42,7 +46,12 @@ const ArtifactSatisfactionComponent: React.FC<ArtifactSatisfactionComponentProps
   return (
     <div className="w-full max-w-xs bg-gray-800 bg-opacity-50 border border-gray-700 rounded-lg shadow-md overflow-hidden flex flex-col items-center">
       <div className="p-2 flex justify-center">
-        <ArtifactCard artifact={artifact} artifactType={artifact.type} onClick={routeToArtifact} />
+        <ArtifactCard
+          artifact={artifact}
+          artifactType={artifact.type}
+          showMetrics={showMetrics}
+          onClick={routeToArtifact}
+        />
       </div>
       <TooltipProvider delayDuration={300}>
         <Tooltip>

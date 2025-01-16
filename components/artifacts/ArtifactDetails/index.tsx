@@ -15,6 +15,7 @@ import { Artifact, ArtifactMetric, Build } from "@/types";
 import { getEnumValues } from "@/utils/getenumvalues";
 
 import TopBuilds from "./TopBuilds";
+import MetricChart from "./MetricChart";
 
 interface ArtifactDetailsProps {
   artifactId: string;
@@ -70,13 +71,17 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   }
 
   const updateMetrics = async () => {
+    const startDate = new Date();
     await updateAllMetrics({ artifact, builds, callback, genshinDataContext, iterations: 100 });
+    const endDate = new Date();
+    const time = endDate.getTime() - startDate.getTime();
+    console.log(`Calculation of metrics for artifact ${artifact.id} complete. Took ${time} ms.`);
     setComplete(true);
     setArtifact((prev) => {
       if (!prev) {
         return prev;
       }
-      return { ...prev, metrics: artifact.metrics };
+      return { ...prev, metricResults: artifact.metricResults };
     });
   };
 
@@ -88,11 +93,11 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       <h1 className="text-3xl font-bold mb-6">Artifact Details</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <ArtifactCard artifact={artifact} artifactType={artifact!.type} size="large" />
+          <ArtifactCard artifact={artifact} artifactType={artifact!.type} showMetrics={complete} size="large" />
         </div>
         {complete && (
           <div>
-            <ArtifactMetrics artifact={artifact!} />
+            <ArtifactMetrics metricResults={artifact.metricResults!} />
           </div>
         )}
       </div>

@@ -28,24 +28,28 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUp
   const genshinDataContext = useGenshinDataContext();
   const currentStats = calculateStats({ build, genshinDataContext });
 
+  const onUpdateInternal = (updatedBuild: Partial<Build>) => {
+    onUpdate(build.characterId, { ...updatedBuild, lastUpdatedDate: new Date().toISOString() });
+  };
+
   const updateWeapon = (weaponId: string) => {
-    onUpdate(build.characterId, { weaponId });
+    onUpdateInternal({ weaponId });
   };
 
   const updateDesiredArtifactSetBonuses = (desiredArtifactSetBonuses: ArtifactSetBonus[]) => {
-    onUpdate(build.characterId, { desiredArtifactSetBonuses });
+    onUpdateInternal({ desiredArtifactSetBonuses });
   };
 
   const updateDesiredArtifactMainStats = (desiredArtifactMainStats: DesiredArtifactMainStats) => {
-    onUpdate(build.characterId, { desiredArtifactMainStats });
+    onUpdateInternal({ desiredArtifactMainStats });
   };
 
   const updateDesiredOverallStats = (desiredOverallStats: DesiredOverallStat[]) => {
-    onUpdate(build.characterId, { desiredOverallStats });
+    onUpdateInternal({ desiredOverallStats });
   };
 
   const updateArtifacts = (artifacts: BuildArtifacts) => {
-    onUpdate(build.characterId, { artifacts });
+    onUpdateInternal({ artifacts });
   };
 
   return (

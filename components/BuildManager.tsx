@@ -54,6 +54,7 @@ const BuildManager = () => {
           characterId: character.id,
           desiredArtifactMainStats: {},
           desiredArtifactSetBonuses: [],
+          desiredOverallStats: [],
           desiredStats: [],
         },
       ]);

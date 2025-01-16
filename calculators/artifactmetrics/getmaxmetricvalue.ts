@@ -1,10 +1,9 @@
 import { ARTIFACT_TIER_NUMERIC_RATING_REVERSE_LOOKUP, ARTIFACT_TIER_NUMERIC_RATINGS } from "@/constants";
 import {
-  Artifact,
   ArtifactMetric,
   ArtifactMetricResult,
   ArtifactMetricResultMap,
-  ArtifactMetrics,
+  ArtifactMetricResults,
   ArtifactTier,
 } from "@/types";
 
@@ -29,18 +28,17 @@ const lookupArtifactTierNumericRating = (tier: ArtifactTier): number => {
 };
 
 const reverseLookupArtifactTierNumericRating = (rating: number): ArtifactTier => {
-  const key = rating.toString();
-  return ARTIFACT_TIER_NUMERIC_RATING_REVERSE_LOOKUP[key] as ArtifactTier;
+  return ARTIFACT_TIER_NUMERIC_RATING_REVERSE_LOOKUP[rating] as ArtifactTier;
 };
 
-export const getMaxMetricValue = <M extends keyof ArtifactMetrics>({
-  artifact,
+export const getMaxMetricValue = <M extends keyof ArtifactMetricResults>({
   metric,
+  results,
 }: {
-  artifact: Artifact;
   metric: M;
+  results: ArtifactMetricResults;
 }): ArtifactMetricResultMap[M] | undefined => {
-  if (!artifact.metrics?.[metric]) {
+  if (!results?.[metric]) {
     return;
   }
   switch (metric) {
@@ -50,11 +48,11 @@ export const getMaxMetricValue = <M extends keyof ArtifactMetrics>({
     case ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS:
     case ArtifactMetric.ROLL_PLUS_MINUS:
       return getMaxNumericMetricValue(
-        Object.values(artifact.metrics[metric]) as ArtifactMetricResult<number>[]
+        Object.values(results[metric]) as ArtifactMetricResult<number>[]
       ) as ArtifactMetricResultMap[M];
     case ArtifactMetric.TIER_RATING:
       return getMaxTierRatingMetricValue(
-        Object.values(artifact.metrics[metric]) as ArtifactMetricResult<ArtifactTier>[]
+        Object.values(results[metric]) as ArtifactMetricResult<ArtifactTier>[]
       ) as ArtifactMetricResultMap[M];
     default:
       throw new Error(`Unexpected metric encountered: ${metric}`);

@@ -58,10 +58,10 @@ export const updateMetrics = async ({
   iterations: number;
   metric: ArtifactMetric;
 }): Promise<void> => {
-  callback(0);
+  await callback(0);
   for (const [index, build] of builds.entries()) {
-    if (!artifact.metrics) {
-      artifact.metrics = {
+    if (!artifact.metricResults) {
+      artifact.metricResults = {
         [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: {},
         [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: {},
         [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: {},
@@ -70,13 +70,13 @@ export const updateMetrics = async ({
         [ArtifactMetric.TIER_RATING]: {},
       };
     }
-    const metricResult = artifact.metrics[metric][build.characterId];
+    const metricResult = artifact.metricResults[metric][build.characterId];
     if (
       !metricResult ||
       (artifact.lastUpdatedDate && metricResult.calculatedOn < artifact.lastUpdatedDate) ||
       (build.lastUpdatedDate && metricResult.calculatedOn < build.lastUpdatedDate)
     ) {
-      artifact.metrics[metric][build.characterId] = {
+      artifact.metricResults[metric][build.characterId] = {
         calculatedOn: new Date(),
         result: calculateMetric({ artifact, build, callback, genshinDataContext, iterations, metric }),
       };

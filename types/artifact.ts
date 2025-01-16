@@ -2,10 +2,10 @@ import { Stat, StatValue } from "./stat";
 
 export interface Artifact {
   id: string;
-  lastUpdatedDate?: Date;
+  lastUpdatedDate?: string;
   level: number;
   mainStat: Stat;
-  metrics?: ArtifactMetrics;
+  metricResults?: ArtifactMetricResults;
   rarity: number;
   setId: string;
   subStats: StatValue<Stat>[];
@@ -18,10 +18,10 @@ export const ArtifactSchema = {
   // additionalProperties: false
   properties: {
     id: { type: "string" },
-    lastUpdatedDate: { format: "date-time", type: "string" },
+    lastUpdatedDate: { type: "string", format: "date-time" },
     level: { type: "integer" },
     mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
-    metrics: { type: "object" },
+    metricResults: { type: "object" },
     rarity: { type: "integer" },
     setId: { type: "string" },
     subStats: {
@@ -50,7 +50,7 @@ export enum ArtifactMetric {
 }
 
 export interface ArtifactMetricResult<T> {
-  calculatedOn: Date;
+  calculatedOn: string;
   result: T;
 }
 
@@ -63,7 +63,7 @@ export interface ArtifactMetricResultMap {
   [ArtifactMetric.TIER_RATING]: ArtifactTier;
 }
 
-export interface ArtifactMetrics {
+export interface ArtifactMetricResults {
   [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: Record<string, ArtifactMetricResult<number>>;
   [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: Record<string, ArtifactMetricResult<number>>;
   [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: Record<string, ArtifactMetricResult<number>>;

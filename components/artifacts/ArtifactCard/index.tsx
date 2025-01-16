@@ -4,17 +4,19 @@ import { forwardRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { Artifact, ArtifactType } from "@/types";
+import MetricChart from "../ArtifactDetails/MetricChart";
 
 interface ArtifactCardProps {
   artifact?: Artifact;
   artifactType: ArtifactType;
   onClick?: () => void;
+  showMetrics: boolean;
   size?: "large" | "small";
 }
 
 const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
-  ({ artifact, artifactType, onClick, size = "small" }, ref) => {
-    const sizeClasses = size === "large" ? "w-96 h-96" : "w-48 h-64";
+  ({ artifact, artifactType, onClick, showMetrics = false, size = "small" }, ref) => {
+    const sizeClasses = size === "large" ? "w-96 h-120" : "w-48 h-80";
     const imageHeight = size === "large" ? 120 : 64;
     const imageWidth = size === "large" ? 120 : 64;
     const textSize1 = size === "large" ? "text-xl" : "text-sm";
@@ -72,6 +74,11 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                   </div>
                 </div>
               </div>
+              {showMetrics && artifact.metricResults && (
+                <div className="mt-2 cursor-default bg-background border p-1">
+                  <MetricChart metricResults={artifact.metricResults} />
+                </div>
+              )}
             </>
           ) : (
             <div className="flex flex-col items-center justify-center h-full">

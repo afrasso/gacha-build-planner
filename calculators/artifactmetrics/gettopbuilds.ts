@@ -10,11 +10,11 @@ export const getTopBuilds = ({
   metric: ArtifactMetric;
 }): Build[] => {
   return builds.sort((a, b) => {
-    if (!artifact.metrics) {
+    if (!artifact.metricResults) {
       return 0;
     }
-    const resultA = artifact.metrics[metric][a.characterId].result;
-    const resultB = artifact.metrics[metric][b.characterId].result;
+    const resultA = artifact.metricResults[metric][a.characterId].result;
+    const resultB = artifact.metricResults[metric][b.characterId].result;
 
     if (typeof resultA === "number" && typeof resultB === "number") {
       return resultB - resultA;
