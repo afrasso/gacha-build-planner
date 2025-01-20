@@ -56,6 +56,7 @@ const BuildManager = () => {
           desiredArtifactSetBonuses: [],
           desiredOverallStats: [],
           desiredStats: [],
+          lastUpdatedDate: new Date().toISOString(),
         },
       ]);
     }

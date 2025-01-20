@@ -4,6 +4,7 @@ import addFormats from "ajv-formats";
 import {
   Artifact,
   ArtifactArraySchema,
+  ArtifactMetric,
   ArtifactSchema,
   ArtifactSetBonusSchema,
   ArtifactSetBonusTypeSchema,
@@ -75,7 +76,21 @@ export const validateArtifacts = (data: unknown): Artifact[] => {
     throw new Error("Data validation failed.");
   }
 
-  return data as Artifact[];
+  const artifacts = data as Artifact[];
+
+  artifacts.forEach((artifact) => {
+    artifact.lastUpdatedDate = artifact.lastUpdatedDate ?? new Date().toISOString();
+    artifact.metricResults = artifact.metricResults ?? {
+      [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: {},
+      [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: {},
+      [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: {},
+      [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: {},
+      [ArtifactMetric.PLUS_MINUS]: {},
+      [ArtifactMetric.RATING]: {},
+    };
+  });
+
+  return artifacts;
 };
 
 export const validateBuilds = (data: unknown): Build[] => {
@@ -92,7 +107,13 @@ export const validateBuilds = (data: unknown): Build[] => {
     throw new Error("Data validation failed.");
   }
 
-  return data as Build[];
+  const builds = data as Build[];
+
+  builds.forEach((build) => {
+    build.desiredOverallStats = build.desiredOverallStats ?? [];
+  });
+
+  return builds;
 };
 
 export const validatePlan = (data: unknown): Plan => {

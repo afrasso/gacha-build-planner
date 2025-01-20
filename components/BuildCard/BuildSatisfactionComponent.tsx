@@ -7,7 +7,7 @@ import {
   BuildSatisfactionResult,
   SatisfactionResult,
   StatSatisfactionDetails,
-} from "@/calculators/buildsatisfaction";
+} from "@/calculation/buildmetrics/satisfaction";
 import ImageWithTooltip from "@/components/ui/custom/ImageWithTooltip";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { ArtifactType, OverallStat } from "@/types";

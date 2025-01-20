@@ -1,14 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
 
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { Artifact, ArtifactMetric, ArtifactType, Build, Stat, StatValue, Weapon } from "@/types";
+
 import {
   Artifact as GOODArtifact,
   Character as GOODCharacter,
   Slot as GOODSlot,
   Stat as GOODStat,
   Weapon as GOODWeapon,
-} from "@/goodtypes";
-import { Artifact, ArtifactType, Build, Stat, StatValue, Weapon } from "@/types";
+} from "./goodtypes";
 
 export const updateBuildsWithGameData = ({
   builds,
@@ -37,6 +38,7 @@ export const updateBuildsWithGameData = ({
       desiredArtifactSetBonuses: [],
       desiredOverallStats: [],
       desiredStats: [],
+      lastUpdatedDate: new Date().toISOString(),
       weaponId: undefined,
     };
   };
@@ -103,8 +105,17 @@ export const updateBuildsWithGameData = ({
     }
     return {
       id: uuidv4(),
+      lastUpdatedDate: new Date().toISOString(),
       level: goodArtifact.level,
       mainStat: mapEnumsByKey(GOODStat, Stat, goodArtifact.mainStatKey),
+      metricResults: {
+        [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: {},
+        [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: {},
+        [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: {},
+        [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: {},
+        [ArtifactMetric.PLUS_MINUS]: {},
+        [ArtifactMetric.RATING]: {},
+      },
       rarity: goodArtifact.rarity,
       setId: artifactSet.id,
       subStats: goodArtifact.substats.map(mapGOODSubstat),

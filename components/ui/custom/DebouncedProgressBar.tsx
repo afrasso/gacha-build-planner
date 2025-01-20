@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 
 interface DebouncedProgressBarProps extends React.ComponentPropsWithoutRef<typeof Progress> {
-  progressAnimationIncrement: number;
   progress: number;
+  progressAnimationIncrement: number;
 }
 
 const DebouncedProgressBar: React.FC<DebouncedProgressBarProps> = ({
@@ -25,7 +25,7 @@ const DebouncedProgressBar: React.FC<DebouncedProgressBarProps> = ({
     });
 
     return () => cancelAnimationFrame(animationFrame);
-  }, [progress, displayedProgress]);
+  }, [displayedProgress, progress, progressAnimationIncrement]);
 
   return <Progress value={displayedProgress} {...props} />;
 };

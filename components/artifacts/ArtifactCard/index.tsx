@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { Artifact, ArtifactType } from "@/types";
+
 import MetricChart from "../ArtifactDetails/MetricChart";
 
 interface ArtifactCardProps {
@@ -76,7 +77,7 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
               </div>
               {showMetrics && artifact.metricResults && (
                 <div className="mt-2 cursor-default bg-background border p-1">
-                  <MetricChart metricResults={artifact.metricResults} />
+                  <MetricChart artifactId={artifact.id} metricResults={artifact.metricResults} />
                 </div>
               )}
             </>

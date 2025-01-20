@@ -1,4 +1,4 @@
-const updateTooltipPosition = ({
+export const updateTooltipPosition = ({
   elementBounds,
   tooltipBounds,
 }: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { calculateStats } from "@/calculators/stats";
+import { calculateStats } from "@/calculation/stats";
 import { CardContent } from "@/components/ui/card";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {

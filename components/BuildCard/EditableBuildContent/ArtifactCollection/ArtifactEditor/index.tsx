@@ -7,11 +7,11 @@ import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Button } from "@/components/ui/button";
 import { Artifact, ArtifactType, Stat, StatValue } from "@/types";
 
+import LevelSelector from "./LevelSelector";
 import MainStatSelector from "./MainStatSelector";
+import RaritySelector from "./RaritySelector";
 import SetSelector from "./SetSelector";
 import SubStatsSelector from "./SubStatsSelector";
-import RaritySelector from "./RaritySelector";
-import LevelSelector from "./LevelSelector";
 
 interface ArtifactEditorProps {
   artifact?: Partial<Artifact>;
@@ -69,7 +69,7 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType,
         ref={setSelectorRef}
         setId={internalArtifact?.setId}
       />
-      <RaritySelector rarity={internalArtifact.rarity} onUpdate={updateRarity} />
+      <RaritySelector onUpdate={updateRarity} rarity={internalArtifact.rarity} />
       <LevelSelector level={internalArtifact.level} onUpdate={updateLevel} />
       <MainStatSelector
         artifactType={artifactType}

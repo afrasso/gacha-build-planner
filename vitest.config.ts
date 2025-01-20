@@ -10,6 +10,7 @@ export default defineConfig({
     },
   },
   test: {
+    cache: false,
     deps: {
       optimizer: {
         web: {

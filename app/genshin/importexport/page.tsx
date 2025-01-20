@@ -1,11 +1,11 @@
 "use client";
 
-import { updateBuildsWithGameData } from "@/calculators/updatebuildswithgamedata";
 import ImportExportComponent from "@/components/ImportExportComponent";
 import ImportGameDataComponent from "@/components/ImportGameDataComponent";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { useStorageContext } from "@/contexts/StorageContext";
-import { validateGOOD } from "@/goodtypes";
+import { validateGOOD } from "@/dataimport/goodtypes";
+import { updateBuildsWithGameData } from "@/dataimport/updatebuildswithgamedata";
 import { Plan, validatePlan } from "@/types";
 
 export default function ImportExportPage() {

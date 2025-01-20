@@ -1,4 +1,4 @@
-import { calculateBuildSatisfaction } from "@/calculators/buildsatisfaction";
+import { calculateBuildSatisfaction } from "@/calculation/buildmetrics/satisfaction";
 import { Card } from "@/components/ui/card";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { ArtifactSet, Build, Weapon } from "@/types";

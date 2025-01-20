@@ -3,7 +3,7 @@
 import { notFound } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-import { updateAllMetrics } from "@/calculators/artifactmetrics";
+import { updateAllMetrics } from "@/calculation/artifactmetrics";
 import ArtifactCard from "@/components/artifacts/ArtifactCard";
 import ArtifactMetrics from "@/components/artifacts/ArtifactManager/ArtifactMetrics";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,7 @@ import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageCon
 import { Artifact, ArtifactMetric, Build } from "@/types";
 import { getEnumValues } from "@/utils/getenumvalues";
 
-import TopBuilds from "./TopBuilds";
-import MetricChart from "./MetricChart";
+// import TopBuilds from "./TopBuilds";
 
 interface ArtifactDetailsProps {
   artifactId: string;
@@ -36,6 +35,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   const [progress, setProgress] = useState<number>(0);
   const [complete, setComplete] = useState<boolean>(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [topBuildsMetric, setTopBuildsMetric] = useState<ArtifactMetric>(ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS);
 
   useEffect(() => {

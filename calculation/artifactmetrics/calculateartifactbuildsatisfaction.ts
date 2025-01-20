@@ -1,5 +1,3 @@
-import { calculateBuildSatisfaction } from "@/calculators/buildsatisfaction";
-import { TargetStatsStrategy } from "@/calculators/buildsatisfaction/types";
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
   Artifact,
@@ -12,7 +10,8 @@ import {
 } from "@/types";
 import { getEnumValues } from "@/utils/getenumvalues";
 
-import { rollArtifact, rollNewArtifact } from "./simulations/rollartifact";
+import { rollArtifact, rollNewArtifact } from "../../simulation/artifact";
+import { calculateBuildSatisfaction, TargetStatsStrategy } from "../buildmetrics/satisfaction";
 
 const getArtifactsForCalculation = ({
   artifact,
@@ -30,7 +29,7 @@ const getArtifactsForCalculation = ({
     return Object.fromEntries(
       Object.entries({ ...build.artifacts, [artifact.type]: artifact }).map(([type, artifact]) => [
         type,
-        rollArtifact(artifact),
+        rollArtifact({ artifact }),
       ])
     );
   }
@@ -44,12 +43,12 @@ const getArtifactsForCalculation = ({
   }
 
   const artifacts: BuildArtifacts = {
-    [artifact.type]: rollArtifact(artifact),
+    [artifact.type]: rollArtifact({ artifact }),
   };
   return getEnumValues(ArtifactType)
     .filter((type) => type !== artifact.type)
     .reduce((acc, type, index) => {
-      acc[type] = rollNewArtifact({ rarity: 5, setId: setIds[index] || artifact.setId, type });
+      acc[type] = rollNewArtifact({ level: 20, rarity: 5, setId: setIds[index] || artifact.setId, type });
       return acc;
     }, artifacts);
 };

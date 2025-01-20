@@ -25,14 +25,14 @@ const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove }) => {
   const character = getCharacter(build.characterId);
   const formattedLastUpdatedDate = build.lastUpdatedDate
     ? new Date(build.lastUpdatedDate).toLocaleString("en-US", {
-        year: "numeric",
-        month: "long",
         day: "numeric",
         hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
         hour12: true,
+        minute: "numeric",
+        month: "long",
+        second: "numeric",
         timeZoneName: "short",
+        year: "numeric",
       })
     : undefined;
 

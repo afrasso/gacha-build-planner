@@ -1,5 +1,5 @@
-import { getTopBuilds } from "@/calculators/artifactmetrics/gettopbuilds";
-import { Artifact, ArtifactMetric, ArtifactMetricResult, ArtifactTier, Build } from "@/types";
+import { getTopBuilds } from "@/calculation/artifactmetrics/gettopbuilds";
+import { Artifact, ArtifactMetric, ArtifactMetricResult, Build } from "@/types";
 
 interface TopBuildsProps {
   artifact: Artifact;
@@ -9,10 +9,10 @@ interface TopBuildsProps {
 
 const TopBuilds: React.FC<TopBuildsProps> = ({ artifact, builds, topBuildsMetric }) => {
   const topBuilds = getTopBuilds({ artifact, builds, metric: topBuildsMetric });
-  if (!artifact.metrics || !artifact.metrics[topBuildsMetric]) {
+  if (!artifact.metricResults || !artifact.metricResults[topBuildsMetric]) {
     return <div>Refresh metrics to calculate top builds.</div>;
   }
-  const metricResults = artifact.metrics[topBuildsMetric];
+  const metricResults = artifact.metricResults[topBuildsMetric];
 
   return (
     <div className="space-y-4">
@@ -26,7 +26,7 @@ const TopBuilds: React.FC<TopBuildsProps> = ({ artifact, builds, topBuildsMetric
 const BuildCard: React.FC<{
   build: Build;
   rank: number;
-  result: ArtifactMetricResult<number> | ArtifactMetricResult<ArtifactTier>;
+  result: ArtifactMetricResult;
 }> = ({ build, rank, result }) => (
   <div className="bg-secondary p-4 rounded-lg flex items-center">
     <div className="text-3xl font-bold mr-4">#{rank}</div>

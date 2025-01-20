@@ -7,14 +7,12 @@ const PRIORITY_WEIGHTS: Record<number, number> = {
   3: 1,
 };
 
-const calculateSubstatNumericRating = ({
+const calculateSubstatRating = ({
   artifact,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  build,
   desiredOverallStat,
 }: {
   artifact: Artifact;
-  build: Build;
   desiredOverallStat: DesiredOverallStat;
 }): number => {
   let rating = 0;
@@ -49,8 +47,16 @@ const calculateSubstatNumericRating = ({
   return rating;
 };
 
-export const calculateArtifactNumericRating = ({ artifact, build }: { artifact: Artifact; build: Build }): number => {
-  // If the build requires a specific main stat, and it doesn't match, the artifact has no value.
+export const calculateArtifactRating = ({
+  artifact,
+  build,
+  iterations,
+}: {
+  artifact: Artifact;
+  build: Build;
+  iterations: number;
+}): number => {
+  // If the build requires a specific main stat, and the current artifact doesn't have it, the artifact has no value.
   if (
     build.desiredArtifactMainStats[artifact.type] &&
     build.desiredArtifactMainStats[artifact.type] !== artifact.mainStat
@@ -58,10 +64,13 @@ export const calculateArtifactNumericRating = ({ artifact, build }: { artifact: 
     return 0;
   }
 
-  let rating = 0;
-  for (const desiredOverallStat of build.desiredOverallStats || []) {
-    rating += calculateSubstatNumericRating({ artifact, build, desiredOverallStat: desiredOverallStat });
+  let totalRating = 0;
+  for (let i = 0; i < iterations; i++) {
+    totalRating += build.desiredOverallStats.reduce((total, desiredOverallStat) => {
+      total += calculateSubstatRating({ artifact, desiredOverallStat });
+      return total;
+    }, 0);
   }
 
-  return rating;
+  return totalRating / iterations;
 };

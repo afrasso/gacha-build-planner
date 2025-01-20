@@ -1,7 +1,7 @@
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { Build, BuildArtifacts, OverallStat, StatValue } from "@/types";
 
-import { calculateStats } from "../stats";
+import { calculateStats } from "../../stats";
 import { calculateArtifactMainStatsSatisfaction } from "./artifactmainstats";
 import { calculateArtifactSetBonusesSatisfaction } from "./artifactsetbonuses";
 import { calculateTargetStatsSatisfaction } from "./targetstats";

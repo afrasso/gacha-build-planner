@@ -2,10 +2,10 @@ import { Stat, StatValue } from "./stat";
 
 export interface Artifact {
   id: string;
-  lastUpdatedDate?: string;
+  lastUpdatedDate: string;
   level: number;
   mainStat: Stat;
-  metricResults?: ArtifactMetricResults;
+  metricResults: ArtifactMetricResults;
   rarity: number;
   setId: string;
   subStats: StatValue<Stat>[];
@@ -45,31 +45,16 @@ export enum ArtifactMetric {
   CURRENT_STATS_RANDOM_ARTIFACTS = "CURRENT_STATS_RANDOM_ARTIFACTS",
   DESIRED_STATS_CURRENT_ARTIFACTS = "DESIRED_STATS_CURRENT_ARTIFACTS",
   DESIRED_STATS_RANDOM_ARTIFACTS = "DESIRED_STATS_RANDOM_ARTIFACTS",
-  ROLL_PLUS_MINUS = "ROLL_PLUS_MINUS",
-  TIER_RATING = "TIER_RATING",
+  RATING = "RATING",
+  PLUS_MINUS = "PLUS_MINUS",
 }
 
-export interface ArtifactMetricResult<T> {
+export type ArtifactMetricResults = Record<ArtifactMetric, Record<string, ArtifactMetricResult>>;
+
+export interface ArtifactMetricResult {
   calculatedOn: string;
-  result: T;
-}
-
-export interface ArtifactMetricResultMap {
-  [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: number;
-  [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: number;
-  [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: number;
-  [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: number;
-  [ArtifactMetric.ROLL_PLUS_MINUS]: number;
-  [ArtifactMetric.TIER_RATING]: ArtifactTier;
-}
-
-export interface ArtifactMetricResults {
-  [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: Record<string, ArtifactMetricResult<number>>;
-  [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: Record<string, ArtifactMetricResult<number>>;
-  [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: Record<string, ArtifactMetricResult<number>>;
-  [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: Record<string, ArtifactMetricResult<number>>;
-  [ArtifactMetric.ROLL_PLUS_MINUS]: Record<string, ArtifactMetricResult<number>>;
-  [ArtifactMetric.TIER_RATING]: Record<string, ArtifactMetricResult<ArtifactTier>>;
+  iterations: number;
+  result: number;
 }
 
 export interface ArtifactSet {

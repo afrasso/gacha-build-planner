@@ -1,5 +1,5 @@
-import { getMaxMetricValue } from "@/calculators/artifactmetrics/getmaxmetricvalue";
-import { Artifact, ArtifactMetric, ArtifactMetricResults } from "@/types";
+import { getMaxMetricValue } from "@/calculation/artifactmetrics/getmaxmetricvalue";
+import { ArtifactMetric, ArtifactMetricResults } from "@/types";
 
 interface ArtifactMetricsProps {
   metricResults: ArtifactMetricResults;
@@ -13,38 +13,38 @@ const ArtifactMetrics: React.FC<ArtifactMetricsProps> = ({ metricResults }) => {
         <MetricCard
           title="Build Satisfaction for Current Stats with Current Artifacts"
           value={getMaxMetricValue({
-            results: metricResults,
             metric: ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS,
+            results: metricResults,
           })}
         />
         <MetricCard
           title="Overall Potential Build Satisfaction for Current Stats"
           value={getMaxMetricValue({
-            results: metricResults,
             metric: ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS,
+            results: metricResults,
           })}
         />
         <MetricCard
           title="Build Satisfaction for Desired Stats with Current Artifacts"
           value={getMaxMetricValue({
-            results: metricResults,
             metric: ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS,
+            results: metricResults,
           })}
         />
         <MetricCard
           title="Overall Potential Build Satisfaction for Desired Stats"
           value={getMaxMetricValue({
-            results: metricResults,
             metric: ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS,
+            results: metricResults,
           })}
         />
         <MetricCard
           title="Plus/Minus Rating"
-          value={getMaxMetricValue({ results: metricResults, metric: ArtifactMetric.ROLL_PLUS_MINUS })}
+          value={getMaxMetricValue({ metric: ArtifactMetric.PLUS_MINUS, results: metricResults })}
         />
         <MetricCard
           title="Tier Rating"
-          value={getMaxMetricValue({ results: metricResults, metric: ArtifactMetric.TIER_RATING })}
+          value={getMaxMetricValue({ metric: ArtifactMetric.RATING, results: metricResults })}
         />
       </div>
     </div>
