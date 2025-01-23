@@ -4,6 +4,7 @@ import { getEnumValues } from "@/utils/getenumvalues";
 
 import { calculateArtifactBuildSatisfaction } from "./calculateartifactbuildsatisfaction";
 import { calculateArtifactRating } from "./calculateartifactrating";
+import { getMaxMetricValue } from "./getmaxmetricvalue";
 
 const needsUpdate = ({
   artifact,
@@ -37,7 +38,7 @@ export const updateMetric = async ({
   iterations: number;
   metric: ArtifactMetric;
 }): Promise<void> => {
-  const result = artifact.metricResults[metric][build.characterId];
+  const result = artifact.metricsResults[metric].buildResults[build.characterId];
   if (needsUpdate({ artifact, build, iterations, result })) {
     if (metric === ArtifactMetric.RATING || metric === ArtifactMetric.PLUS_MINUS) {
       const artifactRating = calculateArtifactRating({ artifact, build, iterations });
@@ -45,12 +46,12 @@ export const updateMetric = async ({
       const buildArtifactRating = buildArtifact
         ? calculateArtifactRating({ artifact: buildArtifact, build, iterations })
         : 0;
-      artifact.metricResults[ArtifactMetric.RATING][build.characterId] = {
+      artifact.metricsResults[ArtifactMetric.RATING].buildResults[build.characterId] = {
         calculatedOn: new Date().toISOString(),
         iterations,
         result: artifactRating,
       };
-      artifact.metricResults[ArtifactMetric.PLUS_MINUS][build.characterId] = {
+      artifact.metricsResults[ArtifactMetric.PLUS_MINUS].buildResults[build.characterId] = {
         calculatedOn: new Date().toISOString(),
         iterations,
         result: artifactRating - buildArtifactRating,
@@ -64,7 +65,7 @@ export const updateMetric = async ({
         iterations,
       });
       if (satisfaction) {
-        artifact.metricResults[metric][build.characterId] = {
+        artifact.metricsResults[metric].buildResults[build.characterId] = {
           calculatedOn: new Date().toISOString(),
           iterations,
           result: satisfaction,
@@ -120,5 +121,6 @@ export const updateAllMetrics = async ({
       iterations,
       metric,
     });
+    artifact.metricsResults[metric].maxValue = getMaxMetricValue({ metric, metricsResults: artifact.metricsResults });
   }
 };

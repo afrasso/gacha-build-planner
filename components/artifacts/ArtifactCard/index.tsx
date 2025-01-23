@@ -75,9 +75,9 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                   </div>
                 </div>
               </div>
-              {showMetrics && artifact.metricResults && (
+              {showMetrics && artifact.metricsResults && (
                 <div className="mt-2 cursor-default bg-background border p-1">
-                  <MetricChart artifactId={artifact.id} metricResults={artifact.metricResults} />
+                  <MetricChart artifactId={artifact.id} metricsResults={artifact.metricsResults} />
                 </div>
               )}
             </>

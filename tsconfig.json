@@ -3,6 +3,7 @@
     "allowJs": true,
     "esModuleInterop": true,
     "incremental": true,
+    "inlineSources": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -19,6 +20,7 @@
     ],
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "strict": true,
     "target": "ESNext"
   },

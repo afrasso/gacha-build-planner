@@ -9,13 +9,14 @@ export const getTopBuilds = ({
   builds: Build[];
   metric: ArtifactMetric;
 }): Build[] => {
-  return builds.sort((a, b) => {
-    if (!artifact.metricResults) {
-      return 0;
-    }
-    const resultA = artifact.metricResults[metric][a.characterId].result;
-    const resultB = artifact.metricResults[metric][b.characterId].result;
-
-    return resultB - resultA;
-  });
+  if (!artifact.metricsResults) {
+    return [];
+  }
+  return builds
+    .filter((build) => artifact.metricsResults[metric].buildResults[build.characterId])
+    .sort(
+      (a, b) =>
+        artifact.metricsResults[metric].buildResults[b.characterId].result -
+        artifact.metricsResults[metric].buildResults[a.characterId].result
+    );
 };

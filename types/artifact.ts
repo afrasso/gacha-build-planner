@@ -1,3 +1,4 @@
+import { ArtifactMetricsResults } from "./artifactmetrics";
 import { Stat, StatValue } from "./stat";
 
 export interface Artifact {
@@ -5,7 +6,7 @@ export interface Artifact {
   lastUpdatedDate: string;
   level: number;
   mainStat: Stat;
-  metricResults: ArtifactMetricResults;
+  metricsResults: ArtifactMetricsResults;
   rarity: number;
   setId: string;
   subStats: StatValue<Stat>[];
@@ -18,10 +19,10 @@ export const ArtifactSchema = {
   // additionalProperties: false
   properties: {
     id: { type: "string" },
-    lastUpdatedDate: { type: "string", format: "date-time" },
+    lastUpdatedDate: { format: "date-time", type: "string" },
     level: { type: "integer" },
     mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
-    metricResults: { type: "object" },
+    metricsResults: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactMetricsResults" },
     rarity: { type: "integer" },
     setId: { type: "string" },
     subStats: {
@@ -30,7 +31,7 @@ export const ArtifactSchema = {
     },
     type: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactType" },
   },
-  required: ["id", "level", "mainStat", "rarity", "setId", "subStats", "type"],
+  required: ["id", "lastUpdatedDate", "level", "mainStat", "metricsResults", "rarity", "setId", "subStats", "type"],
   type: "object",
 };
 
@@ -39,23 +40,6 @@ export const ArtifactArraySchema = {
   items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Artifact" },
   type: "array",
 };
-
-export enum ArtifactMetric {
-  CURRENT_STATS_CURRENT_ARTIFACTS = "CURRENT_STATS_CURRENT_ARTIFACTS",
-  CURRENT_STATS_RANDOM_ARTIFACTS = "CURRENT_STATS_RANDOM_ARTIFACTS",
-  DESIRED_STATS_CURRENT_ARTIFACTS = "DESIRED_STATS_CURRENT_ARTIFACTS",
-  DESIRED_STATS_RANDOM_ARTIFACTS = "DESIRED_STATS_RANDOM_ARTIFACTS",
-  RATING = "RATING",
-  PLUS_MINUS = "PLUS_MINUS",
-}
-
-export type ArtifactMetricResults = Record<ArtifactMetric, Record<string, ArtifactMetricResult>>;
-
-export interface ArtifactMetricResult {
-  calculatedOn: string;
-  iterations: number;
-  result: number;
-}
 
 export interface ArtifactSet {
   hasArtifactTypes: Record<ArtifactType, boolean>;
@@ -127,18 +111,6 @@ export const ArtifactSetBonusTypeSchema = {
   type: "string",
 };
 
-export enum ArtifactTier {
-  A = "A",
-  B = "B",
-  C = "C",
-  D = "D",
-  F = "F",
-  S = "S",
-  SS = "SS",
-  SSS = "SSS",
-  SSS_PLUS = "SSS_PLUS",
-}
-
 export enum ArtifactType {
   CIRCLET = "CIRCLET",
   FLOWER = "FLOWER",
@@ -184,9 +156,3 @@ export const DesiredArtifactMainStatsSchema = {
   required: [],
   type: "object",
 };
-
-export type SatisfactionCalculationType =
-  | ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS
-  | ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS
-  | ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS
-  | ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS;

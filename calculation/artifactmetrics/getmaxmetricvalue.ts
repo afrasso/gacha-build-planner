@@ -1,14 +1,18 @@
-import { ArtifactMetric, ArtifactMetricResults } from "@/types";
+import { ArtifactMetric, ArtifactMetricsResults } from "@/types";
 
 export const getMaxMetricValue = ({
   metric,
-  results,
+  metricsResults,
 }: {
   metric: ArtifactMetric;
-  results: ArtifactMetricResults;
+  metricsResults: ArtifactMetricsResults;
 }): number | undefined => {
-  if (!results?.[metric]) {
+  if (!metricsResults?.[metric]) {
     return;
   }
-  return Math.max(...Object.values(results[metric]).map((result) => result.result || 0));
+  const values = Object.values(metricsResults?.[metric].buildResults);
+  if (!values || values.length === 0) {
+    return;
+  }
+  return Math.max(...values.map((result) => result.result || 0));
 };

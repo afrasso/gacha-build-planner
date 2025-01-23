@@ -4,15 +4,22 @@ import addFormats from "ajv-formats";
 import {
   Artifact,
   ArtifactArraySchema,
-  ArtifactMetric,
   ArtifactSchema,
   ArtifactSetBonusSchema,
   ArtifactSetBonusTypeSchema,
   ArtifactSetSchema,
+  ArtifactType,
   ArtifactTypeSchema,
   BuildArtifactsSchema,
   DesiredArtifactMainStatsSchema,
 } from "./artifact";
+import {
+  ArtifactMetric,
+  ArtifactMetricResultSchema,
+  ArtifactMetricResultsSchema,
+  ArtifactMetricSchema,
+  ArtifactMetricsResultsSchema,
+} from "./artifactmetrics";
 import { Build, BuildArraySchema, BuildSchema } from "./build";
 import { CharacterSchema, ElementSchema } from "./character";
 import { Plan, PlanSchema } from "./plan";
@@ -26,6 +33,7 @@ import {
 import { WeaponSchema, WeaponTypeSchema } from "./weapon";
 
 export * from "./artifact";
+export * from "./artifactmetrics";
 export * from "./build";
 export * from "./character";
 export * from "./plan";
@@ -45,6 +53,11 @@ ajv.addSchema(ArtifactTypeSchema);
 ajv.addSchema(BuildArtifactsSchema);
 ajv.addSchema(DesiredArtifactMainStatsSchema);
 
+ajv.addSchema(ArtifactMetricSchema);
+ajv.addSchema(ArtifactMetricResultSchema);
+ajv.addSchema(ArtifactMetricResultsSchema);
+ajv.addSchema(ArtifactMetricsResultsSchema);
+
 ajv.addSchema(BuildSchema);
 ajv.addSchema(BuildArraySchema);
 
@@ -62,12 +75,33 @@ ajv.addSchema(StatValueSchema);
 ajv.addSchema(WeaponSchema);
 ajv.addSchema(WeaponTypeSchema);
 
+const initializeArtifact = ({ artifact }: { artifact: any }): void => {
+  if (!artifact.lastUpdatedDate) {
+    artifact.lastUpdatedDate = new Date().toISOString();
+  }
+  if (!artifact.metricsResults) {
+    artifact.metricsResults = {};
+  }
+  for (const artifactMetric of Object.values(ArtifactMetric)) {
+    if (!artifact.metricsResults[artifactMetric]) {
+      artifact.metricsResults[artifactMetric] = {};
+    }
+    if (!artifact.metricsResults[artifactMetric].buildResults) {
+      artifact.metricsResults[artifactMetric].buildResults = {};
+    }
+  }
+};
+
 export const validateArtifacts = (data: unknown): Artifact[] => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/ArtifactArray");
 
   if (!validate) {
     throw new Error("Unpexected error: validateArtifacts is not available.");
   }
+
+  (data as any[]).forEach((artifact) => {
+    initializeArtifact({ artifact });
+  });
 
   const valid = validate(data);
 
@@ -76,21 +110,7 @@ export const validateArtifacts = (data: unknown): Artifact[] => {
     throw new Error("Data validation failed.");
   }
 
-  const artifacts = data as Artifact[];
-
-  artifacts.forEach((artifact) => {
-    artifact.lastUpdatedDate = artifact.lastUpdatedDate ?? new Date().toISOString();
-    artifact.metricResults = artifact.metricResults ?? {
-      [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: {},
-      [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: {},
-      [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: {},
-      [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: {},
-      [ArtifactMetric.PLUS_MINUS]: {},
-      [ArtifactMetric.RATING]: {},
-    };
-  });
-
-  return artifacts;
+  return data as Artifact[];
 };
 
 export const validateBuilds = (data: unknown): Build[] => {
@@ -99,6 +119,23 @@ export const validateBuilds = (data: unknown): Build[] => {
   if (!validate) {
     throw new Error("Unpexected error: validateBuilds is not available.");
   }
+
+  (data as any[]).forEach((build) => {
+    if (!build.lastUpdatedDate) {
+      build.lastUpdatedDate = new Date().toISOString();
+    }
+    if (!build.artifacts) {
+      build.artifacts = {};
+    }
+    for (const artifactType of Object.values(ArtifactType)) {
+      if (build.artifacts[artifactType]) {
+        initializeArtifact({ artifact: build.artifacts[artifactType] });
+      }
+    }
+    if (!build.desiredOverallStats) {
+      build.desiredOverallStats = [];
+    }
+  });
 
   const valid = validate(data);
 

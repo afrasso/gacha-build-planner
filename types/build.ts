@@ -7,6 +7,7 @@ export interface Build {
   desiredArtifactMainStats: DesiredArtifactMainStats;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredOverallStats: DesiredOverallStat[];
+  // TODO: Remove this?
   desiredStats: StatValue<OverallStat>[];
   lastUpdatedDate: string;
   weaponId?: string;
@@ -31,7 +32,14 @@ export const BuildSchema = {
     lastUpdatedDate: { format: "date-time", type: "string" },
     weaponId: { type: "string" },
   },
-  required: ["characterId"],
+  required: [
+    "artifacts",
+    "characterId",
+    "desiredArtifactMainStats",
+    "desiredArtifactSetBonuses",
+    "desiredOverallStats",
+    "lastUpdatedDate",
+  ],
   type: "object",
 };
 

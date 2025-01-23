@@ -1,8 +1,7 @@
 "use client";
 
-import { getMaxMetricValue } from "@/calculation/artifactmetrics/getmaxmetricvalue";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { ArtifactMetric, ArtifactMetricResults } from "@/types";
+import { ArtifactMetric, ArtifactMetricsResults } from "@/types";
 
 const colors: string[] = [
   "#4B0000", // Dark Red
@@ -48,30 +47,26 @@ const MetricBar: React.FC<MetricBarProps> = ({ displayValue, name, value }) => {
 
 interface MetricChartProps {
   artifactId: string;
-  metricResults: ArtifactMetricResults;
+  metricsResults: ArtifactMetricsResults;
 }
 
-const MetricChart: React.FC<MetricChartProps> = ({ artifactId, metricResults }) => {
+const MetricChart: React.FC<MetricChartProps> = ({ metricsResults }) => {
   return (
     <div className="w-full mx-auto">
       {Object.values(ArtifactMetric).map((metric) => {
-        const maxValue = getMaxMetricValue({ metric, results: metricResults }) ?? 0;
-        if (maxValue < -8) {
-          console.log(`Shouldn't happen! ${artifactId}, ${metric}=${maxValue}`);
+        const maxValue = metricsResults[metric].maxValue;
+        if (metric === ArtifactMetric.RATING) {
+          const value = (maxValue || 0) / 8;
+          const displayValue = maxValue ? `${Math.round(maxValue * 100) / 100}` : "N/A";
+          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
+        } else if (metric === ArtifactMetric.PLUS_MINUS) {
+          const value = Math.max(0, (maxValue || 0) / 8);
+          const displayValue = maxValue ? `${Math.round(maxValue * 100) / 100}` : "N/A";
+          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
         } else {
-          if (metric === ArtifactMetric.RATING) {
-            const value = maxValue / 8;
-            const displayValue = `${Math.round(maxValue * 100) / 100}`;
-            return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
-          } else if (metric === ArtifactMetric.PLUS_MINUS) {
-            const value = Math.max(0, maxValue / 8);
-            const displayValue = `${Math.round(maxValue * 100) / 100}`;
-            return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
-          } else {
-            const value = maxValue;
-            const displayValue = `${Math.round(maxValue * 100) / 100}`;
-            return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
-          }
+          const value = maxValue || 0;
+          const displayValue = maxValue ? `${Math.round((maxValue || 0) * 100) / 100}` : "N/A";
+          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
         }
       })}
     </div>

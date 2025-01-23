@@ -8,13 +8,11 @@ import ArtifactCard from "@/components/artifacts/ArtifactCard";
 import ArtifactMetrics from "@/components/artifacts/ArtifactManager/ArtifactMetrics";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
-import { Artifact, ArtifactMetric, Build } from "@/types";
-import { getEnumValues } from "@/utils/getenumvalues";
+import { Artifact, Build } from "@/types";
 
-// import TopBuilds from "./TopBuilds";
+import TopBuilds from "./TopBuilds";
 
 interface ArtifactDetailsProps {
   artifactId: string;
@@ -34,9 +32,6 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   );
   const [progress, setProgress] = useState<number>(0);
   const [complete, setComplete] = useState<boolean>(false);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [topBuildsMetric, setTopBuildsMetric] = useState<ArtifactMetric>(ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS);
 
   useEffect(() => {
     const artifactRetrievalResult = loadArtifact(artifactId);
@@ -81,7 +76,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       if (!prev) {
         return prev;
       }
-      return { ...prev, metricResults: artifact.metricResults };
+      return { ...prev, metricsResults: artifact.metricsResults };
     });
   };
 
@@ -97,28 +92,11 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
         </div>
         {complete && (
           <div>
-            <ArtifactMetrics metricResults={artifact.metricResults!} />
+            <ArtifactMetrics metricsResults={artifact.metricsResults!} />
           </div>
         )}
       </div>
-      {complete && (
-        <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4">Top Builds for This Artifact</h2>
-          <Select onValueChange={(metric) => setTopBuildsMetric(metric as ArtifactMetric)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a metric" />
-            </SelectTrigger>
-            <SelectContent>
-              {getEnumValues(ArtifactMetric).map((metric) => (
-                <SelectItem key={metric} value={metric}>
-                  {metric}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {/* <TopBuilds artifact={artifact!} builds={builds} topBuildsMetric={topBuildsMetric} /> */}
-        </div>
-      )}
+      {complete && <TopBuilds artifact={artifact!} builds={builds} />}
     </div>
   );
 };
