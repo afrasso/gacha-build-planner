@@ -8,6 +8,7 @@ import ArtifactCard from "@/components/artifacts/ArtifactCard";
 import ArtifactMetrics from "@/components/artifacts/ArtifactManager/ArtifactMetrics";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { useAuthContext } from "@/contexts/AuthContext";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
 import { Artifact, Build } from "@/types";
@@ -19,28 +20,43 @@ interface ArtifactDetailsProps {
 }
 
 const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
+  const { authFetch, isAuthenticated, user } = useAuthContext();
   const genshinDataContext = useGenshinDataContext();
-  const { loadArtifact, loadBuilds } = useStorageContext();
+  const { loadArtifact, loadBuilds, saveArtifact } = useStorageContext();
 
   const [artifact, setArtifact] = useState<Artifact | undefined>();
-  const [artifactRetrievalStatus, setArtifactRetrievalStatus] = useState<StorageRetrievalStatus>(
-    StorageRetrievalStatus.LOADING
-  );
   const [builds, setBuilds] = useState<Build[]>([]);
-  const [buildsRetrievalStatus, setBuildsRetrievalStatus] = useState<StorageRetrievalStatus>(
-    StorageRetrievalStatus.LOADING
-  );
-  const [progress, setProgress] = useState<number>(0);
   const [complete, setComplete] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isNotFound, setIsNotFound] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
 
   useEffect(() => {
-    const artifactRetrievalResult = loadArtifact(artifactId);
-    setArtifact(artifactRetrievalResult.value);
-    setArtifactRetrievalStatus(artifactRetrievalResult.status);
-    const buildsRetrievalResult = loadBuilds();
-    setBuilds(buildsRetrievalResult.value || []);
-    setBuildsRetrievalStatus(buildsRetrievalResult.status);
-  }, [artifactId, loadArtifact, loadBuilds]);
+    const load = async () => {
+      const artifactRetrievalResult = await loadArtifact(artifactId);
+      if (artifactRetrievalResult.status === StorageRetrievalStatus.NOT_FOUND) {
+        setIsLoading(false);
+        setIsNotFound(true);
+      } else {
+        const buildsRetrievalResult = await loadBuilds();
+        if (
+          artifactRetrievalResult.status === StorageRetrievalStatus.FOUND &&
+          buildsRetrievalResult.status === StorageRetrievalStatus.FOUND
+        ) {
+          setArtifact(artifactRetrievalResult.value);
+          setBuilds(buildsRetrievalResult.value || []);
+          setIsLoading(false);
+        }
+      }
+    };
+    load();
+  }, [authFetch, artifactId, isAuthenticated, loadArtifact, loadBuilds, user]);
+
+  useEffect(() => {
+    if (!isLoading && artifact) {
+      saveArtifact(artifact);
+    }
+  }, [artifact, authFetch, isAuthenticated, isLoading, saveArtifact, user]);
 
   const callback = useCallback(
     async (p: number) => {
@@ -50,14 +66,11 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
     [setProgress]
   );
 
-  if (artifactRetrievalStatus === StorageRetrievalStatus.NOT_FOUND) {
+  if (isNotFound) {
     return notFound();
   }
 
-  if (
-    artifactRetrievalStatus === StorageRetrievalStatus.LOADING ||
-    buildsRetrievalStatus === StorageRetrievalStatus.LOADING
-  ) {
+  if (isLoading) {
     return <div>Loading artifact...</div>;
   }
 
@@ -67,7 +80,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
 
   const updateMetrics = async () => {
     const startDate = new Date();
-    await updateAllMetrics({ artifact, builds, callback, genshinDataContext, iterations: 100 });
+    await updateAllMetrics({ artifact, builds, callback, genshinDataContext, iterations: 10000 });
     const endDate = new Date();
     const time = endDate.getTime() - startDate.getTime();
     console.log(`Calculation of metrics for artifact ${artifact.id} complete. Took ${time} ms.`);
@@ -88,7 +101,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       <h1 className="text-3xl font-bold mb-6">Artifact Details</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <ArtifactCard artifact={artifact} artifactType={artifact!.type} showMetrics={complete} size="large" />
+          <ArtifactCard artifact={artifact} artifactType={artifact!.type} showMetrics={true} size="large" />
         </div>
         {complete && (
           <div>

@@ -14,9 +14,18 @@ export const getTopBuilds = ({
   }
   return builds
     .filter((build) => artifact.metricsResults[metric].buildResults[build.characterId])
-    .sort(
-      (a, b) =>
-        artifact.metricsResults[metric].buildResults[b.characterId].result -
-        artifact.metricsResults[metric].buildResults[a.characterId].result
-    );
+    .sort((a, b) => {
+      const aResult = artifact.metricsResults[metric].buildResults[a.characterId].result;
+      const bResult = artifact.metricsResults[metric].buildResults[b.characterId].result;
+      if (!aResult && !bResult) {
+        return 0;
+      }
+      if (!aResult) {
+        return 1;
+      }
+      if (!bResult) {
+        return -1;
+      }
+      return bResult - aResult;
+    });
 };

@@ -23,7 +23,7 @@ export const ArtifactMetricSchema = {
 export interface ArtifactMetricResult {
   calculatedOn: string;
   iterations: number;
-  result: number;
+  result?: number;
 }
 
 export const ArtifactMetricResultSchema = {
@@ -34,7 +34,7 @@ export const ArtifactMetricResultSchema = {
     iterations: { type: "number" },
     result: { type: "number" },
   },
-  required: ["calculatedOn", "iterations", "result"],
+  required: ["calculatedOn", "iterations"],
   type: "object",
 };
 

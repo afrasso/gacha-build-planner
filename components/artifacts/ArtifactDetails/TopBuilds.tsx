@@ -48,7 +48,7 @@ const TopBuilds: React.FC<TopBuildsProps> = ({ artifact, builds }) => {
 const BuildCard: React.FC<{
   build: Build;
   rank: number;
-  result: number;
+  result?: number;
 }> = ({ build, rank, result }) => (
   <div className="bg-secondary p-4 rounded-lg flex items-center">
     <div className="text-3xl font-bold mr-4">#{rank}</div>

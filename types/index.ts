@@ -75,6 +75,7 @@ ajv.addSchema(StatValueSchema);
 ajv.addSchema(WeaponSchema);
 ajv.addSchema(WeaponTypeSchema);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const initializeArtifact = ({ artifact }: { artifact: any }): void => {
   if (!artifact.lastUpdatedDate) {
     artifact.lastUpdatedDate = new Date().toISOString();
@@ -92,6 +93,43 @@ const initializeArtifact = ({ artifact }: { artifact: any }): void => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const initializeBuild = ({ build }: { build: any }): void => {
+  if (!build.lastUpdatedDate) {
+    build.lastUpdatedDate = new Date().toISOString();
+  }
+  if (!build.artifacts) {
+    build.artifacts = {};
+  }
+  for (const artifactType of Object.values(ArtifactType)) {
+    if (build.artifacts[artifactType]) {
+      initializeArtifact({ artifact: build.artifacts[artifactType] });
+    }
+  }
+  if (!build.desiredOverallStats) {
+    build.desiredOverallStats = [];
+  }
+};
+
+export const validateArtifact = (data: unknown): Artifact => {
+  const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/Artifact");
+
+  if (!validate) {
+    throw new Error("Unexpected error: validateArtifact is not available.");
+  }
+
+  initializeArtifact({ artifact: data });
+
+  const valid = validate(data);
+
+  if (!valid) {
+    console.error("Validation errors:", validate.errors);
+    throw new Error("Data validation failed.");
+  }
+
+  return data as Artifact;
+};
+
 export const validateArtifacts = (data: unknown): Artifact[] => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/ArtifactArray");
 
@@ -99,7 +137,7 @@ export const validateArtifacts = (data: unknown): Artifact[] => {
     throw new Error("Unpexected error: validateArtifacts is not available.");
   }
 
-  (data as any[]).forEach((artifact) => {
+  (data as unknown[]).forEach((artifact) => {
     initializeArtifact({ artifact });
   });
 
@@ -113,6 +151,25 @@ export const validateArtifacts = (data: unknown): Artifact[] => {
   return data as Artifact[];
 };
 
+export const validateBuild = (data: unknown): Build => {
+  const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/Build");
+
+  if (!validate) {
+    throw new Error("Unpexected error: validateBuild is not available.");
+  }
+
+  initializeBuild({ build: data });
+
+  const valid = validate(data);
+
+  if (!valid) {
+    console.error("Validation errors:", validate.errors);
+    throw new Error("Data validation failed.");
+  }
+
+  return data as Build;
+};
+
 export const validateBuilds = (data: unknown): Build[] => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/BuildArray");
 
@@ -120,21 +177,8 @@ export const validateBuilds = (data: unknown): Build[] => {
     throw new Error("Unpexected error: validateBuilds is not available.");
   }
 
-  (data as any[]).forEach((build) => {
-    if (!build.lastUpdatedDate) {
-      build.lastUpdatedDate = new Date().toISOString();
-    }
-    if (!build.artifacts) {
-      build.artifacts = {};
-    }
-    for (const artifactType of Object.values(ArtifactType)) {
-      if (build.artifacts[artifactType]) {
-        initializeArtifact({ artifact: build.artifacts[artifactType] });
-      }
-    }
-    if (!build.desiredOverallStats) {
-      build.desiredOverallStats = [];
-    }
+  (data as unknown[]).forEach((build) => {
+    initializeBuild({ build });
   });
 
   const valid = validate(data);
@@ -144,13 +188,7 @@ export const validateBuilds = (data: unknown): Build[] => {
     throw new Error("Data validation failed.");
   }
 
-  const builds = data as Build[];
-
-  builds.forEach((build) => {
-    build.desiredOverallStats = build.desiredOverallStats ?? [];
-  });
-
-  return builds;
+  return data as Build[];
 };
 
 export const validatePlan = (data: unknown): Plan => {

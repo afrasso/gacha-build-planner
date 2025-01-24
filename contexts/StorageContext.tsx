@@ -2,16 +2,27 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-import { Artifact, Build, validateArtifacts, validateBuilds } from "@/types";
+import { Artifact, Build, validateBuilds } from "@/types";
+
+import {
+  loadArtifactFromIndexedDB,
+  loadArtifactsFromIndexedDB,
+  saveArtifactsToIndexedDB,
+  saveArtifactToIndexedDB,
+  saveBuildsToIndexedDB,
+  saveBuildToIndexedDB,
+} from "./indexeddbhelpers";
 // import { useAuthContext } from "./AuthContext";
 
 interface StorageContextType {
-  loadArtifact: (id: string) => StorageRetrievalResult<Artifact>;
-  loadArtifacts: () => StorageRetrievalResult<Artifact[]>;
+  loadArtifact: (id: string) => Promise<StorageRetrievalResult<Artifact>>;
+  loadArtifacts: () => Promise<StorageRetrievalResult<Artifact[]>>;
   loadBuild: (characterId: string) => StorageRetrievalResult<Build>;
   loadBuilds: () => StorageRetrievalResult<Build[]>;
-  saveArtifacts: (artifacts: Artifact[]) => void;
-  saveBuilds: (builds: Build[]) => void;
+  saveArtifact: (artifact: Artifact) => Promise<void>;
+  saveArtifacts: (artifacts: Artifact[]) => Promise<void>;
+  saveBuild: (build: Build) => Promise<void>;
+  saveBuilds: (builds: Build[]) => Promise<void>;
 }
 
 const StorageContext = createContext<StorageContextType | undefined>(undefined);
@@ -40,16 +51,6 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     setIsClient(true);
   }, []);
 
-  const getArtifactsFromLocalStorage = (): Artifact[] => {
-    const artifactsJson = localStorage.getItem("artifacts");
-    if (!artifactsJson) {
-      return [];
-    }
-    const parsedArtifacts = JSON.parse(artifactsJson);
-    const artifacts = validateArtifacts(parsedArtifacts);
-    return artifacts;
-  };
-
   const getBuildsFromLocalStorage = (): Build[] => {
     const buildsJson = localStorage.getItem("builds");
     if (!buildsJson) {
@@ -60,23 +61,23 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return builds;
   };
 
-  const loadArtifact = (id: string): StorageRetrievalResult<Artifact> => {
+  const loadArtifact = async (id: string): Promise<StorageRetrievalResult<Artifact>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const artifacts = getArtifactsFromLocalStorage();
-    const artifact = artifacts.find((artifact) => artifact.id === id);
+    const artifact = await loadArtifactFromIndexedDB(id);
     if (!artifact) {
       return { status: StorageRetrievalStatus.NOT_FOUND };
     }
     return { status: StorageRetrievalStatus.FOUND, value: artifact };
   };
 
-  const loadArtifacts = (): StorageRetrievalResult<Artifact[]> => {
+  const loadArtifacts = async (): Promise<StorageRetrievalResult<Artifact[]>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    return { status: StorageRetrievalStatus.FOUND, value: getArtifactsFromLocalStorage() };
+    const artifacts = await loadArtifactsFromIndexedDB();
+    return { status: StorageRetrievalStatus.FOUND, value: artifacts };
   };
 
   const loadBuild = (characterId: string): StorageRetrievalResult<Build> => {
@@ -121,11 +122,19 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return { status: StorageRetrievalStatus.FOUND, value: getBuildsFromLocalStorage() };
   };
 
-  const saveArtifacts = (artifacts: Artifact[]) => {
-    localStorage.setItem("artifacts", JSON.stringify(artifacts));
+  const saveArtifact = async (artifact: Artifact): Promise<void> => {
+    await saveArtifactToIndexedDB(artifact);
   };
 
-  const saveBuilds = (builds: Build[]) => {
+  const saveArtifacts = async (artifacts: Artifact[]): Promise<void> => {
+    await saveArtifactsToIndexedDB(artifacts);
+  };
+
+  const saveBuild = async (build: Build): Promise<void> => {
+    await saveBuildToIndexedDB(build);
+  };
+
+  const saveBuilds = async (builds: Build[]): Promise<void> => {
     // const savePlan = async () => {
     //   if (isAuthenticated) {
     //     try {
@@ -162,10 +171,13 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     // savePlan();
 
     localStorage.setItem("builds", JSON.stringify(builds));
+    await saveBuildsToIndexedDB(builds);
   };
 
   return (
-    <StorageContext.Provider value={{ loadArtifact, loadArtifacts, loadBuild, loadBuilds, saveArtifacts, saveBuilds }}>
+    <StorageContext.Provider
+      value={{ loadArtifact, loadArtifacts, loadBuild, loadBuilds, saveArtifact, saveArtifacts, saveBuild, saveBuilds }}
+    >
       {children}
     </StorageContext.Provider>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { updateAllMetrics } from "@/calculation/artifactmetrics";
 import { Button } from "@/components/ui/button";
@@ -23,33 +23,36 @@ const ArtifactManager: React.FC = () => {
   const [artifactSort, setArtifactSort] = useState<ArtifactSort>("RARITY");
   const [builds, setBuilds] = useState<Build[]>([]);
   const [calculationCanceled, setCalculationCanceled] = useState<boolean>(false);
-  const [calculationComplete, setCalculationComplete] = useState<boolean>(false);
   const [calculationCount, setCalculationCount] = useState<number>(0);
   const [calculationProgress, setCalculationProgress] = useState<number>(0);
+  const [isCalculating, setIsCalculating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
   useEffect(() => {
-    const artifactsRetrievalResult = loadArtifacts();
-    const buildsRetrievalResult = loadBuilds();
-    if (
-      artifactsRetrievalResult.status === StorageRetrievalStatus.FOUND &&
-      buildsRetrievalResult.status === StorageRetrievalStatus.FOUND
-    ) {
-      const loadedArtifacts = artifactsRetrievalResult.value || [];
-      setArtifacts(loadedArtifacts);
-      const loadedBuilds = buildsRetrievalResult.value || [];
-      setBuilds(loadedBuilds);
-      setIsLoading(false);
-    }
+    const load = async () => {
+      const artifactsRetrievalResult = await loadArtifacts();
+      const buildsRetrievalResult = loadBuilds();
+      if (
+        artifactsRetrievalResult.status === StorageRetrievalStatus.FOUND &&
+        buildsRetrievalResult.status === StorageRetrievalStatus.FOUND
+      ) {
+        const loadedArtifacts = artifactsRetrievalResult.value || [];
+        setArtifacts(loadedArtifacts);
+        const loadedBuilds = buildsRetrievalResult.value || [];
+        setBuilds(loadedBuilds);
+        setIsLoading(false);
+      }
+    };
+    load();
   }, [authFetch, isAuthenticated, loadArtifacts, loadBuilds, user]);
 
   useEffect(() => {
     if (!isLoading) {
       saveArtifacts(artifacts);
     }
-  }, [authFetch, artifacts, isAuthenticated, isLoading, saveArtifacts, user]);
+  }, [artifacts, authFetch, isAuthenticated, isLoading, saveArtifacts, user]);
 
   const lastUpdateTimeRef = useRef<number>(0);
 
@@ -68,54 +71,32 @@ const ArtifactManager: React.FC = () => {
     [calculationCanceled, setCalculationProgress]
   );
 
-  if (isLoading) {
-    return <div>Loading artifacts...</div>;
-  }
-
-  const startCalculation = async () => {
-    for (const [index, artifact] of artifacts.entries()) {
-      await updateAllMetrics({
-        artifact,
-        builds,
-        callback: async (p) => await callback((index + p) / artifacts.length),
-        genshinDataContext,
-        iterations: 5,
+  // TODO: This method should probably go away; no reason why we can't define a sort function and have getSortedArtifacts call artifacts.sort(sortFunction).
+  const sortByMetric = useCallback(
+    (metric: ArtifactMetric): Artifact[] => {
+      return artifacts.sort((a, b) => {
+        const aValue = a.metricsResults[metric].maxValue;
+        const bValue = b.metricsResults[metric].maxValue;
+        if (!aValue && !bValue) {
+          return 0;
+        }
+        if (!aValue) {
+          return 1;
+        }
+        if (!bValue) {
+          return -1;
+        }
+        return bValue - aValue;
       });
-      setCalculationCount(index + 1);
-    }
-    setCalculationComplete(true);
-    setCalculationProgress(1);
-    setArtifacts([...artifacts]);
-  };
-
-  const cancelCalculation = async () => {
-    setCalculationCanceled(true);
-  };
-
-  type ArtifactSort = "LEVEL" | "RARITY" | ArtifactMetric;
-
-  const sortByMetric = (metric: ArtifactMetric): Artifact[] => {
-    return artifacts.sort((a, b) => {
-      const aValue = a.metricsResults[metric].maxValue;
-      const bValue = b.metricsResults[metric].maxValue;
-      if (!aValue && !bValue) {
-        return 0;
-      }
-      if (!aValue) {
-        return 1;
-      }
-      if (!bValue) {
-        return -1;
-      }
-      return bValue - aValue;
-    });
-  };
+    },
+    [artifacts]
+  );
 
   const updateArtifactSort = (artifactSort: ArtifactSort) => {
     setArtifactSort(artifactSort);
   };
 
-  const getSortedArtifacts = (): Artifact[] => {
+  const getSortedArtifacts = useCallback((): Artifact[] => {
     switch (artifactSort) {
       case ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS:
       case ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS:
@@ -131,7 +112,37 @@ const ArtifactManager: React.FC = () => {
       default:
         throw new Error(`Unexpetged artifact sort encountered: ${artifactSort}`);
     }
+  }, [artifactSort, artifacts, sortByMetric]);
+
+  const sortedArtifacts = useMemo(() => getSortedArtifacts(), [getSortedArtifacts]);
+
+  if (isLoading) {
+    return <div>Loading artifacts...</div>;
+  }
+
+  const startCalculation = async () => {
+    setIsCalculating(true);
+    // TODO: This needs to be a deep copy before performing a side effect on the artifacts!
+    for (const [index, artifact] of artifacts.entries()) {
+      await updateAllMetrics({
+        artifact,
+        builds,
+        callback: async (p) => await callback((index + p) / artifacts.length),
+        genshinDataContext,
+        iterations: 1,
+      });
+      setCalculationCount(index + 1);
+    }
+    setCalculationProgress(1);
+    setArtifacts([...artifacts]);
+    setIsCalculating(false);
   };
+
+  const cancelCalculation = async () => {
+    setCalculationCanceled(true);
+  };
+
+  type ArtifactSort = "LEVEL" | "RARITY" | ArtifactMetric;
 
   return (
     <div className="container mx-auto">
@@ -158,13 +169,13 @@ const ArtifactManager: React.FC = () => {
         </SelectContent>
       </Select>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center">
-        {getSortedArtifacts().map((artifact) => (
+        {sortedArtifacts.map((artifact) => (
           <ArtifactCard
             artifact={artifact}
             artifactType={artifact.type}
             key={artifact.id}
             onClick={() => router.push(`/genshin/artifacts/${artifact.id}`)}
-            showMetrics={calculationComplete}
+            showMetrics={!isCalculating}
           />
         ))}
       </div>

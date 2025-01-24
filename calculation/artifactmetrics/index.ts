@@ -64,13 +64,11 @@ export const updateMetric = async ({
         genshinDataContext,
         iterations,
       });
-      if (satisfaction) {
-        artifact.metricsResults[metric].buildResults[build.characterId] = {
-          calculatedOn: new Date().toISOString(),
-          iterations,
-          result: satisfaction,
-        };
-      }
+      artifact.metricsResults[metric].buildResults[build.characterId] = {
+        calculatedOn: new Date().toISOString(),
+        iterations,
+        result: satisfaction,
+      };
     }
   }
 };
