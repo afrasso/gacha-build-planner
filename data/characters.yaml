@@ -7,7 +7,7 @@
     ATK: 212.397192
     DEF: 682.521525
     HP: 10874.914859
-  name: Aether
+  name: Traveler
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
 - ascensionStat: DMG_BONUS_GEO
@@ -154,6 +154,18 @@
   name: Charlotte
   rarity: 4
   weaponType: WEAPON_CATALYST
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_ANEMO
+  iconUrl: /10000104.png
+  id: '10000104'
+  maxLvlStats:
+    ascensionStat: 24.2
+    ATK: 346.808651
+    DEF: 614.843496
+    HP: 9796.728784
+  name: Chasca
+  rarity: 5
+  weaponType: WEAPON_BOW
 - ascensionStat: HP_PERCENT
   element: ELEMENT_PYRO
   iconUrl: /10000090.png
@@ -190,6 +202,18 @@
   name: Chongyun
   rarity: 4
   weaponType: WEAPON_CLAYMORE
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_CRYO
+  iconUrl: /10000107.png
+  id: '10000107'
+  maxLvlStats:
+    ascensionStat: 115.2
+    ATK: 126.76454140000001
+    DEF: 763.17448941
+    HP: 11633.615306000002
+  name: Citlali
+  rarity: 5
+  weaponType: WEAPON_CATALYST
 - ascensionStat: CRIT_RATE
   element: ELEMENT_ELECTRO
   iconUrl: /10000098.png
@@ -550,6 +574,18 @@
   name: Kuki Shinobu
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ANEMO
+  iconUrl: /10000108.png
+  id: '10000108'
+  maxLvlStats:
+    ascensionStat: 24
+    ATK: 250.62869056
+    DEF: 580.14329625
+    HP: 9243.67751666
+  name: Lan Yan
+  rarity: 4
+  weaponType: WEAPON_CATALYST
 - ascensionStat: HP_PERCENT
   element: ELEMENT_CRYO
   iconUrl: /10000074.png
@@ -574,18 +610,6 @@
   name: Lisa
   rarity: 4
   weaponType: WEAPON_CATALYST
-- ascensionStat: ATK_PERCENT
-  element: ELEMENT_NONE
-  iconUrl: /10000007.png
-  id: '10000007'
-  maxLvlStats:
-    ascensionStat: 24
-    ATK: 212.397192
-    DEF: 682.521525
-    HP: 10874.914859
-  name: Lumine
-  rarity: 5
-  weaponType: WEAPON_SWORD_ONE_HAND
 - ascensionStat: DMG_BONUS_ANEMO
   element: ELEMENT_ANEMO
   iconUrl: /10000083.png
@@ -610,6 +634,18 @@
   name: Lyney
   rarity: 5
   weaponType: WEAPON_BOW
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_PYRO
+  iconUrl: /10000106.png
+  id: '10000106'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 358.76757
+    DEF: 791.6110011000001
+    HP: 12552.058567
+  name: Mavuika
+  rarity: 5
+  weaponType: WEAPON_CLAYMORE
 - ascensionStat: HP_PERCENT
   element: ELEMENT_CRYO
   iconUrl: /10000080.png
@@ -718,6 +754,18 @@
   name: Noelle
   rarity: 4
   weaponType: WEAPON_CLAYMORE
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ELECTRO
+  iconUrl: /10000105.png
+  id: '10000105'
+  maxLvlStats:
+    ascensionStat: 24
+    ATK: 244.25677079999997
+    DEF: 586.9685115000001
+    HP: 9243.67751666
+  name: Ororon
+  rarity: 4
+  weaponType: WEAPON_BOW
 - ascensionStat: HEALING_BONUS
   element: ELEMENT_CRYO
   iconUrl: /10000035.png

@@ -11,8 +11,6 @@ const Tooltip: React.FC<TooltipProps> = ({ children, text }) => {
   const ref = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLSpanElement>(null);
 
-  console.log(children);
-
   const updateTooltipPosition = () => {
     if (ref.current && tooltipRef.current) {
       const imageBounds = ref.current.getBoundingClientRect();

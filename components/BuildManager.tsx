@@ -15,24 +15,23 @@ import { Button } from "./ui/button";
 
 const BuildManager = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
-  const { artifactSets, characters, getCharacter, weapons } = useGenshinDataContext();
+  const { characters } = useGenshinDataContext();
   const { loadBuilds, saveBuilds } = useStorageContext();
 
   const [builds, setBuilds] = useState<Build[]>([]);
-  const [buildsRetrievalStatus, setBuildsRetrievalStatus] = useState<StorageRetrievalStatus>(
-    StorageRetrievalStatus.LOADING
-  );
   const [isLoading, setIsLoading] = useState(true);
   const [isReorderDialogOpen, setIsReorderDialogOpen] = useState(false);
 
   useEffect(() => {
-    const buildsRetrievalResult = loadBuilds();
-    const loadedBuilds = loadBuilds().value || [];
-    setBuildsRetrievalStatus(buildsRetrievalResult.status);
-    setBuilds(loadedBuilds);
-    if (buildsRetrievalResult.status === StorageRetrievalStatus.FOUND) {
-      setIsLoading(false);
-    }
+    const load = async () => {
+      const buildsRetrievalResult = await loadBuilds();
+      if (buildsRetrievalResult.status === StorageRetrievalStatus.FOUND) {
+        const loadedBuilds = buildsRetrievalResult.value || [];
+        setBuilds(loadedBuilds.sort((a, b) => a.sortOrder - b.sortOrder));
+        setIsLoading(false);
+      }
+    };
+    load();
   }, [authFetch, isAuthenticated, loadBuilds, user]);
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const BuildManager = () => {
     }
   }, [authFetch, builds, isAuthenticated, isLoading, saveBuilds, user]);
 
-  if (buildsRetrievalStatus === StorageRetrievalStatus.LOADING) {
+  if (isLoading) {
     return <div>Loading builds...</div>;
   }
 
@@ -57,6 +56,7 @@ const BuildManager = () => {
           desiredOverallStats: [],
           desiredStats: [],
           lastUpdatedDate: new Date().toISOString(),
+          sortOrder: builds.length,
         },
       ]);
     }
@@ -95,12 +95,11 @@ const BuildManager = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
         {builds.map((build) => (
           <BuildCard
-            artifactSets={artifactSets}
             build={build}
             key={build.characterId}
             onRemove={removeBuild}
             onUpdate={updateBuild}
-            weapons={weapons.filter((weapon) => weapon.type === getCharacter(build.characterId).weaponType)}
+            showInfoButton={true}
           />
         ))}
       </div>

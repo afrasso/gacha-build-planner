@@ -41,18 +41,19 @@ const loadItemFromIndexedDB = async <T>({
 
     getRequest.onsuccess = () => {
       if (getRequest.result) {
-        console.log(`Item loaded successfully from IndexedDB collection ${collectionName}.`, getRequest.result);
+        console.log(`Item loaded successfully from the IndexedDB collection '${collectionName}'.`, getRequest.result);
         const item = validate(getRequest.result);
         resolve(item);
       } else {
-        console.log(`No item found with the ID ${id} in the IndexedDB collection ${collectionName}.`);
+        console.log(`No item found with the ID ${id} in the IndexedDB collection '${collectionName}'.`);
         resolve(undefined);
       }
     };
 
     getRequest.onerror = (event) => {
-      console.error(`Error retrieving item with the ID ${id} from IndexedDB collection ${collectionName}.`, event);
-      reject(new Error(`Error retrieving item with the ID ${id} from IndexedDB collection ${collectionName}.`));
+      const message = `Error retrieving item with the ID ${id} from the IndexedDB collection '${collectionName}'.`;
+      console.error(message, event);
+      reject(new Error(message));
     };
   });
 };
@@ -72,14 +73,17 @@ const loadItemsFromIndexedDB = async <T>({
     const getRequest = store.getAll();
 
     getRequest.onsuccess = () => {
-      console.log(`${getRequest.result.length} items loaded successfully from IndexedDB collection ${collectionName}.`);
+      console.log(
+        `${getRequest.result.length} items loaded successfully from the IndexedDB collection ${collectionName}.`
+      );
       const items = validate(getRequest.result);
       resolve(items);
     };
 
     getRequest.onerror = (event) => {
-      console.error(`Error loading item from IndexedDB collection ${collectionName}.`, event);
-      reject(new Error(`Error loading item from IndexedDB collection ${collectionName}.`));
+      const message = `Error loading item from the IndexedDB collection '${collectionName}'.`;
+      console.error(message, event);
+      reject(new Error(message));
     };
   });
 };
@@ -93,13 +97,14 @@ const saveItemToIndexedDB = async <T>({ collectionName, item }: { collectionName
     const putRequest = store.put(item);
 
     putRequest.onsuccess = () => {
-      console.log(`Item saved successfully to IndexedDB collection ${collectionName}.`, item);
+      console.log(`Item saved successfully to the IndexedDB collection '${collectionName}'.`, item);
       resolve();
     };
 
     putRequest.onerror = (event) => {
-      console.error(`Error saving item to IndexedDB collection ${collectionName}.`, event);
-      reject(new Error(`Error saving item to IndexedDB collection ${collectionName}.`));
+      const message = `Error saving item to the IndexedDB collection '${collectionName}'.`;
+      console.error(message, event);
+      reject(new Error(message));
     };
   });
 };
@@ -119,13 +124,14 @@ const saveItemsToIndexedDB = async <T>({
     items.forEach((item) => store.put(item));
 
     transaction.oncomplete = () => {
-      console.log(`All items saved successfully to IndexedDB collection ${collectionName}.`);
+      console.log(`All items saved successfully to the IndexedDB collection '${collectionName}'.`);
       resolve();
     };
 
     transaction.onerror = (event) => {
-      console.error(`Error saving items to IndexedDB collection ${collectionName}:`, event);
-      reject(new Error(`Error saving items to IndexedDB collection ${collectionName}.`));
+      const message = `Error saving items to IndexedDB collection '${collectionName}'.`;
+      console.error(message, event);
+      reject(new Error(message));
     };
   });
 };

@@ -62,11 +62,6 @@ export const validateGOOD = (data: unknown): { artifacts: Artifact[]; characters
   if (!valid) {
     // Access the errors
     console.error("Validation errors:", validate.errors);
-
-    // Optionally, format the errors for better readability
-    const formattedErrors = ajv.errorsText(validate.errors, { separator: "\n" });
-    console.error("Formatted Errors:\n", formattedErrors);
-
     throw new Error("Data validation failed.");
   }
 

@@ -32,7 +32,8 @@ const extractCharacters = async ({
     .map((characterName) => genshindb.characters(characterName))
     .filter((character): character is genshindb.Character => character !== undefined);
 
-  for (const dbCharacter of dbCharacters) {
+  // Skip Lumine and get data for Aether only since it's identical.
+  for (const dbCharacter of dbCharacters.filter((dbCharacter) => dbCharacter.name !== "Lumine")) {
     const maxLvlStats = dbCharacter.stats(90);
 
     const ascensionStat = mapStat(dbCharacter.substatType);
@@ -49,7 +50,7 @@ const extractCharacters = async ({
         DEF: maxLvlStats.defense,
         HP: maxLvlStats.hp,
       },
-      name: dbCharacter.name,
+      name: dbCharacter.name !== "Aether" ? dbCharacter.name : "Traveler",
       rarity: dbCharacter.rarity,
       weaponType: dbCharacter.weaponType,
     };
@@ -65,10 +66,11 @@ const extractCharacters = async ({
         console.log(
           `Downloading character ${dbCharacter.name} (${dbCharacter.id}) from ${dbCharacter.images.mihoyo_icon}`
         );
-        await downloadImage({
-          savePath: path.join(__publicdir, `${dbCharacter.id}.png`),
-          url: dbCharacter.images.mihoyo_icon,
-        });
+        const url =
+          dbCharacter.name !== "Aether"
+            ? dbCharacter.images.mihoyo_icon
+            : "https://static.wikia.nocookie.net/gensin-impact/images/5/59/Traveler_Icon.png";
+        await downloadImage({ savePath: path.join(__publicdir, `${dbCharacter.id}.png`), url });
       } catch (err) {
         console.log(
           `Failed downloading icon for ${dbCharacter.name} (${dbCharacter.id}) due to the following error: ${err}`

@@ -72,9 +72,7 @@ export function ReorderBuildsDialog({ builds, isOpen, onClose, onReorder }: Reor
 
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -90,7 +88,11 @@ export function ReorderBuildsDialog({ builds, isOpen, onClose, onReorder }: Reor
   };
 
   const handleSave = () => {
-    onReorder(items);
+    const newBuilds = items.map((build, index) => {
+      build.sortOrder = index;
+      return build;
+    });
+    onReorder(newBuilds);
     onClose();
   };
 

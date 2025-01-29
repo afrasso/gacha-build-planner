@@ -7,6 +7,8 @@ import { Artifact, Build, validateBuilds } from "@/types";
 import {
   loadArtifactFromIndexedDB,
   loadArtifactsFromIndexedDB,
+  loadBuildFromIndexedDB,
+  loadBuildsFromIndexedDB,
   saveArtifactsToIndexedDB,
   saveArtifactToIndexedDB,
   saveBuildsToIndexedDB,
@@ -17,8 +19,8 @@ import {
 interface StorageContextType {
   loadArtifact: (id: string) => Promise<StorageRetrievalResult<Artifact>>;
   loadArtifacts: () => Promise<StorageRetrievalResult<Artifact[]>>;
-  loadBuild: (characterId: string) => StorageRetrievalResult<Build>;
-  loadBuilds: () => StorageRetrievalResult<Build[]>;
+  loadBuild: (characterId: string) => Promise<StorageRetrievalResult<Build>>;
+  loadBuilds: () => Promise<StorageRetrievalResult<Build[]>>;
   saveArtifact: (artifact: Artifact) => Promise<void>;
   saveArtifacts: (artifacts: Artifact[]) => Promise<void>;
   saveBuild: (build: Build) => Promise<void>;
@@ -51,15 +53,15 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     setIsClient(true);
   }, []);
 
-  const getBuildsFromLocalStorage = (): Build[] => {
-    const buildsJson = localStorage.getItem("builds");
-    if (!buildsJson) {
-      return [];
-    }
-    const parsedBuilds = JSON.parse(buildsJson);
-    const builds = validateBuilds(parsedBuilds);
-    return builds;
-  };
+  // const getBuildsFromLocalStorage = (): Build[] => {
+  //   const buildsJson = localStorage.getItem("builds");
+  //   if (!buildsJson) {
+  //     return [];
+  //   }
+  //   const parsedBuilds = JSON.parse(buildsJson);
+  //   const builds = validateBuilds(parsedBuilds);
+  //   return builds;
+  // };
 
   const loadArtifact = async (id: string): Promise<StorageRetrievalResult<Artifact>> => {
     if (!isClient) {
@@ -80,19 +82,20 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return { status: StorageRetrievalStatus.FOUND, value: artifacts };
   };
 
-  const loadBuild = (characterId: string): StorageRetrievalResult<Build> => {
+  const loadBuild = async (characterId: string): Promise<StorageRetrievalResult<Build>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const builds = getBuildsFromLocalStorage();
-    const build = builds.find((build) => build.characterId === characterId);
+    const build = await loadBuildFromIndexedDB(characterId);
+    // const builds = getBuildsFromLocalStorage();
+    // const build = builds.find((build) => build.characterId === characterId);
     if (!build) {
       return { status: StorageRetrievalStatus.NOT_FOUND };
     }
     return { status: StorageRetrievalStatus.FOUND, value: build };
   };
 
-  const loadBuilds = (): StorageRetrievalResult<Build[]> => {
+  const loadBuilds = async (): Promise<StorageRetrievalResult<Build[]>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
@@ -119,7 +122,8 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     //   }
     // };
 
-    return { status: StorageRetrievalStatus.FOUND, value: getBuildsFromLocalStorage() };
+    const builds = await loadBuildsFromIndexedDB();
+    return { status: StorageRetrievalStatus.FOUND, value: builds };
   };
 
   const saveArtifact = async (artifact: Artifact): Promise<void> => {
@@ -170,7 +174,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
 
     // savePlan();
 
-    localStorage.setItem("builds", JSON.stringify(builds));
+    // localStorage.setItem("builds", JSON.stringify(builds));
     await saveBuildsToIndexedDB(builds);
   };
 

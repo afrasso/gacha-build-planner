@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import ArtifactCard from "@/components/artifacts/ArtifactCard";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Artifact, ArtifactType } from "@/types";
 
 import ArtifactEditor from "./ArtifactEditor";
@@ -24,14 +24,13 @@ const EditableArtifactCard: React.FC<EditableArtifactCardProps> = ({ artifact, a
 
   return (
     <Dialog key={artifactType} onOpenChange={setIsDialogOpen} open={isDialogOpen}>
-      <DialogTrigger asChild>
-        <ArtifactCard
-          artifact={artifact}
-          artifactType={artifactType}
-          onClick={() => setIsDialogOpen(true)}
-          showMetrics={false}
-        />
-      </DialogTrigger>
+      <ArtifactCard
+        artifact={artifact}
+        artifactType={artifactType}
+        onEdit={() => setIsDialogOpen(true)}
+        showInfoButton={true}
+        showMetrics={false}
+      />
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>

@@ -101,7 +101,13 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       <h1 className="text-3xl font-bold mb-6">Artifact Details</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <ArtifactCard artifact={artifact} artifactType={artifact!.type} showMetrics={true} size="large" />
+          <ArtifactCard
+            artifact={artifact}
+            artifactType={artifact!.type}
+            showInfoButton={false}
+            showMetrics={true}
+            size="large"
+          />
         </div>
         {complete && (
           <div>
@@ -109,7 +115,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
           </div>
         )}
       </div>
-      {complete && <TopBuilds artifact={artifact!} builds={builds} />}
+      {complete && <TopBuilds artifact={artifact} builds={builds} />}
     </div>
   );
 };

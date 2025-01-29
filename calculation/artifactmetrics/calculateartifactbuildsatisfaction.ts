@@ -88,10 +88,13 @@ export const calculateArtifactBuildSatisfaction = ({
   const targetStatsStrategy = getTargetStatsStrategy({ calculationType });
   for (let i = 0; i < iterations; i++) {
     const artifacts = getArtifactsForCalculation({ artifact, build, calculationType });
-    satisfactionCount += calculateBuildSatisfaction({ artifacts, build, genshinDataContext, targetStatsStrategy })
-      .overallSatisfaction
-      ? 1
-      : 0;
+    const satisfactionResult = calculateBuildSatisfaction({
+      artifacts,
+      build,
+      genshinDataContext,
+      targetStatsStrategy,
+    });
+    satisfactionCount += satisfactionResult.overallSatisfaction ? 1 : 0;
   }
   return satisfactionCount / iterations;
 };

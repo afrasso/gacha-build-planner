@@ -77,6 +77,9 @@ ajv.addSchema(WeaponTypeSchema);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const initializeArtifact = ({ artifact }: { artifact: any }): void => {
+  if (!artifact.isLocked) {
+    artifact.isLocked = false;
+  }
   if (!artifact.lastUpdatedDate) {
     artifact.lastUpdatedDate = new Date().toISOString();
   }
@@ -108,6 +111,9 @@ const initializeBuild = ({ build }: { build: any }): void => {
   }
   if (!build.desiredOverallStats) {
     build.desiredOverallStats = [];
+  }
+  if (!build.sortOrder) {
+    build.sortOrder = 1;
   }
 };
 
@@ -197,6 +203,14 @@ export const validatePlan = (data: unknown): Plan => {
   if (!validate) {
     throw new Error("Unpexected error: validatePlan is not available.");
   }
+
+  ((data as any).artifacts as unknown[]).forEach((artifact) => {
+    initializeArtifact({ artifact });
+  });
+
+  ((data as any).builds as unknown[]).forEach((build) => {
+    initializeBuild({ build });
+  });
 
   const valid = validate(data);
 

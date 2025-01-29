@@ -1,6 +1,8 @@
 "use client";
 
+import { Info } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,14 +14,16 @@ import SatisfactionIcon from "./SatisfactionIcon";
 interface HeaderProps {
   build: Build;
   isSatisfied: boolean;
-  onRemove: (buildId: string) => void;
+  onRemove?: (buildId: string) => void;
+  showInfoButton: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove }) => {
+const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove, showInfoButton }) => {
   const { getCharacter } = useGenshinDataContext();
+  const router = useRouter();
 
   const remove = () => {
-    onRemove(build.characterId);
+    onRemove?.(build.characterId);
   };
 
   const character = getCharacter(build.characterId);
@@ -44,6 +48,16 @@ const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove }) => {
           {character.name}
         </div>
         <div className="flex items-center space-x-2">
+          {showInfoButton && (
+            <Button
+              className="p-0 w-6 h-8 flex-shrink-0"
+              onClick={() => router.push(`/genshin/builds/${build.characterId}`)}
+              size="sm"
+              variant="ghost"
+            >
+              <Info size={16} />
+            </Button>
+          )}
           <Button onClick={remove} size="sm" variant="destructive">
             Delete
             <span className="sr-only">Remove</span>

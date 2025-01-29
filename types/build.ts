@@ -10,6 +10,7 @@ export interface Build {
   // TODO: Remove this?
   desiredStats: StatValue<OverallStat>[];
   lastUpdatedDate: string;
+  sortOrder: number;
   weaponId?: string;
 }
 
@@ -30,6 +31,7 @@ export const BuildSchema = {
     },
     desiredStats: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStatValue" }, type: "array" },
     lastUpdatedDate: { format: "date-time", type: "string" },
+    sortOrder: { type: "integer" },
     weaponId: { type: "string" },
   },
   required: [
@@ -39,6 +41,7 @@ export const BuildSchema = {
     "desiredArtifactSetBonuses",
     "desiredOverallStats",
     "lastUpdatedDate",
+    "sortOrder",
   ],
   type: "object",
 };

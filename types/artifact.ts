@@ -2,7 +2,9 @@ import { ArtifactMetricsResults } from "./artifactmetrics";
 import { Stat, StatValue } from "./stat";
 
 export interface Artifact {
+  characterId?: string;
   id: string;
+  isLocked: boolean;
   lastUpdatedDate: string;
   level: number;
   mainStat: Stat;
@@ -18,7 +20,9 @@ export const ArtifactSchema = {
   // TODO: Fix this
   // additionalProperties: false
   properties: {
+    characterId: { type: "string" },
     id: { type: "string" },
+    isLocked: { type: "boolean" },
     lastUpdatedDate: { format: "date-time", type: "string" },
     level: { type: "integer" },
     mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
@@ -31,7 +35,18 @@ export const ArtifactSchema = {
     },
     type: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactType" },
   },
-  required: ["id", "lastUpdatedDate", "level", "mainStat", "metricsResults", "rarity", "setId", "subStats", "type"],
+  required: [
+    "id",
+    "isLocked",
+    "lastUpdatedDate",
+    "level",
+    "mainStat",
+    "metricsResults",
+    "rarity",
+    "setId",
+    "subStats",
+    "type",
+  ],
   type: "object",
 };
 

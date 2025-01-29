@@ -34,7 +34,7 @@ export const calculateBuildSatisfaction = ({
   targetStatsStrategy?: TargetStatsStrategy;
 }): BuildSatisfactionResult => {
   const artifactMainStatsSatisfaction = calculateArtifactMainStatsSatisfaction({
-    artifacts: build.artifacts,
+    artifacts: artifacts || build.artifacts,
     desiredArtifactMainStats: build.desiredArtifactMainStats,
   });
   const artifactSetBonusesSatisfaction = calculateArtifactSetBonusesSatisfaction({

@@ -46,26 +46,28 @@ const MetricBar: React.FC<MetricBarProps> = ({ displayValue, name, value }) => {
 };
 
 interface MetricChartProps {
-  artifactId: string;
+  characterId?: string;
   metricsResults: ArtifactMetricsResults;
 }
 
-const MetricChart: React.FC<MetricChartProps> = ({ metricsResults }) => {
+const MetricChart: React.FC<MetricChartProps> = ({ characterId, metricsResults }) => {
   return (
     <div className="w-full mx-auto">
       {Object.values(ArtifactMetric).map((metric) => {
-        const maxValue = metricsResults[metric].maxValue;
+        const rawValue = characterId
+          ? metricsResults[metric].buildResults[characterId].result
+          : metricsResults[metric].maxValue;
         if (metric === ArtifactMetric.RATING) {
-          const value = (maxValue || 0) / 8;
-          const displayValue = maxValue ? `${Math.round(maxValue * 100) / 100}` : "N/A";
+          const value = (rawValue || 0) / 8;
+          const displayValue = rawValue ? `${Math.round(rawValue * 100) / 100}` : "N/A";
           return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
         } else if (metric === ArtifactMetric.PLUS_MINUS) {
-          const value = Math.max(0, (maxValue || 0) / 8);
-          const displayValue = maxValue ? `${Math.round(maxValue * 100) / 100}` : "N/A";
+          const value = Math.max(0, (rawValue || 0) / 8);
+          const displayValue = rawValue ? `${Math.round(rawValue * 100) / 100}` : "N/A";
           return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
         } else {
-          const value = maxValue || 0;
-          const displayValue = maxValue ? `${Math.round((maxValue || 0) * 100) / 100}` : "N/A";
+          const value = rawValue || 0;
+          const displayValue = rawValue ? `${Math.round((rawValue || 0) * 100) / 100}` : "N/A";
           return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
         }
       })}

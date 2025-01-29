@@ -98,6 +98,7 @@ export const rollNewArtifact = ({
   const subStats = getRandomInitialSubStats({ mainStat, rarity });
   return {
     id: uuidv4(),
+    isLocked: false,
     lastUpdatedDate: new Date().toISOString(),
     level,
     mainStat,
