@@ -29,30 +29,25 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
   ) => {
     const router = useRouter();
 
-    const sizeClasses = size === "large" ? "w-96 h-120" : "w-48 h-80";
-    const imageHeight = size === "large" ? 120 : 64;
-    const imageWidth = size === "large" ? 120 : 64;
+    const artifactImageHeight = size === "large" ? 120 : 64;
+    const artifactImageWidth = size === "large" ? 120 : 64;
+    const characterImageHeight = size === "large" ? 120 : 48;
+    const characterImageWidth = size === "large" ? 120 : 48;
+    const sizeClasses = size === "large" ? "w-96 h-120" : "w-48 h-92";
     const textSize1 = size === "large" ? "text-xl" : "text-sm";
     const textSize2 = size === "large" ? "text-base" : "text-xs";
-    const { getArtifactSet } = useGenshinDataContext();
+    const { getArtifactSet, getCharacter } = useGenshinDataContext();
     const artifactSet = artifact?.setId ? getArtifactSet(artifact.setId) : undefined;
+    const character = artifact?.characterId ? getCharacter(artifact?.characterId) : undefined;
 
     // TODO: Add lock icon if locked.
     return artifact && artifactSet ? (
-      <Card className={sizeClasses} ref={ref}>
-        <CardContent className="p-2 flex flex-col h-full">
+      <Card className={`${sizeClasses} m-2`} ref={ref}>
+        <CardContent className="relative p-2 flex flex-col h-full">
           <>
             <div className="flex justify-between items-center">
-              {showInfoButton && (
-                <Button
-                  className="p-0 w-6 h-8 flex-shrink-0"
-                  onClick={() => router.push(`/genshin/artifacts/${artifact.id}`)}
-                  size="sm"
-                  variant="ghost"
-                >
-                  <Info size={16} />
-                </Button>
-              )}
+              {(onEdit || showInfoButton) && <div className="w-6 h-8" />}
+              {onEdit && showInfoButton && <div className="w-6 h-8" />}
               <p className="text-xs text-muted-foreground mb-1 text-center">{artifactType}</p>
               {onEdit && (
                 <DialogTrigger asChild>
@@ -69,19 +64,29 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                   </Button>
                 </DialogTrigger>
               )}
+              {showInfoButton && (
+                <Button
+                  className="p-0 w-6 h-8 flex-shrink-0"
+                  onClick={() => router.push(`/genshin/artifacts/${artifact.id}`)}
+                  size="sm"
+                  variant="ghost"
+                >
+                  <Info size={16} />
+                </Button>
+              )}
             </div>
             <div className="flex items-start mb-2">
-              <Image
-                alt={artifactSet.name}
-                className="rounded-md"
-                height={imageHeight}
-                src={artifactSet.iconUrl}
-                width={imageWidth}
-              />
               <div className="ml-2 flex-1">
                 <h3 className={`font-semibold ${textSize1} leading-tight line-clamp-2`}>{artifactSet.name}</h3>
                 <span className="text-sm text-muted-foreground">Level {artifact.level}</span>
               </div>
+              <Image
+                alt={artifactSet.name}
+                className="rounded-md"
+                height={artifactImageHeight}
+                src={artifactSet.iconUrl}
+                width={artifactImageWidth}
+              />
             </div>
             <div className="flex justify-center items-center">
               <StarSelector max={5} value={artifact.rarity} />
@@ -118,6 +123,17 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
             {showMetrics && artifact.metricsResults && (
               <div className="mt-2 cursor-default bg-background border p-1">
                 <MetricChart characterId={characterId} metricsResults={artifact.metricsResults} />
+              </div>
+            )}
+            {character && (
+              <div className="absolute -top-4 -left-4 rounded-full overflow-hidden border-2 border-primary bg-secondary">
+                <Image
+                  src={character.iconUrl}
+                  alt={character.name}
+                  width={characterImageWidth}
+                  height={characterImageHeight}
+                  className="object-cover"
+                />
               </div>
             )}
           </>
