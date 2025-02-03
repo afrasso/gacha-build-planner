@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { updateAllMetrics } from "@/calculation/artifactmetrics";
+import { sortArtifacts } from "@/calculation/artifactmetrics/sortartifacts";
 import { Button } from "@/components/ui/button";
 import { PaginationComponent } from "@/components/ui/custom/PaginationComponent";
 import { getPageOfItems } from "@/components/ui/helpers/getpageofitems";
@@ -15,7 +16,6 @@ import { Artifact, ArtifactMetric, Build } from "@/types";
 
 import ArtifactCard from "../ArtifactCard";
 import { ArtifactFilter, ArtifactFilterDialog, isInFilter } from "./ArtifactFilterDialog";
-import { sortArtifacts } from "@/calculation/artifactmetrics/sortartifacts";
 
 const ArtifactManager: React.FC = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
@@ -75,48 +75,9 @@ const ArtifactManager: React.FC = () => {
     [calculationCanceled, setCalculationProgress]
   );
 
-  // TODO: This method should probably go away; no reason why we can't define a sort function and have getSortedArtifacts call artifacts.sort(sortFunction).
-  // const sortByMetric = useCallback(
-  //   (metric: ArtifactMetric): Artifact[] => {
-  //     return artifacts.sort((a, b) => {
-  //       const aValue = a.metricsResults[metric].maxValue;
-  //       const bValue = b.metricsResults[metric].maxValue;
-  //       if (!aValue && !bValue) {
-  //         return 0;
-  //       }
-  //       if (!aValue) {
-  //         return 1;
-  //       }
-  //       if (!bValue) {
-  //         return -1;
-  //       }
-  //       return bValue - aValue;
-  //     });
-  //   },
-  //   [artifacts]
-  // );
-
   const updateArtifactSort = (sort: ArtifactSort) => {
     setSort(sort);
   };
-
-  // const getSortedArtifacts = useCallback((): Artifact[] => {
-  //   switch (artifactSort) {
-  //     case ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS:
-  //     case ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS:
-  //     case ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS:
-  //     case ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS:
-  //     case ArtifactMetric.PLUS_MINUS:
-  //     case ArtifactMetric.RATING:
-  //       return sortByMetric(artifactSort);
-  //     case "LEVEL":
-  //       return artifacts.sort((a, b) => b.level - a.level);
-  //     case "RARITY":
-  //       return artifacts.sort((a, b) => b.rarity - a.rarity);
-  //     default:
-  //       throw new Error(`Unexpected artifact sort encountered: ${artifactSort}`);
-  //   }
-  // }, [artifactSort, artifacts, sortByMetric]);
 
   const sortedAndFilteredArtifacts = useMemo(() => {
     const filteredArtifacts = artifacts.filter((artifact) => isInFilter({ artifact, filter }));
@@ -135,8 +96,9 @@ const ArtifactManager: React.FC = () => {
         artifact,
         builds,
         callback: async (p) => await callback((index + p) / artifacts.length),
+        forceRecalculate: true,
         genshinDataContext,
-        iterations: 1,
+        iterations: 25,
       });
       setCalculationCount(index + 1);
     }
@@ -174,7 +136,7 @@ const ArtifactManager: React.FC = () => {
                   {metric}
                 </SelectItem>
               ))}
-              {["OVERALL", "LEVEL", "RARITY"].map((artifactSort) => (
+              {["LEVEL", "RARITY"].map((artifactSort) => (
                 <SelectItem key={artifactSort} value={artifactSort}>
                   {artifactSort}
                 </SelectItem>

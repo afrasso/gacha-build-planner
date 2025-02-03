@@ -1,10 +1,10 @@
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { Artifact, Build, Weapon } from "@/types";
 
-import { Artifact as GOODArtifact, Character as GOODCharacter, Weapon as GOODWeapon } from "./types";
 import { artifactMapper } from "./artifactmapper";
 import { createNewBuild } from "./createnewbuild";
 import { artifactSetLookup, buildLookup, characterLookup, weaponLookup } from "./lookups";
+import { Artifact as GOODArtifact, Character as GOODCharacter, Weapon as GOODWeapon } from "./types";
 
 export const updateBuildsWithGameData = ({
   artifacts,
@@ -22,9 +22,12 @@ export const updateBuildsWithGameData = ({
   goodWeapons: GOODWeapon[];
 }): { artifacts: Artifact[]; builds: Build[] } => {
   const { lookupArtifactSet } = artifactSetLookup({ genshinDataContext });
-  const { addBuild, lookupBuild } = buildLookup({ builds, genshinDataContext });
   const { lookupCharacter } = characterLookup({ genshinDataContext });
   const { lookupWeapon } = weaponLookup({ genshinDataContext });
+
+  const updatedBuilds = builds.map((build) => structuredClone(build));
+  const updatedArtifacts: Artifact[] = [];
+  const { addBuild, lookupBuild } = buildLookup({ builds: updatedBuilds, genshinDataContext });
 
   const mapGOODWeaponToWeapon = ({ goodWeapon }: { goodWeapon: GOODWeapon }): Weapon => {
     const weapon = lookupWeapon(goodWeapon.key);
@@ -38,7 +41,9 @@ export const updateBuildsWithGameData = ({
   console.log("Updating builds...");
   for (const goodCharacter of goodCharacters) {
     if (!lookupBuild({ goodCharacterKey: goodCharacter.key })) {
-      addBuild(createNewBuild({ lookupCharacter, goodCharacter }));
+      const build = createNewBuild({ goodCharacter, lookupCharacter });
+      updatedBuilds.push(build);
+      addBuild(build);
     }
   }
 
@@ -53,7 +58,6 @@ export const updateBuildsWithGameData = ({
   // Get artifacts and assign to builds.
   console.log("Updating artifacts...");
   const { mapGOODArtifactToArtifact } = artifactMapper({ artifacts, lookupArtifactSet, lookupCharacter });
-  const updatedArtifacts: Artifact[] = [];
   for (const goodArtifact of goodArtifacts) {
     const artifact = mapGOODArtifactToArtifact({ goodArtifact });
     if (goodArtifact.location && goodArtifact.location !== "") {
@@ -63,5 +67,10 @@ export const updateBuildsWithGameData = ({
     updatedArtifacts.push(artifact);
   }
 
-  return { artifacts: updatedArtifacts, builds };
+  const sortedBuilds = updatedBuilds.sort((a, b) => a.sortOrder - b.sortOrder);
+  for (let i = 0; i < sortedBuilds.length; i++) {
+    sortedBuilds[i].sortOrder = i;
+  }
+
+  return { artifacts: updatedArtifacts, builds: updatedBuilds };
 };

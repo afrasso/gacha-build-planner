@@ -85,23 +85,25 @@ export const rollArtifact = ({ artifact }: { artifact: Artifact }): Artifact => 
 
 export const rollNewArtifact = ({
   level,
+  mainStat,
   rarity,
   setId,
   type,
 }: {
   level: number;
+  mainStat?: Stat;
   rarity: number;
   setId: string;
   type: ArtifactType;
 }): Artifact => {
-  const mainStat = getRandomMainStat({ type });
-  const subStats = getRandomInitialSubStats({ mainStat, rarity });
+  const actualMainStat = mainStat || getRandomMainStat({ type });
+  const subStats = getRandomInitialSubStats({ mainStat: actualMainStat, rarity });
   return {
     id: uuidv4(),
     isLocked: false,
     lastUpdatedDate: new Date().toISOString(),
     level,
-    mainStat,
+    mainStat: actualMainStat,
     metricsResults: {
       [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
       [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },

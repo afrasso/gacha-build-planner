@@ -115,8 +115,9 @@ const BuildDetails: React.FC<BuildDetailsProps> = ({ characterId }) => {
         artifact,
         builds: [build],
         callback: async (p) => await callback((index + p) / artifacts.length),
+        forceRecalculate: true,
         genshinDataContext,
-        iterations: 100,
+        iterations: 1000,
       });
       setCalculationCount(index + 1);
     }

@@ -16,7 +16,7 @@ import { Button } from "./ui/button";
 const BuildManager = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
   const { characters } = useGenshinDataContext();
-  const { loadBuilds, saveBuilds } = useStorageContext();
+  const { deleteBuild, loadBuilds, saveBuilds } = useStorageContext();
 
   const [builds, setBuilds] = useState<Build[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -71,6 +71,7 @@ const BuildManager = () => {
 
   const removeBuild = (buildId: string) => {
     const characterId = buildId;
+    deleteBuild(characterId);
     setBuilds((builds) => builds.filter((build) => build.characterId !== characterId));
   };
 

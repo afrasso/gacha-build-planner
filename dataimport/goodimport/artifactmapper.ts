@@ -1,12 +1,30 @@
-import { v4 as uuidv4 } from "uuid";
-import { Artifact, ArtifactMetric, ArtifactSet, ArtifactType, Character, Stat, StatValue } from "@/types";
-import { Artifact as GOODArtifact, Slot as GOODSlot, Stat as GOODStat } from "./types";
-import { mapEnumsByKey } from "./mapenumsbykey";
 import crypto from "crypto";
+import { v4 as uuidv4 } from "uuid";
 
-const calculateArtifactHash = (artifact: Partial<Artifact>) => {
-  const hashString = JSON.stringify(artifact, ["level", "mainStat", "rarity", "setId", "subStats", "type"]);
-  return crypto.createHash("sha256").update(hashString).digest("hex");
+import { Artifact, ArtifactMetric, ArtifactSet, ArtifactType, Character, Stat, StatValue } from "@/types";
+
+import { mapEnumsByKey } from "./mapenumsbykey";
+import { Artifact as GOODArtifact, Slot as GOODSlot, Stat as GOODStat } from "./types";
+
+const calculateArtifactHash = ({
+  level,
+  mainStat,
+  rarity,
+  setId,
+  subStats,
+  type,
+}: {
+  level: number;
+  mainStat: Stat;
+  rarity: number;
+  setId: string;
+  subStats: StatValue<Stat>[];
+  type: ArtifactType;
+}) => {
+  const sortedSubStats = subStats.sort((a, b) => a.stat.localeCompare(b.stat));
+  const hashString = JSON.stringify({ level, mainStat, rarity, setId, subStats: sortedSubStats, type });
+  const hash = crypto.createHash("sha256").update(hashString).digest("hex");
+  return hash;
 };
 
 const mapGOODSubstat = (goodSubstat: { key: GOODStat; value: number }): StatValue<Stat> => {
@@ -43,12 +61,12 @@ export const artifactMapper = ({
     const hash = calculateArtifactHash({ level: goodArtifact.level, mainStat, rarity, setId, subStats, type });
     const existingArtifact = artifactsHash[hash];
     if (existingArtifact) {
-      if (goodArtifact.location) {
-        existingArtifact.characterId = lookupCharacter(goodArtifact.location).id;
-      }
-      existingArtifact.isLocked = goodArtifact.lock;
-      existingArtifact.lastUpdatedDate = new Date().toISOString();
-      return existingArtifact;
+      const newArtifact = structuredClone(existingArtifact);
+      newArtifact.characterId =
+        goodArtifact.location && goodArtifact.location !== "" ? lookupCharacter(goodArtifact.location).id : undefined;
+      newArtifact.isLocked = goodArtifact.lock;
+      newArtifact.lastUpdatedDate = new Date().toISOString();
+      return newArtifact;
     }
 
     return {

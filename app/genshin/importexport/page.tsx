@@ -10,7 +10,7 @@ import { Plan, validatePlan } from "@/types";
 
 export default function ImportExportPage() {
   const genshinDataContext = useGenshinDataContext();
-  const { loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
+  const { deleteArtifacts, loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
 
   const loadPlan = async (): Promise<Plan> => {
     const artifactsRetrievalResult = await loadArtifacts();
@@ -55,8 +55,9 @@ export default function ImportExportPage() {
       goodCharacters,
       goodWeapons,
     });
-    saveBuilds(updatedBuilds);
-    saveArtifacts(updatedArtifacts);
+    await saveBuilds(updatedBuilds);
+    await deleteArtifacts();
+    await saveArtifacts(updatedArtifacts);
   };
 
   return (

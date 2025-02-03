@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from "react";
 
 import { updateAllMetrics } from "@/calculation/artifactmetrics";
 import ArtifactCard from "@/components/artifacts/ArtifactCard";
-import ArtifactMetrics from "@/components/artifacts/ArtifactManager/ArtifactMetrics";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useAuthContext } from "@/contexts/AuthContext";
@@ -26,7 +25,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
 
   const [artifact, setArtifact] = useState<Artifact | undefined>();
   const [builds, setBuilds] = useState<Build[]>([]);
-  const [complete, setComplete] = useState<boolean>(false);
+  const [inProgress, setInProgress] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isNotFound, setIsNotFound] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
@@ -79,12 +78,13 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   }
 
   const updateMetrics = async () => {
+    setInProgress(true);
     const startDate = new Date();
     await updateAllMetrics({ artifact, builds, callback, genshinDataContext, iterations: 10000 });
     const endDate = new Date();
     const time = endDate.getTime() - startDate.getTime();
     console.log(`Calculation of metrics for artifact ${artifact.id} complete. Took ${time} ms.`);
-    setComplete(true);
+    setInProgress(false);
     setArtifact((prev) => {
       if (!prev) {
         return prev;
@@ -98,9 +98,9 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       <Button onClick={updateMetrics}>Update metric calculations</Button>
       <Progress className="w-[60%]" value={progress * 100} />
       <div>Progress: {Math.round(progress * 100)}%</div>
-      <h1 className="text-3xl font-bold mb-6">Artifact Details</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="flex gap-8">
         <div>
+          <h1 className="text-3xl font-bold mt-6 mb-6">Artifact Details</h1>
           <ArtifactCard
             artifact={artifact}
             artifactType={artifact!.type}
@@ -109,13 +109,11 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
             size="large"
           />
         </div>
-        {complete && (
-          <div>
-            <ArtifactMetrics metricsResults={artifact.metricsResults!} />
-          </div>
-        )}
+        <div className="w-full">
+          <h1 className="text-3xl font-bold mt-6 mb-6">Top Builds</h1>
+          {!inProgress && <TopBuilds artifact={artifact} builds={builds} />}
+        </div>
       </div>
-      {complete && <TopBuilds artifact={artifact} builds={builds} />}
     </div>
   );
 };

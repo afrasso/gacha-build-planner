@@ -6,7 +6,7 @@ import { calculateArtifactBuildSatisfaction } from "./calculateartifactbuildsati
 import { calculateArtifactRating } from "./calculateartifactrating";
 import { getMaxMetricValue } from "./getmaxmetricvalue";
 
-const needsUpdate = ({
+const determineIfMetricNeedsUpdate = ({
   artifact,
   build,
   iterations,
@@ -28,18 +28,21 @@ const needsUpdate = ({
 export const updateMetric = async ({
   artifact,
   build,
+  forceRecalculate = false,
   genshinDataContext,
   iterations,
   metric,
 }: {
   artifact: Artifact;
   build: Build;
+  forceRecalculate?: boolean;
   genshinDataContext: GenshinDataContext;
   iterations: number;
   metric: ArtifactMetric;
 }): Promise<void> => {
   const result = artifact.metricsResults[metric].buildResults[build.characterId];
-  if (needsUpdate({ artifact, build, iterations, result })) {
+  const needsUpdate = determineIfMetricNeedsUpdate({ artifact, build, iterations, result });
+  if (forceRecalculate || needsUpdate) {
     if (metric === ArtifactMetric.RATING || metric === ArtifactMetric.PLUS_MINUS) {
       const artifactRating = calculateArtifactRating({ artifact, build, iterations });
       const buildArtifact = build.artifacts[artifact.type];
@@ -77,6 +80,7 @@ export const updateMetrics = async ({
   artifact,
   builds,
   callback = () => {},
+  forceRecalculate = false,
   genshinDataContext,
   iterations,
   metric,
@@ -84,13 +88,14 @@ export const updateMetrics = async ({
   artifact: Artifact;
   builds: Build[];
   callback?: (progress: number) => void;
+  forceRecalculate?: boolean;
   genshinDataContext: GenshinDataContext;
   iterations: number;
   metric: ArtifactMetric;
 }): Promise<void> => {
   await callback(0);
   for (const [index, build] of builds.entries()) {
-    updateMetric({ artifact, build, genshinDataContext, iterations, metric });
+    updateMetric({ artifact, build, forceRecalculate, genshinDataContext, iterations, metric });
     const progress = (index + 1) / builds.length;
     await callback(progress);
   }
@@ -100,12 +105,14 @@ export const updateAllMetrics = async ({
   artifact,
   builds,
   callback = () => {},
+  forceRecalculate = false,
   genshinDataContext,
   iterations,
 }: {
   artifact: Artifact;
   builds: Build[];
   callback?: (progress: number) => void;
+  forceRecalculate?: boolean;
   genshinDataContext: GenshinDataContext;
   iterations: number;
 }): Promise<void> => {
@@ -115,6 +122,7 @@ export const updateAllMetrics = async ({
       artifact,
       builds,
       callback: async (p) => await callback((index + p) / metrics.length),
+      forceRecalculate,
       genshinDataContext,
       iterations,
       metric,

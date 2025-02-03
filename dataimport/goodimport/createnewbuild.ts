@@ -13,7 +13,7 @@ export const createNewBuild = ({
   if (!character) {
     throw new Error(`Could not find the character ${goodCharacter.key}`);
   }
-  return {
+  const build = {
     artifacts: {},
     characterId: character.id,
     desiredArtifactMainStats: {},
@@ -21,7 +21,8 @@ export const createNewBuild = ({
     desiredOverallStats: [],
     desiredStats: [],
     lastUpdatedDate: new Date().toISOString(),
-    sortOrder: 0,
+    sortOrder: -1,
     weaponId: undefined,
   };
+  return build;
 };

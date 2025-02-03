@@ -1,18 +1,30 @@
 "use client";
 
 import { Filter } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Toggle } from "@/components/ui/toggle";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import { Artifact, ArtifactType, Stat } from "@/types";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
+
+export enum EquipStatus {
+  EQUIPPED = "EQUIPPED",
+  UNEQUIPPED = "UNEQUIPPED",
+}
+
+export enum LockStatus {
+  LOCKED = "LOCKED",
+  UNLOCKED = "UNLOCKED",
+}
 
 export interface ArtifactFilter {
+  equipStatuses: Partial<Record<EquipStatus, boolean>>;
+  lockStatuses: Partial<Record<LockStatus, boolean>>;
   mainStats: Partial<Record<Stat, boolean>>;
   maxLevel: number;
   maxRarity: number;
@@ -21,6 +33,11 @@ export interface ArtifactFilter {
   setIds: Partial<Record<string, boolean>>;
   types: Partial<Record<ArtifactType, boolean>>;
 }
+
+const MIN_LEVEL = 0;
+const MIN_RARITY = 1;
+const MAX_LEVEL = 20;
+const MAX_RARITY = 5;
 
 interface ArtifactFilterDialogProps {
   filter?: ArtifactFilter;
@@ -31,7 +48,18 @@ export const isInFilter = ({ artifact, filter }: { artifact: Artifact; filter: A
   if (!filter) {
     return true;
   }
-  if (Object.values(filter.types).includes(true) && filter.types[artifact.type] === false) {
+  if (
+    Object.values(filter.equipStatuses).includes(true) &&
+    ((!filter.equipStatuses[EquipStatus.EQUIPPED] && artifact.characterId) ||
+      (!filter.equipStatuses[EquipStatus.UNEQUIPPED] && !artifact.characterId))
+  ) {
+    return false;
+  }
+  if (
+    Object.values(filter.lockStatuses).includes(true) &&
+    ((!filter.lockStatuses[LockStatus.LOCKED] && artifact.isLocked) ||
+      (!filter.lockStatuses[LockStatus.UNLOCKED] && !artifact.isLocked))
+  ) {
     return false;
   }
   if (artifact.level < filter.minLevel || artifact.level > filter.maxLevel) {
@@ -40,10 +68,13 @@ export const isInFilter = ({ artifact, filter }: { artifact: Artifact; filter: A
   if (artifact.rarity < filter.minRarity || artifact.rarity > filter.maxRarity) {
     return false;
   }
-  if (Object.values(filter.mainStats).includes(true) && filter.mainStats[artifact.mainStat] === false) {
+  if (Object.values(filter.mainStats).includes(true) && !filter.mainStats[artifact.mainStat]) {
     return false;
   }
-  if (Object.values(filter.setIds).includes(true) && filter.setIds[artifact.setId] === false) {
+  if (Object.values(filter.setIds).includes(true) && !filter.setIds[artifact.setId]) {
+    return false;
+  }
+  if (Object.values(filter.types).includes(true) && !filter.types[artifact.type]) {
     return false;
   }
   return true;
@@ -52,18 +83,36 @@ export const isInFilter = ({ artifact, filter }: { artifact: Artifact; filter: A
 export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterDialogProps) {
   const { artifactSets } = useGenshinDataContext();
 
+  const [equipStatuses, setEquipStatuses] = useState<Partial<Record<EquipStatus, boolean>>>(
+    filter?.equipStatuses || {}
+  );
+  const [lockStatuses, setLockStatuses] = useState<Partial<Record<LockStatus, boolean>>>(filter?.lockStatuses || {});
   const [mainStats, setMainStats] = useState<Partial<Record<Stat, boolean>>>(filter?.mainStats || {});
-  const [maxLevel, setMaxLevel] = useState<number>(20);
-  const [maxRarity, setMaxRarity] = useState<number>(5);
-  const [minLevel, setMinLevel] = useState<number>(0);
-  const [minRarity, setMinRarity] = useState<number>(1);
+  const [maxLevel, setMaxLevel] = useState<number>(MAX_LEVEL);
+  const [maxRarity, setMaxRarity] = useState<number>(MAX_RARITY);
+  const [minLevel, setMinLevel] = useState<number>(MIN_LEVEL);
+  const [minRarity, setMinRarity] = useState<number>(MIN_RARITY);
   const [setIds, setSetIds] = useState<Partial<Record<string, boolean>>>(filter?.setIds || {});
   const [types, setTypes] = useState<Partial<Record<ArtifactType, boolean>>>(filter?.types || {});
 
   const clearFilters = () => {
+    setEquipStatuses({});
+    setLockStatuses({});
     setMainStats({});
+    setMinLevel(MIN_LEVEL);
+    setMinRarity(MIN_RARITY);
+    setMaxLevel(MAX_LEVEL);
+    setMaxRarity(MAX_RARITY);
     setSetIds({});
     setTypes({});
+  };
+
+  const onEquipStatusToggle = ({ equipStatus, pressed }: { equipStatus: EquipStatus; pressed: boolean }) => {
+    setEquipStatuses((prev) => ({ ...prev, [equipStatus]: pressed }));
+  };
+
+  const onLockStatusToggle = ({ lockStatus, pressed }: { lockStatus: LockStatus; pressed: boolean }) => {
+    setLockStatuses((prev) => ({ ...prev, [lockStatus]: pressed }));
   };
 
   const onMainStatToggle = ({ mainStat, pressed }: { mainStat: Stat; pressed: boolean }) =>
@@ -75,50 +124,64 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
   const onTypeToggle = ({ pressed, type }: { pressed: boolean; type: ArtifactType }) =>
     setTypes((prev) => ({ ...prev, [type]: pressed }));
 
-  const isMainStatToggled = (mainStat: Stat) => mainStats[mainStat];
+  const isEquipStatusToggled = (equipStatus: EquipStatus) => !!equipStatuses[equipStatus];
 
-  const isSetIdToggled = (setId: string) => setIds[setId];
+  const isLockStatusToggled = (lockStatus: LockStatus) => !!lockStatuses[lockStatus];
 
-  const isTypeToggled = (type: ArtifactType) => types[type];
+  const isMainStatToggled = (mainStat: Stat) => !!mainStats[mainStat];
+
+  const isSetIdToggled = (setId: string) => !!setIds[setId];
+
+  const isTypeToggled = (type: ArtifactType) => !!types[type];
 
   const onMaxLevelChange = (level?: number) => {
     if (!level) {
-      setMaxLevel(20);
+      setMaxLevel(MAX_LEVEL);
     } else {
-      setMaxLevel(Math.min(20, level));
+      setMaxLevel(Math.min(MAX_LEVEL, level));
       setMinLevel(Math.min(minLevel, level));
     }
   };
 
   const onMinLevelChange = (level?: number) => {
     if (!level) {
-      setMinLevel(1);
+      setMinLevel(MIN_LEVEL);
     } else {
-      setMinLevel(Math.max(0, level));
+      setMinLevel(Math.max(MIN_LEVEL, level));
       setMaxLevel(Math.max(maxLevel, level));
     }
   };
 
   const onMaxRarityChange = (rarity?: number) => {
     if (!rarity) {
-      setMaxRarity(5);
+      setMaxRarity(MAX_RARITY);
     } else {
-      setMaxRarity(Math.min(5, rarity));
+      setMaxRarity(Math.min(MAX_RARITY, rarity));
       setMinRarity(Math.min(minRarity, rarity));
     }
   };
 
   const onMinRarityChange = (rarity?: number) => {
     if (!rarity) {
-      setMinRarity(1);
+      setMinRarity(MIN_RARITY);
     } else {
-      setMinRarity(Math.max(1, rarity));
+      setMinRarity(Math.max(MIN_RARITY, rarity));
       setMaxRarity(Math.max(maxRarity, rarity));
     }
   };
 
   const onSubmit = () => {
-    onFilterChange({ mainStats, maxLevel, maxRarity, minLevel, minRarity, setIds, types });
+    onFilterChange({
+      equipStatuses,
+      lockStatuses,
+      mainStats,
+      maxLevel,
+      maxRarity,
+      minLevel,
+      minRarity,
+      setIds,
+      types,
+    });
   };
 
   return (
@@ -132,11 +195,39 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
         <DialogHeader>
           <DialogTitle>Filter Artifacts</DialogTitle>
         </DialogHeader>
-        <div>{JSON.stringify(filter)}</div>
-        <div>{JSON.stringify(mainStats)}</div>
-        <div>{JSON.stringify(setIds)}</div>
-        <div>{JSON.stringify(types)}</div>
         <ScrollArea className="max-h-[60vh] overflow-y-auto pr-4">
+          <div className="p-4">
+            <div className="mb-2">
+              <Label className="text-md font-semibold text-primary">Equip Status</Label>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {Object.values(EquipStatus).map((equipStatus) => (
+                <Toggle
+                  key={equipStatus}
+                  onPressedChange={(pressed) => onEquipStatusToggle({ equipStatus, pressed })}
+                  pressed={isEquipStatusToggled(equipStatus)}
+                >
+                  {equipStatus}
+                </Toggle>
+              ))}
+            </div>
+          </div>
+          <div className="p-4">
+            <div className="mb-2">
+              <Label className="text-md font-semibold text-primary">Lock Status</Label>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {Object.values(LockStatus).map((lockStatus) => (
+                <Toggle
+                  key={lockStatus}
+                  onPressedChange={(pressed) => onLockStatusToggle({ lockStatus, pressed })}
+                  pressed={isLockStatusToggled(lockStatus)}
+                >
+                  {lockStatus}
+                </Toggle>
+              ))}
+            </div>
+          </div>
           <div className="p-4">
             <div className="mb-2">
               <Label className="text-md font-semibold text-primary">Type</Label>
@@ -153,22 +244,16 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <div className="w-1/3 bg-gray-300 h-px" role="separator" aria-hidden="true" />
-          </div>
           <div className="p-4 mb-4">
             <div className="mb-2">
               <Label className="text-md font-semibold text-primary">Rarity</Label>
             </div>
             <div className="flex gap-2 items-center">
               <Label className="text-sm font-semibold text-primary">Min</Label>
-              <DebouncedNumericInput min={1} max={5} onChange={onMinRarityChange} value={minRarity} />
+              <DebouncedNumericInput max={MAX_RARITY} min={MIN_RARITY} onChange={onMinRarityChange} value={minRarity} />
               <Label className="text-sm font-semibold text-primary">Max</Label>
-              <DebouncedNumericInput min={1} max={5} onChange={onMaxRarityChange} value={maxRarity} />
+              <DebouncedNumericInput max={MAX_RARITY} min={MIN_RARITY} onChange={onMaxRarityChange} value={maxRarity} />
             </div>
-          </div>
-          <div className="flex items-center justify-center">
-            <div className="w-1/3 bg-gray-300 h-px" role="separator" aria-hidden="true" />
           </div>
           <div className="p-4 mb-4">
             <div className="mb-2">
@@ -176,13 +261,10 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
             </div>
             <div className="flex gap-2 items-center">
               <Label className="text-sm font-semibold text-primary">Min</Label>
-              <DebouncedNumericInput min={0} max={20} onChange={onMinLevelChange} value={minLevel} />
+              <DebouncedNumericInput max={MAX_LEVEL} min={MIN_LEVEL} onChange={onMinLevelChange} value={minLevel} />
               <Label className="text-sm font-semibold text-primary">Max</Label>
-              <DebouncedNumericInput min={0} max={20} onChange={onMaxLevelChange} value={maxLevel} />
+              <DebouncedNumericInput max={MAX_LEVEL} min={MIN_LEVEL} onChange={onMaxLevelChange} value={maxLevel} />
             </div>
-          </div>
-          <div className="flex items-center justify-center">
-            <div className="w-1/3 bg-gray-300 h-px" role="separator" aria-hidden="true" />
           </div>
           <div className="p-4">
             <div className="mb-2">
@@ -199,9 +281,6 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
                 </Toggle>
               ))}
             </div>
-          </div>
-          <div className="flex items-center justify-center">
-            <div className="w-1/3 bg-gray-300 h-px" role="separator" aria-hidden="true" />
           </div>
           <div className="p-4">
             <div className="mb-2">

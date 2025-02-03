@@ -14,10 +14,10 @@ export interface ArtifactSetBonusSatisfactionDetails {
 }
 
 export interface BuildSatisfactionResult {
-  artifactMainStatsSatisfaction: SatisfactionResult<ArtifactMainStatSatisfactionDetails>;
-  artifactSetBonusesSatisfaction: SatisfactionResult<ArtifactSetBonusSatisfactionDetails>;
+  artifactMainStatsSatisfaction?: SatisfactionResult<ArtifactMainStatSatisfactionDetails>;
+  artifactSetBonusesSatisfaction?: SatisfactionResult<ArtifactSetBonusSatisfactionDetails>;
   overallSatisfaction: boolean;
-  statsSatisfaction: SatisfactionResult<StatSatisfactionDetails>;
+  statsSatisfaction?: SatisfactionResult<StatSatisfactionDetails>;
 }
 
 export interface SatisfactionResult<T> {

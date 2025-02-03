@@ -1,6 +1,6 @@
 import { Info, Pencil } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { forwardRef } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -27,12 +27,11 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
     { artifact, artifactType, characterId, onEdit, showInfoButton = true, showMetrics = false, size = "small" },
     ref
   ) => {
-    const router = useRouter();
-
     const artifactImageHeight = size === "large" ? 120 : 64;
     const artifactImageWidth = size === "large" ? 120 : 64;
-    const characterImageHeight = size === "large" ? 120 : 48;
-    const characterImageWidth = size === "large" ? 120 : 48;
+    const characterImageHeight = size === "large" ? 64 : 48;
+    const characterImageWidth = size === "large" ? 64 : 48;
+    const headerMargin = size === "large" ? "mb-4" : "mb-0";
     const sizeClasses = size === "large" ? "w-96 h-120" : "w-48 h-92";
     const textSize1 = size === "large" ? "text-xl" : "text-sm";
     const textSize2 = size === "large" ? "text-base" : "text-xs";
@@ -45,46 +44,51 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
       <Card className={`${sizeClasses} m-2`} ref={ref}>
         <CardContent className="relative p-2 flex flex-col h-full">
           <>
-            <div className="flex justify-between items-center">
-              {(onEdit || showInfoButton) && <div className="w-6 h-8" />}
-              {onEdit && showInfoButton && <div className="w-6 h-8" />}
-              <p className="text-xs text-muted-foreground mb-1 text-center">{artifactType}</p>
-              {onEdit && (
-                <DialogTrigger asChild>
-                  <Button
-                    className="p-0 w-6 h-8 flex-shrink-0"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onEdit?.();
-                    }}
-                    size="sm"
-                    variant="ghost"
-                  >
-                    <Pencil size={16} />
+            <div className={`flex justify-between items-center ${headerMargin}`}>
+              <div className="flex">
+                <div className={`w-6 h-8 ${!onEdit && !showInfoButton && "invisible"}`} />
+                <div className={`w-6 h-8 ${(!onEdit || !showInfoButton) && "invisible"}`} />
+              </div>
+              <p className={`${textSize2} text-muted-foreground mb-1 text-center`}>{artifactType}</p>
+              <div className="flex">
+                {onEdit ? (
+                  <DialogTrigger asChild>
+                    <Button
+                      className="p-0 w-6 h-8 flex-shrink-0"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onEdit?.();
+                      }}
+                      size="sm"
+                      variant="ghost"
+                    >
+                      <Pencil size={16} />
+                    </Button>
+                  </DialogTrigger>
+                ) : (
+                  <div className="p-0 w-6 h-8 flex-shrink-0 invisible"></div>
+                )}
+                {showInfoButton ? (
+                  <Button asChild className="p-0 w-6 h-8 flex-shrink-0" size="sm" variant="ghost">
+                    <Link href={`/genshin/artifacts/${artifact.id}`}>
+                      <Info size={16} />
+                    </Link>
                   </Button>
-                </DialogTrigger>
-              )}
-              {showInfoButton && (
-                <Button
-                  className="p-0 w-6 h-8 flex-shrink-0"
-                  onClick={() => router.push(`/genshin/artifacts/${artifact.id}`)}
-                  size="sm"
-                  variant="ghost"
-                >
-                  <Info size={16} />
-                </Button>
-              )}
+                ) : (
+                  <div className="p-0 w-6 h-8 flex-shrink-0 invisible"></div>
+                )}
+              </div>
             </div>
-            <div className="flex items-start mb-2">
+            <div className="flex items-center mb-2">
               <div className="ml-2 flex-1">
                 <h3 className={`font-semibold ${textSize1} leading-tight line-clamp-2`}>{artifactSet.name}</h3>
-                <span className="text-sm text-muted-foreground">Level {artifact.level}</span>
+                <span className={`${textSize2} text-muted-foreground`}>Level {artifact.level}</span>
               </div>
               <Image
                 alt={artifactSet.name}
                 className="rounded-md"
                 height={artifactImageHeight}
-                src={artifactSet.iconUrl}
+                src={artifactSet.iconUrls[artifact.type]}
                 width={artifactImageWidth}
               />
             </div>
@@ -128,11 +132,11 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
             {character && (
               <div className="absolute -top-4 -left-4 rounded-full overflow-hidden border-2 border-primary bg-secondary">
                 <Image
-                  src={character.iconUrl}
                   alt={character.name}
-                  width={characterImageWidth}
-                  height={characterImageHeight}
                   className="object-cover"
+                  height={characterImageHeight}
+                  src={character.iconUrl}
+                  width={characterImageWidth}
                 />
               </div>
             )}

@@ -112,8 +112,8 @@ const initializeBuild = ({ build }: { build: any }): void => {
   if (!build.desiredOverallStats) {
     build.desiredOverallStats = [];
   }
-  if (!build.sortOrder) {
-    build.sortOrder = 1;
+  if (build.sortOrder === undefined) {
+    build.sortOrder = -1;
   }
 };
 

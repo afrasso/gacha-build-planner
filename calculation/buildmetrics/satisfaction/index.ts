@@ -26,21 +26,27 @@ export const calculateBuildSatisfaction = ({
   artifacts,
   build,
   genshinDataContext,
+  ignoreSetBonuses = false,
   targetStatsStrategy = TargetStatsStrategy.CURRENT,
 }: {
   artifacts?: BuildArtifacts;
   build: Build;
   genshinDataContext: GenshinDataContext;
+  ignoreSetBonuses?: boolean;
   targetStatsStrategy?: TargetStatsStrategy;
 }): BuildSatisfactionResult => {
   const artifactMainStatsSatisfaction = calculateArtifactMainStatsSatisfaction({
     artifacts: artifacts || build.artifacts,
     desiredArtifactMainStats: build.desiredArtifactMainStats,
   });
-  const artifactSetBonusesSatisfaction = calculateArtifactSetBonusesSatisfaction({
-    artifacts: artifacts || build.artifacts,
-    desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
-  });
+
+  const artifactSetBonusesSatisfaction = ignoreSetBonuses
+    ? undefined
+    : calculateArtifactSetBonusesSatisfaction({
+        artifacts: artifacts || build.artifacts,
+        desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
+      });
+
   const stats = calculateStats({ artifacts, build, genshinDataContext });
   const targetStats =
     targetStatsStrategy === TargetStatsStrategy.CURRENT
@@ -53,7 +59,7 @@ export const calculateBuildSatisfaction = ({
     artifactSetBonusesSatisfaction,
     overallSatisfaction:
       artifactMainStatsSatisfaction.satisfaction &&
-      artifactSetBonusesSatisfaction.satisfaction &&
+      (!artifactSetBonusesSatisfaction || artifactSetBonusesSatisfaction.satisfaction) &&
       statsSatisfaction.satisfaction,
     statsSatisfaction,
   };

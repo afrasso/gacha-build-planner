@@ -129,11 +129,12 @@ const StatsDisplay: React.FC<{ result: SatisfactionResult<StatSatisfactionDetail
 };
 
 const BuildSatisfactionDisplay: React.FC<BuildSatisfactionDisplayProps> = ({ result }) => {
+  // TODO: Right now we're explicitly declaring these results not-null; are we sure?
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <ArtifactSetBonusesDisplay result={result.artifactSetBonusesSatisfaction} />
-      <ArtifactMainStatsDisplay result={result.artifactMainStatsSatisfaction} />
-      <StatsDisplay result={result.statsSatisfaction} />
+      <ArtifactSetBonusesDisplay result={result.artifactSetBonusesSatisfaction!} />
+      <ArtifactMainStatsDisplay result={result.artifactMainStatsSatisfaction!} />
+      <StatsDisplay result={result.statsSatisfaction!} />
     </div>
   );
 };

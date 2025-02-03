@@ -64,12 +64,17 @@ export const calculateArtifactRating = ({
     return 0;
   }
 
+  // TODO: The max rating is actually based on the build criteria. At some point we can make the rating relative to this
+  // max rating.
+
   let totalRating = 0;
+  // Start at a rating of 1, since it satisfies the main stat condition.
+  const initialRating = 1;
   for (let i = 0; i < iterations; i++) {
     totalRating += build.desiredOverallStats.reduce((total, desiredOverallStat) => {
       total += calculateSubstatRating({ artifact, desiredOverallStat });
       return total;
-    }, 0);
+    }, initialRating);
   }
 
   return totalRating / iterations;

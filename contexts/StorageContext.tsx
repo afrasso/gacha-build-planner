@@ -2,9 +2,13 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-import { Artifact, Build, validateBuilds } from "@/types";
+import { Artifact, Build } from "@/types";
 
 import {
+  deleteArtifactFromIndexedDB,
+  deleteArtifactsFromIndexedDB,
+  deleteBuildFromIndexedDB,
+  deleteBuildsFromIndexedDB,
   loadArtifactFromIndexedDB,
   loadArtifactsFromIndexedDB,
   loadBuildFromIndexedDB,
@@ -13,10 +17,14 @@ import {
   saveArtifactToIndexedDB,
   saveBuildsToIndexedDB,
   saveBuildToIndexedDB,
-} from "./indexeddbhelpers";
+} from "./indexeddb";
 // import { useAuthContext } from "./AuthContext";
 
 interface StorageContextType {
+  deleteArtifact: (id: string) => Promise<void>;
+  deleteArtifacts: () => Promise<void>;
+  deleteBuild: (characterId: string) => Promise<void>;
+  deleteBuilds: () => Promise<void>;
   loadArtifact: (id: string) => Promise<StorageRetrievalResult<Artifact>>;
   loadArtifacts: () => Promise<StorageRetrievalResult<Artifact[]>>;
   loadBuild: (characterId: string) => Promise<StorageRetrievalResult<Build>>;
@@ -53,15 +61,21 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     setIsClient(true);
   }, []);
 
-  // const getBuildsFromLocalStorage = (): Build[] => {
-  //   const buildsJson = localStorage.getItem("builds");
-  //   if (!buildsJson) {
-  //     return [];
-  //   }
-  //   const parsedBuilds = JSON.parse(buildsJson);
-  //   const builds = validateBuilds(parsedBuilds);
-  //   return builds;
-  // };
+  const deleteArtifact = async (id: string): Promise<void> => {
+    await deleteArtifactFromIndexedDB(id);
+  };
+
+  const deleteArtifacts = async (): Promise<void> => {
+    await deleteArtifactsFromIndexedDB();
+  };
+
+  const deleteBuild = async (characterId: string): Promise<void> => {
+    await deleteBuildFromIndexedDB(characterId);
+  };
+
+  const deleteBuilds = async (): Promise<void> => {
+    await deleteBuildsFromIndexedDB();
+  };
 
   const loadArtifact = async (id: string): Promise<StorageRetrievalResult<Artifact>> => {
     if (!isClient) {
@@ -87,8 +101,6 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
       return { status: StorageRetrievalStatus.LOADING };
     }
     const build = await loadBuildFromIndexedDB(characterId);
-    // const builds = getBuildsFromLocalStorage();
-    // const build = builds.find((build) => build.characterId === characterId);
     if (!build) {
       return { status: StorageRetrievalStatus.NOT_FOUND };
     }
@@ -173,14 +185,25 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     // };
 
     // savePlan();
-
-    // localStorage.setItem("builds", JSON.stringify(builds));
     await saveBuildsToIndexedDB(builds);
   };
 
   return (
     <StorageContext.Provider
-      value={{ loadArtifact, loadArtifacts, loadBuild, loadBuilds, saveArtifact, saveArtifacts, saveBuild, saveBuilds }}
+      value={{
+        deleteArtifact,
+        deleteArtifacts,
+        deleteBuild,
+        deleteBuilds,
+        loadArtifact,
+        loadArtifacts,
+        loadBuild,
+        loadBuilds,
+        saveArtifact,
+        saveArtifacts,
+        saveBuild,
+        saveBuilds,
+      }}
     >
       {children}
     </StorageContext.Provider>
