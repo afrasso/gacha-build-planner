@@ -3,17 +3,16 @@
 import React from "react";
 
 import { Label } from "@/components/ui/label";
-import { Artifact, ArtifactSet, ArtifactType, BuildArtifacts } from "@/types";
+import { Artifact, ArtifactType, BuildArtifacts } from "@/types";
 
 import EditableArtifactCard from "./EditableArtifactCard";
 
 interface ArtifactsCollectionProps {
   artifacts: BuildArtifacts;
-  artifactSets: ArtifactSet[];
   onUpdate: (artifacts: BuildArtifacts) => void;
 }
 
-const ArtifactsCollection: React.FC<ArtifactsCollectionProps> = ({ artifacts, artifactSets, onUpdate }) => {
+const ArtifactsCollection: React.FC<ArtifactsCollectionProps> = ({ artifacts, onUpdate }) => {
   const update = (artifact: Artifact) => {
     const newArtifacts = { ...artifacts, [artifact.type]: artifact };
     onUpdate(newArtifacts);
@@ -28,7 +27,6 @@ const ArtifactsCollection: React.FC<ArtifactsCollectionProps> = ({ artifacts, ar
             (artifactType) => (
               <EditableArtifactCard
                 artifact={artifacts[artifactType]}
-                artifactSets={artifactSets}
                 artifactType={artifactType}
                 key={artifactType}
                 onUpdate={update}

@@ -1,29 +1,28 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Button } from "@/components/ui/button";
-import { Artifact, ArtifactSet, ArtifactType, Stat, StatValue } from "@/types";
+import { Artifact, ArtifactType, Stat, StatValue } from "@/types";
 
+import LevelSelector from "./LevelSelector";
 import MainStatSelector from "./MainStatSelector";
+import RaritySelector from "./RaritySelector";
 import SetSelector from "./SetSelector";
 import SubStatsSelector from "./SubStatsSelector";
 
 interface ArtifactEditorProps {
   artifact?: Partial<Artifact>;
-  artifactSets: ArtifactSet[];
   artifactType: ArtifactType;
   onUpdate: (artifact: Artifact) => void;
 }
 
-const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
-  artifact,
-  artifactSets,
-  artifactType,
-  onUpdate,
-}: ArtifactEditorProps) => {
-  const [internalArtifact, setInternalArtifact] = useState<Partial<Artifact>>(artifact || { type: artifactType });
+const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType, onUpdate }: ArtifactEditorProps) => {
+  const [internalArtifact, setInternalArtifact] = useState<Partial<Artifact>>(
+    artifact || { id: uuidv4(), type: artifactType }
+  );
 
   const setSelectorRef = useRef<ISaveableContentHandle>(null);
   const mainStatSelectorRef = useRef<ISaveableContentHandle>(null);
@@ -35,8 +34,16 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
     }
   };
 
-  const updateSet = (set: ArtifactSet) => {
-    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, set }));
+  const updateSetId = (setId: string) => {
+    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, setId }));
+  };
+
+  const updateRarity = (rarity: number) => {
+    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, rarity }));
+  };
+
+  const updateLevel = (level: number) => {
+    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, level }));
   };
 
   const updateMainStat = (mainStat: Stat) => {
@@ -57,12 +64,13 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
   return (
     <div>
       <SetSelector
-        artifactSets={artifactSets}
         artifactType={artifactType}
-        onUpdate={updateSet}
+        onUpdate={updateSetId}
         ref={setSelectorRef}
-        set={internalArtifact.set}
+        setId={internalArtifact?.setId}
       />
+      <RaritySelector onUpdate={updateRarity} rarity={internalArtifact.rarity} />
+      <LevelSelector level={internalArtifact.level} onUpdate={updateLevel} />
       <MainStatSelector
         artifactType={artifactType}
         mainStat={internalArtifact.mainStat}

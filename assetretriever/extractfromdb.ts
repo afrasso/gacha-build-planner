@@ -2,7 +2,7 @@ import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
 
-import { ArtifactType } from "@/types";
+import { ArtifactType, Stat } from "@/types";
 import { __datadir, __publicdir } from "@/utils/directoryutils.js";
 import downloadImage from "@/utils/downloadimage.js";
 import ensureDirExists from "@/utils/ensuredirexists";
@@ -32,15 +32,30 @@ const extractCharacters = async ({
     .map((characterName) => genshindb.characters(characterName))
     .filter((character): character is genshindb.Character => character !== undefined);
 
-  for (const dbCharacter of dbCharacters) {
-    characters.push({
+  // Skip Lumine and get data for Aether only since it's identical.
+  for (const dbCharacter of dbCharacters.filter((dbCharacter) => dbCharacter.name !== "Lumine")) {
+    const maxLvlStats = dbCharacter.stats(90);
+
+    const ascensionStat = mapStat(dbCharacter.substatType);
+    const ascensionStatValue = calculateStatValue({ rawValue: maxLvlStats.specialized, stat: ascensionStat });
+
+    const character = {
+      ascensionStat,
       element: dbCharacter.elementType,
       iconUrl: `/${dbCharacter.id}.png`,
-      id: dbCharacter.id,
-      name: dbCharacter.name,
+      id: String(dbCharacter.id),
+      maxLvlStats: {
+        ascensionStat: ascensionStatValue,
+        ATK: maxLvlStats.attack,
+        DEF: maxLvlStats.defense,
+        HP: maxLvlStats.hp,
+      },
+      name: dbCharacter.name !== "Aether" ? dbCharacter.name : "Traveler",
       rarity: dbCharacter.rarity,
       weaponType: dbCharacter.weaponType,
-    });
+    };
+
+    characters.push(character);
 
     if (
       downloadIcons &&
@@ -51,10 +66,11 @@ const extractCharacters = async ({
         console.log(
           `Downloading character ${dbCharacter.name} (${dbCharacter.id}) from ${dbCharacter.images.mihoyo_icon}`
         );
-        await downloadImage({
-          savePath: path.join(__publicdir, `${dbCharacter.id}.png`),
-          url: dbCharacter.images.mihoyo_icon,
-        });
+        const url =
+          dbCharacter.name !== "Aether"
+            ? dbCharacter.images.mihoyo_icon
+            : "https://static.wikia.nocookie.net/gensin-impact/images/5/59/Traveler_Icon.png";
+        await downloadImage({ savePath: path.join(__publicdir, `${dbCharacter.id}.png`), url });
       } catch (err) {
         console.log(
           `Failed downloading icon for ${dbCharacter.name} (${dbCharacter.id}) due to the following error: ${err}`
@@ -79,14 +95,36 @@ const extractWeapons = async ({
     .map((weaponName) => genshindb.weapons(weaponName))
     .filter((weapon): weapon is genshindb.Weapon => weapon !== undefined);
 
+  const getMaxLevel = (rarity: number) => {
+    if (rarity === 1 || rarity === 2) {
+      return 70;
+    }
+    return 90;
+  };
+
   for (const dbWeapon of dbWeapons) {
-    weapons.push({
-      iconUrl: `/${dbWeapon.id}.png`,
-      id: dbWeapon.id,
-      name: dbWeapon.name,
-      rarity: dbWeapon.rarity,
-      type: dbWeapon.weaponType,
-    });
+    const maxLvlStats = dbWeapon.stats(getMaxLevel(dbWeapon.rarity));
+
+    const mainStat = mapStat(dbWeapon.mainStatType);
+    const mainStatValue = calculateStatValue({ rawValue: maxLvlStats.specialized, stat: mainStat });
+
+    try {
+      weapons.push({
+        iconUrl: `/${dbWeapon.id}.png`,
+        id: String(dbWeapon.id),
+        mainStat,
+        maxLvlStats: {
+          ATK: maxLvlStats.attack,
+          mainStat: mainStatValue,
+        },
+        name: dbWeapon.name,
+        rarity: dbWeapon.rarity,
+        type: dbWeapon.weaponType,
+      });
+    } catch (err) {
+      console.log(JSON.stringify(dbWeapon));
+      throw err;
+    }
 
     if (
       downloadIcons &&
@@ -140,7 +178,7 @@ const extractArtifactSets = async ({
         [ArtifactType.PLUME]: `/${dbArtifactSet.id}_2.png`,
         [ArtifactType.SANDS]: `/${dbArtifactSet.id}_5.png`,
       },
-      id: dbArtifactSet.id,
+      id: String(dbArtifactSet.id),
       name: dbArtifactSet.name,
       rarities: dbArtifactSet.rarityList,
     });
@@ -216,6 +254,51 @@ const extractArtifactSets = async ({
 
   saveYaml(artifactSets, path.join(__datadir, "artifactSets.yaml"));
   return failures;
+};
+
+const mapStat = (stat: string | undefined) => {
+  if (!stat) {
+    return;
+  }
+
+  const lookup: Record<string, Stat> = {
+    FIGHT_PROP_ATTACK_PERCENT: Stat.ATK_PERCENT,
+    FIGHT_PROP_CHARGE_EFFICIENCY: Stat.ENERGY_RECHARGE,
+    FIGHT_PROP_CRITICAL: Stat.CRIT_RATE,
+    FIGHT_PROP_CRITICAL_HURT: Stat.CRIT_DMG,
+    FIGHT_PROP_DEFENSE_PERCENT: Stat.DEF_PERCENT,
+    FIGHT_PROP_ELEC_ADD_HURT: Stat.DMG_BONUS_ELECTRO,
+    FIGHT_PROP_ELEMENT_MASTERY: Stat.ELEMENTAL_MASTERY,
+    FIGHT_PROP_FIRE_ADD_HURT: Stat.DMG_BONUS_PYRO,
+    FIGHT_PROP_GRASS_ADD_HURT: Stat.DMG_BONUS_DENDRO,
+    FIGHT_PROP_HEAL_ADD: Stat.HEALING_BONUS,
+    FIGHT_PROP_HP_PERCENT: Stat.HP_PERCENT,
+    FIGHT_PROP_ICE_ADD_HURT: Stat.DMG_BONUS_CRYO,
+    FIGHT_PROP_PHYSICAL_ADD_HURT: Stat.DMG_BONUS_PHYSICAL,
+    FIGHT_PROP_ROCK_ADD_HURT: Stat.DMG_BONUS_GEO,
+    FIGHT_PROP_WATER_ADD_HURT: Stat.DMG_BONUS_HYDRO,
+    FIGHT_PROP_WIND_ADD_HURT: Stat.DMG_BONUS_ANEMO,
+  };
+
+  const mappedStat = lookup[stat];
+  if (!mappedStat) {
+    throw new Error(`Could not find the stat ${stat}.`);
+  }
+
+  return mappedStat;
+};
+
+const calculateStatValue = ({ rawValue, stat }: { rawValue: number | undefined; stat: Stat | undefined }) => {
+  if (!stat || !rawValue) {
+    return;
+  }
+
+  // Currently, all possible ascension stats or weapon main stats other than Elemental Masery are percentages, which are
+  // stored in genshinDB as a fraction of 1.
+  if (stat === Stat.ELEMENTAL_MASTERY) {
+    return rawValue;
+  }
+  return rawValue * 100;
 };
 
 const downloadIcon = async ({

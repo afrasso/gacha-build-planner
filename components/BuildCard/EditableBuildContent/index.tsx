@@ -1,61 +1,61 @@
 "use client";
 
+import { calculateStats } from "@/calculation/stats";
 import { CardContent } from "@/components/ui/card";
+import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
   ArtifactSet,
   ArtifactSetBonus,
   Build,
   BuildArtifacts,
   DesiredArtifactMainStats,
-  OverallStat,
-  StatValue,
-  Weapon,
+  DesiredOverallStat,
 } from "@/types";
 
 import ArtifactCollection from "./ArtifactCollection";
 import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
 import DesiredArtifactSetBonusSelector from "./DesiredArtifactSetBonusSelector";
-import DesiredStatsSelector from "./DesiredStatsSelector";
+import DesiredOverallStatsSelector from "./DesiredOverallStatsSelector";
 import WeaponSelector from "./WeaponSelector";
 
 interface EditableBuildContentProps {
   artifactSets: ArtifactSet[];
   build: Build;
   onUpdate: (buildId: string, build: Partial<Build>) => void;
-  weapons: Weapon[];
 }
 
-const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ artifactSets, build, onUpdate, weapons }) => {
-  const updateWeapon = (weapon: Weapon) => {
-    const buildId = build.character.id;
-    onUpdate(buildId, { weapon });
+const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUpdate }) => {
+  const genshinDataContext = useGenshinDataContext();
+  const currentStats = calculateStats({ build, genshinDataContext });
+
+  const onUpdateInternal = (updatedBuild: Partial<Build>) => {
+    onUpdate(build.characterId, { ...updatedBuild, lastUpdatedDate: new Date().toISOString() });
+  };
+
+  const updateWeapon = (weaponId: string) => {
+    onUpdateInternal({ weaponId });
   };
 
   const updateDesiredArtifactSetBonuses = (desiredArtifactSetBonuses: ArtifactSetBonus[]) => {
-    const buildId = build.character.id;
-    onUpdate(buildId, { character: build.character, desiredArtifactSetBonuses });
+    onUpdateInternal({ desiredArtifactSetBonuses });
   };
 
   const updateDesiredArtifactMainStats = (desiredArtifactMainStats: DesiredArtifactMainStats) => {
-    const buildId = build.character.id;
-    onUpdate(buildId, { character: build.character, desiredArtifactMainStats });
+    onUpdateInternal({ desiredArtifactMainStats });
   };
 
-  const updateDesiredStats = (desiredStats: StatValue<OverallStat>[]) => {
-    const buildId = build.character.id;
-    onUpdate(buildId, { character: build.character, desiredStats });
+  const updateDesiredOverallStats = (desiredOverallStats: DesiredOverallStat[]) => {
+    onUpdateInternal({ desiredOverallStats });
   };
 
   const updateArtifacts = (artifacts: BuildArtifacts) => {
-    const buildId = build.character.id;
-    onUpdate(buildId, { artifacts, character: build.character });
+    onUpdateInternal({ artifacts });
   };
 
   return (
     <CardContent>
-      <WeaponSelector onChange={updateWeapon} selectedWeapon={build.weapon} weapons={weapons} />
+      <WeaponSelector onChange={updateWeapon} selectedWeaponId={build.weaponId} />
       <DesiredArtifactSetBonusSelector
-        artifactSets={artifactSets}
         desiredArtifactSetBonuses={build.desiredArtifactSetBonuses}
         onChange={updateDesiredArtifactSetBonuses}
       />
@@ -63,8 +63,12 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ artifactSet
         desiredArtifactMainStats={build.desiredArtifactMainStats}
         onChange={updateDesiredArtifactMainStats}
       />
-      <DesiredStatsSelector desiredStats={build.desiredStats} onChange={updateDesiredStats} />
-      <ArtifactCollection artifacts={build.artifacts} artifactSets={artifactSets} onUpdate={updateArtifacts} />
+      <DesiredOverallStatsSelector
+        currentStats={currentStats}
+        desiredStats={build.desiredOverallStats || []}
+        onChange={updateDesiredOverallStats}
+      />
+      <ArtifactCollection artifacts={build.artifacts} onUpdate={updateArtifacts} />
     </CardContent>
   );
 };

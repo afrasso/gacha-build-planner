@@ -1,36 +1,62 @@
 "use client";
 
+import { List } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { useAuthContext } from "@/contexts/AuthContext";
-import { ArtifactSet, Build, Character, Plan, Weapon } from "@/types";
+import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
+import { Build, Character } from "@/types";
 
 import BuildCard from "./BuildCard";
 import CharacterSelector from "./CharacterSelector";
+import { ReorderBuildsDialog } from "./ReorderBuildsDialog";
+import { Button } from "./ui/button";
 
-interface BuildManagerProps {
-  artifactSets: ArtifactSet[];
-  characters: Character[];
-  weapons: Weapon[];
-}
-
-const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, weapons }) => {
+const BuildManager = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
+  const { characters } = useGenshinDataContext();
+  const { deleteBuild, loadBuilds, saveBuilds } = useStorageContext();
 
   const [builds, setBuilds] = useState<Build[]>([]);
-  const [planId, setPlanId] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isReorderDialogOpen, setIsReorderDialogOpen] = useState(false);
+
+  useEffect(() => {
+    const load = async () => {
+      const buildsRetrievalResult = await loadBuilds();
+      if (buildsRetrievalResult.status === StorageRetrievalStatus.FOUND) {
+        const loadedBuilds = buildsRetrievalResult.value || [];
+        setBuilds(loadedBuilds.sort((a, b) => a.sortOrder - b.sortOrder));
+        setIsLoading(false);
+      }
+    };
+    load();
+  }, [authFetch, isAuthenticated, loadBuilds, user]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      saveBuilds(builds);
+    }
+  }, [authFetch, builds, isAuthenticated, isLoading, saveBuilds, user]);
+
+  if (isLoading) {
+    return <div>Loading builds...</div>;
+  }
 
   const addBuild = (character: Character) => {
-    if (character && !builds.some((b) => b.character.id === character.id)) {
+    if (character && !builds.some((build) => build.characterId === character.id)) {
       setBuilds([
         ...builds,
         {
           artifacts: {},
-          character,
+          characterId: character.id,
           desiredArtifactMainStats: {},
           desiredArtifactSetBonuses: [],
+          desiredOverallStats: [],
           desiredStats: [],
-          weapon: undefined,
+          lastUpdatedDate: new Date().toISOString(),
+          sortOrder: builds.length,
         },
       ]);
     }
@@ -39,98 +65,52 @@ const BuildManager: React.FC<BuildManagerProps> = ({ artifactSets, characters, w
   const updateBuild = (buildId: string, updates: Partial<Build>) => {
     const characterId = buildId;
     setBuilds((builds) =>
-      builds.map((build) => (build.character.id === characterId ? { ...build, ...updates } : build))
+      builds.map((build) => (build.characterId === characterId ? { ...build, ...updates } : build))
     );
   };
 
   const removeBuild = (buildId: string) => {
     const characterId = buildId;
-    setBuilds((builds) => builds.filter((build) => build.character.id !== characterId));
+    deleteBuild(characterId);
+    setBuilds((builds) => builds.filter((build) => build.characterId !== characterId));
   };
 
-  useEffect(() => {
-    const loadPlan = async () => {
-      if (isAuthenticated) {
-        try {
-          if (!user) {
-            throw new Error("User not populated");
-          }
-          const response = await authFetch(`/users/${user.id}/plans`, { method: "GET" });
-          if (!response.ok) {
-            throw new Error("Unexpected response when retrieving plan");
-          }
-          const responseBody = await response.json();
-          const plans: Plan[] = responseBody._embedded.plans;
-          if (plans && plans.length > 0 && plans[0] && plans[0].builds && plans[0].builds.length > 0) {
-            const plan = plans[0];
-            setPlanId(plan.id);
-            setBuilds(plans[0].builds);
-          }
-        } catch (err) {
-          console.error("Error loading data", err);
-        }
-      }
-    };
-
-    loadPlan();
-  }, [authFetch, isAuthenticated, user]);
-
-  useEffect(() => {
-    const savePlan = async () => {
-      if (isAuthenticated) {
-        try {
-          if (!user) {
-            throw new Error("User not populated");
-          }
-          if (builds && builds.length > 0) {
-            if (!planId) {
-              const response = await authFetch(`/users/${user.id}/plans`, {
-                body: JSON.stringify({ builds }),
-                method: "POST",
-              });
-              if (!response.ok) {
-                throw new Error("Unexpected response when saving plan");
-              }
-              const plan = await response.json();
-              setPlanId(plan.id);
-            } else {
-              const response = await authFetch(`/users/${user.id}/plans/${planId}`, {
-                body: JSON.stringify({ builds }),
-                method: "PUT",
-              });
-              if (!response.ok) {
-                throw new Error("Unexpected response when saving plan");
-              }
-            }
-          }
-        } catch (err) {
-          console.error("Error loading data", err);
-        }
-      }
-    };
-
-    savePlan();
-  }, [authFetch, builds, isAuthenticated, planId, user]);
+  const handleReorderBuilds = (newOrder: Build[]) => {
+    setBuilds(newOrder);
+  };
 
   return (
-    <div>
-      <CharacterSelector
-        characters={characters.filter((character) => !builds.map((build) => build.character.id).includes(character.id))}
-        onAdd={addBuild}
-      />
+    <>
+      <div className="flex items-center space-x-2 mb-4">
+        <CharacterSelector
+          characters={characters.filter(
+            (character) => !builds.map((build) => build.characterId).includes(character.id)
+          )}
+          onAdd={addBuild}
+        />
+        <Button className="h-9 w-9" onClick={() => setIsReorderDialogOpen(true)} size="icon" variant="outline">
+          <List className="h-4 w-4" />
+          <span className="sr-only">Reorder builds</span>
+        </Button>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
         {builds.map((build) => (
           <BuildCard
-            artifactSets={artifactSets}
             build={build}
-            key={build.character.id}
+            key={build.characterId}
             onRemove={removeBuild}
             onUpdate={updateBuild}
-            weapons={weapons.filter((weapon) => weapon.type === build.character.weaponType)}
+            showInfoButton={true}
           />
         ))}
       </div>
-    </div>
+      <ReorderBuildsDialog
+        builds={builds}
+        isOpen={isReorderDialogOpen}
+        onClose={() => setIsReorderDialogOpen(false)}
+        onReorder={handleReorderBuilds}
+      />
+    </>
   );
 };
 

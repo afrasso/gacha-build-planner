@@ -7,15 +7,16 @@ import { Button } from "@/components/ui/button";
 import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ORDER_OVERALL_STATS } from "@/constants";
+import { OVERALL_STATS_ORDER } from "@/constants";
 import { OverallStat, StatValue } from "@/types";
 
 interface DesiredStatsSelectorProps {
+  currentStats: Record<OverallStat, number>;
   desiredStats: StatValue<OverallStat>[];
   onChange: (desiredStats: StatValue<OverallStat>[]) => void;
 }
 
-const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStats, onChange }) => {
+const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ currentStats, desiredStats, onChange }) => {
   const [isAddingDesiredStat, setIsAddingDesiredStat] = useState(false);
   const [stat, setStat] = useState<OverallStat | undefined>(undefined);
   const [value, setValue] = useState<number | undefined>(undefined);
@@ -28,6 +29,7 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
 
   const updateStat = (stat: OverallStat) => {
     setStat(stat);
+    setValue(currentStats[stat]);
     setIsStatValid(true);
   };
 
@@ -50,7 +52,7 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
   const validate = () => {
     const newIsStatValid = !!stat;
     setIsStatValid(newIsStatValid);
-    const newIsValueValid = value !== undefined && value >= 0 && value < 1000;
+    const newIsValueValid = value !== undefined && value >= 0 && value < 100000;
     setIsValueValid(newIsValueValid);
     return newIsStatValid && newIsValueValid;
   };
@@ -76,12 +78,12 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ desiredStat
   const getOrderedRemainingStats = () => {
     return Object.values(OverallStat)
       .filter((stat) => !desiredStats.map((desiredStat) => desiredStat.stat).includes(stat))
-      .sort((stat1, stat2) => ORDER_OVERALL_STATS.indexOf(stat1) - ORDER_OVERALL_STATS.indexOf(stat2));
+      .sort((stat1, stat2) => OVERALL_STATS_ORDER.indexOf(stat1) - OVERALL_STATS_ORDER.indexOf(stat2));
   };
 
   const getOrderedDesiredStats = () => {
     return desiredStats.sort(
-      (stat1, stat2) => ORDER_OVERALL_STATS.indexOf(stat1.stat) - ORDER_OVERALL_STATS.indexOf(stat2.stat)
+      (stat1, stat2) => OVERALL_STATS_ORDER.indexOf(stat1.stat) - OVERALL_STATS_ORDER.indexOf(stat2.stat)
     );
   };
 
