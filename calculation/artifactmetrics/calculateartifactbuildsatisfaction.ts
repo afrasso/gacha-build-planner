@@ -1,3 +1,4 @@
+import { MAIN_STAT_ODDS_BY_ARTIFACT_TYPE } from "@/constants";
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
   Artifact,
@@ -15,7 +16,6 @@ import { getEnumValues } from "@/utils/getenumvalues";
 
 import { rollArtifact, rollNewArtifact } from "../../simulation/artifact";
 import { calculateBuildSatisfaction, TargetStatsStrategy } from "../buildmetrics/satisfaction";
-import { MAIN_STAT_ODDS_BY_ARTIFACT_TYPE } from "@/constants";
 
 const getArtifactSetBonusFactor = ({
   artifact,
@@ -178,8 +178,8 @@ export const calculateArtifactBuildSatisfaction = ({
     // Factor in set bonus requirements into satisfaction result (since they basically weren't considered above).
     const setBonusFactor = getArtifactSetBonusFactor({
       artifact,
-      desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
       calculationType,
+      desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
     });
     const mainStatFactor = getArtifactMainStatFactor({
       artifact,
