@@ -7,9 +7,10 @@ describe("getArtifactTypeCombinations()", () => {
   const artifactTypes = Object.values(ArtifactType);
 
   describe("When the list of artifact types is empty", () => {
-    it("should return an empty array of combinations", () => {
+    it("should return a single empty combination", () => {
       const combinations = getArtifactTypeCombinations({ artifactTypes: [], count: 0 });
-      expect(combinations.length).toBe(0);
+      expect(combinations.length).toBe(1);
+      expect(combinations[0]).toEqual([]);
     });
   });
 
