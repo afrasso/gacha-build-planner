@@ -28,6 +28,6 @@ export default defineConfig({
     globals: true,
     isolate: false, // Run tests in a single process
     setupFiles: ["./setupTests.ts"],
-    watch: true,
+    watch: !process.env.CI,
   },
 });
