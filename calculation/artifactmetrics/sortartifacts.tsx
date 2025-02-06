@@ -26,6 +26,7 @@ export const sortArtifacts = ({ artifacts, sort }: { artifacts: Artifact[]; sort
     case ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS:
     case ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS:
     case ArtifactMetric.PLUS_MINUS:
+    case ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS:
     case ArtifactMetric.RATING:
       return artifacts.sort(getMetricSort(sort));
     case "LEVEL":

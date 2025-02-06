@@ -4,6 +4,7 @@ export enum ArtifactMetric {
   DESIRED_STATS_CURRENT_ARTIFACTS = "DESIRED_STATS_CURRENT_ARTIFACTS",
   DESIRED_STATS_RANDOM_ARTIFACTS = "DESIRED_STATS_RANDOM_ARTIFACTS",
   PLUS_MINUS = "PLUS_MINUS",
+  POSITIVE_PLUS_MINUS_ODDS = "POSITIVE_PLUS_MINUS_ODDS",
   RATING = "RATING",
 }
 
@@ -15,6 +16,7 @@ export const ArtifactMetricSchema = {
     "DESIRED_STATS_CURRENT_ARTIFACTS",
     "DESIRED_STATS_RANDOM_ARTIFACTS",
     "PLUS_MINUS",
+    "POSITIVE_PLUS_MINUS_ODDS",
     "RATING",
   ],
   type: "string",
@@ -70,6 +72,7 @@ export const ArtifactMetricsResultsSchema = {
     DESIRED_STATS_CURRENT_ARTIFACTS: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactMetricResults" },
     DESIRED_STATS_RANDOM_ARTIFACTS: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactMetricResults" },
     PLUS_MINUS: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactMetricResults" },
+    POSITIVE_PLUS_MINUS_ODDS: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactMetricResults" },
     RATING: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactMetricResults" },
   },
   required: [
@@ -78,6 +81,7 @@ export const ArtifactMetricsResultsSchema = {
     "DESIRED_STATS_CURRENT_ARTIFACTS",
     "DESIRED_STATS_RANDOM_ARTIFACTS",
     "PLUS_MINUS",
+    "POSITIVE_PLUS_MINUS_ODDS",
     "RATING",
   ],
   type: "object",

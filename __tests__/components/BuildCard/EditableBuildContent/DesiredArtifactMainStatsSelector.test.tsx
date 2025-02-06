@@ -5,11 +5,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import DesiredArtifactMainStatsSelector from "@/components/BuildCard/EditableBuildContent/DesiredArtifactMainStatsSelector";
 import { ArtifactType, DesiredArtifactMainStats, Stat } from "@/types";
 
-vi.mock("@/components/ui/button");
-vi.mock("@/components/ui/label");
-vi.mock("@/components/ui/select");
-vi.mock("lucide-react");
-
 describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
   const mockOnChange = vi.fn();
   const renderComponent = (desiredArtifactMainStats: DesiredArtifactMainStats = {}) => {

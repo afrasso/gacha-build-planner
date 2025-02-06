@@ -110,6 +110,7 @@ export const rollNewArtifact = ({
       [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
       [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
       [ArtifactMetric.PLUS_MINUS]: { buildResults: {} },
+      [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
       [ArtifactMetric.RATING]: { buildResults: {} },
     },
     rarity,

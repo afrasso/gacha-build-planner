@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react(), tsConfigPaths()],
   resolve: {
     alias: {
-      "@": "/",
+      "@": new URL("./", import.meta.url).pathname,
     },
   },
   test: {
@@ -28,6 +28,6 @@ export default defineConfig({
     globals: true,
     isolate: false, // Run tests in a single process
     setupFiles: ["./setupTests.ts"],
-    watch: false,
+    watch: !process.env.CI,
   },
 });

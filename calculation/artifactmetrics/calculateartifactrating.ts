@@ -1,5 +1,8 @@
 import { SUB_STAT_ROLL_VALUES_BY_RARITY } from "@/constants";
+import { rollArtifact } from "@/simulation/artifact";
 import { Artifact, Build, DesiredOverallStat, OverallStat, Stat } from "@/types";
+
+import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
 
 const PRIORITY_WEIGHTS: Record<number, number> = {
   1: 0.25,
@@ -47,15 +50,7 @@ const calculateSubstatRating = ({
   return rating;
 };
 
-export const calculateArtifactRating = ({
-  artifact,
-  build,
-  iterations,
-}: {
-  artifact: Artifact;
-  build: Build;
-  iterations: number;
-}): number => {
+const calculateRating = ({ artifact, build }: { artifact: Artifact; build: Build }): number => {
   // If the build requires a specific main stat, and the current artifact doesn't have it, the artifact has no value.
   if (
     build.desiredArtifactMainStats[artifact.type] &&
@@ -64,18 +59,53 @@ export const calculateArtifactRating = ({
     return 0;
   }
 
-  // TODO: The max rating is actually based on the build criteria. At some point we can make the rating relative to this
-  // max rating.
+  const rolledArtifact = rollArtifact({ artifact });
+
+  // TODO: The max rating is actually based on the build criteria. At some point we can make the rating relative to max
+  // possible rating given the build's desired stats.
+  const initialRating = 1;
+  return build.desiredOverallStats.reduce((total, desiredOverallStat) => {
+    total += calculateSubstatRating({ artifact: rolledArtifact, desiredOverallStat });
+    return total;
+  }, initialRating);
+};
+
+export interface ArtifactRatingMetricsResults {
+  plusMinus: number;
+  positivePlusMinusOdds: number;
+  rating: number;
+}
+
+export const calculateArtifactRatingMetrics = ({
+  artifact,
+  build,
+  iterations,
+}: {
+  artifact: Artifact;
+  build: Build;
+  iterations: number;
+}): ArtifactRatingMetricsResults => {
+  const weightedFactor = getWeightedArtifactSetBonusFactor({
+    artifact,
+    desiredArtifactMainStats: build.desiredArtifactMainStats,
+    desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
+  });
 
   let totalRating = 0;
-  // Start at a rating of 1, since it satisfies the main stat condition.
-  const initialRating = 1;
+  let totalPlusMinus = 0;
+  let positivePlusMinusCount = 0;
   for (let i = 0; i < iterations; i++) {
-    totalRating += build.desiredOverallStats.reduce((total, desiredOverallStat) => {
-      total += calculateSubstatRating({ artifact, desiredOverallStat });
-      return total;
-    }, initialRating);
+    const artifactRating = calculateRating({ artifact, build });
+    const buildArtifact = build.artifacts[artifact.type];
+    const buildArtifactRating = buildArtifact ? calculateRating({ artifact: buildArtifact, build }) : 0;
+    totalRating += artifactRating;
+    totalPlusMinus += artifactRating - buildArtifactRating;
+    positivePlusMinusCount += artifactRating > buildArtifactRating ? 1 : 0;
   }
 
-  return totalRating / iterations;
+  return {
+    plusMinus: (weightedFactor * totalPlusMinus) / iterations,
+    positivePlusMinusOdds: (weightedFactor * positivePlusMinusCount) / iterations,
+    rating: (weightedFactor * totalRating) / iterations,
+  };
 };
