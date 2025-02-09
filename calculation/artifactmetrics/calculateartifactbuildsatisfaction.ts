@@ -14,8 +14,8 @@ import {
 } from "@/types";
 import { getEnumValues } from "@/utils/getenumvalues";
 
-import { rollArtifact, rollNewArtifact } from "../../simulation/artifact";
 import { calculateBuildSatisfaction, TargetStatsStrategy } from "../buildmetrics/satisfaction";
+import { rollArtifact, rollNewArtifact } from "../simulation";
 
 const getArtifactSetBonusFactor = ({
   artifact,

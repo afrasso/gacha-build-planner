@@ -1,7 +1,7 @@
 import { getSubStatRollValues } from "@/constants";
-import { rollArtifact } from "@/simulation/artifact";
 import { Artifact, Build, DesiredOverallStat, OverallStat, Stat } from "@/types";
 
+import { rollArtifact } from "../simulation";
 import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
 
 const PRIORITY_WEIGHTS: Record<number, number> = {

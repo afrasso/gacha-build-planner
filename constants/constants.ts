@@ -1,5 +1,7 @@
 import { ArtifactTier, ArtifactType, OverallStat, Stat } from "@/types";
 
+export const ARTIFACT_LEVELS_PER_SUBSTAT_ROLL = 4;
+
 // Source: https://genshin-impact.fandom.com/wiki/Artifact/Stats
 export const ARTIFACT_MAX_LEVEL_BY_RARITY: Record<number, number> = {
   1: 4,
@@ -170,6 +172,8 @@ export const MAIN_STAT_ODDS_BY_ARTIFACT_TYPE: Record<ArtifactType, Partial<Recor
     [Stat.HP_PERCENT]: 0.2668,
   },
 };
+
+export const MAX_SUBSTATS = 4;
 
 export const OVERALL_STATS_ORDER: OverallStat[] = [
   OverallStat.MAX_HP,

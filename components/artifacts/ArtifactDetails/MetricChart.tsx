@@ -58,10 +58,9 @@ const MetricChart: React.FC<MetricChartProps> = ({ characterId, metricsResults }
           ? metricsResults[metric].buildResults[characterId].result
           : metricsResults[metric].maxValue;
         if (metric === ArtifactMetric.RATING) {
-          // Max rating is 0, which is 1 for the main stat, 4 for the max possible initial stats, and another 5 for
+          // Max rating is 10, which is 1 for the main stat, 4 for the max possible initial stats, and another 5 for
           // substat rolls.
           const value = (rawValue || 0) / 10;
-          console.log(value);
           const displayValue = rawValue ? `${Math.round(rawValue * 100) / 100}` : "N/A";
           return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
         } else if (metric === ArtifactMetric.PLUS_MINUS) {
