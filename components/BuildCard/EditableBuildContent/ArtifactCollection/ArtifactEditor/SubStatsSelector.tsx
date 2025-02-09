@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { SUB_STATS } from "@/constants";
+import { getSubStats } from "@/constants";
 import { Stat, StatValue } from "@/types";
 
 interface SubStatsSelectorProps {
@@ -173,7 +173,7 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                          {SUB_STATS.map((stat: Stat) => (
+                          {getSubStats().map((stat: Stat) => (
                             <SelectItem disabled={stat === mainStat} key={stat} value={stat}>
                               {stat}
                             </SelectItem>

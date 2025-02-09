@@ -27,6 +27,7 @@ import {
   DesiredOverallStatSchema,
   OverallStatSchema,
   OverallStatValueSchema,
+  Stat,
   StatSchema,
   StatValueSchema,
 } from "./stat";
@@ -82,6 +83,9 @@ const initializeArtifact = ({ artifact }: { artifact: any }): void => {
   }
   if (!artifact.lastUpdatedDate) {
     artifact.lastUpdatedDate = new Date().toISOString();
+  }
+  if (artifact.mainStat === "ATK") {
+    artifact.mainStat = Stat.ATK_FLAT;
   }
   if (!artifact.metricsResults) {
     artifact.metricsResults = {};

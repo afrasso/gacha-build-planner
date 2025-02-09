@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { OVERALL_STATS_ORDER } from "@/constants";
+import { getOrderedOverallStats } from "@/constants";
 import { OverallStat, StatValue } from "@/types";
 
 interface DesiredStatsSelectorProps {
@@ -78,12 +78,12 @@ const DesiredStatsSelector: React.FC<DesiredStatsSelectorProps> = ({ currentStat
   const getOrderedRemainingStats = () => {
     return Object.values(OverallStat)
       .filter((stat) => !desiredStats.map((desiredStat) => desiredStat.stat).includes(stat))
-      .sort((stat1, stat2) => OVERALL_STATS_ORDER.indexOf(stat1) - OVERALL_STATS_ORDER.indexOf(stat2));
+      .sort((stat1, stat2) => getOrderedOverallStats().indexOf(stat1) - getOrderedOverallStats().indexOf(stat2));
   };
 
   const getOrderedDesiredStats = () => {
     return desiredStats.sort(
-      (stat1, stat2) => OVERALL_STATS_ORDER.indexOf(stat1.stat) - OVERALL_STATS_ORDER.indexOf(stat2.stat)
+      (stat1, stat2) => getOrderedOverallStats().indexOf(stat1.stat) - getOrderedOverallStats().indexOf(stat2.stat)
     );
   };
 

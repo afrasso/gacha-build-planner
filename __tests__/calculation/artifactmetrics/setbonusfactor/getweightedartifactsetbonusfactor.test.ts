@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { describe, expect, it } from "vitest";
 
 import { getWeightedArtifactSetBonusFactor } from "@/calculation/artifactmetrics/setbonusfactor";
-import { MAIN_STAT_ODDS_BY_ARTIFACT_TYPE } from "@/constants";
+import { getMainStatOdds } from "@/constants";
 import { Artifact, ArtifactSetBonus, ArtifactSetBonusType, ArtifactType, Stat } from "@/types";
 
 describe("getWeightedArtifactSetBonusFactor()", () => {
@@ -206,35 +206,35 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
           });
 
           const circletFlowerOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5);
           const circletGobletOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5);
           const circletPlumeOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5);
           const circletSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const flowerGobletOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5);
           const flowerPlumeOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5);
           const flowerSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const gobletPlumeOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5);
           const gobletSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const plumeSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
 
           const totalWeight =
             circletFlowerOdds +
@@ -303,30 +303,30 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
           });
 
           const circletFlowerGobletPlumeOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5);
           const circletFlowerGobletSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const circletFlowerPlumeSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const circletGobletPlumeSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const flowerGobletPlumeSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
 
           const totalWeight =
             circletFlowerGobletPlumeOdds +
@@ -373,30 +373,30 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
           });
 
           const circletFlowerGobletPlumeOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5);
           const circletFlowerGobletSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const circletFlowerPlumeSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const circletGobletPlumeSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
           const flowerGobletPlumeSandsOdds =
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.FLOWER][Stat.HP_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.PLUME][Stat.ATK_FLAT]! / 5) *
-            (MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT]! / 5);
+            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: Stat.HP_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: Stat.ATK_FLAT }) / 5) *
+            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT }) / 5);
 
           const totalWeight =
             circletFlowerGobletPlumeOdds +

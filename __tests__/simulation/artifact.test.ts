@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
 
-import { ARTIFACT_MAX_LEVEL_BY_RARITY, SUB_STAT_ROLL_VALUES_BY_RARITY } from "@/constants";
+import { getArtifactMaxLevel, getSubStatRollValues } from "@/constants";
 import {
   getInitialSubStatCount,
   getRandomInitialSubStats,
@@ -34,6 +34,7 @@ describe("Artifact Simulation Tests", () => {
   }): Artifact => {
     const artifact: Artifact = {
       id: uuidv4(),
+      isLocked: false,
       lastUpdatedDate: new Date().toISOString(),
       level,
       mainStat: Stat.ATK_FLAT,
@@ -43,6 +44,7 @@ describe("Artifact Simulation Tests", () => {
         [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
         [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
         [ArtifactMetric.PLUS_MINUS]: { buildResults: {} },
+        [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
         [ArtifactMetric.RATING]: { buildResults: {} },
       },
       rarity,
@@ -51,15 +53,6 @@ describe("Artifact Simulation Tests", () => {
       type: ArtifactType.FLOWER,
     };
     return artifact;
-  };
-
-  const getRollValues = ({ rarity, stat }: { rarity: number; stat: Stat }): number[] => {
-    const rollValues = SUB_STAT_ROLL_VALUES_BY_RARITY[rarity][stat];
-    expect(rollValues).toBeDefined();
-    if (!rollValues) {
-      throw new Error("Unexpected test error: rollValues should always be defined or caught by test.");
-    }
-    return rollValues;
   };
 
   describe("getInitialSubStatCount()", () => {
@@ -142,7 +135,7 @@ describe("Artifact Simulation Tests", () => {
       expect(subStatValues.length).toBe(expectedLength);
       for (const subStatValue of subStatValues) {
         expect(subStatValue.stat).not.toBe(mainStat);
-        const rollValues = getRollValues({ rarity, stat: subStatValue.stat });
+        const rollValues = getSubStatRollValues({ rarity, subStat: subStatValue.stat });
         expect(subStatValue.value).toBe(rollValues[0]);
       }
     };
@@ -431,7 +424,7 @@ describe("Artifact Simulation Tests", () => {
         const rolledArtifact = rollArtifact({ artifact });
         expect(rolledArtifact.id).toBe(artifact.id);
         expect(rolledArtifact.lastUpdatedDate).toBe(rolledArtifact.lastUpdatedDate);
-        expect(rolledArtifact.level).toBe(ARTIFACT_MAX_LEVEL_BY_RARITY[rarity]);
+        expect(rolledArtifact.level).toBe(getArtifactMaxLevel({ rarity }));
         expect(rolledArtifact.mainStat).toBe(artifact.mainStat);
         expect(rolledArtifact.rarity).toBe(artifact.rarity);
         expect(rolledArtifact.setId).toBe(artifact.setId);
@@ -467,7 +460,7 @@ describe("Artifact Simulation Tests", () => {
       it("should return the appropriate number of new sub-stats", () => {
         const level = 1;
         const rarity = 2;
-        const atkPercentRollValues = getRollValues({ rarity, stat: Stat.ATK_PERCENT });
+        const atkPercentRollValues = getSubStatRollValues({ rarity, subStat: Stat.ATK_PERCENT });
         const initialSubStats: StatValue<Stat>[] = [{ stat: Stat.ATK_PERCENT, value: atkPercentRollValues[0] }];
         const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
@@ -477,7 +470,7 @@ describe("Artifact Simulation Tests", () => {
         expect(newSubStats[0].stat).toBe(Stat.ATK_PERCENT);
         expect(newSubStats[0].value).toBe(atkPercentRollValues[0]);
 
-        const critDmgRollValues = getRollValues({ rarity, stat: Stat.CRIT_DMG });
+        const critDmgRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_DMG });
         expect(newSubStats[1].stat).toBe(Stat.CRIT_DMG);
         expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
       });
@@ -487,7 +480,7 @@ describe("Artifact Simulation Tests", () => {
       it("should return the appropriate number of new sub-stats", () => {
         const level = 1;
         const rarity = 3;
-        const atkPercentRollValues = getRollValues({ rarity, stat: Stat.ATK_PERCENT });
+        const atkPercentRollValues = getSubStatRollValues({ rarity, subStat: Stat.ATK_PERCENT });
         const initialSubStats: StatValue<Stat>[] = [{ stat: Stat.ATK_PERCENT, value: atkPercentRollValues[0] }];
         const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
@@ -497,15 +490,15 @@ describe("Artifact Simulation Tests", () => {
         expect(newSubStats[0].stat).toBe(Stat.ATK_PERCENT);
         expect(newSubStats[0].value).toBe(atkPercentRollValues[0]);
 
-        const critDmgRollValues = getRollValues({ rarity, stat: Stat.CRIT_DMG });
+        const critDmgRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_DMG });
         expect(newSubStats[1].stat).toBe(Stat.CRIT_DMG);
         expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
 
-        const critRateRollValues = getRollValues({ rarity, stat: Stat.CRIT_RATE });
+        const critRateRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_RATE });
         expect(newSubStats[2].stat).toBe(Stat.CRIT_RATE);
         expect(newSubStats[2].value).toBe(critRateRollValues[0]);
 
-        const defFlatRollValues = getRollValues({ rarity, stat: Stat.DEF_FLAT });
+        const defFlatRollValues = getSubStatRollValues({ rarity, subStat: Stat.DEF_FLAT });
         expect(newSubStats[3].stat).toBe(Stat.DEF_FLAT);
         expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
       });
@@ -515,8 +508,8 @@ describe("Artifact Simulation Tests", () => {
       it("should return the appropriate number of new sub-stats", () => {
         const level = 1;
         const rarity = 3;
-        const atkPercentRollValues = getRollValues({ rarity, stat: Stat.ATK_PERCENT });
-        const critDmgRollValues = getRollValues({ rarity, stat: Stat.CRIT_DMG });
+        const atkPercentRollValues = getSubStatRollValues({ rarity, subStat: Stat.ATK_PERCENT });
+        const critDmgRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_DMG });
         const initialSubStats: StatValue<Stat>[] = [
           { stat: Stat.ATK_PERCENT, value: atkPercentRollValues[0] },
           { stat: Stat.CRIT_DMG, value: critDmgRollValues[0] },
@@ -531,11 +524,11 @@ describe("Artifact Simulation Tests", () => {
         expect(newSubStats[1].stat).toBe(Stat.CRIT_DMG);
         expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
 
-        const critRateRollValues = getRollValues({ rarity, stat: Stat.CRIT_RATE });
+        const critRateRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_RATE });
         expect(newSubStats[2].stat).toBe(Stat.CRIT_RATE);
         expect(newSubStats[2].value).toBe(critRateRollValues[0]);
 
-        const defFlatRollValues = getRollValues({ rarity, stat: Stat.DEF_FLAT });
+        const defFlatRollValues = getSubStatRollValues({ rarity, subStat: Stat.DEF_FLAT });
         expect(newSubStats[3].stat).toBe(Stat.DEF_FLAT);
         expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
       });
@@ -545,8 +538,8 @@ describe("Artifact Simulation Tests", () => {
       it("should return the appropriate number of new sub-stats", () => {
         const level = 1;
         const rarity = 4;
-        const atkPercentRollValues = getRollValues({ rarity, stat: Stat.ATK_PERCENT });
-        const critDmgRollValues = getRollValues({ rarity, stat: Stat.CRIT_DMG });
+        const atkPercentRollValues = getSubStatRollValues({ rarity, subStat: Stat.ATK_PERCENT });
+        const critDmgRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_DMG });
         const initialSubStats: StatValue<Stat>[] = [
           { stat: Stat.ATK_PERCENT, value: atkPercentRollValues[0] },
           { stat: Stat.CRIT_DMG, value: critDmgRollValues[0] },
@@ -561,11 +554,11 @@ describe("Artifact Simulation Tests", () => {
         expect(newSubStats[1].stat).toBe(Stat.CRIT_DMG);
         expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
 
-        const critRateRollValues = getRollValues({ rarity, stat: Stat.CRIT_RATE });
+        const critRateRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_RATE });
         expect(newSubStats[2].stat).toBe(Stat.CRIT_RATE);
         expect(newSubStats[2].value).toBe(critRateRollValues[0]);
 
-        const defFlatRollValues = getRollValues({ rarity, stat: Stat.DEF_FLAT });
+        const defFlatRollValues = getSubStatRollValues({ rarity, subStat: Stat.DEF_FLAT });
         expect(newSubStats[3].stat).toBe(Stat.DEF_FLAT);
         expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
       });
@@ -575,9 +568,9 @@ describe("Artifact Simulation Tests", () => {
       it("should return the appropriate number of new sub-stats", () => {
         const level = 1;
         const rarity = 4;
-        const atkPercentRollValues = getRollValues({ rarity, stat: Stat.ATK_PERCENT });
-        const critDmgRollValues = getRollValues({ rarity, stat: Stat.CRIT_DMG });
-        const critRateRollValues = getRollValues({ rarity, stat: Stat.CRIT_RATE });
+        const atkPercentRollValues = getSubStatRollValues({ rarity, subStat: Stat.ATK_PERCENT });
+        const critDmgRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_DMG });
+        const critRateRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_RATE });
         const initialSubStats: StatValue<Stat>[] = [
           { stat: Stat.ATK_PERCENT, value: atkPercentRollValues[0] },
           { stat: Stat.CRIT_DMG, value: critDmgRollValues[0] },
@@ -595,7 +588,7 @@ describe("Artifact Simulation Tests", () => {
         expect(newSubStats[2].stat).toBe(Stat.CRIT_RATE);
         expect(newSubStats[2].value).toBe(critRateRollValues[0]);
 
-        const defFlatRollValues = getRollValues({ rarity, stat: Stat.DEF_FLAT });
+        const defFlatRollValues = getSubStatRollValues({ rarity, subStat: Stat.DEF_FLAT });
         expect(newSubStats[3].stat).toBe(Stat.DEF_FLAT);
         expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
       });
@@ -605,9 +598,9 @@ describe("Artifact Simulation Tests", () => {
       it("should return the appropriate number of new sub-stats", () => {
         const level = 1;
         const rarity = 5;
-        const atkPercentRollValues = getRollValues({ rarity, stat: Stat.ATK_PERCENT });
-        const critDmgRollValues = getRollValues({ rarity, stat: Stat.CRIT_DMG });
-        const critRateRollValues = getRollValues({ rarity, stat: Stat.CRIT_RATE });
+        const atkPercentRollValues = getSubStatRollValues({ rarity, subStat: Stat.ATK_PERCENT });
+        const critDmgRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_DMG });
+        const critRateRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_RATE });
         const initialSubStats: StatValue<Stat>[] = [
           { stat: Stat.ATK_PERCENT, value: atkPercentRollValues[0] },
           { stat: Stat.CRIT_DMG, value: critDmgRollValues[0] },
@@ -625,7 +618,7 @@ describe("Artifact Simulation Tests", () => {
         expect(newSubStats[2].stat).toBe(Stat.CRIT_RATE);
         expect(newSubStats[2].value).toBe(critRateRollValues[0]);
 
-        const defFlatRollValues = getRollValues({ rarity, stat: Stat.DEF_FLAT });
+        const defFlatRollValues = getSubStatRollValues({ rarity, subStat: Stat.DEF_FLAT });
         expect(newSubStats[3].stat).toBe(Stat.DEF_FLAT);
         expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
       });
@@ -635,10 +628,10 @@ describe("Artifact Simulation Tests", () => {
       it("should return the appropriate number of new sub-stats", () => {
         const level = 1;
         const rarity = 5;
-        const atkPercentRollValues = getRollValues({ rarity, stat: Stat.ATK_PERCENT });
-        const critDmgRollValues = getRollValues({ rarity, stat: Stat.CRIT_DMG });
-        const critRateRollValues = getRollValues({ rarity, stat: Stat.CRIT_RATE });
-        const defFlatRollValues = getRollValues({ rarity, stat: Stat.DEF_FLAT });
+        const atkPercentRollValues = getSubStatRollValues({ rarity, subStat: Stat.ATK_PERCENT });
+        const critDmgRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_DMG });
+        const critRateRollValues = getSubStatRollValues({ rarity, subStat: Stat.CRIT_RATE });
+        const defFlatRollValues = getSubStatRollValues({ rarity, subStat: Stat.DEF_FLAT });
         const initialSubStats: StatValue<Stat>[] = [
           { stat: Stat.ATK_PERCENT, value: atkPercentRollValues[0] },
           { stat: Stat.CRIT_DMG, value: critDmgRollValues[0] },

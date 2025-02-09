@@ -1,4 +1,4 @@
-import { MAIN_STAT_ODDS_BY_ARTIFACT_TYPE } from "@/constants";
+import { getMainStatOdds } from "@/constants";
 import { ArtifactType, DesiredArtifactMainStats } from "@/types";
 
 const calculateFactorial = (n: number): number => {
@@ -31,12 +31,7 @@ const calculateOddsOfOnSetPieces = ({
         ? desiredMainStatsForArtifact[0]
         : undefined;
     if (desiredArtifactMainStat) {
-      const odds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[artifactType][desiredArtifactMainStat];
-      if (!odds) {
-        throw new Error(
-          `Unexpected error: could not find odds for the stat ${desiredArtifactMainStat} for an artifact of type ${artifactType}.`
-        );
-      }
+      const odds = getMainStatOdds({ artifactType, mainStat: desiredArtifactMainStat });
       // Divide by five due to the raw odds of even getting this artifact type.
       acc = acc * odds;
     }

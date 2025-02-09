@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
 import { Label } from "@/components/ui/label";
-import { ARTIFACT_MAX_LEVEL_BY_RARITY } from "@/constants";
+import { getArtifactMaxLevel } from "@/constants";
 
 interface LevelSelectorProps {
   level?: number;
@@ -21,7 +21,7 @@ const LevelSelector = forwardRef<ISaveableContentHandle, LevelSelectorProps>(({ 
   };
 
   const validate = () => {
-    const maxLevel = ARTIFACT_MAX_LEVEL_BY_RARITY[rarity];
+    const maxLevel = getArtifactMaxLevel({ rarity });
     if (!level || level < 1 || level > maxLevel) {
       setIsValid(false);
       return false;
