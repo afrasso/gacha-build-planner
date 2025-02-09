@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import calculateOddsOfOnSetPieces from "@/calculation/artifactmetrics/setbonusfactor/calculateoddsofonsetpieces";
-import { MAIN_STAT_ODDS_BY_ARTIFACT_TYPE } from "@/constants";
+import { getMainStatOdds } from "@/constants";
 import { ArtifactType, Stat } from "@/types";
 
 describe("calculateOddsOfOnSetPieces()", () => {
@@ -24,8 +24,7 @@ describe("calculateOddsOfOnSetPieces()", () => {
       const artifactTypes: ArtifactType[] = [ArtifactType.CIRCLET];
       const odds = calculateOddsOfOnSetPieces({ artifactTypes, desiredArtifactMainStats });
 
-      const initialOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT];
-      expect(initialOdds).toBeDefined();
+      const initialOdds = getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT });
 
       const expectedOdds = initialOdds! / 5;
       expect(odds).toBeCloseTo(expectedOdds);
@@ -37,10 +36,8 @@ describe("calculateOddsOfOnSetPieces()", () => {
       const artifactTypes: ArtifactType[] = [ArtifactType.CIRCLET, ArtifactType.GOBLET];
       const odds = calculateOddsOfOnSetPieces({ artifactTypes, desiredArtifactMainStats });
 
-      const initialCircletOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT];
-      expect(initialCircletOdds).toBeDefined();
-      const initialGobletOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT];
-      expect(initialGobletOdds).toBeDefined();
+      const initialCircletOdds = getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT });
+      const initialGobletOdds = getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT });
 
       // Multiplying by 2!, since the artifacts can be retrieved in either order.
       const expectedOdds = (initialCircletOdds! / 5) * (initialGobletOdds! / 5) * (2 * 1);
@@ -53,12 +50,9 @@ describe("calculateOddsOfOnSetPieces()", () => {
       const artifactTypes: ArtifactType[] = [ArtifactType.CIRCLET, ArtifactType.GOBLET, ArtifactType.SANDS];
       const odds = calculateOddsOfOnSetPieces({ artifactTypes, desiredArtifactMainStats });
 
-      const initialCircletOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT];
-      expect(initialCircletOdds).toBeDefined();
-      const initialGobletOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT];
-      expect(initialGobletOdds).toBeDefined();
-      const initialSandsOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT];
-      expect(initialSandsOdds).toBeDefined();
+      const initialCircletOdds = getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT });
+      const initialGobletOdds = getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT });
+      const initialSandsOdds = getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT });
 
       // Multiplying by 3!, since the artifacts can be retrieved in any order.
       const expectedOdds = (initialCircletOdds! / 5) * (initialGobletOdds! / 5) * (initialSandsOdds! / 5) * (3 * 2 * 1);
@@ -71,12 +65,9 @@ describe("calculateOddsOfOnSetPieces()", () => {
       const artifactTypes: ArtifactType[] = Object.values(ArtifactType);
       const odds = calculateOddsOfOnSetPieces({ artifactTypes, desiredArtifactMainStats });
 
-      const initialCircletOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET][Stat.ATK_PERCENT];
-      expect(initialCircletOdds).toBeDefined();
-      const initialGobletOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET][Stat.ATK_PERCENT];
-      expect(initialGobletOdds).toBeDefined();
-      const initialSandsOdds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[ArtifactType.SANDS][Stat.ATK_PERCENT];
-      expect(initialSandsOdds).toBeDefined();
+      const initialCircletOdds = getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: Stat.ATK_PERCENT });
+      const initialGobletOdds = getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: Stat.ATK_PERCENT });
+      const initialSandsOdds = getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: Stat.ATK_PERCENT });
 
       // Multiplying by 5!, since the artifacts can be retrieved in any order.
       const expectedOdds =

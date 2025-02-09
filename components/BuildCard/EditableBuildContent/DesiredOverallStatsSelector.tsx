@@ -9,7 +9,7 @@ import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput"
 import StarSelector from "@/components/ui/custom/StarSelector";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { OVERALL_STATS_ORDER } from "@/constants";
+import { getOrderedOverallStats } from "@/constants";
 import { DesiredOverallStat, OverallStat } from "@/types";
 
 interface DesiredOverallStatsSelectorProps {
@@ -57,7 +57,7 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
     return desiredStats.sort((stat1, stat2) => {
       if (stat1.priority === stat2.priority) {
         if (stat1.excessUseful === stat2.excessUseful) {
-          return OVERALL_STATS_ORDER.indexOf(stat1.stat) - OVERALL_STATS_ORDER.indexOf(stat2.stat);
+          return getOrderedOverallStats().indexOf(stat1.stat) - getOrderedOverallStats().indexOf(stat2.stat);
         } else {
           return (stat2.excessUseful ? 1 : 0) - (stat1.excessUseful ? 1 : 0);
         }
@@ -69,7 +69,7 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
   const getOrderedRemainingStats = () => {
     return Object.values(OverallStat)
       .filter((stat) => !desiredStats.map((desiredStat) => desiredStat.stat).includes(stat))
-      .sort((stat1, stat2) => OVERALL_STATS_ORDER.indexOf(stat1) - OVERALL_STATS_ORDER.indexOf(stat2));
+      .sort((stat1, stat2) => getOrderedOverallStats().indexOf(stat1) - getOrderedOverallStats().indexOf(stat2));
   };
 
   const remove = (stat: OverallStat) => {

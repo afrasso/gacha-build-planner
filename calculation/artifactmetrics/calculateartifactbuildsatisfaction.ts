@@ -1,4 +1,4 @@
-import { MAIN_STAT_ODDS_BY_ARTIFACT_TYPE } from "@/constants";
+import { getMainStatOdds } from "@/constants";
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
 import {
   Artifact,
@@ -68,12 +68,7 @@ const getArtifactMainStatFactorForType = ({
     throw new Error("More than one main stat possibility is currently not supported.");
   }
   const mainStat = mainStats[0];
-  const factor = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[artifactType][mainStat];
-  if (!factor) {
-    throw new Error(
-      `Unexpected error: could not find odds for main stat ${mainStat} on artifact type ${artifactType}.`
-    );
-  }
+  const factor = getMainStatOdds({ artifactType, mainStat });
   return factor;
 };
 

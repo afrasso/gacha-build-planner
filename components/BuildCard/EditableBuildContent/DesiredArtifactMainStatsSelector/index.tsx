@@ -1,7 +1,7 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
-import { MAIN_STATS_BY_ARTIFACT_TYPE } from "@/constants";
+import { getMainStats } from "@/constants";
 import { ArtifactType, DesiredArtifactMainStats } from "@/types";
 
 import DesiredArtifactMainStatSelector from "./DesiredArtifactMainStatSelector";
@@ -26,7 +26,7 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelecto
         <DesiredArtifactMainStatSelector
           artifactType={artifactType}
           key={artifactType}
-          mainStats={MAIN_STATS_BY_ARTIFACT_TYPE[artifactType]}
+          mainStats={getMainStats({ artifactType })}
           onChange={(stat) => onChange({ ...desiredArtifactMainStats, [artifactType]: stat })}
           stat={desiredArtifactMainStats[artifactType]?.[0]}
         />

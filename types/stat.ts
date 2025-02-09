@@ -63,8 +63,6 @@ export const OverallStatSchema = {
 };
 
 export enum Stat {
-  // TODO: This is a bug; it should have been ATK_FLAT but now it exists; fix this.
-  ATK = "ATK",
   ATK_FLAT = "ATK_FLAT",
   ATK_PERCENT = "ATK_PERCENT",
   CRIT_DMG = "CRIT_DMG",
@@ -89,7 +87,6 @@ export enum Stat {
 export const StatSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/Stat",
   enum: [
-    "ATK",
     "ATK_FLAT",
     "ATK_PERCENT",
     "CRIT_DMG",

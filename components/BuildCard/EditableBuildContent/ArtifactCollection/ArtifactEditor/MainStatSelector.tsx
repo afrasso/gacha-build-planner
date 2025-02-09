@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MAIN_STATS_BY_ARTIFACT_TYPE } from "@/constants";
+import { getMainStats } from "@/constants";
 import { ArtifactType, Stat } from "@/types";
 
 interface MainStatSelectorProps {
@@ -55,7 +55,7 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
               <SelectValue placeholder="Select main stat" />
             </SelectTrigger>
             <SelectContent>
-              {MAIN_STATS_BY_ARTIFACT_TYPE[artifactType].map((stat: Stat) => (
+              {getMainStats({ artifactType }).map((stat: Stat) => (
                 <SelectItem key={stat} value={stat}>
                   {stat}
                 </SelectItem>

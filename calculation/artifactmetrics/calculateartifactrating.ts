@@ -1,4 +1,4 @@
-import { SUB_STAT_ROLL_VALUES_BY_RARITY } from "@/constants";
+import { getSubStatRollValues } from "@/constants";
 import { rollArtifact } from "@/simulation/artifact";
 import { Artifact, Build, DesiredOverallStat, OverallStat, Stat } from "@/types";
 
@@ -24,12 +24,12 @@ const calculateSubstatRating = ({
     if (desiredOverallStat.stat !== overallStat) {
       return;
     }
-    const subStat = artifact.subStats.find((subStat) => subStat.stat === stat);
-    if (!subStat) {
+    const subStatValue = artifact.subStats.find((subStat) => subStat.stat === stat);
+    if (!subStatValue) {
       return;
     }
-    const maxRoll = Math.max(...SUB_STAT_ROLL_VALUES_BY_RARITY[5][subStat.stat]!);
-    rating += (PRIORITY_WEIGHTS[desiredOverallStat.priority] * subStat.value) / maxRoll;
+    const maxRoll = Math.max(...getSubStatRollValues({ rarity: artifact.rarity, subStat: subStatValue.stat }));
+    rating += (PRIORITY_WEIGHTS[desiredOverallStat.priority] * subStatValue.value) / maxRoll;
   };
 
   // For now, let's ignore flat stats, since while they do have some value, they certainly don't have full value, and
