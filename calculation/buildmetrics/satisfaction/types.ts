@@ -2,7 +2,7 @@ import { ArtifactSetBonusType, ArtifactType, OverallStat, Stat } from "@/types";
 
 export interface ArtifactMainStatSatisfactionDetails {
   artifactType: ArtifactType;
-  desiredMainStat: Stat;
+  desiredMainStats: Stat[];
   mainStat: Stat | undefined;
   satisfaction: boolean;
 }

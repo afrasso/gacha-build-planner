@@ -6,9 +6,9 @@ import { ArtifactType, Stat } from "@/types";
 
 describe("calculateOddsOfOnSetPieces()", () => {
   const desiredArtifactMainStats = {
-    [ArtifactType.CIRCLET]: Stat.ATK_PERCENT,
-    [ArtifactType.GOBLET]: Stat.ATK_PERCENT,
-    [ArtifactType.SANDS]: Stat.ATK_PERCENT,
+    [ArtifactType.CIRCLET]: [Stat.ATK_PERCENT],
+    [ArtifactType.GOBLET]: [Stat.ATK_PERCENT],
+    [ArtifactType.SANDS]: [Stat.ATK_PERCENT],
   };
 
   describe("When the list of artifact types is empty", () => {

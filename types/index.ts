@@ -109,6 +109,16 @@ const initializeBuild = ({ build }: { build: any }): void => {
       initializeArtifact({ artifact: build.artifacts[artifactType] });
     }
   }
+  if (build.desiredArtifactMainStats) {
+    for (const artifactType of Object.values(ArtifactType)) {
+      if (
+        build.desiredArtifactMainStats[artifactType] &&
+        !Array.isArray(build.desiredArtifactMainStats[artifactType])
+      ) {
+        build.desiredArtifactMainStats[artifactType] = [build.desiredArtifactMainStats[artifactType]];
+      }
+    }
+  }
   if (!build.desiredOverallStats) {
     build.desiredOverallStats = [];
   }
