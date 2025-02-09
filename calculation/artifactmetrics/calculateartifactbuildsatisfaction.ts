@@ -52,18 +52,22 @@ const getArtifactSetBonusFactor = ({
 const getArtifactMainStatFactorForType = ({
   artifact,
   artifactType,
-  mainStat,
+  mainStats,
 }: {
   artifact: Artifact;
   artifactType: ArtifactType;
-  mainStat?: Stat;
+  mainStats?: Stat[];
 }): number => {
-  if (!mainStat) {
+  if (!mainStats || mainStats.length === 0) {
     return 1;
   }
   if (artifact.type === artifactType) {
     return 1;
   }
+  if (mainStats.length > 1) {
+    throw new Error("More than one main stat possibility is currently not supported.");
+  }
+  const mainStat = mainStats[0];
   const factor = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[artifactType][mainStat];
   if (!factor) {
     throw new Error(
@@ -94,7 +98,7 @@ const getArtifactMainStatFactor = ({
   const factor = [ArtifactType.CIRCLET, ArtifactType.GOBLET, ArtifactType.SANDS].reduce((acc, artifactType) => {
     acc =
       acc *
-      getArtifactMainStatFactorForType({ artifact, artifactType, mainStat: desiredArtifactMainStats[artifactType] });
+      getArtifactMainStatFactorForType({ artifact, artifactType, mainStats: desiredArtifactMainStats[artifactType] });
     return acc;
   }, 1);
   return factor;
@@ -125,7 +129,11 @@ const getArtifactsForCalculation = ({
     .filter((type) => type !== artifact.type)
     .reduce(
       (acc, type) => {
-        const mainStat = build.desiredArtifactMainStats[type];
+        const mainStats = build.desiredArtifactMainStats[type];
+        if (mainStats && mainStats.length > 1) {
+          throw new Error("More than one main stat possibility is currently not supported.");
+        }
+        const mainStat = mainStats && mainStats.length > 0 ? mainStats[0] : undefined;
         acc[type] = rollNewArtifact({ level: 20, mainStat, rarity: 5, setId: artifact.setId, type });
         return acc;
       },
@@ -159,7 +167,7 @@ export const calculateArtifactBuildSatisfaction = ({
   // If you've defined a required main stat for this artifact type in your build, and this doesn't match, it's a default 0.
   if (
     build.desiredArtifactMainStats[artifact.type] &&
-    build.desiredArtifactMainStats[artifact.type] !== artifact.mainStat
+    !build.desiredArtifactMainStats[artifact.type]?.includes(artifact.mainStat)
   ) {
     return 0;
   }

@@ -35,9 +35,9 @@ describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
 
   it("renders correctly with initial values", () => {
     const desiredArtifactMainStats: DesiredArtifactMainStats = {
-      [ArtifactType.CIRCLET]: Stat.CRIT_RATE,
-      [ArtifactType.GOBLET]: Stat.DMG_BONUS_PYRO,
-      [ArtifactType.SANDS]: Stat.ATK_PERCENT,
+      [ArtifactType.CIRCLET]: [Stat.CRIT_RATE],
+      [ArtifactType.GOBLET]: [Stat.DMG_BONUS_PYRO],
+      [ArtifactType.SANDS]: [Stat.ATK_PERCENT],
     };
 
     renderComponent(desiredArtifactMainStats);

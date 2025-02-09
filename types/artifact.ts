@@ -156,17 +156,17 @@ export const BuildArtifactsSchema = {
   type: "object",
 };
 
-export type DesiredArtifactMainStats = Partial<Record<ArtifactType, Stat>>;
+export type DesiredArtifactMainStats = Partial<Record<ArtifactType, Stat[]>>;
 
 export const DesiredArtifactMainStatsSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/DesiredArtifactMainStats",
   additionalProperties: false,
   properties: {
-    CIRCLET: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
-    FLOWER: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
-    GOBLET: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
-    PLUME: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
-    SANDS: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
+    CIRCLET: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
+    FLOWER: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
+    GOBLET: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
+    PLUME: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
+    SANDS: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
   },
   required: [],
   type: "object",

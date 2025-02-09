@@ -157,9 +157,9 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
   describe("When there are main stat requirements", () => {
     const desiredArtifactMainStats = {
-      [ArtifactType.CIRCLET]: Stat.ATK_PERCENT,
-      [ArtifactType.GOBLET]: Stat.ATK_PERCENT,
-      [ArtifactType.SANDS]: Stat.ATK_PERCENT,
+      [ArtifactType.CIRCLET]: [Stat.ATK_PERCENT],
+      [ArtifactType.GOBLET]: [Stat.ATK_PERCENT],
+      [ArtifactType.SANDS]: [Stat.ATK_PERCENT],
     };
 
     describe("and no set bonuses are specified", () => {

@@ -54,7 +54,7 @@ const calculateRating = ({ artifact, build }: { artifact: Artifact; build: Build
   // If the build requires a specific main stat, and the current artifact doesn't have it, the artifact has no value.
   if (
     build.desiredArtifactMainStats[artifact.type] &&
-    build.desiredArtifactMainStats[artifact.type] !== artifact.mainStat
+    !build.desiredArtifactMainStats[artifact.type]?.includes(artifact.mainStat)
   ) {
     return 0;
   }

@@ -9,10 +9,17 @@ export const calculateArtifactMainStatsSatisfaction = ({
   artifacts: BuildArtifacts;
   desiredArtifactMainStats: DesiredArtifactMainStats;
 }): SatisfactionResult<ArtifactMainStatSatisfactionDetails> => {
-  const details = (Object.entries(desiredArtifactMainStats) as [ArtifactType, Stat][]).map(([artifactType, stat]) => {
-    const mainStat = artifacts[artifactType]?.mainStat;
-    return { artifactType, desiredMainStat: stat, mainStat, satisfaction: mainStat === stat };
-  });
+  const details = (Object.entries(desiredArtifactMainStats) as [ArtifactType, Stat[]][]).map(
+    ([artifactType, mainStats]) => {
+      const mainStat = artifacts[artifactType]?.mainStat;
+      return {
+        artifactType,
+        desiredMainStats: mainStats,
+        mainStat,
+        satisfaction: !!mainStat && mainStats.includes(mainStat),
+      };
+    }
+  );
 
   return {
     details,

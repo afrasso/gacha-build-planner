@@ -28,7 +28,7 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelecto
           key={artifactType}
           mainStats={MAIN_STATS_BY_ARTIFACT_TYPE[artifactType]}
           onChange={(stat) => onChange({ ...desiredArtifactMainStats, [artifactType]: stat })}
-          stat={desiredArtifactMainStats[artifactType]}
+          stat={desiredArtifactMainStats[artifactType]?.[0]}
         />
       ))}
     </div>

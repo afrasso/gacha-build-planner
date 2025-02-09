@@ -58,7 +58,7 @@ const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMa
           <Hourglass size={32} />
           <SatisfactionIcon
             isSatisfied={mainStatSatisfactions[ArtifactType.SANDS].satisfaction}
-            tooltipText={`${ArtifactType.SANDS}: ${mainStatSatisfactions[ArtifactType.SANDS].desiredMainStat}`}
+            tooltipText={`${ArtifactType.SANDS}: ${mainStatSatisfactions[ArtifactType.SANDS].desiredMainStats}`}
           />
         </div>
       )}
@@ -67,7 +67,7 @@ const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMa
           <Wine size={32} />
           <SatisfactionIcon
             isSatisfied={mainStatSatisfactions[ArtifactType.GOBLET].satisfaction}
-            tooltipText={`${ArtifactType.GOBLET}: ${mainStatSatisfactions[ArtifactType.GOBLET].desiredMainStat}`}
+            tooltipText={`${ArtifactType.GOBLET}: ${mainStatSatisfactions[ArtifactType.GOBLET].desiredMainStats}`}
           />
         </div>
       )}
@@ -76,7 +76,7 @@ const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMa
           <Crown size={32} />
           <SatisfactionIcon
             isSatisfied={mainStatSatisfactions[ArtifactType.CIRCLET].satisfaction}
-            tooltipText={`${ArtifactType.CIRCLET}: ${mainStatSatisfactions[ArtifactType.CIRCLET].desiredMainStat}`}
+            tooltipText={`${ArtifactType.CIRCLET}: ${mainStatSatisfactions[ArtifactType.CIRCLET].desiredMainStats}`}
           />
         </div>
       )}

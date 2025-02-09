@@ -22,7 +22,14 @@ const calculateOddsOfOnSetPieces = ({
 }): number => {
   // Odds are the odds that all of the specified artifacts are on-set.
   const initialOdds = artifactTypes.reduce((acc, artifactType) => {
-    const desiredArtifactMainStat = desiredArtifactMainStats[artifactType];
+    const desiredMainStatsForArtifact = desiredArtifactMainStats[artifactType];
+    if (desiredMainStatsForArtifact && desiredMainStatsForArtifact.length > 1) {
+      throw new Error("More than one main stat possibility is currently not supported.");
+    }
+    const desiredArtifactMainStat =
+      desiredMainStatsForArtifact && desiredMainStatsForArtifact.length > 0
+        ? desiredMainStatsForArtifact[0]
+        : undefined;
     if (desiredArtifactMainStat) {
       const odds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[artifactType][desiredArtifactMainStat];
       if (!odds) {
