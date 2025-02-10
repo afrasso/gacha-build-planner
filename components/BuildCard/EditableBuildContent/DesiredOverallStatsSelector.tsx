@@ -14,11 +14,15 @@ import { DesiredOverallStat, OverallStat } from "@/types";
 
 interface DesiredOverallStatsSelectorProps {
   currentStats: Record<OverallStat, number>;
-  desiredStats: DesiredOverallStat[];
-  onChange: (desiredStats: DesiredOverallStat[]) => void;
+  desiredOverallStats: DesiredOverallStat[];
+  onChange: (desiredOverallStats: DesiredOverallStat[]) => void;
 }
 
-const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ currentStats, desiredStats, onChange }) => {
+const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({
+  currentStats,
+  desiredOverallStats,
+  onChange,
+}) => {
   const [excessUseful, setExcessUseful] = useState(false);
   const [isAddingDesiredStat, setIsAddingDesiredStat] = useState(false);
   const [isStatValid, setIsStatValid] = useState(true);
@@ -32,7 +36,7 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
   };
 
   const canAddStatValue = () => {
-    return desiredStats.length < Object.values(OverallStat).length;
+    return desiredOverallStats.length < Object.values(OverallStat).length;
   };
 
   const cancel = () => {
@@ -49,12 +53,12 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
       setStat(undefined);
       setValue(undefined);
       setIsAddingDesiredStat(false);
-      onChange([...desiredStats, desiredStat]);
+      onChange([...desiredOverallStats, desiredStat]);
     }
   };
 
-  const getOrderedDesiredStats = () => {
-    return desiredStats.sort((stat1, stat2) => {
+  const getOrderedDesiredOverallStats = () => {
+    return desiredOverallStats.sort((stat1, stat2) => {
       if (stat1.priority === stat2.priority) {
         if (stat1.excessUseful === stat2.excessUseful) {
           return getOrderedOverallStats().indexOf(stat1.stat) - getOrderedOverallStats().indexOf(stat2.stat);
@@ -68,12 +72,12 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
 
   const getOrderedRemainingStats = () => {
     return Object.values(OverallStat)
-      .filter((stat) => !desiredStats.map((desiredStat) => desiredStat.stat).includes(stat))
+      .filter((stat) => !desiredOverallStats.map((desiredStat) => desiredStat.stat).includes(stat))
       .sort((stat1, stat2) => getOrderedOverallStats().indexOf(stat1) - getOrderedOverallStats().indexOf(stat2));
   };
 
   const remove = (stat: OverallStat) => {
-    onChange(desiredStats.filter((desiredStat) => desiredStat.stat !== stat));
+    onChange(desiredOverallStats.filter((desiredStat) => desiredStat.stat !== stat));
   };
 
   const updateExcessUseful = (excessUseful: boolean) => {
@@ -112,7 +116,7 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
         <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Desired Stats:</Label>
         <div className="flex-grow flex items-center">
           <div className="flex items-center flex-grow h-8 px-3 py-2 text-left text-sm">
-            {!(desiredStats?.length > 0) && <span className="text-sm text-muted-foreground">None selected</span>}
+            {!(desiredOverallStats?.length > 0) && <span className="text-sm text-muted-foreground">None selected</span>}
           </div>
           <div className="flex ml-2 gap-1">
             <Button
@@ -128,7 +132,7 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
         </div>
       </div>
       <div className="flex flex-col justify-between">
-        {getOrderedDesiredStats().map((desiredStat) => (
+        {getOrderedDesiredOverallStats().map((desiredStat) => (
           <div className="flex-grow flex items-center" key={desiredStat.stat}>
             <div className="h-8 px-3 mr-2 text-sm flex items-center justify-between w-full">
               <div className="flex-grow w-3/4">{desiredStat.stat}</div>
@@ -227,4 +231,4 @@ const DesiredStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = ({ curr
   );
 };
 
-export default DesiredStatsSelector;
+export default DesiredOverallStatsSelector;

@@ -9,7 +9,7 @@ export const compareBuilds = ({ actualBuilds, expectedBuilds }: { actualBuilds: 
     expect(actualBuild).not.toBeUndefined();
     expect(actualBuild!.artifacts).toEqual(expectedBuild.artifacts);
     expect(actualBuild!.desiredArtifactMainStats).toEqual(expectedBuild.desiredArtifactMainStats);
-    expect(actualBuild!.desiredStats).toEqual(expectedBuild.desiredStats);
+    expect(actualBuild!.desiredOverallStats).toEqual(expectedBuild.desiredOverallStats);
     expect(actualBuild!.weaponId).toEqual(expectedBuild.weaponId);
   });
 };
