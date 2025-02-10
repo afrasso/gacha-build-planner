@@ -1,8 +1,7 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
-import { getMainStats } from "@/constants";
-import { ArtifactType, DesiredArtifactMainStats, Stat } from "@/types";
+import { ArtifactType, DesiredArtifactMainStats } from "@/types";
 
 import DesiredArtifactMainStatSelector from "./DesiredArtifactMainStatSelector";
 
