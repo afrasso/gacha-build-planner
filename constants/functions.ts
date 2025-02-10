@@ -1,15 +1,21 @@
 import { ArtifactTier, ArtifactType, OverallStat, Stat } from "@/types";
 
 import {
+  ARTIFACT_LEVELS_PER_SUBSTAT_ROLL,
   ARTIFACT_MAX_LEVEL_BY_RARITY,
   ARTIFACT_TIER_BY_NUMERIC_RATING,
   INITIAL_SUBSTAT_COUNT_ODDS_BY_RARITY,
   MAIN_STAT_MAX_VALUES_BY_RARITY,
   MAIN_STAT_ODDS_BY_ARTIFACT_TYPE,
+  MAX_SUBSTATS,
   OVERALL_STATS_ORDER,
   SUB_STAT_ROLL_VALUES_BY_RARITY,
   SUB_STAT_WEIGHTS,
 } from "./constants";
+
+export const getArtifactLevelsPerSubStatRoll = (): number => {
+  return ARTIFACT_LEVELS_PER_SUBSTAT_ROLL;
+};
 
 export const getArtifactMaxLevel = ({ rarity }: { rarity: number }): number => {
   const maxLevel = ARTIFACT_MAX_LEVEL_BY_RARITY[rarity];
@@ -56,6 +62,10 @@ export const getMainStatOdds = ({ artifactType, mainStat }: { artifactType: Arti
 export const getMainStats = ({ artifactType }: { artifactType: ArtifactType }): Stat[] => {
   const odds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[artifactType];
   return Object.entries(odds).map(([stat]) => stat as Stat);
+};
+
+export const getMaxSubStats = (): number => {
+  return MAX_SUBSTATS;
 };
 
 export const getOrderedOverallStats = (): OverallStat[] => {

@@ -12,12 +12,13 @@ const getWeightedArtifactSetBonusFactor = ({
   desiredArtifactMainStats: DesiredArtifactMainStats;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
 }): number => {
-  // If the artifact matches one of the sets that's required, we also don't need to reduce the factor.
-  if (desiredArtifactSetBonuses.map((bonus) => bonus.setId).includes(artifact.setId)) {
+  // If there are no desired set bonuses, the odds of getting an artifact with a set we're happy with is 1.
+  if (!desiredArtifactSetBonuses || desiredArtifactSetBonuses.length === 0) {
     return 1;
   }
 
-  if (desiredArtifactSetBonuses.length === 0) {
+  // If the artifact matches one of the sets that's required, we don't then the factor is 1.
+  if (desiredArtifactSetBonuses.map((bonus) => bonus.setId).includes(artifact.setId)) {
     return 1;
   }
 

@@ -19,7 +19,6 @@ export const createNewBuild = ({
     desiredArtifactMainStats: {},
     desiredArtifactSetBonuses: [],
     desiredOverallStats: [],
-    desiredStats: [],
     lastUpdatedDate: new Date().toISOString(),
     sortOrder: -1,
     weaponId: undefined,

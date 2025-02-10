@@ -1,15 +1,16 @@
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 
-import { MAIN_STATS_BY_ARTIFACT_TYPE, SUB_STATS } from "@/constants";
+import { getMainStats, getSubStats } from "@/constants";
 import {
   Artifact,
+  ArtifactMetric,
   ArtifactSet,
   ArtifactSetBonus,
   ArtifactSetBonusType,
   ArtifactType,
   Build,
-  OverallStat,
+  DesiredOverallStat,
   Plan,
   Stat,
   StatValue,
@@ -42,7 +43,7 @@ export const generateArtifactSet = (): ArtifactSet => {
 
 export const generateSubStats = (): StatValue<Stat>[] => {
   return _.times(4, () => ({
-    stat: getRandomElement(SUB_STATS),
+    stat: getRandomElement(getSubStats()),
     value: Math.random(),
   }));
 };
@@ -50,8 +51,19 @@ export const generateSubStats = (): StatValue<Stat>[] => {
 export const generateArtifact = (type: ArtifactType): Artifact => {
   return {
     id: uuidv4(),
+    isLocked: false,
+    lastUpdatedDate: new Date().toISOString(),
     level: Math.random(),
-    mainStat: getRandomElement(MAIN_STATS_BY_ARTIFACT_TYPE[type]),
+    mainStat: getRandomElement(getMainStats({ artifactType: type })),
+    metricsResults: {
+      [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
+      [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
+      [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
+      [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
+      [ArtifactMetric.PLUS_MINUS]: { buildResults: {} },
+      [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
+      [ArtifactMetric.RATING]: { buildResults: {} },
+    },
     rarity: Math.random(),
     setId: uuidv4(),
     subStats: generateSubStats(),
@@ -67,9 +79,9 @@ export const generateBuild = (): Build => {
   };
   const characterId = uuidv4();
   const desiredArtifactMainStats = {
-    [ArtifactType.CIRCLET]: getRandomElement(MAIN_STATS_BY_ARTIFACT_TYPE[ArtifactType.CIRCLET]),
-    [ArtifactType.GOBLET]: getRandomElement(MAIN_STATS_BY_ARTIFACT_TYPE[ArtifactType.GOBLET]),
-    [ArtifactType.SANDS]: getRandomElement(MAIN_STATS_BY_ARTIFACT_TYPE[ArtifactType.SANDS]),
+    [ArtifactType.CIRCLET]: [getRandomElement(getMainStats({ artifactType: ArtifactType.CIRCLET }))],
+    [ArtifactType.GOBLET]: [getRandomElement(getMainStats({ artifactType: ArtifactType.GOBLET }))],
+    [ArtifactType.SANDS]: [getRandomElement(getMainStats({ artifactType: ArtifactType.SANDS }))],
   };
   const desiredArtifactSetBonuses: ArtifactSetBonus[] = [
     {
@@ -77,9 +89,20 @@ export const generateBuild = (): Build => {
       setId: uuidv4(),
     },
   ];
-  const desiredStats = Object.values(OverallStat).map((stat) => ({ stat, value: Math.random() }));
+  const desiredOverallStats: DesiredOverallStat[] = [];
+  const lastUpdatedDate = new Date().toISOString();
+  const sortOrder = 0;
   const weaponId = uuidv4();
-  return { artifacts, characterId, desiredArtifactMainStats, desiredArtifactSetBonuses, desiredStats, weaponId };
+  return {
+    artifacts,
+    characterId,
+    desiredArtifactMainStats,
+    desiredArtifactSetBonuses,
+    desiredOverallStats,
+    lastUpdatedDate,
+    sortOrder,
+    weaponId,
+  };
 };
 
 export const generatePlan = ({ planId, userId }: { planId: string; userId: string }): Plan => {

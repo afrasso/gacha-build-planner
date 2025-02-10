@@ -65,7 +65,7 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUp
       />
       <DesiredOverallStatsSelector
         currentStats={currentStats}
-        desiredStats={build.desiredOverallStats || []}
+        desiredOverallStats={build.desiredOverallStats || []}
         onChange={updateDesiredOverallStats}
       />
       <ArtifactCollection artifacts={build.artifacts} onUpdate={updateArtifacts} />

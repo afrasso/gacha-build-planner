@@ -54,7 +54,6 @@ const BuildManager = () => {
           desiredArtifactMainStats: {},
           desiredArtifactSetBonuses: [],
           desiredOverallStats: [],
-          desiredStats: [],
           lastUpdatedDate: new Date().toISOString(),
           sortOrder: builds.length,
         },

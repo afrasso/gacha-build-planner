@@ -1,30 +1,20 @@
-import { getMainStatOdds } from "@/constants";
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import {
-  Artifact,
-  ArtifactMetric,
-  ArtifactSetBonus,
-  ArtifactSetBonusType,
-  ArtifactType,
-  Build,
-  BuildArtifacts,
-  DesiredArtifactMainStats,
-  SatisfactionCalculationType,
-  Stat,
-} from "@/types";
+import { Artifact, ArtifactMetric, ArtifactType, Build, BuildArtifacts, SatisfactionCalculationType } from "@/types";
 import { getEnumValues } from "@/utils/getenumvalues";
 
-import { rollArtifact, rollNewArtifact } from "../../simulation/artifact";
 import { calculateBuildSatisfaction, TargetStatsStrategy } from "../buildmetrics/satisfaction";
+import { rollArtifact, rollNewArtifact } from "../simulation";
+import { getArtifactMainStatsFactor } from "./mainstatsfactor";
+import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
 
-const getArtifactSetBonusFactor = ({
+const getSetBonusFactor = ({
   artifact,
+  build,
   calculationType,
-  desiredArtifactSetBonuses,
 }: {
   artifact: Artifact;
+  build: Build;
   calculationType: SatisfactionCalculationType;
-  desiredArtifactSetBonuses: ArtifactSetBonus[];
 }): number => {
   // Since we're not generating random artifacts, we're already taking into account the current artifact's set and
   // those of the other artifacts on the build, so no need to reduce the factor at all.
@@ -35,51 +25,21 @@ const getArtifactSetBonusFactor = ({
     return 1;
   }
 
-  // If the artifact matches one of the sets that's required, we also don't need to reduce the factor.
-  if (desiredArtifactSetBonuses.map((bonus) => bonus.setId).includes(artifact.setId)) {
-    return 1;
-  }
-
-  // Otherwise, reduce the factor by the number of other artifacts that are required to meet the desired set bonuses.
-  const requiredMatchingArtifactCount = desiredArtifactSetBonuses.reduce((result, bonus) => {
-    result += bonus.bonusType === ArtifactSetBonusType.FOUR_PIECE ? 4 : 2;
-    return result;
-  }, 0);
-  const factor = (5 - requiredMatchingArtifactCount) / 5;
-  return factor;
+  return getWeightedArtifactSetBonusFactor({
+    artifact,
+    desiredArtifactMainStats: build.desiredArtifactMainStats,
+    desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
+  });
 };
 
-const getArtifactMainStatFactorForType = ({
+const getMainStatsFactor = ({
   artifact,
-  artifactType,
-  mainStats,
-}: {
-  artifact: Artifact;
-  artifactType: ArtifactType;
-  mainStats?: Stat[];
-}): number => {
-  if (!mainStats || mainStats.length === 0) {
-    return 1;
-  }
-  if (artifact.type === artifactType) {
-    return 1;
-  }
-  if (mainStats.length > 1) {
-    throw new Error("More than one main stat possibility is currently not supported.");
-  }
-  const mainStat = mainStats[0];
-  const factor = getMainStatOdds({ artifactType, mainStat });
-  return factor;
-};
-
-const getArtifactMainStatFactor = ({
-  artifact,
+  build,
   calculationType,
-  desiredArtifactMainStats,
 }: {
   artifact: Artifact;
+  build: Build;
   calculationType: SatisfactionCalculationType;
-  desiredArtifactMainStats: DesiredArtifactMainStats;
 }): number => {
   // Since we're not generating random artifacts, we're already taking into account the current artifact's set and
   // those of the other artifacts on the build, so no need to reduce the factor at all.
@@ -90,13 +50,7 @@ const getArtifactMainStatFactor = ({
     return 1;
   }
 
-  const factor = [ArtifactType.CIRCLET, ArtifactType.GOBLET, ArtifactType.SANDS].reduce((acc, artifactType) => {
-    acc =
-      acc *
-      getArtifactMainStatFactorForType({ artifact, artifactType, mainStats: desiredArtifactMainStats[artifactType] });
-    return acc;
-  }, 1);
-  return factor;
+  return getArtifactMainStatsFactor({ artifact, desiredArtifactMainStats: build.desiredArtifactMainStats });
 };
 
 const getArtifactsForCalculation = ({
@@ -166,6 +120,7 @@ export const calculateArtifactBuildSatisfaction = ({
   ) {
     return 0;
   }
+
   let satisfactionCount = 0;
   const targetStatsStrategy = getTargetStatsStrategy({ calculationType });
   for (let i = 0; i < iterations; i++) {
@@ -174,22 +129,13 @@ export const calculateArtifactBuildSatisfaction = ({
       artifacts,
       build,
       genshinDataContext,
-      ignoreSetBonuses: true,
       targetStatsStrategy,
     });
 
     // Factor in set bonus requirements into satisfaction result (since they basically weren't considered above).
-    const setBonusFactor = getArtifactSetBonusFactor({
-      artifact,
-      calculationType,
-      desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
-    });
-    const mainStatFactor = getArtifactMainStatFactor({
-      artifact,
-      calculationType,
-      desiredArtifactMainStats: build.desiredArtifactMainStats,
-    });
-    satisfactionCount += setBonusFactor * mainStatFactor * (satisfactionResult.overallSatisfaction ? 1 : 0);
+    const setBonusFactor = getSetBonusFactor({ artifact, build, calculationType });
+    const mainStatsFactor = getMainStatsFactor({ artifact, build, calculationType });
+    satisfactionCount += setBonusFactor * mainStatsFactor * (satisfactionResult.overallSatisfaction ? 1 : 0);
   }
   return satisfactionCount / iterations;
 };

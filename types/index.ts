@@ -23,14 +23,7 @@ import {
 import { Build, BuildArraySchema, BuildSchema } from "./build";
 import { CharacterSchema, ElementSchema } from "./character";
 import { Plan, PlanSchema } from "./plan";
-import {
-  DesiredOverallStatSchema,
-  OverallStatSchema,
-  OverallStatValueSchema,
-  Stat,
-  StatSchema,
-  StatValueSchema,
-} from "./stat";
+import { DesiredOverallStatSchema, OverallStatSchema, Stat, StatSchema, StatValueSchema } from "./stat";
 import { WeaponSchema, WeaponTypeSchema } from "./weapon";
 
 export * from "./artifact";
@@ -69,7 +62,6 @@ ajv.addSchema(PlanSchema);
 
 ajv.addSchema(DesiredOverallStatSchema);
 ajv.addSchema(OverallStatSchema);
-ajv.addSchema(OverallStatValueSchema);
 ajv.addSchema(StatSchema);
 ajv.addSchema(StatValueSchema);
 
@@ -122,6 +114,9 @@ const initializeBuild = ({ build }: { build: any }): void => {
         build.desiredArtifactMainStats[artifactType] = [build.desiredArtifactMainStats[artifactType]];
       }
     }
+  }
+  if (build.desiredStats) {
+    delete build.desiredStats;
   }
   if (!build.desiredOverallStats) {
     build.desiredOverallStats = [];

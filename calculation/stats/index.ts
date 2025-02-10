@@ -17,7 +17,7 @@ export const calculateStats = ({
   artifacts?: BuildArtifacts;
   build: Build;
   genshinDataContext: GenshinDataContext;
-}) => {
+}): Record<OverallStat, number> => {
   const { getCharacter, getWeapon } = genshinDataContext;
   const character = getCharacter(build.characterId);
   const weapon = build.weaponId ? getWeapon(build.weaponId) : undefined;

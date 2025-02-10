@@ -1,5 +1,5 @@
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Build, BuildArtifacts, OverallStat, StatValue } from "@/types";
+import { Build, BuildArtifacts, DesiredOverallStat, OverallStat, StatValue } from "@/types";
 
 import { calculateStats } from "../../stats";
 import { calculateArtifactMainStatsSatisfaction } from "./artifactmainstats";
@@ -10,15 +10,15 @@ import { BuildSatisfactionResult, TargetStatsStrategy } from "./types";
 export * from "./types";
 
 const getTargetStats = ({
-  desiredStats,
+  desiredOverallStats,
   stats,
 }: {
-  desiredStats: StatValue<OverallStat>[];
+  desiredOverallStats: DesiredOverallStat[];
   stats: Record<OverallStat, number>;
 }): StatValue<OverallStat>[] => {
-  return desiredStats.map((desiredStat) => ({
-    stat: desiredStat.stat,
-    value: stats[desiredStat.stat],
+  return desiredOverallStats.map((desiredOverallStat) => ({
+    stat: desiredOverallStat.stat,
+    value: stats[desiredOverallStat.stat],
   }));
 };
 
@@ -26,13 +26,11 @@ export const calculateBuildSatisfaction = ({
   artifacts,
   build,
   genshinDataContext,
-  ignoreSetBonuses = false,
   targetStatsStrategy = TargetStatsStrategy.CURRENT,
 }: {
   artifacts?: BuildArtifacts;
   build: Build;
   genshinDataContext: GenshinDataContext;
-  ignoreSetBonuses?: boolean;
   targetStatsStrategy?: TargetStatsStrategy;
 }): BuildSatisfactionResult => {
   const artifactMainStatsSatisfaction = calculateArtifactMainStatsSatisfaction({
@@ -40,18 +38,16 @@ export const calculateBuildSatisfaction = ({
     desiredArtifactMainStats: build.desiredArtifactMainStats,
   });
 
-  const artifactSetBonusesSatisfaction = ignoreSetBonuses
-    ? undefined
-    : calculateArtifactSetBonusesSatisfaction({
-        artifacts: artifacts || build.artifacts,
-        desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
-      });
+  const artifactSetBonusesSatisfaction = calculateArtifactSetBonusesSatisfaction({
+    artifacts: artifacts || build.artifacts,
+    desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
+  });
 
   const stats = calculateStats({ artifacts, build, genshinDataContext });
   const targetStats =
     targetStatsStrategy === TargetStatsStrategy.CURRENT
-      ? getTargetStats({ desiredStats: build.desiredStats, stats })
-      : build.desiredStats;
+      ? getTargetStats({ desiredOverallStats: build.desiredOverallStats, stats })
+      : build.desiredOverallStats;
   const statsSatisfaction = calculateTargetStatsSatisfaction({ stats, targetStats });
 
   return {

@@ -1,5 +1,5 @@
 import { ArtifactSetBonus, BuildArtifacts, DesiredArtifactMainStats } from "./artifact";
-import { DesiredOverallStat, OverallStat, StatValue } from "./stat";
+import { DesiredOverallStat } from "./stat";
 
 export interface Build {
   artifacts: BuildArtifacts;
@@ -7,8 +7,6 @@ export interface Build {
   desiredArtifactMainStats: DesiredArtifactMainStats;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredOverallStats: DesiredOverallStat[];
-  // TODO: Remove this?
-  desiredStats: StatValue<OverallStat>[];
   lastUpdatedDate: string;
   sortOrder: number;
   weaponId?: string;
@@ -29,7 +27,6 @@ export const BuildSchema = {
       items: { $ref: "https://gacha-build-planner.vercel.app/schemas/DesiredOverallStat" },
       type: "array",
     },
-    desiredStats: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStatValue" }, type: "array" },
     lastUpdatedDate: { format: "date-time", type: "string" },
     sortOrder: { type: "integer" },
     weaponId: { type: "string" },

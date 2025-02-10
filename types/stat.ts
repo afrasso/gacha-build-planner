@@ -115,17 +115,6 @@ export interface StatValue<T extends OverallStat | Stat> {
   value: number;
 }
 
-export const OverallStatValueSchema = {
-  $id: "https://gacha-build-planner.vercel.app/schemas/OverallStatValue",
-  additionalProperties: false,
-  properties: {
-    stat: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStat" },
-    value: { type: "number" },
-  },
-  required: [],
-  type: "object",
-};
-
 export const StatValueSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/StatValue",
   additionalProperties: false,
