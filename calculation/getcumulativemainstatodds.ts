@@ -9,7 +9,7 @@ const getCumulativeMainStatOdds = ({
   mainStats?: Stat[];
 }): number => {
   // If no main stats are specified, we can assume that any main stat is acceptable, and thus the odds of getting an
-  //  main stat is 1.
+  // main stat is 1.
   if (!mainStats || mainStats.length === 0) {
     return 1;
   }

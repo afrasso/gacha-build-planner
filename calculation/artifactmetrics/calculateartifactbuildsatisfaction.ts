@@ -78,12 +78,13 @@ const getArtifactsForCalculation = ({
     .filter((type) => type !== artifact.type)
     .reduce(
       (acc, type) => {
-        const mainStats = build.desiredArtifactMainStats[type];
-        if (mainStats && mainStats.length > 1) {
-          throw new Error("More than one main stat possibility is currently not supported.");
-        }
-        const mainStat = mainStats && mainStats.length > 0 ? mainStats[0] : undefined;
-        acc[type] = rollNewArtifact({ level: 20, mainStat, rarity: 5, setId: artifact.setId, type });
+        acc[type] = rollNewArtifact({
+          level: 20,
+          mainStats: build.desiredArtifactMainStats[type],
+          rarity: 5,
+          setId: artifact.setId,
+          type,
+        });
         return acc;
       },
       { [artifact.type]: rollArtifact({ artifact }) }

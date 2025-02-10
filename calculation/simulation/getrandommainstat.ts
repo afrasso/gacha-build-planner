@@ -1,18 +1,26 @@
 import { getMainStatOdds, getMainStats } from "@/constants";
 import { ArtifactType, Stat } from "@/types";
+import getCumulativeMainStatOdds from "../getcumulativemainstatodds";
 
-export const getRandomMainStat = ({ type }: { type: ArtifactType }): Stat => {
-  const random = Math.random();
-  let cumulativeOdds = 0;
-  for (const mainStat of getMainStats({ artifactType: type })) {
+export const getRandomMainStat = ({ mainStats, type }: { mainStats?: Stat[]; type: ArtifactType }): Stat => {
+  const unfilteredMainStats = getMainStats({ artifactType: type });
+  const filteredMainStats =
+    mainStats && mainStats.length > 0
+      ? unfilteredMainStats.filter((stat) => mainStats?.includes(stat))
+      : unfilteredMainStats;
+  const cumulativeOdds = getCumulativeMainStatOdds({ artifactType: type, mainStats: filteredMainStats });
+
+  const random = Math.random() * cumulativeOdds;
+  let currentCumulativeOdds = 0;
+  for (const mainStat of filteredMainStats) {
     const odds = getMainStatOdds({ artifactType: type, mainStat });
-    if (random < cumulativeOdds + odds) {
+    if (random < currentCumulativeOdds + odds) {
       return mainStat;
     }
-    cumulativeOdds += odds;
+    currentCumulativeOdds += odds;
   }
 
   throw new Error(
-    `Unexpected error: the cumulative main stat odds for the artifact type ${type} are greater than one: ${cumulativeOdds}.`
+    `Unexpected error: the actual cumulative main stat odds for the artifact type ${type} are greater than the expected cumulative odds: ${currentCumulativeOdds}.`
   );
 };

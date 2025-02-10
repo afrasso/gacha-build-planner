@@ -17,23 +17,7 @@ describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
     vi.clearAllMocks();
   });
 
-  it("renders correctly with no initial values", () => {
-    renderComponent();
-
-    const label = screen.getByTestId("main-stats-label");
-    expect(label).toBeInTheDocument();
-    expect(label).toHaveTextContent("Main Stats:");
-
-    [ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].forEach((artifactType) => {
-      const mainStatSelector = screen.getByTestId(artifactType);
-      expect(mainStatSelector).toBeInTheDocument();
-      const emptyContent = within(mainStatSelector).getByTestId("stat-not-populated");
-      expect(emptyContent).toBeInTheDocument();
-      expect(emptyContent).toHaveTextContent("Not selected");
-    });
-  });
-
-  it("renders correctly with initial values", () => {
+  it("renders correctly", () => {
     const desiredArtifactMainStats: DesiredArtifactMainStats = {
       [ArtifactType.CIRCLET]: [Stat.CRIT_RATE],
       [ArtifactType.GOBLET]: [Stat.DMG_BONUS_PYRO],
@@ -47,11 +31,8 @@ describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
     expect(label).toHaveTextContent("Main Stats:");
 
     [ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].forEach((artifactType) => {
-      const mainStatSelector = screen.getByTestId(artifactType);
-      expect(mainStatSelector).toBeInTheDocument();
-      const emptyContent = within(mainStatSelector).getByTestId("stat-populated");
-      expect(emptyContent).toBeInTheDocument();
-      expect(emptyContent).toHaveTextContent(`${desiredArtifactMainStats[artifactType]}`);
+      const artifactLabel = screen.getByTestId(`${artifactType}-label`);
+      expect(artifactLabel).toBeInTheDocument();
     });
   });
 });

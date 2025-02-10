@@ -1,4 +1,4 @@
-import { getMainStatOdds } from "@/constants";
+import getCumulativeMainStatOdds from "@/calculation/getcumulativemainstatodds";
 import { ArtifactType, DesiredArtifactMainStats } from "@/types";
 
 const calculateFactorial = (n: number): number => {
@@ -20,21 +20,11 @@ const calculateOddsOfOnSetPieces = ({
   artifactTypes: ArtifactType[];
   desiredArtifactMainStats: DesiredArtifactMainStats;
 }): number => {
-  // Odds are the odds that all of the specified artifacts are on-set.
+  // Total odds are the odds that all of the specified artifacts are on-set.
   const initialOdds = artifactTypes.reduce((acc, artifactType) => {
-    const desiredMainStatsForArtifact = desiredArtifactMainStats[artifactType];
-    if (desiredMainStatsForArtifact && desiredMainStatsForArtifact.length > 1) {
-      throw new Error("More than one main stat possibility is currently not supported.");
-    }
-    const desiredArtifactMainStat =
-      desiredMainStatsForArtifact && desiredMainStatsForArtifact.length > 0
-        ? desiredMainStatsForArtifact[0]
-        : undefined;
-    if (desiredArtifactMainStat) {
-      const odds = getMainStatOdds({ artifactType, mainStat: desiredArtifactMainStat });
-      // Divide by five due to the raw odds of even getting this artifact type.
-      acc = acc * odds;
-    }
+    const odds = getCumulativeMainStatOdds({ artifactType, mainStats: desiredArtifactMainStats[artifactType] });
+    // Divide by five due to the raw odds of even getting this artifact type.
+    acc = acc * odds;
     return acc / 5;
   }, 1);
 

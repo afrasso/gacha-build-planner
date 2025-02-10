@@ -7,18 +7,18 @@ import { getRandomMainStat } from "./getrandommainstat";
 
 export const rollNewArtifact = ({
   level,
-  mainStat,
+  mainStats,
   rarity,
   setId,
   type,
 }: {
   level: number;
-  mainStat?: Stat;
+  mainStats?: Stat[];
   rarity: number;
   setId: string;
   type: ArtifactType;
 }): Artifact => {
-  const actualMainStat = mainStat || getRandomMainStat({ type });
+  const actualMainStat = getRandomMainStat({ mainStats, type });
   const subStats = getRandomInitialSubStats({ mainStat: actualMainStat, rarity });
   return {
     id: uuidv4(),
