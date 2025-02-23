@@ -1,0 +1,924 @@
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/101.png
+  iconUrls:
+    BODY: /starrail/relics/101_3.png
+    FOOT: /starrail/relics/101_4.png
+    HAND: /starrail/relics/101_2.png
+    HEAD: /starrail/relics/101_1.png
+    NECK: /starrail/relics/101_6.png
+    OBJECT: /starrail/relics/101_5.png
+  id: '101'
+  name: Passerby's Rejuvenated Wooden Hairstick
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/102.png
+  iconUrls:
+    BODY: /starrail/relics/102_3.png
+    FOOT: /starrail/relics/102_4.png
+    HAND: /starrail/relics/102_2.png
+    HEAD: /starrail/relics/102_1.png
+    NECK: /starrail/relics/102_6.png
+    OBJECT: /starrail/relics/102_5.png
+  id: '102'
+  name: Musketeer's Wild Wheat Felt Hat
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/103.png
+  iconUrls:
+    BODY: /starrail/relics/103_3.png
+    FOOT: /starrail/relics/103_4.png
+    HAND: /starrail/relics/103_2.png
+    HEAD: /starrail/relics/103_1.png
+    NECK: /starrail/relics/103_6.png
+    OBJECT: /starrail/relics/103_5.png
+  id: '103'
+  name: Knight's Forgiving Casque
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/104.png
+  iconUrls:
+    BODY: /starrail/relics/104_3.png
+    FOOT: /starrail/relics/104_4.png
+    HAND: /starrail/relics/104_2.png
+    HEAD: /starrail/relics/104_1.png
+    NECK: /starrail/relics/104_6.png
+    OBJECT: /starrail/relics/104_5.png
+  id: '104'
+  name: Hunter's Artaius Hood
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/105.png
+  iconUrls:
+    BODY: /starrail/relics/105_3.png
+    FOOT: /starrail/relics/105_4.png
+    HAND: /starrail/relics/105_2.png
+    HEAD: /starrail/relics/105_1.png
+    NECK: /starrail/relics/105_6.png
+    OBJECT: /starrail/relics/105_5.png
+  id: '105'
+  name: Champion's Headgear
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/106.png
+  iconUrls:
+    BODY: /starrail/relics/106_3.png
+    FOOT: /starrail/relics/106_4.png
+    HAND: /starrail/relics/106_2.png
+    HEAD: /starrail/relics/106_1.png
+    NECK: /starrail/relics/106_6.png
+    OBJECT: /starrail/relics/106_5.png
+  id: '106'
+  name: Guard's Cast Iron Helmet
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/107.png
+  iconUrls:
+    BODY: /starrail/relics/107_3.png
+    FOOT: /starrail/relics/107_4.png
+    HAND: /starrail/relics/107_2.png
+    HEAD: /starrail/relics/107_1.png
+    NECK: /starrail/relics/107_6.png
+    OBJECT: /starrail/relics/107_5.png
+  id: '107'
+  name: Firesmith's Obsidian Goggles
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/108.png
+  iconUrls:
+    BODY: /starrail/relics/108_3.png
+    FOOT: /starrail/relics/108_4.png
+    HAND: /starrail/relics/108_2.png
+    HEAD: /starrail/relics/108_1.png
+    NECK: /starrail/relics/108_6.png
+    OBJECT: /starrail/relics/108_5.png
+  id: '108'
+  name: Genius's Ultraremote Sensing Visor
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/109.png
+  iconUrls:
+    BODY: /starrail/relics/109_3.png
+    FOOT: /starrail/relics/109_4.png
+    HAND: /starrail/relics/109_2.png
+    HEAD: /starrail/relics/109_1.png
+    NECK: /starrail/relics/109_6.png
+    OBJECT: /starrail/relics/109_5.png
+  id: '109'
+  name: Band's Polarized Sunglasses
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/110.png
+  iconUrls:
+    BODY: /starrail/relics/110_3.png
+    FOOT: /starrail/relics/110_4.png
+    HAND: /starrail/relics/110_2.png
+    HEAD: /starrail/relics/110_1.png
+    NECK: /starrail/relics/110_6.png
+    OBJECT: /starrail/relics/110_5.png
+  id: '110'
+  name: Eagle's Beaked Helmet
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/111.png
+  iconUrls:
+    BODY: /starrail/relics/111_3.png
+    FOOT: /starrail/relics/111_4.png
+    HAND: /starrail/relics/111_2.png
+    HEAD: /starrail/relics/111_1.png
+    NECK: /starrail/relics/111_6.png
+    OBJECT: /starrail/relics/111_5.png
+  id: '111'
+  name: Thief's Myriad-Faced Mask
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/112.png
+  iconUrls:
+    BODY: /starrail/relics/112_3.png
+    FOOT: /starrail/relics/112_4.png
+    HAND: /starrail/relics/112_2.png
+    HEAD: /starrail/relics/112_1.png
+    NECK: /starrail/relics/112_6.png
+    OBJECT: /starrail/relics/112_5.png
+  id: '112'
+  name: Wastelander's Breathing Mask
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/113.png
+  iconUrls:
+    BODY: /starrail/relics/113_3.png
+    FOOT: /starrail/relics/113_4.png
+    HAND: /starrail/relics/113_2.png
+    HEAD: /starrail/relics/113_1.png
+    NECK: /starrail/relics/113_6.png
+    OBJECT: /starrail/relics/113_5.png
+  id: '113'
+  name: Disciple's Prosthetic Eye
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/114.png
+  iconUrls:
+    BODY: /starrail/relics/114_3.png
+    FOOT: /starrail/relics/114_4.png
+    HAND: /starrail/relics/114_2.png
+    HEAD: /starrail/relics/114_1.png
+    NECK: /starrail/relics/114_6.png
+    OBJECT: /starrail/relics/114_5.png
+  id: '114'
+  name: Messenger's Holovisor
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/115.png
+  iconUrls:
+    BODY: /starrail/relics/115_3.png
+    FOOT: /starrail/relics/115_4.png
+    HAND: /starrail/relics/115_2.png
+    HEAD: /starrail/relics/115_1.png
+    NECK: /starrail/relics/115_6.png
+    OBJECT: /starrail/relics/115_5.png
+  id: '115'
+  name: Grand Duke's Crown of Netherflame
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/116.png
+  iconUrls:
+    BODY: /starrail/relics/116_3.png
+    FOOT: /starrail/relics/116_4.png
+    HAND: /starrail/relics/116_2.png
+    HEAD: /starrail/relics/116_1.png
+    NECK: /starrail/relics/116_6.png
+    OBJECT: /starrail/relics/116_5.png
+  id: '116'
+  name: Prisoner's Sealed Muzzle
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/117.png
+  iconUrls:
+    BODY: /starrail/relics/117_3.png
+    FOOT: /starrail/relics/117_4.png
+    HAND: /starrail/relics/117_2.png
+    HEAD: /starrail/relics/117_1.png
+    NECK: /starrail/relics/117_6.png
+    OBJECT: /starrail/relics/117_5.png
+  id: '117'
+  name: Pioneer's Heatproof Shell
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/118.png
+  iconUrls:
+    BODY: /starrail/relics/118_3.png
+    FOOT: /starrail/relics/118_4.png
+    HAND: /starrail/relics/118_2.png
+    HEAD: /starrail/relics/118_1.png
+    NECK: /starrail/relics/118_6.png
+    OBJECT: /starrail/relics/118_5.png
+  id: '118'
+  name: Watchmaker's Telescoping Lens
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/119.png
+  iconUrls:
+    BODY: /starrail/relics/119_3.png
+    FOOT: /starrail/relics/119_4.png
+    HAND: /starrail/relics/119_2.png
+    HEAD: /starrail/relics/119_1.png
+    NECK: /starrail/relics/119_6.png
+    OBJECT: /starrail/relics/119_5.png
+  id: '119'
+  name: Iron Cavalry's Homing Helm
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/120.png
+  iconUrls:
+    BODY: /starrail/relics/120_3.png
+    FOOT: /starrail/relics/120_4.png
+    HAND: /starrail/relics/120_2.png
+    HEAD: /starrail/relics/120_1.png
+    NECK: /starrail/relics/120_6.png
+    OBJECT: /starrail/relics/120_5.png
+  id: '120'
+  name: Valorous Mask of Northern Skies
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/121.png
+  iconUrls:
+    BODY: /starrail/relics/121_3.png
+    FOOT: /starrail/relics/121_4.png
+    HAND: /starrail/relics/121_2.png
+    HEAD: /starrail/relics/121_1.png
+    NECK: /starrail/relics/121_6.png
+    OBJECT: /starrail/relics/121_5.png
+  id: '121'
+  name: Sacerdos' Melodic Earrings
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/122.png
+  iconUrls:
+    BODY: /starrail/relics/122_3.png
+    FOOT: /starrail/relics/122_4.png
+    HAND: /starrail/relics/122_2.png
+    HEAD: /starrail/relics/122_1.png
+    NECK: /starrail/relics/122_6.png
+    OBJECT: /starrail/relics/122_5.png
+  id: '122'
+  name: Scholar's Silver-Rimmed Monocle
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/123.png
+  iconUrls:
+    BODY: /starrail/relics/123_3.png
+    FOOT: /starrail/relics/123_4.png
+    HAND: /starrail/relics/123_2.png
+    HEAD: /starrail/relics/123_1.png
+    NECK: /starrail/relics/123_6.png
+    OBJECT: /starrail/relics/123_5.png
+  id: '123'
+  name: Hero's Wreath of Championship
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/124.png
+  iconUrls:
+    BODY: /starrail/relics/124_3.png
+    FOOT: /starrail/relics/124_4.png
+    HAND: /starrail/relics/124_2.png
+    HEAD: /starrail/relics/124_1.png
+    NECK: /starrail/relics/124_6.png
+    OBJECT: /starrail/relics/124_5.png
+  id: '124'
+  name: Poet's Dill Wreath
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/301.png
+  iconUrls:
+    BODY: /starrail/relics/301_3.png
+    FOOT: /starrail/relics/301_4.png
+    HAND: /starrail/relics/301_2.png
+    HEAD: /starrail/relics/301_1.png
+    NECK: /starrail/relics/301_6.png
+    OBJECT: /starrail/relics/301_5.png
+  id: '301'
+  name: Herta's Space Station
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/302.png
+  iconUrls:
+    BODY: /starrail/relics/302_3.png
+    FOOT: /starrail/relics/302_4.png
+    HAND: /starrail/relics/302_2.png
+    HEAD: /starrail/relics/302_1.png
+    NECK: /starrail/relics/302_6.png
+    OBJECT: /starrail/relics/302_5.png
+  id: '302'
+  name: The Xianzhou Luofu's Celestial Ark
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/303.png
+  iconUrls:
+    BODY: /starrail/relics/303_3.png
+    FOOT: /starrail/relics/303_4.png
+    HAND: /starrail/relics/303_2.png
+    HEAD: /starrail/relics/303_1.png
+    NECK: /starrail/relics/303_6.png
+    OBJECT: /starrail/relics/303_5.png
+  id: '303'
+  name: The IPC's Mega HQ
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/304.png
+  iconUrls:
+    BODY: /starrail/relics/304_3.png
+    FOOT: /starrail/relics/304_4.png
+    HAND: /starrail/relics/304_2.png
+    HEAD: /starrail/relics/304_1.png
+    NECK: /starrail/relics/304_6.png
+    OBJECT: /starrail/relics/304_5.png
+  id: '304'
+  name: Belobog's Fortress of Preservation
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/305.png
+  iconUrls:
+    BODY: /starrail/relics/305_3.png
+    FOOT: /starrail/relics/305_4.png
+    HAND: /starrail/relics/305_2.png
+    HEAD: /starrail/relics/305_1.png
+    NECK: /starrail/relics/305_6.png
+    OBJECT: /starrail/relics/305_5.png
+  id: '305'
+  name: Planet Screwllum's Mechanical Sun
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/306.png
+  iconUrls:
+    BODY: /starrail/relics/306_3.png
+    FOOT: /starrail/relics/306_4.png
+    HAND: /starrail/relics/306_2.png
+    HEAD: /starrail/relics/306_1.png
+    NECK: /starrail/relics/306_6.png
+    OBJECT: /starrail/relics/306_5.png
+  id: '306'
+  name: Salsotto's Moving City
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/307.png
+  iconUrls:
+    BODY: /starrail/relics/307_3.png
+    FOOT: /starrail/relics/307_4.png
+    HAND: /starrail/relics/307_2.png
+    HEAD: /starrail/relics/307_1.png
+    NECK: /starrail/relics/307_6.png
+    OBJECT: /starrail/relics/307_5.png
+  id: '307'
+  name: Talia's Nailscrap Town
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/308.png
+  iconUrls:
+    BODY: /starrail/relics/308_3.png
+    FOOT: /starrail/relics/308_4.png
+    HAND: /starrail/relics/308_2.png
+    HEAD: /starrail/relics/308_1.png
+    NECK: /starrail/relics/308_6.png
+    OBJECT: /starrail/relics/308_5.png
+  id: '308'
+  name: Vonwacq's Island of Birth
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/309.png
+  iconUrls:
+    BODY: /starrail/relics/309_3.png
+    FOOT: /starrail/relics/309_4.png
+    HAND: /starrail/relics/309_2.png
+    HEAD: /starrail/relics/309_1.png
+    NECK: /starrail/relics/309_6.png
+    OBJECT: /starrail/relics/309_5.png
+  id: '309'
+  name: Taikiyan Laser Stadium
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/310.png
+  iconUrls:
+    BODY: /starrail/relics/310_3.png
+    FOOT: /starrail/relics/310_4.png
+    HAND: /starrail/relics/310_2.png
+    HEAD: /starrail/relics/310_1.png
+    NECK: /starrail/relics/310_6.png
+    OBJECT: /starrail/relics/310_5.png
+  id: '310'
+  name: Insumousu's Whalefall Ship
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/311.png
+  iconUrls:
+    BODY: /starrail/relics/311_3.png
+    FOOT: /starrail/relics/311_4.png
+    HAND: /starrail/relics/311_2.png
+    HEAD: /starrail/relics/311_1.png
+    NECK: /starrail/relics/311_6.png
+    OBJECT: /starrail/relics/311_5.png
+  id: '311'
+  name: Glamoth's Iron Cavalry Regiment
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/312.png
+  iconUrls:
+    BODY: /starrail/relics/312_3.png
+    FOOT: /starrail/relics/312_4.png
+    HAND: /starrail/relics/312_2.png
+    HEAD: /starrail/relics/312_1.png
+    NECK: /starrail/relics/312_6.png
+    OBJECT: /starrail/relics/312_5.png
+  id: '312'
+  name: Penacony's Grand Hotel
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/313.png
+  iconUrls:
+    BODY: /starrail/relics/313_3.png
+    FOOT: /starrail/relics/313_4.png
+    HAND: /starrail/relics/313_2.png
+    HEAD: /starrail/relics/313_1.png
+    NECK: /starrail/relics/313_6.png
+    OBJECT: /starrail/relics/313_5.png
+  id: '313'
+  name: Sigonia's Gaiathra Berth
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/314.png
+  iconUrls:
+    BODY: /starrail/relics/314_3.png
+    FOOT: /starrail/relics/314_4.png
+    HAND: /starrail/relics/314_2.png
+    HEAD: /starrail/relics/314_1.png
+    NECK: /starrail/relics/314_6.png
+    OBJECT: /starrail/relics/314_5.png
+  id: '314'
+  name: Izumo's Magatsu no Morokami
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/315.png
+  iconUrls:
+    BODY: /starrail/relics/315_3.png
+    FOOT: /starrail/relics/315_4.png
+    HAND: /starrail/relics/315_2.png
+    HEAD: /starrail/relics/315_1.png
+    NECK: /starrail/relics/315_6.png
+    OBJECT: /starrail/relics/315_5.png
+  id: '315'
+  name: Duran's Tent of Golden Sky
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/316.png
+  iconUrls:
+    BODY: /starrail/relics/316_3.png
+    FOOT: /starrail/relics/316_4.png
+    HAND: /starrail/relics/316_2.png
+    HEAD: /starrail/relics/316_1.png
+    NECK: /starrail/relics/316_6.png
+    OBJECT: /starrail/relics/316_5.png
+  id: '316'
+  name: Forge's Lotus Lantern Wick
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/317.png
+  iconUrls:
+    BODY: /starrail/relics/317_3.png
+    FOOT: /starrail/relics/317_4.png
+    HAND: /starrail/relics/317_2.png
+    HEAD: /starrail/relics/317_1.png
+    NECK: /starrail/relics/317_6.png
+    OBJECT: /starrail/relics/317_5.png
+  id: '317'
+  name: Lushaka's Waterscape
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/318.png
+  iconUrls:
+    BODY: /starrail/relics/318_3.png
+    FOOT: /starrail/relics/318_4.png
+    HAND: /starrail/relics/318_2.png
+    HEAD: /starrail/relics/318_1.png
+    NECK: /starrail/relics/318_6.png
+    OBJECT: /starrail/relics/318_5.png
+  id: '318'
+  name: BananAmusement Park's BananAxis Plaza
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5

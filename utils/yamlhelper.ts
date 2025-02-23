@@ -15,17 +15,23 @@ export function loadYaml<T>(filePath: string): T {
   }
 }
 
-export function saveYaml<T>(content: T, filePath: string): void {
+export function saveYaml<T>({
+  content,
+  filePath,
+  verbose = false,
+}: {
+  content: T;
+  filePath: string;
+  verbose?: boolean;
+}): void {
   try {
     const fileContents = yaml.dump(content);
     fs.writeFileSync(filePath, fileContents);
-    console.log(`Data saved as YAML to ${filePath}`);
-  } catch (err) {
-    if (err instanceof Error) {
-      console.error("Error saving YAML file:", err.message);
-    } else {
-      console.error("Unknown error while saving YAML file:", err);
+    if (verbose) {
+      console.log(`Data saved as YAML to ${filePath}`);
     }
+  } catch (err) {
+    console.error(`Error occurred while saving YAML file: ${err}`);
     throw err;
   }
 }
