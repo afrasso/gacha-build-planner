@@ -10,17 +10,21 @@ import scrapeCharacterIcons from "./scrapecharactericons";
 import scrapeWeaponIcons from "./scrapeweaponicons";
 
 const scrapeWiki = async ({
-  artifacts,
-  characters,
+  failedArtifactIconDownloads,
+  failedCharacterIconDownloads,
+  failedWeaponIconDownloads,
   verbose,
-  weapons,
 }: {
-  artifacts: FailedArtifactIconDownload[];
-  characters: FailedCharacterIconDownload[];
+  failedArtifactIconDownloads: FailedArtifactIconDownload[];
+  failedCharacterIconDownloads: FailedCharacterIconDownload[];
+  failedWeaponIconDownloads: FailedWeaponIconDownload[];
   verbose: boolean;
-  weapons: FailedWeaponIconDownload[];
 }) => {
-  if (!_.isEmpty(characters) || !_.isEmpty(weapons) || !_.isEmpty(artifacts)) {
+  if (
+    !_.isEmpty(failedArtifactIconDownloads) ||
+    !_.isEmpty(failedCharacterIconDownloads) ||
+    !_.isEmpty(failedWeaponIconDownloads)
+  ) {
     console.log("Scraping missing icons from wiki....");
     ensureDirExists(__publicdir);
     ensureDirExists(path.join(__publicdir, "genshin"));
@@ -29,9 +33,9 @@ const scrapeWiki = async ({
     ensureDirExists(path.join(__publicdir, "genshin", "characters"));
     ensureDirExists(path.join(__publicdir, "genshin", "weapons"));
 
-    await scrapeCharacterIcons({ characters, verbose });
-    await scrapeWeaponIcons({ verbose, weapons });
-    await scrapeArtifactIcons({ artifacts, verbose });
+    await scrapeCharacterIcons({ failedCharacterIconDownloads, verbose });
+    await scrapeWeaponIcons({ failedWeaponIconDownloads, verbose });
+    await scrapeArtifactIcons({ failedArtifactIconDownloads, verbose });
 
     console.log("Scraping complete.");
   }

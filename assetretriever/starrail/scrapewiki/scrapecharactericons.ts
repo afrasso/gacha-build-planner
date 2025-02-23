@@ -19,6 +19,8 @@ export const scrapeCharacterIcons = async ({
     return;
   }
 
+  console.log("Scraping character icons...");
+
   const url = "https://honkai-star-rail.fandom.com/wiki/Character/List";
 
   try {
@@ -46,6 +48,7 @@ export const scrapeCharacterIcons = async ({
   } catch (err) {
     console.error(`Error scraping character icons: ${err}`);
   }
+  console.log("Character icon scraping complete.");
 };
 
 export default scrapeCharacterIcons;

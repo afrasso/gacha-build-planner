@@ -62,17 +62,17 @@ const extractWeapons = async ({
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
       const url = dbWeapon.images.mihoyo_awakenIcon;
       if (!url) {
-        console.warn(`Icon URL for weapon "${dbWeapon.name} (${id}) does not exist."`);
+        console.warn(`Icon URL for ${dbWeapon.name} (${id}) does not exist.`);
         failures.push({ id, name });
       } else {
         const savePath = path.join(__publicdir, "genshin", "weapons", `${id}.png`);
         if (verbose) {
-          console.log(`Downloading icon for weapon "${dbWeapon.name}" (${id}) from ${url}`);
+          console.log(`Downloading icon for ${dbWeapon.name} (${id}) from ${url}`);
         }
         try {
           await downloadImage({ savePath, url, verbose });
         } catch (err) {
-          console.warn(`Error downloading icon for weapon "${dbWeapon.name}" (${dbWeapon.id}): ${err}`);
+          console.warn(`Error downloading icon for ${dbWeapon.name} (${dbWeapon.id}): ${err}`);
           failures.push({ id, name });
         }
       }

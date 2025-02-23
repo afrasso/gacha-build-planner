@@ -10,12 +10,10 @@ import { FailedLightConeIconDownload } from "../types";
 import mapDbBaseStat from "./mapdbbasestat";
 
 const extractLightCones = async ({
-  client,
   downloadIcons = false,
   ids = [],
   verbose,
 }: {
-  client: StarRail;
   downloadIcons?: boolean;
   ids?: string[];
   verbose: boolean;
@@ -25,6 +23,7 @@ const extractLightCones = async ({
   const lightCones = [];
   const failures: FailedLightConeIconDownload[] = [];
 
+  const client = new StarRail({});
   const dbLightCones = client.getAllLightCones();
 
   for (const dbLightCone of dbLightCones) {
@@ -52,12 +51,12 @@ const extractLightCones = async ({
     const savePath = path.join(__publicdir, "starrail", "lightcones", `${id}.png`);
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
       if (verbose) {
-        console.log(`Downloading icon for light cone "${name}" (${id}) from ${url}.`);
+        console.log(`Downloading icon for ${name} (${id}) from ${url}.`);
       }
       try {
         await downloadImage({ savePath, url, verbose });
       } catch (err) {
-        console.warn(`Error downloading icon for light cone "${name}" (${id}): ${err}`);
+        console.warn(`Error downloading icon for ${name} (${id}): ${err}`);
         failures.push({ id, name });
       }
     }

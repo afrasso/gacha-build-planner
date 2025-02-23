@@ -10,12 +10,12 @@ import { FailedWeaponIconDownload } from "../types";
 
 const scrapeIconsFromSection = async ({
   $,
-  nameToIdMap,
+  failedWeaponIconDownloads,
   section,
   verbose,
 }: {
   $: cheerio.Root;
-  nameToIdMap: Record<string, string>;
+  failedWeaponIconDownloads: FailedWeaponIconDownload[];
   section: cheerio.Cheerio;
   verbose: boolean;
 }) => {
@@ -24,47 +24,52 @@ const scrapeIconsFromSection = async ({
   for (const row of rows) {
     const name = $(row).find("td:nth-child(2) a").text();
     const smallIconUrl = $(row).find("td:nth-child(1) img").attr("data-src");
+    const weapon = failedWeaponIconDownloads.find((weapon) => weapon.name === name);
 
-    if (name && smallIconUrl && nameToIdMap[name]) {
-      const id = nameToIdMap[name];
+    if (name && smallIconUrl && weapon) {
+      const id = weapon.id;
       const iconUrl = smallIconUrl.split(".png")[0] + ".png";
       const savePath = path.join(__publicdir, "genshin", "weapons", `${id}.png`);
-      console.log(`Downloading weapon "${name}" (${id}) from ${iconUrl}.`);
+      console.log(`Downloading icon for ${name} (${id}) from ${iconUrl}.`);
       await downloadImage({ savePath, url: iconUrl, verbose });
     }
   }
 };
 
-const scrapeWeaponIcons = async ({ verbose, weapons }: { verbose: boolean; weapons: FailedWeaponIconDownload[] }) => {
-  if (_.isEmpty(weapons)) {
+const scrapeWeaponIcons = async ({
+  failedWeaponIconDownloads,
+  verbose,
+}: {
+  failedWeaponIconDownloads: FailedWeaponIconDownload[];
+  verbose: boolean;
+}) => {
+  if (_.isEmpty(failedWeaponIconDownloads)) {
     return;
   }
+
+  console.log("Scraping weapon icons...");
 
   const url = "https://genshin-impact.fandom.com/wiki/Weapon/List";
 
   // Special handling to map database weapon name to wiki icon name.
-  const prizedIsshinBlade = weapons.find((weapon) => weapon.id === "11419");
+  const prizedIsshinBlade = failedWeaponIconDownloads.find((weapon) => weapon.id === "11419");
   if (prizedIsshinBlade) {
     prizedIsshinBlade.name = "Prized Isshin Blade (Awakened)";
   }
-
-  const nameToIdMap = weapons.reduce<Record<string, string>>((result, weapon) => {
-    result[weapon.name] = weapon.id;
-    return result;
-  }, {});
 
   try {
     const response = await axios.get(url);
     const $: cheerio.Root = cheerio.load(response.data);
 
     const listOfAllWeaponsSection: cheerio.Cheerio = $("h2:has(#List_of_All_Weapons)").nextUntil("h2");
-    await scrapeIconsFromSection({ $, nameToIdMap, section: listOfAllWeaponsSection, verbose });
+    await scrapeIconsFromSection({ $, failedWeaponIconDownloads, section: listOfAllWeaponsSection, verbose });
 
     const questExclusiveWeaponsSection = $("h2:has(#Quest-Exclusive_Weapons)").nextUntil("h2");
-    await scrapeIconsFromSection({ $, nameToIdMap, section: questExclusiveWeaponsSection, verbose });
+    await scrapeIconsFromSection({ $, failedWeaponIconDownloads, section: questExclusiveWeaponsSection, verbose });
   } catch (err) {
     console.error(`Error scraping weapon icons: ${err}`);
   }
+  console.log("Weapon icon scraping complete.");
 };
 
 export default scrapeWeaponIcons;

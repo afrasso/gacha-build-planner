@@ -11,12 +11,10 @@ import mapDbBaseStat from "./mapdbbasestat";
 import mapDbTraceStat from "./mapdbtracestat";
 
 const extractCharacters = async ({
-  client,
   downloadIcons = false,
   ids = [],
   verbose,
 }: {
-  client: StarRail;
   downloadIcons?: boolean;
   ids?: string[];
   verbose: boolean;
@@ -26,6 +24,7 @@ const extractCharacters = async ({
   const characters = [];
   const failures: FailedCharacterIconDownload[] = [];
 
+  const client = new StarRail({});
   const dbCharacters: CharacterData[] = client.getAllCharacters();
 
   // Skip Stelle and get data for Caelus only since it's identical.
@@ -69,12 +68,12 @@ const extractCharacters = async ({
         const url = dbCharacter.icon.url;
         const savePath = path.join(__publicdir, "starrail", "characters", `${id}.png`);
         if (verbose) {
-          console.log(`Downloading icon for character "${name}" of path ${pathName} (${id}) from ${url}.`);
+          console.log(`Downloading icon for ${name} of path ${pathName} (${id}) from ${url}.`);
         }
         try {
           await downloadImage({ savePath, url, verbose });
         } catch (err) {
-          console.warn(`Error downloading icon for character "${name}" of path ${pathName} (${id}): ${err}`);
+          console.warn(`Error downloading icon for ${name} of path ${pathName} (${id}): ${err}`);
           failures.push({ id, name, pathName });
         }
       } else {

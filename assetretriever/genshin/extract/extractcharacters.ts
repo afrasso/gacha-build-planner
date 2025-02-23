@@ -64,7 +64,7 @@ const extractCharacters = async ({
           : "https://static.wikia.nocookie.net/gensin-impact/images/5/59/Traveler_Icon.png";
       const savePath = path.join(__publicdir, "genshin", "characters", `${id}.png`);
       if (verbose) {
-        console.log(`Downloading icon for character "${name}" (${id}) from ${url}.`);
+        console.log(`Downloading icon for ${name} (${id}) from ${url}.`);
       }
       try {
         await downloadImage({ savePath, url, verbose });

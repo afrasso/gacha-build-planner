@@ -11,12 +11,10 @@ import { FailedRelicIconDownload, FailedRelicSetIconDownload } from "../types";
 import getRelicIconSuffix from "./getreliciconsuffix";
 
 const extractRelicSets = async ({
-  client,
   downloadIcons = false,
   ids = [],
   verbose,
 }: {
-  client: StarRail;
   downloadIcons?: boolean;
   ids?: string[];
   verbose: boolean;
@@ -27,6 +25,7 @@ const extractRelicSets = async ({
   const failures: FailedRelicIconDownload[] = [];
   const setFailures: FailedRelicSetIconDownload[] = [];
 
+  const client = new StarRail({});
   const dbRelics = client.getAllRelics();
   for (const dbRelic of dbRelics) {
     const set = dbRelic.set;
@@ -62,7 +61,7 @@ const extractRelicSets = async ({
       if (downloadIcons && (_.isEmpty(ids) || ids.includes(setId)) && setUrl) {
         try {
           if (verbose) {
-            console.log(`Downloading icon for relic set "${setName}" (${setId}) from ${setUrl}`);
+            console.log(`Downloading icon for ${setName} (${setId}) from ${setUrl}`);
           }
           await downloadImage({
             savePath: path.join(__publicdir, "starrail", "relicsets", `${setId}.png`),
@@ -70,7 +69,7 @@ const extractRelicSets = async ({
             verbose,
           });
         } catch (err) {
-          console.warn(`Error downloading icon for relic set ${setName} (${setId}): ${err}`);
+          console.warn(`Error downloading icon for ${setName} (${setId}): ${err}`);
           setFailures.push({ id: setId, name: setName });
         }
       }
@@ -86,12 +85,12 @@ const extractRelicSets = async ({
       const url = dbRelic.icon.url;
       const savePath = path.join(__publicdir, "starrail", "relics", `${setId}${getRelicIconSuffix(type)}.png`);
       if (verbose) {
-        console.log(`Downloading icon for relic of type ${type} from set "${setName}" (${setId}) from ${url}.`);
+        console.log(`Downloading icon for ${type} of ${setName} (${setId}) from ${url}.`);
       }
       try {
         await downloadImage({ savePath, url, verbose });
       } catch (err) {
-        console.warn(`Error downloading icon for relic of type ${type} from set ${setName} (${setId}).`, err);
+        console.warn(`Error downloading icon for ${type} of ${setName} (${setId}).`, err);
         failures.push({ setId, setName, type });
       }
     }

@@ -1,5 +1,4 @@
 import path from "path";
-import { StarRail } from "starrail.js";
 
 import { __datadir, __publicdir } from "@/utils/directoryutils";
 import ensureDirExists from "@/utils/ensuredirexists";
@@ -37,12 +36,9 @@ const extract = async ({
   ensureDirExists(path.join(__publicdir, "starrail", "relics"));
   ensureDirExists(path.join(__publicdir, "starrail", "relicsets"));
 
-  const client = new StarRail({});
-
-  const failedCharacterIconDownloads = await extractCharacters({ client, downloadIcons, ids, verbose });
-  const failedLightConeIconDownloads = await extractLightCones({ client, downloadIcons, ids, verbose });
+  const failedCharacterIconDownloads = await extractCharacters({ downloadIcons, ids, verbose });
+  const failedLightConeIconDownloads = await extractLightCones({ downloadIcons, ids, verbose });
   const { failures: failedRelicIconDownloads, setFailures: failedRelicSetIconDownloads } = await extractRelicSets({
-    client,
     downloadIcons,
     ids,
     verbose,

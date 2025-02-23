@@ -29,11 +29,11 @@ const mapType = (type: string): ArtifactType => {
 
 const scrapeArtifactIcon = async ({
   artifactPageUrl,
-  nameToIdsMap,
+  failedArtifactIconDownloads,
   verbose,
 }: {
   artifactPageUrl: string;
-  nameToIdsMap: Record<string, Array<FailedArtifactIconDownload>>;
+  failedArtifactIconDownloads: FailedArtifactIconDownload[];
   verbose: boolean;
 }) => {
   try {
@@ -52,10 +52,13 @@ const scrapeArtifactIcon = async ({
       throw new Error(`Could not determine artifact type and name on ${artifactPageUrl}`);
     }
     const type = mapType(typeName);
-    const id = nameToIdsMap[setName]?.find((x) => x.type === type)?.setId;
-    if (id && iconUrl) {
+    const artifact = failedArtifactIconDownloads.find(
+      (artifact) => artifact.setName === setName && artifact.type === type
+    );
+    if (artifact) {
+      const id = artifact.setId;
       const savePath = path.join(__publicdir, getArtifactIconPath({ id, type }));
-      console.log(`Downloading ${type} for ${setName} (${id}) from ${iconUrl}`);
+      console.log(`Downloading icon for ${type} of ${setName} (${id}) from ${iconUrl}`);
       await downloadImage({ savePath, url: iconUrl, verbose });
     }
   } catch (err) {
@@ -64,26 +67,20 @@ const scrapeArtifactIcon = async ({
 };
 
 const scrapeArtifactIcons = async ({
-  artifacts,
+  failedArtifactIconDownloads,
   verbose,
 }: {
-  artifacts: FailedArtifactIconDownload[];
+  failedArtifactIconDownloads: FailedArtifactIconDownload[];
   verbose: boolean;
 }) => {
-  if (_.isEmpty(artifacts)) {
+  if (_.isEmpty(failedArtifactIconDownloads)) {
     return;
   }
 
+  console.log("Scraping artifact icons...");
+
   const baseUrl = "https://genshin-impact.fandom.com";
   const url = "https://genshin-impact.fandom.com/wiki/Artifact/Sets";
-
-  const nameToIdsMap = artifacts.reduce<Record<string, Array<FailedArtifactIconDownload>>>((result, artifact) => {
-    if (!result[artifact.setName]) {
-      result[artifact.setName] = [];
-    }
-    result[artifact.setName].push(artifact);
-    return result;
-  }, {});
 
   try {
     const response = await axios.get(url);
@@ -103,11 +100,12 @@ const scrapeArtifactIcons = async ({
       artifactPageUrls.push(...new Set(iconLinks));
     }
     for (const artifactPageUrl of artifactPageUrls) {
-      await scrapeArtifactIcon({ artifactPageUrl, nameToIdsMap, verbose });
+      await scrapeArtifactIcon({ artifactPageUrl, failedArtifactIconDownloads, verbose });
     }
   } catch (err) {
     console.error(`Error scraping artifacts: ${err}`);
   }
+  console.log("Artifact icon scraping complete.");
 };
 
 export default scrapeArtifactIcons;
