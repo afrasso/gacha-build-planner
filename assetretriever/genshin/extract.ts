@@ -241,7 +241,7 @@ const downloadArtifactIcon = async ({
   }
 
   try {
-    const savePath = getArtifactIconPath({ id, type });
+    const savePath = path.join(__publicdir, getArtifactIconPath({ id, type }));
     if (verbose) {
       console.log(`Downloading ${type} for artifact set "${name}" (${id}) from ${url}.`);
     }

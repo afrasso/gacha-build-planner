@@ -3,10 +3,12 @@ import * as cheerio from "cheerio";
 import _ from "lodash";
 import path from "path";
 
+import { ArtifactType } from "@/types";
 import { __publicdir } from "@/utils/directoryutils.js";
 import downloadImage from "@/utils/downloadimage.js";
 import ensureDirExists from "@/utils/ensuredirexists.js";
 
+import getArtifactIconPath from "./getartifacticonpath";
 import { FailedArtifactIconDownload, FailedCharacterIconDownload, FailedWeaponIconDownload } from "./types";
 
 const scrapeWiki = async ({
@@ -175,15 +177,15 @@ const scrapeArtifactIcon = async ({
     }
     const iconUrl = smallIconUrl.split(".png")[0] + ".png";
     const setName = section.find("div[data-source=set] a").text();
-    const type = section.find("div[data-source=piece] a").text();
-    if (!setName || !type) {
+    const typeName = section.find("div[data-source=piece] a").text();
+    if (!setName || !typeName) {
       throw new Error(`Could not determine artifact type and name on ${artifactPageUrl}`);
     }
-    const dbType = mapType(type);
-    const id = nameToIdsMap[setName]?.find((x) => x.type === dbType)?.setId;
+    const type = mapType(typeName);
+    const id = nameToIdsMap[setName]?.find((x) => x.type === type)?.setId;
     if (id && iconUrl) {
-      const savePath = path.join(__publicdir, "genshin", "artifacts", `${id}.png`);
-      console.log(`Downloading ${dbType} for ${setName} (${id}) from ${iconUrl}`);
+      const savePath = path.join(__publicdir, getArtifactIconPath({ id, type }));
+      console.log(`Downloading ${type} for ${setName} (${id}) from ${iconUrl}`);
       await downloadImage({ savePath, url: iconUrl });
     }
   } catch (err) {
@@ -195,18 +197,18 @@ const scrapeArtifactIcon = async ({
   }
 };
 
-const mapType = (type: string) => {
+const mapType = (type: string): ArtifactType => {
   switch (type) {
     case "Circlet of Logos":
-      return "circlet";
+      return ArtifactType.CIRCLET;
     case "Flower of Life":
-      return "flower";
+      return ArtifactType.FLOWER;
     case "Goblet of Eonothem":
-      return "goblet";
+      return ArtifactType.GOBLET;
     case "Plume of Death":
-      return "plume";
+      return ArtifactType.PLUME;
     case "Sands of Eon":
-      return "sands";
+      return ArtifactType.SANDS;
     default:
       throw new Error(`Found invalid artifact type from wiki:  ${type}`);
   }
