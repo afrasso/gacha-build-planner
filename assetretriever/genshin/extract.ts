@@ -43,7 +43,7 @@ const extractCharacters = async ({
     const character = {
       ascensionStat,
       element: dbCharacter.elementType,
-      iconUrl: `/${id}.png`,
+      iconUrl: `/genshin/characters/${id}.png`,
       id,
       maxLvlStats: {
         ascensionStat: ascensionStatValue,
@@ -59,7 +59,7 @@ const extractCharacters = async ({
     characters.push(character);
 
     const url =
-      dbCharacter.name !== "Traveler"
+      name !== "Traveler"
         ? dbCharacter.images.mihoyo_icon
         : "https://static.wikia.nocookie.net/gensin-impact/images/5/59/Traveler_Icon.png";
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id)) && url) {
@@ -116,7 +116,7 @@ const extractWeapons = async ({
     const mainStatValue = calculateStatValue({ rawValue: maxLvlStats.specialized, stat: mainStat });
 
     weapons.push({
-      iconUrl: `/${id}.png`,
+      iconUrl: `/genshin/weapons/${id}.png`,
       id,
       mainStat,
       maxLvlStats: {
@@ -144,6 +144,7 @@ const extractWeapons = async ({
 
   const filePath = path.join(__datadir, "genshin", "weapons.yaml");
   saveYaml({ content: weapons, filePath, verbose });
+  console.log("Weapon extraction complete.");
   return failures;
 };
 
@@ -177,7 +178,7 @@ const extractArtifactSets = async ({
         [ArtifactType.PLUME]: !!dbArtifactSet.plume,
         [ArtifactType.SANDS]: !!dbArtifactSet.sands,
       },
-      iconUrl: getSetIconUrl(dbArtifactSet),
+      iconUrl: getArtifactIconPath({ id, type: ArtifactType.FLOWER }),
       iconUrls: Object.values(ArtifactType).reduce((acc, type) => {
         acc[type] = getArtifactIconPath({ id, type });
         return acc;
@@ -296,22 +297,6 @@ const calculateStatValue = ({ rawValue, stat }: { rawValue: number | undefined; 
     return rawValue;
   }
   return rawValue * 100;
-};
-
-const getSetIconUrl = (dbArtifactSet: genshindb.Artifact) => {
-  if (dbArtifactSet.flower) {
-    return `/genshin/artifacts/${dbArtifactSet.id}_4.png`;
-  } else if (dbArtifactSet.plume) {
-    return `/genshin/artifacts/${dbArtifactSet.id}_2.png`;
-  } else if (dbArtifactSet.sands) {
-    return `/genshin/artifacts/${dbArtifactSet.id}_5.png`;
-  } else if (dbArtifactSet.goblet) {
-    return `/genshin/artifacts/${dbArtifactSet.id}_1.png`;
-  } else if (dbArtifactSet.circlet) {
-    return `/genshin/artifacts/${dbArtifactSet.id}_3.png`;
-  } else {
-    throw new Error(`Artifact set ${dbArtifactSet} has no artifacts`);
-  }
 };
 
 const extract = async ({

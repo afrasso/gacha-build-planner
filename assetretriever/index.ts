@@ -17,9 +17,11 @@ const argv = yargs(hideBin(process.argv))
     type: "string",
   })
   .option("ids", {
+    alias: "i",
     describe: "Specify a list of icon IDs to download",
     type: "array",
   })
+  .coerce("ids", (ids) => ids.map(String))
   .option("verbose", {
     alias: "v",
     default: false,
