@@ -28,6 +28,7 @@ const extract = async ({
   failedRelicIconDownloads: FailedRelicIconDownload[];
   failedRelicSetIconDownloads: FailedRelicSetIconDownload[];
 }> => {
+  ensureDirExists(__datadir);
   ensureDirExists(path.join(__datadir, "starrail"));
   ensureDirExists(__publicdir);
   ensureDirExists(path.join(__publicdir, "starrail"));

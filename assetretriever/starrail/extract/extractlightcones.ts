@@ -26,6 +26,7 @@ const extractLightCones = async ({
   const failures: FailedLightConeIconDownload[] = [];
 
   const dbLightCones = client.getAllLightCones();
+
   for (const dbLightCone of dbLightCones) {
     const id = String(dbLightCone.id);
     const name = dbLightCone.name.get("en");
@@ -48,14 +49,15 @@ const extractLightCones = async ({
     lightCones.push(lightCone);
 
     const url = dbLightCone.icon.url;
-    if (downloadIcons && (_.isEmpty(ids) || ids.includes(id)) && url) {
+    const savePath = path.join(__publicdir, "starrail", "lightcones", `${id}.png`);
+    if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
+      if (verbose) {
+        console.log(`Downloading icon for light cone "${name}" (${id}) from ${url}.`);
+      }
       try {
-        if (verbose) {
-          console.log(`Downloading icon for light cone "${name}" (${id}) from ${url}.`);
-        }
-        await downloadImage({ savePath: path.join(__publicdir, "starrail", "lightcones", `${id}.png`), url, verbose });
+        await downloadImage({ savePath, url, verbose });
       } catch (err) {
-        console.error(`Error downloading icon for light cone "${name}" (${id}): ${err}`);
+        console.warn(`Error downloading icon for light cone "${name}" (${id}): ${err}`);
         failures.push({ id, name });
       }
     }

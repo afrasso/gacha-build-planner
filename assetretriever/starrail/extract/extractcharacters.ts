@@ -64,23 +64,20 @@ const extractCharacters = async ({
 
     characters.push(character);
 
-    const url = dbCharacter.icon.url;
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
-      if (url && name !== "Trailblazer") {
+      if (name !== "Trailblazer") {
+        const url = dbCharacter.icon.url;
+        const savePath = path.join(__publicdir, "starrail", "characters", `${id}.png`);
+        if (verbose) {
+          console.log(`Downloading icon for character "${name}" of path ${pathName} (${id}) from ${url}.`);
+        }
         try {
-          if (verbose) {
-            console.log(`Downloading icon for character "${name}" of path ${pathName} (${id}) from ${url}.`);
-          }
-          await downloadImage({
-            savePath: path.join(__publicdir, "starrail", "characters", `${id}.png`),
-            url,
-            verbose,
-          });
+          await downloadImage({ savePath, url, verbose });
         } catch (err) {
-          console.error(`Error downloading icon for character "${name}" of path ${pathName} (${id}): ${err}`);
+          console.warn(`Error downloading icon for character "${name}" of path ${pathName} (${id}): ${err}`);
           failures.push({ id, name, pathName });
         }
-      } else if (name === "Trailblazer") {
+      } else {
         // Ensure we download the Trailblazer's character icon from the wiki since that shows both Caelus and Stelle on it.
         failures.push({ id, name, pathName });
       }

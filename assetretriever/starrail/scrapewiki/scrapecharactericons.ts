@@ -7,19 +7,19 @@ import { __publicdir } from "@/utils/directoryutils";
 import downloadImage from "@/utils/downloadimage";
 
 import { FailedCharacterIconDownload } from "../types";
-import { VERBOSITY } from "./types";
 
 export const scrapeCharacterIcons = async ({
   failedCharacterIconDownloads,
-  verbosity,
+  verbose,
 }: {
   failedCharacterIconDownloads: FailedCharacterIconDownload[];
-  verbosity: VERBOSITY;
+  verbose: boolean;
 }) => {
-  const url = "https://honkai-star-rail.fandom.com/wiki/Character/List";
   if (_.isEmpty(failedCharacterIconDownloads)) {
     return;
   }
+
+  const url = "https://honkai-star-rail.fandom.com/wiki/Character/List";
 
   try {
     const response = await axios.get(url);
@@ -39,10 +39,8 @@ export const scrapeCharacterIcons = async ({
       if (name && smallIconUrl && character) {
         const url = smallIconUrl.split(".png")[0] + ".png";
         const savePath = path.join(__publicdir, "starrail", "characters", `${character.id}.png`);
-        if (verbosity >= VERBOSITY.INFO) {
-          console.log(`Downloading icon for character '${name}' of path ${pathName} (${character.id}) from ${url}.`);
-        }
-        await downloadImage({ savePath, url, verbose: verbosity === VERBOSITY.DEBUG });
+        console.log(`Downloading icon for character '${name}' of path ${pathName} (${character.id}) from ${url}.`);
+        await downloadImage({ savePath, url, verbose });
       }
     }
   } catch (err) {

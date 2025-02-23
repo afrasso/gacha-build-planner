@@ -1,14 +1,13 @@
 import { FailedRelicSetIconDownload } from "../types";
-import { VERBOSITY } from "./types";
 
 const scrapeRelicSetIcons = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   failedRelicSetIconDownloads,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  verbosity,
+  verbose,
 }: {
   failedRelicSetIconDownloads: FailedRelicSetIconDownload[];
-  verbosity: VERBOSITY;
+  verbose: boolean;
 }) => {};
 
 export default scrapeRelicSetIcons;

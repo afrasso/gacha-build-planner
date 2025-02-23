@@ -18,6 +18,7 @@ export const retrieveAssets = async ({
   await scrapeWiki({
     artifacts: failedArtifactIconDownloads,
     characters: failedCharacterIconDownloads,
+    verbose,
     weapons: failedWeaponIconDownloads,
   });
 };

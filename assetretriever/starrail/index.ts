@@ -1,5 +1,5 @@
 import extract from "./extract";
-import scrapeWiki, { VERBOSITY } from "./scrapewiki";
+import scrapeWiki from "./scrapewiki";
 
 export const retrieveAssets = async ({
   downloadIcons,
@@ -25,6 +25,6 @@ export const retrieveAssets = async ({
     failedLightConeIconDownloads,
     failedRelicIconDownloads,
     failedRelicSetIconDownloads,
-    verbosity: verbose ? VERBOSITY.DEBUG : VERBOSITY.INFO,
+    verbose,
   });
 };

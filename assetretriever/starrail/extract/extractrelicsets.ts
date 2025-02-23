@@ -70,7 +70,7 @@ const extractRelicSets = async ({
             verbose,
           });
         } catch (err) {
-          console.error(`Error downloading icon for relic set ${setName} (${setId}): ${err}`);
+          console.warn(`Error downloading icon for relic set ${setName} (${setId}): ${err}`);
           setFailures.push({ id: setId, name: setName });
         }
       }
@@ -82,20 +82,16 @@ const extractRelicSets = async ({
       relicSet.rarities!.push(dbRelic.stars);
     }
 
-    const url = dbRelic.icon.url;
-    if (downloadIcons && (_.isEmpty(ids) || ids.includes(setId)) && url) {
-      const suffix = getRelicIconSuffix(type);
+    if (downloadIcons && (_.isEmpty(ids) || ids.includes(setId))) {
+      const url = dbRelic.icon.url;
+      const savePath = path.join(__publicdir, "starrail", "relics", `${setId}${getRelicIconSuffix(type)}.png`);
+      if (verbose) {
+        console.log(`Downloading icon for relic of type ${type} from set "${setName}" (${setId}) from ${url}.`);
+      }
       try {
-        if (verbose) {
-          console.log(`Downloading icon for relic of type ${type} from set "${setName}" (${setId}) from ${url}.`);
-        }
-        await downloadImage({
-          savePath: path.join(__publicdir, "starrail", "relics", `${setId}${suffix}.png`),
-          url,
-          verbose,
-        });
+        await downloadImage({ savePath, url, verbose });
       } catch (err) {
-        console.error(`Error downloading icon for relic of type ${type} from set ${setName} (${setId}).`, err);
+        console.warn(`Error downloading icon for relic of type ${type} from set ${setName} (${setId}).`, err);
         failures.push({ setId, setName, type });
       }
     }
