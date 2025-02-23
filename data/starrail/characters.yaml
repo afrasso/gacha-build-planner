@@ -1,0 +1,1105 @@
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1001.png
+  id: '1001'
+  maxLvlStats:
+    ATK: 511.56
+    DEF: 573.3
+    HP: 1058.4
+    SPD: 101
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: March 7th
+  path: Knight
+  rarity: 4
+  statTraces:
+    DMG_BONUS_ICE: 0.224
+    DEF_PERCENT: 0.225
+    EFF_RES: 0.1
+- combatTypeId: Wind
+  iconUrl: /starrail/characters/1002.png
+  id: '1002'
+  maxLvlStats:
+    ATK: 546.84
+    DEF: 396.9
+    HP: 882
+    SPD: 110
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Dan Heng
+  path: Rogue
+  rarity: 4
+  statTraces:
+    DMG_BONUS_WIND: 0.224
+    ATK_PERCENT: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1003.png
+  id: '1003'
+  maxLvlStats:
+    ATK: 756.756
+    DEF: 436.59000000000003
+    HP: 1047.816
+    SPD: 96
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Himeko
+  path: Mage
+  rarity: 5
+  statTraces:
+    DMG_BONUS_FIRE: 0.224
+    ATK_PERCENT: 0.18
+    EFF_RES: 0.1
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1004.png
+  id: '1004'
+  maxLvlStats:
+    ATK: 620.9280000000001
+    DEF: 509.355
+    HP: 1125.4319999999998
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Welt
+  path: Warlock
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    DMG_BONUS_IMAGINARY: 0.14400000000000002
+    EFF_RES: 0.1
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1005.png
+  id: '1005'
+  maxLvlStats:
+    ATK: 679.1400000000001
+    DEF: 485.1
+    HP: 1086.624
+    SPD: 100
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Kafka
+  path: Warlock
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    EFF_HIT_RATE: 0.18
+    HP_PERCENT: 0.1
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1006.png
+  id: '1006'
+  maxLvlStats:
+    ATK: 640.332
+    DEF: 460.845
+    HP: 1047.816
+    SPD: 107
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Silver Wolf
+  path: Warlock
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    EFF_HIT_RATE: 0.18
+    DMG_BONUS_QUANTUM: 0.08
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1008.png
+  id: '1008'
+  maxLvlStats:
+    ATK: 599.76
+    DEF: 330.75
+    HP: 1199.52
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Arlan
+  path: Warrior
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    EFF_RES: 0.18
+    HP_PERCENT: 0.1
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1009.png
+  id: '1009'
+  maxLvlStats:
+    ATK: 511.56
+    DEF: 463.04999999999995
+    HP: 1023.12
+    SPD: 106
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Asta
+  path: Shaman
+  rarity: 4
+  statTraces:
+    DMG_BONUS_FIRE: 0.224
+    DEF_PERCENT: 0.225
+    CRIT_RATE: 0.066999999
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1013.png
+  id: '1013'
+  maxLvlStats:
+    ATK: 582.1199999999999
+    DEF: 396.9
+    HP: 952.56
+    SPD: 100
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Herta
+  path: Mage
+  rarity: 4
+  statTraces:
+    DMG_BONUS_ICE: 0.224
+    DEF_PERCENT: 0.225
+    CRIT_RATE: 0.066999999
+- combatTypeId: Wind
+  iconUrl: /starrail/characters/1101.png
+  id: '1101'
+  maxLvlStats:
+    ATK: 582.1199999999999
+    DEF: 533.61
+    HP: 1241.8560000000002
+    SPD: 99
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Bronya
+  path: Shaman
+  rarity: 5
+  statTraces:
+    DMG_BONUS_WIND: 0.224
+    CRIT_DMG: 0.24
+    EFF_RES: 0.1
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1102.png
+  id: '1102'
+  maxLvlStats:
+    ATK: 640.332
+    DEF: 363.82500000000005
+    HP: 931.392
+    SPD: 115
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Seele
+  path: Rogue
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    CRIT_DMG: 0.24
+    DEF_PERCENT: 0.125
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1103.png
+  id: '1103'
+  maxLvlStats:
+    ATK: 652.6800000000001
+    DEF: 374.85
+    HP: 917.28
+    SPD: 104
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Serval
+  path: Mage
+  rarity: 4
+  statTraces:
+    CRIT_RATE: 0.186999998
+    EFF_HIT_RATE: 0.18
+    EFF_RES: 0.1
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1104.png
+  id: '1104'
+  maxLvlStats:
+    ATK: 543.312
+    DEF: 654.885
+    HP: 1397.088
+    SPD: 92
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Gepard
+  path: Knight
+  rarity: 5
+  statTraces:
+    DMG_BONUS_ICE: 0.224
+    EFF_RES: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1105.png
+  id: '1105'
+  maxLvlStats:
+    ATK: 476.28
+    DEF: 507.15
+    HP: 1164.2399999999998
+    SPD: 98
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Natasha
+  path: Priest
+  rarity: 4
+  statTraces:
+    HP_PERCENT: 0.28
+    EFF_RES: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1106.png
+  id: '1106'
+  maxLvlStats:
+    ATK: 546.84
+    DEF: 463.04999999999995
+    HP: 987.8399999999999
+    SPD: 105
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Pela
+  path: Warlock
+  rarity: 4
+  statTraces:
+    DMG_BONUS_ICE: 0.224
+    ATK_PERCENT: 0.18
+    EFF_HIT_RATE: 0.1
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1107.png
+  id: '1107'
+  maxLvlStats:
+    ATK: 737.3520000000001
+    DEF: 485.1
+    HP: 1241.8560000000002
+    SPD: 90
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Clara
+  path: Warrior
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    DMG_BONUS_PHYSICAL: 0.14400000000000002
+    HP_PERCENT: 0.1
+- combatTypeId: Wind
+  iconUrl: /starrail/characters/1108.png
+  id: '1108'
+  maxLvlStats:
+    ATK: 617.4000000000001
+    DEF: 396.9
+    HP: 1023.12
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Sampo
+  path: Warlock
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    EFF_HIT_RATE: 0.18
+    EFF_RES: 0.1
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1109.png
+  id: '1109'
+  maxLvlStats:
+    ATK: 617.4000000000001
+    DEF: 352.79999999999995
+    HP: 1340.6399999999999
+    SPD: 94
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Hook
+  path: Warrior
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    HP_PERCENT: 0.18
+    CRIT_DMG: 0.133
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1110.png
+  id: '1110'
+  maxLvlStats:
+    ATK: 493.91999999999996
+    DEF: 551.25
+    HP: 1058.4
+    SPD: 100
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Lynx
+  path: Priest
+  rarity: 4
+  statTraces:
+    HP_PERCENT: 0.28
+    DEF_PERCENT: 0.225
+    EFF_RES: 0.1
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1111.png
+  id: '1111'
+  maxLvlStats:
+    ATK: 582.1199999999999
+    DEF: 485.1
+    HP: 917.28
+    SPD: 103
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Luka
+  path: Warlock
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    EFF_HIT_RATE: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1112.png
+  id: '1112'
+  maxLvlStats:
+    ATK: 620.9280000000001
+    DEF: 412.33500000000004
+    HP: 931.392
+    SPD: 110
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Topaz & Numby
+  path: Rogue
+  rarity: 5
+  statTraces:
+    DMG_BONUS_FIRE: 0.224
+    CRIT_RATE: 0.119999999
+    HP_PERCENT: 0.1
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1201.png
+  id: '1201'
+  maxLvlStats:
+    ATK: 652.6800000000001
+    DEF: 441
+    HP: 1023.12
+    SPD: 98
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Qingque
+  path: Mage
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    DMG_BONUS_QUANTUM: 0.14400000000000002
+    DEF_PERCENT: 0.125
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1202.png
+  id: '1202'
+  maxLvlStats:
+    ATK: 529.2
+    DEF: 396.9
+    HP: 846.72
+    SPD: 112
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Tingyun
+  path: Shaman
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    DEF_PERCENT: 0.225
+    DMG_BONUS_LIGHTNING: 0.08
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1203.png
+  id: '1203'
+  maxLvlStats:
+    ATK: 756.756
+    DEF: 363.82500000000005
+    HP: 1280.664
+    SPD: 101
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Luocha
+  path: Priest
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    HP_PERCENT: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1204.png
+  id: '1204'
+  maxLvlStats:
+    ATK: 698.544
+    DEF: 485.1
+    HP: 1164.2399999999998
+    SPD: 99
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Jing Yuan
+  path: Mage
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    CRIT_RATE: 0.119999999
+    DEF_PERCENT: 0.125
+- combatTypeId: Wind
+  iconUrl: /starrail/characters/1205.png
+  id: '1205'
+  maxLvlStats:
+    ATK: 543.312
+    DEF: 485.1
+    HP: 1358.2800000000002
+    SPD: 97
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Blade
+  path: Warrior
+  rarity: 5
+  statTraces:
+    HP_PERCENT: 0.28
+    CRIT_RATE: 0.119999999
+    EFF_RES: 0.1
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1206.png
+  id: '1206'
+  maxLvlStats:
+    ATK: 564.48
+    DEF: 418.95000000000005
+    HP: 917.28
+    SPD: 107
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Sushang
+  path: Rogue
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    HP_PERCENT: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1207.png
+  id: '1207'
+  maxLvlStats:
+    ATK: 599.76
+    DEF: 374.85
+    HP: 917.28
+    SPD: 107
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Yukong
+  path: Shaman
+  rarity: 4
+  statTraces:
+    DMG_BONUS_IMAGINARY: 0.224
+    HP_PERCENT: 0.18
+    ATK_PERCENT: 0.1
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1208.png
+  id: '1208'
+  maxLvlStats:
+    ATK: 465.696
+    DEF: 606.375
+    HP: 1474.7040000000002
+    SPD: 100
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Fu Xuan
+  path: Knight
+  rarity: 5
+  statTraces:
+    CRIT_RATE: 0.186999998
+    HP_PERCENT: 0.18
+    EFF_RES: 0.1
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1209.png
+  id: '1209'
+  maxLvlStats:
+    ATK: 679.1400000000001
+    DEF: 412.33500000000004
+    HP: 892.5840000000001
+    SPD: 109
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Yanqing
+  path: Rogue
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    DMG_BONUS_ICE: 0.14400000000000002
+    HP_PERCENT: 0.1
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1210.png
+  id: '1210'
+  maxLvlStats:
+    ATK: 582.1199999999999
+    DEF: 441
+    HP: 882
+    SPD: 106
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Guinaifen
+  path: Warlock
+  rarity: 4
+  statTraces:
+    DMG_BONUS_FIRE: 0.224
+    BREAK_EFF: 0.24
+    EFF_HIT_RATE: 0.1
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1211.png
+  id: '1211'
+  maxLvlStats:
+    ATK: 562.7159999999999
+    DEF: 485.1
+    HP: 1319.4720000000002
+    SPD: 98
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Bailu
+  path: Priest
+  rarity: 5
+  statTraces:
+    HP_PERCENT: 0.28
+    DEF_PERCENT: 0.225
+    EFF_RES: 0.1
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1212.png
+  id: '1212'
+  maxLvlStats:
+    ATK: 679.1400000000001
+    DEF: 485.1
+    HP: 1435.8960000000002
+    SPD: 96
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Jingliu
+  path: Warrior
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    SPD: 9
+    HP_PERCENT: 0.1
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1213.png
+  id: '1213'
+  maxLvlStats:
+    ATK: 698.544
+    DEF: 363.82500000000005
+    HP: 1241.8560000000002
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Dan Heng • Imbibitor Lunae
+  path: Warrior
+  rarity: 5
+  statTraces:
+    DMG_BONUS_IMAGINARY: 0.224
+    CRIT_RATE: 0.119999999
+    HP_PERCENT: 0.1
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1214.png
+  id: '1214'
+  maxLvlStats:
+    ATK: 599.76
+    DEF: 396.9
+    HP: 1058.4
+    SPD: 103
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Xueyi
+  path: Warrior
+  rarity: 4
+  statTraces:
+    BREAK_EFF: 0.373
+    HP_PERCENT: 0.18
+    DMG_BONUS_QUANTUM: 0.08
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1215.png
+  id: '1215'
+  maxLvlStats:
+    ATK: 564.48
+    DEF: 352.79999999999995
+    HP: 917.28
+    SPD: 110
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Hanya
+  path: Shaman
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    SPD: 9
+    HP_PERCENT: 0.1
+- combatTypeId: Wind
+  iconUrl: /starrail/characters/1217.png
+  id: '1217'
+  maxLvlStats:
+    ATK: 601.5239999999999
+    DEF: 509.355
+    HP: 1358.2800000000002
+    SPD: 98
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Huohuo
+  path: Priest
+  rarity: 5
+  statTraces:
+    HP_PERCENT: 0.28
+    EFF_RES: 0.18
+    SPD: 5
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1218.png
+  id: '1218'
+  maxLvlStats:
+    ATK: 601.5239999999999
+    DEF: 509.355
+    HP: 1358.2800000000002
+    SPD: 98
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Jiaoqiu
+  path: Warlock
+  rarity: 5
+  statTraces:
+    EFF_HIT_RATE: 0.28
+    DMG_BONUS_FIRE: 0.14400000000000002
+    SPD: 5
+- combatTypeId: Wind
+  iconUrl: /starrail/characters/1220.png
+  id: '1220'
+  maxLvlStats:
+    ATK: 601.5239999999999
+    DEF: 388.08000000000004
+    HP: 1047.816
+    SPD: 112
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Feixiao
+  path: Rogue
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    CRIT_RATE: 0.119999999
+    DEF_PERCENT: 0.125
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1221.png
+  id: '1221'
+  maxLvlStats:
+    ATK: 679.1400000000001
+    DEF: 460.845
+    HP: 1358.2800000000002
+    SPD: 94
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Yunli
+  path: Warrior
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    HP_PERCENT: 0.18
+    CRIT_RATE: 0.066999999
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1222.png
+  id: '1222'
+  maxLvlStats:
+    ATK: 679.1400000000001
+    DEF: 436.59000000000003
+    HP: 1358.2800000000002
+    SPD: 98
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Lingsha
+  path: Priest
+  rarity: 5
+  statTraces:
+    BREAK_EFF: 0.373
+    HP_PERCENT: 0.18
+    ATK_PERCENT: 0.1
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1223.png
+  id: '1223'
+  maxLvlStats:
+    ATK: 599.76
+    DEF: 352.79999999999995
+    HP: 811.44
+    SPD: 111
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Moze
+  path: Rogue
+  rarity: 4
+  statTraces:
+    CRIT_DMG: 0.373
+    ATK_PERCENT: 0.18
+    HP_PERCENT: 0.1
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1224.png
+  id: '1224'
+  maxLvlStats:
+    ATK: 564.48
+    DEF: 441
+    HP: 1058.4
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: March 7th
+  path: Rogue
+  rarity: 4
+  statTraces:
+    ATK_PERCENT: 0.28
+    CRIT_DMG: 0.24
+    DEF_PERCENT: 0.125
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1225.png
+  id: '1225'
+  maxLvlStats:
+    ATK: 582.1199999999999
+    DEF: 557.865
+    HP: 1125.4319999999998
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Fugue
+  path: Warlock
+  rarity: 5
+  statTraces:
+    SPD: 14
+    BREAK_EFF: 0.24
+    HP_PERCENT: 0.1
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1301.png
+  id: '1301'
+  maxLvlStats:
+    ATK: 529.2
+    DEF: 441
+    HP: 1305.3600000000001
+    SPD: 98
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Gallagher
+  path: Priest
+  rarity: 4
+  statTraces:
+    EFF_RES: 0.28
+    BREAK_EFF: 0.133
+    HP_PERCENT: 0.18
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1302.png
+  id: '1302'
+  maxLvlStats:
+    ATK: 737.3520000000001
+    DEF: 363.82500000000005
+    HP: 1047.816
+    SPD: 103
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Argenti
+  path: Mage
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    DMG_BONUS_PHYSICAL: 0.14400000000000002
+    HP_PERCENT: 0.1
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1303.png
+  id: '1303'
+  maxLvlStats:
+    ATK: 659.7360000000001
+    DEF: 485.1
+    HP: 1086.624
+    SPD: 104
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Ruan Mei
+  path: Shaman
+  rarity: 5
+  statTraces:
+    BREAK_EFF: 0.373
+    DEF_PERCENT: 0.225
+    SPD: 5
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1304.png
+  id: '1304'
+  maxLvlStats:
+    ATK: 446.29200000000003
+    DEF: 654.885
+    HP: 1203.0479999999998
+    SPD: 106
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Aventurine
+  path: Knight
+  rarity: 5
+  statTraces:
+    DEF_PERCENT: 0.35
+    DMG_BONUS_IMAGINARY: 0.14400000000000002
+    EFF_RES: 0.1
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1305.png
+  id: '1305'
+  maxLvlStats:
+    ATK: 776.1600000000001
+    DEF: 460.845
+    HP: 1047.816
+    SPD: 103
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Dr. Ratio
+  path: Rogue
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    CRIT_RATE: 0.119999999
+    DEF_PERCENT: 0.125
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1306.png
+  id: '1306'
+  maxLvlStats:
+    ATK: 523.908
+    DEF: 485.1
+    HP: 1397.088
+    SPD: 101
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Sparkle
+  path: Shaman
+  rarity: 5
+  statTraces:
+    HP_PERCENT: 0.28
+    CRIT_DMG: 0.24
+    EFF_RES: 0.1
+- combatTypeId: Wind
+  iconUrl: /starrail/characters/1307.png
+  id: '1307'
+  maxLvlStats:
+    ATK: 659.7360000000001
+    DEF: 485.1
+    HP: 1086.624
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Black Swan
+  path: Warlock
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    DMG_BONUS_WIND: 0.14400000000000002
+    EFF_HIT_RATE: 0.1
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1308.png
+  id: '1308'
+  maxLvlStats:
+    ATK: 698.544
+    DEF: 436.59000000000003
+    HP: 1125.4319999999998
+    SPD: 101
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Acheron
+  path: Warlock
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    CRIT_DMG: 0.24
+    DMG_BONUS_LIGHTNING: 0.08
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1309.png
+  id: '1309'
+  maxLvlStats:
+    ATK: 640.332
+    DEF: 485.1
+    HP: 1280.664
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Robin
+  path: Shaman
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    HP_PERCENT: 0.18
+    SPD: 5
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/1310.png
+  id: '1310'
+  maxLvlStats:
+    ATK: 523.908
+    DEF: 776.1600000000001
+    HP: 814.968
+    SPD: 104
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Firefly
+  path: Warrior
+  rarity: 5
+  statTraces:
+    BREAK_EFF: 0.373
+    EFF_RES: 0.18
+    SPD: 5
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1312.png
+  id: '1312'
+  maxLvlStats:
+    ATK: 599.76
+    DEF: 396.9
+    HP: 1270.08
+    SPD: 96
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Misha
+  path: Warrior
+  rarity: 4
+  statTraces:
+    DMG_BONUS_ICE: 0.224
+    DEF_PERCENT: 0.225
+    CRIT_RATE: 0.066999999
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1313.png
+  id: '1313'
+  maxLvlStats:
+    ATK: 640.332
+    DEF: 533.61
+    HP: 1241.8560000000002
+    SPD: 96
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Sunday
+  path: Shaman
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    EFF_RES: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Quantum
+  iconUrl: /starrail/characters/1314.png
+  id: '1314'
+  maxLvlStats:
+    ATK: 659.7360000000001
+    DEF: 509.355
+    HP: 1086.624
+    SPD: 103
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Jade
+  path: Mage
+  rarity: 5
+  statTraces:
+    DMG_BONUS_QUANTUM: 0.224
+    ATK_PERCENT: 0.18
+    EFF_RES: 0.1
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/1315.png
+  id: '1315'
+  maxLvlStats:
+    ATK: 620.9280000000001
+    DEF: 436.59000000000003
+    HP: 1203.0479999999998
+    SPD: 107
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Boothill
+  path: Rogue
+  rarity: 5
+  statTraces:
+    BREAK_EFF: 0.373
+    ATK_PERCENT: 0.18
+    HP_PERCENT: 0.1
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/1317.png
+  id: '1317'
+  maxLvlStats:
+    ATK: 717.9480000000001
+    DEF: 460.845
+    HP: 1086.624
+    SPD: 96
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Rappa
+  path: Mage
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    SPD: 9
+    BREAK_EFF: 0.133
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/1401.png
+  id: '1401'
+  maxLvlStats:
+    ATK: 679.1400000000001
+    DEF: 485.1
+    HP: 1164.2399999999998
+    SPD: 99
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: The Herta
+  path: Mage
+  rarity: 5
+  statTraces:
+    DMG_BONUS_ICE: 0.224
+    ATK_PERCENT: 0.18
+    SPD: 5
+- combatTypeId: Thunder
+  iconUrl: /starrail/characters/1402.png
+  id: '1402'
+  maxLvlStats:
+    ATK: 698.544
+    DEF: 485.1
+    HP: 1241.8560000000002
+    SPD: 102
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Aglaea
+  path: Memory
+  rarity: 5
+  statTraces:
+    DMG_BONUS_LIGHTNING: 0.224
+    CRIT_RATE: 0.119999999
+    DEF_PERCENT: 0.125
+- combatTypeId: Physical
+  iconUrl: /starrail/characters/8001.png
+  id: '8001'
+  maxLvlStats:
+    ATK: 620.9280000000001
+    DEF: 460.845
+    HP: 1203.0479999999998
+    SPD: 100
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Trailblazer
+  path: Warrior
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    HP_PERCENT: 0.18
+    DEF_PERCENT: 0.125
+- combatTypeId: Fire
+  iconUrl: /starrail/characters/8003.png
+  id: '8003'
+  maxLvlStats:
+    ATK: 601.5239999999999
+    DEF: 606.375
+    HP: 1241.8560000000002
+    SPD: 95
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Trailblazer
+  path: Knight
+  rarity: 5
+  statTraces:
+    DEF_PERCENT: 0.35
+    ATK_PERCENT: 0.18
+    HP_PERCENT: 0.1
+- combatTypeId: Imaginary
+  iconUrl: /starrail/characters/8005.png
+  id: '8005'
+  maxLvlStats:
+    ATK: 446.29200000000003
+    DEF: 679.1400000000001
+    HP: 1086.624
+    SPD: 105
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Trailblazer
+  path: Shaman
+  rarity: 5
+  statTraces:
+    BREAK_EFF: 0.373
+    DMG_BONUS_IMAGINARY: 0.14400000000000002
+    EFF_RES: 0.1
+- combatTypeId: Ice
+  iconUrl: /starrail/characters/8007.png
+  id: '8007'
+  maxLvlStats:
+    ATK: 543.312
+    DEF: 630.6300000000001
+    HP: 1047.816
+    SPD: 103
+    CRIT_RATE: 0.05
+    CRIT_DMG: 0.5
+  name: Trailblazer
+  path: Memory
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    ATK_PERCENT: 0.14
+    HP_PERCENT: 0.14

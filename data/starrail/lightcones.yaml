@@ -1,0 +1,1098 @@
+- iconUrl: /starrail/lightcones/20000.png
+  id: '20000'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Arrows
+  path: The Hunt
+  rarity: 3
+- iconUrl: /starrail/lightcones/20001.png
+  id: '20001'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 264.6
+    DEF: 264.6
+  name: Cornucopia
+  path: Abundance
+  rarity: 3
+- iconUrl: /starrail/lightcones/20002.png
+  id: '20002'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 370.44000000000005
+    DEF: 198.45
+  name: Collapsing Sky
+  path: Destruction
+  rarity: 3
+- iconUrl: /starrail/lightcones/20003.png
+  id: '20003'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 264.6
+    DEF: 330.75
+  name: Amber
+  path: Preservation
+  rarity: 3
+- iconUrl: /starrail/lightcones/20004.png
+  id: '20004'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Void
+  path: Nihility
+  rarity: 3
+- iconUrl: /starrail/lightcones/20005.png
+  id: '20005'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Chorus
+  path: Harmony
+  rarity: 3
+- iconUrl: /starrail/lightcones/20006.png
+  id: '20006'
+  maxLvlStats:
+    HP: 740.8800000000001
+    ATK: 370.44000000000005
+    DEF: 264.6
+  name: Data Bank
+  path: Erudition
+  rarity: 3
+- iconUrl: /starrail/lightcones/20007.png
+  id: '20007'
+  maxLvlStats:
+    HP: 740.8800000000001
+    ATK: 370.44000000000005
+    DEF: 264.6
+  name: Darting Arrow
+  path: The Hunt
+  rarity: 3
+- iconUrl: /starrail/lightcones/20008.png
+  id: '20008'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 317.52
+    DEF: 198.45
+  name: Fine Fruit
+  path: Abundance
+  rarity: 3
+- iconUrl: /starrail/lightcones/20009.png
+  id: '20009'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 370.44000000000005
+    DEF: 198.45
+  name: Shattered Home
+  path: Destruction
+  rarity: 3
+- iconUrl: /starrail/lightcones/20010.png
+  id: '20010'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 264.6
+    DEF: 264.6
+  name: Defense
+  path: Preservation
+  rarity: 3
+- iconUrl: /starrail/lightcones/20011.png
+  id: '20011'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Loop
+  path: Nihility
+  rarity: 3
+- iconUrl: /starrail/lightcones/20012.png
+  id: '20012'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Meshing Cogs
+  path: Harmony
+  rarity: 3
+- iconUrl: /starrail/lightcones/20013.png
+  id: '20013'
+  maxLvlStats:
+    HP: 740.8800000000001
+    ATK: 370.44000000000005
+    DEF: 264.6
+  name: Passkey
+  path: Erudition
+  rarity: 3
+- iconUrl: /starrail/lightcones/20014.png
+  id: '20014'
+  maxLvlStats:
+    HP: 740.8800000000001
+    ATK: 370.44000000000005
+    DEF: 264.6
+  name: Adversarial
+  path: The Hunt
+  rarity: 3
+- iconUrl: /starrail/lightcones/20015.png
+  id: '20015'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 317.52
+    DEF: 198.45
+  name: Multiplication
+  path: Abundance
+  rarity: 3
+- iconUrl: /starrail/lightcones/20016.png
+  id: '20016'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 370.44000000000005
+    DEF: 198.45
+  name: Mutual Demise
+  path: Destruction
+  rarity: 3
+- iconUrl: /starrail/lightcones/20017.png
+  id: '20017'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 264.6
+    DEF: 264.6
+  name: Pioneering
+  path: Preservation
+  rarity: 3
+- iconUrl: /starrail/lightcones/20018.png
+  id: '20018'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Hidden Shadow
+  path: Nihility
+  rarity: 3
+- iconUrl: /starrail/lightcones/20019.png
+  id: '20019'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Mediation
+  path: Harmony
+  rarity: 3
+- iconUrl: /starrail/lightcones/20020.png
+  id: '20020'
+  maxLvlStats:
+    HP: 740.8800000000001
+    ATK: 370.44000000000005
+    DEF: 264.6
+  name: Sagacity
+  path: Erudition
+  rarity: 3
+- iconUrl: /starrail/lightcones/20021.png
+  id: '20021'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Shadowburn
+  path: Remembrance
+  rarity: 3
+- iconUrl: /starrail/lightcones/20022.png
+  id: '20022'
+  maxLvlStats:
+    HP: 635.04
+    ATK: 423.36
+    DEF: 264.6
+  name: Reminiscence
+  path: Remembrance
+  rarity: 3
+- iconUrl: /starrail/lightcones/21000.png
+  id: '21000'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 423.36
+    DEF: 330.75
+  name: Post-Op Conversation
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21001.png
+  id: '21001'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Good Night and Sleep Well
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21002.png
+  id: '21002'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 370.44000000000005
+    DEF: 463.04999999999995
+  name: Day One of My New Life
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21003.png
+  id: '21003'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Only Silence Remains
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21004.png
+  id: '21004'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Memories of the Past
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21005.png
+  id: '21005'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 264.6
+  name: The Moles Welcome You
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21006.png
+  id: '21006'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: The Birth of the Self
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21007.png
+  id: '21007'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Shared Feeling
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21008.png
+  id: '21008'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Eyes of the Prey
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21009.png
+  id: '21009'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Landau's Choice
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21010.png
+  id: '21010'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Swordplay
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21011.png
+  id: '21011'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 423.36
+    DEF: 330.75
+  name: Planetary Rendezvous
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21012.png
+  id: '21012'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 264.6
+  name: A Secret Vow
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21013.png
+  id: '21013'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: Make the World Clamor
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21014.png
+  id: '21014'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Perfect Timing
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21015.png
+  id: '21015'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Resolution Shines As Pearls of Sweat
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21016.png
+  id: '21016'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 370.44000000000005
+    DEF: 396.9
+  name: Trend of the Universal Market
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21017.png
+  id: '21017'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Subscribe for More!
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21018.png
+  id: '21018'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Dance! Dance! Dance!
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21019.png
+  id: '21019'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Under the Blue Sky
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21020.png
+  id: '21020'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: Geniuses' Repose
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21021.png
+  id: '21021'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Quid Pro Quo
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21022.png
+  id: '21022'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Fermata
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21023.png
+  id: '21023'
+  maxLvlStats:
+    HP: 740.8800000000001
+    ATK: 476.28
+    DEF: 463.04999999999995
+  name: We Are Wildfire
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21024.png
+  id: '21024'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: River Flows in Spring
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21025.png
+  id: '21025'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Past and Future
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21026.png
+  id: '21026'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Woof! Walk Time!
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21027.png
+  id: '21027'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: The Seriousness of Breakfast
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21028.png
+  id: '21028'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 370.44000000000005
+    DEF: 396.9
+  name: Warmth Shortens Cold Nights
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21029.png
+  id: '21029'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 529.2
+    DEF: 330.75
+  name: We Will Meet Again
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21030.png
+  id: '21030'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 370.44000000000005
+    DEF: 529.2
+  name: This Is Me!
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21031.png
+  id: '21031'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 529.2
+    DEF: 330.75
+  name: Return to Darkness
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21032.png
+  id: '21032'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Carve the Moon, Weave the Clouds
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21033.png
+  id: '21033'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 529.2
+    DEF: 264.6
+  name: Nowhere to Run
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21034.png
+  id: '21034'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 529.2
+    DEF: 330.75
+  name: Today Is Another Peaceful Day
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21035.png
+  id: '21035'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 423.36
+    DEF: 330.75
+  name: What Is Real?
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21036.png
+  id: '21036'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Dreamville Adventure
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21037.png
+  id: '21037'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Final Victor
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21038.png
+  id: '21038'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 264.6
+  name: Flames Afar
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21039.png
+  id: '21039'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 370.44000000000005
+    DEF: 463.04999999999995
+  name: Destiny's Threads Forewoven
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21040.png
+  id: '21040'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: The Day The Cosmos Fell
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21041.png
+  id: '21041'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 264.6
+  name: It's Showtime
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21042.png
+  id: '21042'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Indelible Promise
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21043.png
+  id: '21043'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 370.44000000000005
+    DEF: 463.04999999999995
+  name: Concert for Two
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21044.png
+  id: '21044'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Boundless Choreo
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21045.png
+  id: '21045'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: After the Charmony Fall
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21046.png
+  id: '21046'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Poised to Bloom
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21047.png
+  id: '21047'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: Shadowed by Night
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21048.png
+  id: '21048'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Dream's Montage
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21050.png
+  id: '21050'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: Victory In a Blink
+  path: Remembrance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21051.png
+  id: '21051'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Geniuses' Greetings
+  path: Remembrance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21052.png
+  id: '21052'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 198.45
+  name: Sweat Now, Cry Less
+  path: Remembrance
+  rarity: 4
+- iconUrl: /starrail/lightcones/22000.png
+  id: '22000'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Before the Tutorial Mission Starts
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/22001.png
+  id: '22001'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 423.36
+    DEF: 396.9
+  name: Hey, Over Here
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/22002.png
+  id: '22002'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: For Tomorrow's Journey
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/22003.png
+  id: '22003'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 264.6
+  name: 'Ninja Record: Sound Hunt'
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/23000.png
+  id: '23000'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 582.1199999999999
+    DEF: 396.9
+  name: Night on the Milky Way
+  path: Erudition
+  rarity: 5
+- iconUrl: /starrail/lightcones/23001.png
+  id: '23001'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: In the Night
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23002.png
+  id: '23002'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 582.1199999999999
+    DEF: 396.9
+  name: Something Irreplaceable
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23003.png
+  id: '23003'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 529.2
+    DEF: 463.04999999999995
+  name: But the Battle Isn't Over
+  path: Harmony
+  rarity: 5
+- iconUrl: /starrail/lightcones/23004.png
+  id: '23004'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: In the Name of the World
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23005.png
+  id: '23005'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 595.3499999999999
+  name: Moment of Victory
+  path: Preservation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23006.png
+  id: '23006'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Patience Is All You Need
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23007.png
+  id: '23007'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Incessant Rain
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23008.png
+  id: '23008'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 582.1199999999999
+    DEF: 396.9
+  name: Echoes of the Coffin
+  path: Abundance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23009.png
+  id: '23009'
+  maxLvlStats:
+    HP: 1270.08
+    ATK: 582.1199999999999
+    DEF: 330.75
+  name: The Unreachable Side
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23010.png
+  id: '23010'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Before Dawn
+  path: Erudition
+  rarity: 5
+- iconUrl: /starrail/lightcones/23011.png
+  id: '23011'
+  maxLvlStats:
+    HP: 1270.08
+    ATK: 423.36
+    DEF: 529.2
+  name: She Already Shut Her Eyes
+  path: Preservation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23012.png
+  id: '23012'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Sleep Like the Dead
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23013.png
+  id: '23013'
+  maxLvlStats:
+    HP: 1270.08
+    ATK: 476.28
+    DEF: 463.04999999999995
+  name: Time Waits for No One
+  path: Abundance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23014.png
+  id: '23014'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 582.1199999999999
+    DEF: 396.9
+  name: I Shall Be My Own Sword
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23015.png
+  id: '23015'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 635.04
+    DEF: 396.9
+  name: Brighter Than the Sun
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23016.png
+  id: '23016'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Worrisome, Blissful
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23017.png
+  id: '23017'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 476.28
+    DEF: 529.2
+  name: Night of Fright
+  path: Abundance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23018.png
+  id: '23018'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: An Instant Before A Gaze
+  path: Erudition
+  rarity: 5
+- iconUrl: /starrail/lightcones/23019.png
+  id: '23019'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 529.2
+  name: Past Self in Mirror
+  path: Harmony
+  rarity: 5
+- iconUrl: /starrail/lightcones/23020.png
+  id: '23020'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: Baptism of Pure Thought
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23021.png
+  id: '23021'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 529.2
+    DEF: 463.04999999999995
+  name: Earthly Escapade
+  path: Harmony
+  rarity: 5
+- iconUrl: /starrail/lightcones/23022.png
+  id: '23022'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Reforged Remembrance
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23023.png
+  id: '23023'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 423.36
+    DEF: 661.5
+  name: Inherently Unjust Destiny
+  path: Preservation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23024.png
+  id: '23024'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 635.04
+    DEF: 396.9
+  name: Along the Passing Shore
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23025.png
+  id: '23025'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 476.28
+    DEF: 529.2
+  name: Whereabouts Should Dreams Rest
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23026.png
+  id: '23026'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 635.04
+    DEF: 463.04999999999995
+  name: Flowing Nightglow
+  path: Harmony
+  rarity: 5
+- iconUrl: /starrail/lightcones/23027.png
+  id: '23027'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Sailing Towards a Second Life
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23028.png
+  id: '23028'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: Yet Hope Is Priceless
+  path: Erudition
+  rarity: 5
+- iconUrl: /starrail/lightcones/23029.png
+  id: '23029'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: Those Many Springs
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23030.png
+  id: '23030'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Dance at Sunset
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23031.png
+  id: '23031'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 635.04
+    DEF: 463.04999999999995
+  name: I Venture Forth to Hunt
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23032.png
+  id: '23032'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 529.2
+  name: Scent Alone Stays True
+  path: Abundance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23033.png
+  id: '23033'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: 'Ninjutsu Inscription: Dazzling Evilbreaker'
+  path: Erudition
+  rarity: 5
+- iconUrl: /starrail/lightcones/23034.png
+  id: '23034'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 476.28
+    DEF: 529.2
+  name: A Grounded Ascent
+  path: Harmony
+  rarity: 5
+- iconUrl: /starrail/lightcones/23035.png
+  id: '23035'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 661.5
+  name: Long Road Leads Home
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23036.png
+  id: '23036'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 635.04
+    DEF: 396.9
+  name: Time Woven Into Gold
+  path: Remembrance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23037.png
+  id: '23037'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 635.04
+    DEF: 463.04999999999995
+  name: Into the Unreachable Veil
+  path: Erudition
+  rarity: 5
+- iconUrl: /starrail/lightcones/24000.png
+  id: '24000'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 396.9
+  name: On the Fall of an Aeon
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/24001.png
+  id: '24001'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 529.2
+    DEF: 463.04999999999995
+  name: Cruising in the Stellar Sea
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/24002.png
+  id: '24002'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 423.36
+    DEF: 529.2
+  name: Texture of Memories
+  path: Preservation
+  rarity: 5
+- iconUrl: /starrail/lightcones/24003.png
+  id: '24003'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 396.9
+  name: Solitary Healing
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/24004.png
+  id: '24004'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 396.9
+  name: Eternal Calculus
+  path: Erudition
+  rarity: 5
