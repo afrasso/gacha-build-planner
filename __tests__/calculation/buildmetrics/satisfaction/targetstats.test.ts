@@ -27,17 +27,17 @@ describe("Target Stats Satisfaction Tests", () => {
             [OverallStatKey.MAX_HP]: 100,
           };
           const targetStats: Stat<OverallStatKey>[] = [
-            { stat: OverallStatKey.ATK, value: 50 },
-            { stat: OverallStatKey.CRIT_DMG, value: 50 },
+            { key: OverallStatKey.ATK, value: 50 },
+            { key: OverallStatKey.CRIT_DMG, value: 50 },
           ];
           const satisfactionResult = calculateTargetStatsSatisfaction({ stats, targetStats });
           expect(satisfactionResult.satisfaction).toBe(true);
           expect(satisfactionResult.details.length).toBe(targetStats.length);
           for (const details of satisfactionResult.details) {
             expect(details.satisfaction).toBe(true);
-            expect(details.statValue).toBe(stats[details.targetStat]);
+            expect(details.currentStatValue).toBe(stats[details.statKey]);
             expect(details.targetStatValue).toBe(
-              targetStats.find((statValue) => statValue.stat === details.targetStat)?.value
+              targetStats.find((statValue) => statValue.key === details.statKey)?.value
             );
           }
         });
@@ -64,17 +64,17 @@ describe("Target Stats Satisfaction Tests", () => {
             [OverallStatKey.MAX_HP]: 100,
           };
           const targetStats: Stat<OverallStatKey>[] = [
-            { stat: OverallStatKey.ATK, value: 200 },
-            { stat: OverallStatKey.CRIT_DMG, value: 200 },
+            { key: OverallStatKey.ATK, value: 200 },
+            { key: OverallStatKey.CRIT_DMG, value: 200 },
           ];
           const satisfactionResult = calculateTargetStatsSatisfaction({ stats, targetStats });
           expect(satisfactionResult.satisfaction).toBe(false);
           expect(satisfactionResult.details.length).toBe(targetStats.length);
           for (const details of satisfactionResult.details) {
             expect(details.satisfaction).toBe(false);
-            expect(details.statValue).toBe(stats[details.targetStat]);
+            expect(details.currentStatValue).toBe(stats[details.statKey]);
             expect(details.targetStatValue).toBe(
-              targetStats.find((statValue) => statValue.stat === details.targetStat)?.value
+              targetStats.find((statValue) => statValue.key === details.statKey)?.value
             );
           }
         });
@@ -101,21 +101,21 @@ describe("Target Stats Satisfaction Tests", () => {
             [OverallStatKey.MAX_HP]: 100,
           };
           const targetStats: Stat<OverallStatKey>[] = [
-            { stat: OverallStatKey.ATK, value: 50 },
-            { stat: OverallStatKey.CRIT_DMG, value: 200 },
+            { key: OverallStatKey.ATK, value: 50 },
+            { key: OverallStatKey.CRIT_DMG, value: 200 },
           ];
           const satisfactionResult = calculateTargetStatsSatisfaction({ stats, targetStats });
           expect(satisfactionResult.satisfaction).toBe(false);
           expect(satisfactionResult.details.length).toBe(targetStats.length);
           for (const details of satisfactionResult.details) {
-            if (details.targetStat === OverallStatKey.ATK) {
+            if (details.statKey === OverallStatKey.ATK) {
               expect(details.satisfaction).toBe(true);
             } else {
               expect(details.satisfaction).toBe(false);
             }
-            expect(details.statValue).toBe(stats[details.targetStat]);
+            expect(details.currentStatValue).toBe(stats[details.statKey]);
             expect(details.targetStatValue).toBe(
-              targetStats.find((statValue) => statValue.stat === details.targetStat)?.value
+              targetStats.find((statValue) => statValue.key === details.statKey)?.value
             );
           }
         });

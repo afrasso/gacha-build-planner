@@ -26,9 +26,9 @@ export interface SatisfactionResult<T> {
 }
 
 export interface StatSatisfactionDetails {
+  currentStatValue: number;
   satisfaction: boolean;
-  statValue: number;
-  targetStatKey: OverallStatKey;
+  statKey: OverallStatKey;
   targetStatValue: number;
 }
 

@@ -10,9 +10,9 @@ export const calculateTargetStatsSatisfaction = ({
   targetStats: Stat<OverallStatKey>[];
 }): SatisfactionResult<StatSatisfactionDetails> => {
   const details = targetStats.map((targetStat) => ({
+    currentStatValue: stats[targetStat.key],
     satisfaction: targetStat.value <= stats[targetStat.key],
-    statValue: stats[targetStat.key],
-    targetStatKey: targetStat.key,
+    statKey: targetStat.key,
     targetStatValue: targetStat.value,
   }));
 

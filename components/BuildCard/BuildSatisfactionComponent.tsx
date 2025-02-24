@@ -110,14 +110,14 @@ const StatsDisplay: React.FC<{ result: SatisfactionResult<StatSatisfactionDetail
   return (
     <div className="flex flex-col items-center justify-center h-full">
       {result.details.map((statSatisfaction) => {
-        const comparatorSymbol = statSatisfaction.statValue >= statSatisfaction.targetStatValue ? ">=" : "<";
+        const comparatorSymbol = statSatisfaction.currentStatValue >= statSatisfaction.targetStatValue ? ">=" : "<";
         return (
-          <div className="flex items-center gap-2 mb-2" key={statSatisfaction.targetStatKey}>
+          <div className="flex items-center gap-2 mb-2" key={statSatisfaction.statKey}>
             <ImageWithTooltip
-              alt={statSatisfaction.targetStatKey}
+              alt={statSatisfaction.statKey}
               height={32}
-              src={getStatIconUrl(statSatisfaction.targetStatKey)}
-              tooltipText={`${statSatisfaction.targetStatKey}: ${statSatisfaction.statValue} ${comparatorSymbol} ${statSatisfaction.targetStatValue}`}
+              src={getStatIconUrl(statSatisfaction.statKey)}
+              tooltipText={`${statSatisfaction.statKey}: ${statSatisfaction.currentStatValue} ${comparatorSymbol} ${statSatisfaction.targetStatValue}`}
               width={32}
             />
             <SatisfactionIcon isSatisfied={statSatisfaction.satisfaction} />

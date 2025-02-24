@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "v
 
 import { getRandomInitialSubStats } from "@/calculation/simulation/getrandominitialsubstats";
 import { getSubStatRollValues } from "@/constants";
-import { StatKey, Stat } from "@/types";
+import { Stat, StatKey } from "@/types";
 
 describe("getRandomInitialSubStats()", () => {
   let randomSpy: MockInstance<() => number>;
@@ -28,8 +28,8 @@ describe("getRandomInitialSubStats()", () => {
   }) => {
     expect(subStatValues.length).toBe(expectedLength);
     for (const subStatValue of subStatValues) {
-      expect(subStatValue.stat).not.toBe(mainStat);
-      const rollValues = getSubStatRollValues({ rarity, subStat: subStatValue.stat });
+      expect(subStatValue.key).not.toBe(mainStat);
+      const rollValues = getSubStatRollValues({ rarity, statKey: subStatValue.key });
       expect(subStatValue.value).toBe(rollValues[0]);
     }
   };
