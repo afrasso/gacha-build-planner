@@ -1,11 +1,11 @@
 import { getSubStatRollValues } from "@/constants";
-import { Stat, StatValue } from "@/types";
+import { Stat, StatKey } from "@/types";
 
 import { getRandomValue } from "./getrandomvalue";
 
-export const rollSubStat = ({ rarity, stat }: { rarity: number; stat: Stat }): StatValue<Stat> => {
-  const rollValues = getSubStatRollValues({ rarity, subStat: stat });
+export const rollSubStat = ({ rarity, statKey }: { rarity: number; statKey: StatKey }): Stat<StatKey> => {
+  const rollValues = getSubStatRollValues({ rarity, statKey });
   const value = getRandomValue(rollValues);
 
-  return { stat, value };
+  return { key: statKey, value };
 };

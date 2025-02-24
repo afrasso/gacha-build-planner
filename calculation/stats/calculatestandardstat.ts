@@ -1,4 +1,4 @@
-import { BuildArtifacts, Character, Stat, Weapon } from "@/types";
+import { BuildArtifacts, Character, StatKey, Weapon } from "@/types";
 
 import { getTotalArtifactStatValue } from "./gettotalartifactstatvalue";
 
@@ -6,19 +6,19 @@ export const calculateStandardStat = ({
   artifacts,
   character,
   min = 0,
-  stat,
+  statKey,
   weapon,
 }: {
   artifacts: BuildArtifacts;
   character: Character;
   min?: number;
-  stat: Stat;
+  statKey: StatKey;
   weapon?: Weapon;
 }) => {
   const total =
-    getTotalArtifactStatValue({ artifacts, stat }) +
-    (character.ascensionStat === stat ? character.maxLvlStats.ascensionStat : min) +
-    (weapon?.mainStat === stat ? weapon.maxLvlStats.mainStat : 0);
+    getTotalArtifactStatValue({ artifacts, statKey }) +
+    (character.ascensionStat === statKey ? character.maxLvlStats.ascensionStat : min) +
+    (weapon?.mainStat === statKey ? weapon.maxLvlStats.mainStat : 0);
 
   return total;
 };

@@ -1,15 +1,15 @@
-import { Stat, StatValue } from "@/types";
+import { Stat, StatKey } from "@/types";
 
 import { getInitialSubStatCount } from "./getinitialsubstatcount";
 import { getRandomNewSubStat } from "./getrandomnewsubstat";
 import { rollSubStat } from "./rollsubstat";
 
-export const getRandomInitialSubStats = ({ mainStat, rarity }: { mainStat: Stat; rarity: number }) => {
+export const getRandomInitialSubStats = ({ mainStat, rarity }: { mainStat: StatKey; rarity: number }) => {
   const subStatCount = getInitialSubStatCount({ rarity });
-  const subStats: StatValue<Stat>[] = [];
+  const subStats: Stat<StatKey>[] = [];
   for (let i = 0; i < subStatCount; i++) {
-    const subStat = getRandomNewSubStat({ mainStat, subStats: subStats.map((s) => s.stat) });
-    subStats.push(rollSubStat({ rarity, stat: subStat }));
+    const statKey = getRandomNewSubStat({ mainStat, subStats: subStats.map((s) => s.key) });
+    subStats.push(rollSubStat({ rarity, statKey }));
   }
   return subStats;
 };

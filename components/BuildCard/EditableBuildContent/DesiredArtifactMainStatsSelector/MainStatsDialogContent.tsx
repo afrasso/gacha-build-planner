@@ -6,22 +6,22 @@ import { Button } from "@/components/ui/button";
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Toggle } from "@/components/ui/toggle";
 import { getMainStats } from "@/constants";
-import { ArtifactType, Stat } from "@/types";
+import { ArtifactType, StatKey } from "@/types";
 
 interface MainStatsDialogContentProps {
   artifactType: ArtifactType;
-  mainStats: Stat[];
-  onUpdate: (mainStats: Stat[]) => void;
+  mainStats: StatKey[];
+  onUpdate: (mainStats: StatKey[]) => void;
 }
 
 export function MainStatsDialogContent({ artifactType, mainStats, onUpdate }: MainStatsDialogContentProps) {
-  const [internalMainStats, setInternalMainStats] = useState<Stat[]>(mainStats);
+  const [internalMainStats, setInternalMainStats] = useState<StatKey[]>(mainStats);
 
   const clear = () => {
     setInternalMainStats([]);
   };
 
-  const onMainStatToggle = ({ mainStat, pressed }: { mainStat: Stat; pressed: boolean }) => {
+  const onMainStatToggle = ({ mainStat, pressed }: { mainStat: StatKey; pressed: boolean }) => {
     if (pressed && !internalMainStats.includes(mainStat)) {
       setInternalMainStats((prev) => [...prev, mainStat]);
     } else if (!pressed && internalMainStats.includes(mainStat)) {
@@ -29,7 +29,7 @@ export function MainStatsDialogContent({ artifactType, mainStats, onUpdate }: Ma
     }
   };
 
-  const isMainStatToggled = (mainStat: Stat) => internalMainStats.includes(mainStat);
+  const isMainStatToggled = (mainStat: StatKey) => internalMainStats.includes(mainStat);
 
   const onSubmit = () => {
     onUpdate(internalMainStats);

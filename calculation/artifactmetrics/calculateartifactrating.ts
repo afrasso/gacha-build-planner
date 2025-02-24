@@ -1,5 +1,5 @@
 import { getSubStatRollValues } from "@/constants";
-import { Artifact, Build, DesiredOverallStat, OverallStat, Stat } from "@/types";
+import { Artifact, Build, DesiredOverallStat, OverallStatKey, StatKey } from "@/types";
 
 import { rollArtifact } from "../simulation";
 import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
@@ -20,15 +20,21 @@ const calculateSubstatRating = ({
 }): number => {
   let rating = 0;
 
-  const calculateSubstatRollValue = ({ overallStat, stat }: { overallStat: OverallStat; stat: Stat }) => {
-    if (desiredOverallStat.stat !== overallStat) {
+  const calculateSubstatRollValue = ({
+    overallStatKey,
+    statKey,
+  }: {
+    overallStatKey: OverallStatKey;
+    statKey: StatKey;
+  }) => {
+    if (desiredOverallStat.stat.key !== overallStatKey) {
       return;
     }
-    const subStatValue = artifact.subStats.find((subStat) => subStat.stat === stat);
+    const subStatValue = artifact.subStats.find((subStat) => subStat.key === statKey);
     if (!subStatValue) {
       return;
     }
-    const maxRoll = Math.max(...getSubStatRollValues({ rarity: artifact.rarity, subStat: subStatValue.stat }));
+    const maxRoll = Math.max(...getSubStatRollValues({ rarity: artifact.rarity, statKey: subStatValue.key }));
     rating += (PRIORITY_WEIGHTS[desiredOverallStat.priority] * subStatValue.value) / maxRoll;
   };
 
@@ -38,14 +44,14 @@ const calculateSubstatRating = ({
   // calculateSubstatRollValue({ overallStat: OverallStat.DEF, stat: Stat.DEF_FLAT });
   // calculateSubstatRollValue({ overallStat: OverallStat.HP, stat: Stat.HP_FLAT });
 
-  calculateSubstatRollValue({ overallStat: OverallStat.ATK, stat: Stat.ATK_PERCENT });
-  calculateSubstatRollValue({ overallStat: OverallStat.CRIT_DMG, stat: Stat.CRIT_DMG });
-  calculateSubstatRollValue({ overallStat: OverallStat.CRIT_RATE, stat: Stat.CRIT_RATE });
-  calculateSubstatRollValue({ overallStat: OverallStat.DEF, stat: Stat.DEF_PERCENT });
-  calculateSubstatRollValue({ overallStat: OverallStat.ELEMENTAL_MASTERY, stat: Stat.ELEMENTAL_MASTERY });
-  calculateSubstatRollValue({ overallStat: OverallStat.ENERGY_RECHARGE, stat: Stat.ENERGY_RECHARGE });
-  calculateSubstatRollValue({ overallStat: OverallStat.HEALING_BONUS, stat: Stat.HEALING_BONUS });
-  calculateSubstatRollValue({ overallStat: OverallStat.MAX_HP, stat: Stat.HP_PERCENT });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.ATK, statKey: StatKey.ATK_PERCENT });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.CRIT_DMG, statKey: StatKey.CRIT_DMG });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.CRIT_RATE, statKey: StatKey.CRIT_RATE });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.DEF, statKey: StatKey.DEF_PERCENT });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.ELEMENTAL_MASTERY, statKey: StatKey.ELEMENTAL_MASTERY });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.ENERGY_RECHARGE, statKey: StatKey.ENERGY_RECHARGE });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.HEALING_BONUS, statKey: StatKey.HEALING_BONUS });
+  calculateSubstatRollValue({ overallStatKey: OverallStatKey.MAX_HP, statKey: StatKey.HP_PERCENT });
 
   return rating;
 };

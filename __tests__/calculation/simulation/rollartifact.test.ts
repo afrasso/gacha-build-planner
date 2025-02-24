@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { rollArtifact } from "@/calculation/simulation";
 import { getArtifactMaxLevel } from "@/constants";
-import { Artifact, ArtifactMetric, ArtifactType, Stat, StatValue } from "@/types";
+import { Artifact, ArtifactMetric, ArtifactType, StatKey, Stat } from "@/types";
 
 describe("rollArtifact()", () => {
   const generateArtifact = ({
@@ -13,14 +13,14 @@ describe("rollArtifact()", () => {
   }: {
     level: number;
     rarity: number;
-    subStats: StatValue<Stat>[];
+    subStats: Stat<StatKey>[];
   }): Artifact => {
     const artifact: Artifact = {
       id: uuidv4(),
       isLocked: false,
       lastUpdatedDate: new Date().toISOString(),
       level,
-      mainStat: Stat.ATK_FLAT,
+      mainStat: StatKey.ATK_FLAT,
       metricsResults: {
         [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
         [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
@@ -42,7 +42,7 @@ describe("rollArtifact()", () => {
     it("should have all of the same values except for the level and sub-stats", () => {
       const level = 1;
       const rarity = 1;
-      const subStats: StatValue<Stat>[] = [];
+      const subStats: Stat<StatKey>[] = [];
       const artifact = generateArtifact({ level, rarity, subStats });
       const rolledArtifact = rollArtifact({ artifact });
       expect(rolledArtifact.id).toBe(artifact.id);

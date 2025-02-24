@@ -12,8 +12,8 @@ import {
   Build,
   DesiredOverallStat,
   Plan,
+  StatKey,
   Stat,
-  StatValue,
 } from "@/types";
 
 import { getRandomElement, getRandomEnumValue } from "./testhelpers";
@@ -41,7 +41,7 @@ export const generateArtifactSet = (): ArtifactSet => {
   };
 };
 
-export const generateSubStats = (): StatValue<Stat>[] => {
+export const generateSubStats = (): Stat<StatKey>[] => {
   return _.times(4, () => ({
     stat: getRandomElement(getSubStats()),
     value: Math.random(),

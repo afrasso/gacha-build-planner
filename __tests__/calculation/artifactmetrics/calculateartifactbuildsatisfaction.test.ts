@@ -12,8 +12,8 @@ import {
   ArtifactType,
   Build,
   Character,
-  OverallStat,
-  Stat,
+  OverallStatKey,
+  StatKey,
   Weapon,
 } from "@/types";
 
@@ -36,7 +36,7 @@ describe("calculateArtifactBuildSatisfaction()", () => {
       isLocked: false,
       lastUpdatedDate: new Date().toISOString(),
       level: 0,
-      mainStat: Stat.ATK_FLAT,
+      mainStat: StatKey.ATK_FLAT,
       metricsResults: {
         [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
         [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
@@ -67,24 +67,24 @@ describe("calculateArtifactBuildSatisfaction()", () => {
     return build;
   };
 
-  const generateOverallStats = (): Record<OverallStat, number> => {
+  const generateOverallStats = (): Record<OverallStatKey, number> => {
     return {
-      [OverallStat.ATK]: 1000,
-      [OverallStat.CRIT_DMG]: 100,
-      [OverallStat.CRIT_RATE]: 100,
-      [OverallStat.DEF]: 1000,
-      [OverallStat.DMG_BONUS_ANEMO]: 0,
-      [OverallStat.DMG_BONUS_CRYO]: 0,
-      [OverallStat.DMG_BONUS_DENDRO]: 0,
-      [OverallStat.DMG_BONUS_ELECTRO]: 0,
-      [OverallStat.DMG_BONUS_GEO]: 0,
-      [OverallStat.DMG_BONUS_HYDRO]: 0,
-      [OverallStat.DMG_BONUS_PHYSICAL]: 0,
-      [OverallStat.DMG_BONUS_PYRO]: 0,
-      [OverallStat.ELEMENTAL_MASTERY]: 100,
-      [OverallStat.ENERGY_RECHARGE]: 100,
-      [OverallStat.HEALING_BONUS]: 0,
-      [OverallStat.MAX_HP]: 10000,
+      [OverallStatKey.ATK]: 1000,
+      [OverallStatKey.CRIT_DMG]: 100,
+      [OverallStatKey.CRIT_RATE]: 100,
+      [OverallStatKey.DEF]: 1000,
+      [OverallStatKey.DMG_BONUS_ANEMO]: 0,
+      [OverallStatKey.DMG_BONUS_CRYO]: 0,
+      [OverallStatKey.DMG_BONUS_DENDRO]: 0,
+      [OverallStatKey.DMG_BONUS_ELECTRO]: 0,
+      [OverallStatKey.DMG_BONUS_GEO]: 0,
+      [OverallStatKey.DMG_BONUS_HYDRO]: 0,
+      [OverallStatKey.DMG_BONUS_PHYSICAL]: 0,
+      [OverallStatKey.DMG_BONUS_PYRO]: 0,
+      [OverallStatKey.ELEMENTAL_MASTERY]: 100,
+      [OverallStatKey.ENERGY_RECHARGE]: 100,
+      [OverallStatKey.HEALING_BONUS]: 0,
+      [OverallStatKey.MAX_HP]: 10000,
     };
   };
 

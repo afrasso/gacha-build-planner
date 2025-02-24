@@ -1,4 +1,4 @@
-import { ArtifactTier, ArtifactType, OverallStat, Stat } from "@/types";
+import { ArtifactTier, ArtifactType, OverallStatKey, StatKey } from "@/types";
 
 import {
   ARTIFACT_LEVELS_PER_SUBSTAT_ROLL,
@@ -39,7 +39,7 @@ export const getInitialSubstatCountOdds = ({ rarity }: { rarity: number }): Reco
   return odds;
 };
 
-export const getMainStatMaxValue = ({ mainStat, rarity }: { mainStat: Stat; rarity: number }): number => {
+export const getMainStatMaxValue = ({ mainStat, rarity }: { mainStat: StatKey; rarity: number }): number => {
   const maxValue = MAIN_STAT_MAX_VALUES_BY_RARITY[rarity][mainStat];
   if (!maxValue) {
     throw new Error(
@@ -49,7 +49,13 @@ export const getMainStatMaxValue = ({ mainStat, rarity }: { mainStat: Stat; rari
   return maxValue;
 };
 
-export const getMainStatOdds = ({ artifactType, mainStat }: { artifactType: ArtifactType; mainStat: Stat }): number => {
+export const getMainStatOdds = ({
+  artifactType,
+  mainStat,
+}: {
+  artifactType: ArtifactType;
+  mainStat: StatKey;
+}): number => {
   const odds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[artifactType][mainStat];
   if (!odds) {
     throw new Error(
@@ -59,34 +65,34 @@ export const getMainStatOdds = ({ artifactType, mainStat }: { artifactType: Arti
   return odds;
 };
 
-export const getMainStats = ({ artifactType }: { artifactType: ArtifactType }): Stat[] => {
+export const getMainStats = ({ artifactType }: { artifactType: ArtifactType }): StatKey[] => {
   const odds = MAIN_STAT_ODDS_BY_ARTIFACT_TYPE[artifactType];
-  return Object.entries(odds).map(([stat]) => stat as Stat);
+  return Object.entries(odds).map(([stat]) => stat as StatKey);
 };
 
 export const getMaxSubStats = (): number => {
   return MAX_SUBSTATS;
 };
 
-export const getOrderedOverallStats = (): OverallStat[] => {
+export const getOrderedOverallStats = (): OverallStatKey[] => {
   return OVERALL_STATS_ORDER;
 };
 
-export const getSubStats = (): Stat[] => {
-  return Object.entries(SUB_STAT_WEIGHTS).map(([stat]) => stat as Stat);
+export const getSubStats = (): StatKey[] => {
+  return Object.entries(SUB_STAT_WEIGHTS).map(([stat]) => stat as StatKey);
 };
 
-export const getSubStatRollValues = ({ rarity, subStat }: { rarity: number; subStat: Stat }): number[] => {
-  const rollValues = SUB_STAT_ROLL_VALUES_BY_RARITY[rarity][subStat];
+export const getSubStatRollValues = ({ rarity, statKey }: { rarity: number; statKey: StatKey }): number[] => {
+  const rollValues = SUB_STAT_ROLL_VALUES_BY_RARITY[rarity][statKey];
   if (!rollValues) {
     throw new Error(
-      `Unexpected specified combination of rarity ${rarity} and sub stat ${subStat} when retrieving the main stat max value.`
+      `Unexpected specified combination of rarity ${rarity} and sub stat ${statKey} when retrieving the main stat max value.`
     );
   }
   return rollValues;
 };
 
-export const getSubStatWeight = ({ subStat }: { subStat: Stat }): number => {
+export const getSubStatWeight = ({ subStat }: { subStat: StatKey }): number => {
   const weight = SUB_STAT_WEIGHTS[subStat];
   if (!weight) {
     throw new Error(`Unexpected sub stat ${subStat} specified when retrieving sub stat weights.`);

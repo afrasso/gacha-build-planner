@@ -7,12 +7,12 @@ import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput"
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getSubStats } from "@/constants";
-import { Stat, StatValue } from "@/types";
+import { Stat, StatKey } from "@/types";
 
 interface SubStatsSelectorProps {
-  mainStat?: Stat;
-  onUpdate: (subStats: StatValue<Stat>[]) => void;
-  subStats?: StatValue<Stat>[];
+  mainStat?: StatKey;
+  onUpdate: (subStats: Stat<StatKey>[]) => void;
+  subStats?: Stat<StatKey>[];
 }
 
 const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProps>(
@@ -23,10 +23,10 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
     const [areSubStatsValid, setAreSubStatsValid] = useState(true);
     const [isSelectorPresent, setIsSelectorPresent] = useState(false);
     const [isSelectorPresenceValid, setIsSelectorPresenceValid] = useState(false);
-    const [stat, setStat] = useState<Stat | undefined>(undefined);
-    const [isStatValid, setIsStatValid] = useState(true);
-    const [value, setValue] = useState<number | undefined>(undefined);
-    const [isValueValid, setIsValueValid] = useState(true);
+    const [statKey, setStatKey] = useState<StatKey | undefined>(undefined);
+    const [isStatKeyValid, setIsStatKeyValid] = useState(true);
+    const [statValue, setStatValue] = useState<number | undefined>(undefined);
+    const [isStatValueValid, setIsStatValueValid] = useState(true);
 
     const cancel = () => {};
 
@@ -61,51 +61,51 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
     };
 
     const changeSelectorStat = (stat: string) => {
-      setStat(stat as Stat);
-      setIsStatValid(true);
+      setStatKey(stat as StatKey);
+      setIsStatKeyValid(true);
     };
 
     const changeSelectorValue = useCallback(
       (value: number | undefined) => {
-        setValue(value);
-        setIsValueValid(true);
+        setStatValue(value);
+        setIsStatValueValid(true);
       },
-      [setValue, setIsValueValid]
+      [setStatValue, setIsStatValueValid]
     );
 
     const cancelSelector = () => {
       setIsSelectorPresent(false);
       setIsSelectorPresenceValid(true);
-      setStat(undefined);
-      setIsStatValid(true);
-      setValue(undefined);
-      setIsValueValid(true);
+      setStatKey(undefined);
+      setIsStatKeyValid(true);
+      setStatValue(undefined);
+      setIsStatValueValid(true);
     };
 
     const validateSelector = () => {
-      const newIsStatValid = !!stat;
-      setIsStatValid(newIsStatValid);
-      const newIsValueValid = value !== undefined && value >= 0 && value < 1000;
-      setIsValueValid(newIsValueValid);
+      const newIsStatValid = !!statKey;
+      setIsStatKeyValid(newIsStatValid);
+      const newIsValueValid = statValue !== undefined && statValue >= 0 && statValue < 1000;
+      setIsStatValueValid(newIsValueValid);
       return newIsStatValid && newIsValueValid;
     };
 
     const confirmSelector = () => {
       if (validateSelector()) {
-        const subStat: StatValue<Stat> = { stat: stat!, value: value! };
+        const subStat: Stat<StatKey> = { key: statKey!, value: statValue! };
         setIsSelectorPresent(false);
         setIsSelectorPresenceValid(true);
-        setStat(undefined);
-        setIsStatValid(true);
-        setValue(undefined);
-        setIsValueValid(true);
+        setStatKey(undefined);
+        setIsStatKeyValid(true);
+        setStatValue(undefined);
+        setIsStatValueValid(true);
         setAreSubStatsValid(true);
         onUpdate([...subStats, subStat]);
       }
     };
 
-    const removeSubStat = (stat: Stat) => {
-      onUpdate(subStats.filter((subStat) => subStat.stat !== stat));
+    const removeSubStat = (statKey: StatKey) => {
+      onUpdate(subStats.filter((subStat) => subStat.key !== statKey));
     };
 
     const canAddSubStat = () => {
@@ -136,14 +136,14 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
           </div>
           <div className="flex flex-col justify-between relative">
             {subStats?.map((subStat) => (
-              <div className="flex-grow flex items-center" key={subStat.stat}>
+              <div className="flex-grow flex items-center" key={subStat.key}>
                 <div className="h-6 px-3 text-sm flex items-center justify-between w-full">
-                  <div>{subStat.stat}</div>
+                  <div>{subStat.key}</div>
                   <div className="text-sm text-muted-foreground">{subStat.value}</div>
                 </div>
                 <Button
                   className="p-0 w-6 h-8 flex-shrink-0"
-                  onClick={() => removeSubStat(subStat.stat)}
+                  onClick={() => removeSubStat(subStat.key)}
                   size="sm"
                   variant="ghost"
                 >
@@ -156,31 +156,31 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
             )}
           </div>
         </div>
-        <div className={!isStatValid || !isValueValid || !isSelectorPresenceValid ? "mb-6" : "mb-0"}>
+        <div className={!isStatKeyValid || !isStatValueValid || !isSelectorPresenceValid ? "mb-6" : "mb-0"}>
           <div className="flex flex-grow items-center justify-between gap-2">
             {isSelectorPresent && (
               <>
                 <div className="relative">
                   <div className="flex flex-grow items-center justify-between gap-2">
                     <div className="w-1/2 relative">
-                      <Select onValueChange={changeSelectorStat} value={stat}>
+                      <Select onValueChange={changeSelectorStat} value={statKey}>
                         <SelectTrigger
-                          aria-describedby={!isStatValid ? "stat-error" : undefined}
-                          aria-invalid={!isStatValid}
+                          aria-describedby={!isStatKeyValid ? "stat-error" : undefined}
+                          aria-invalid={!isStatKeyValid}
                           className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
-                          isValid={isStatValid}
+                          isValid={isStatKeyValid}
                         >
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                          {getSubStats().map((stat: Stat) => (
+                          {getSubStats().map((stat: StatKey) => (
                             <SelectItem disabled={stat === mainStat} key={stat} value={stat}>
                               {stat}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      {!isStatValid && (
+                      {!isStatKeyValid && (
                         <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="bonus-type-error">
                           Please select a stat.
                         </p>
@@ -189,12 +189,12 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
                     <div className="w-1/2 relative">
                       <DebouncedNumericInput
                         className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
-                        isValid={isValueValid}
+                        isValid={isStatValueValid}
                         onChange={changeSelectorValue}
                         placeholder="Enter value"
-                        value={value}
+                        value={statValue}
                       />
-                      {!isValueValid && (
+                      {!isStatValueValid && (
                         <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="bonus-type-error">
                           Please enter a value.
                         </p>

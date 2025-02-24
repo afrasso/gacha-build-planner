@@ -23,7 +23,14 @@ import {
 import { Build, BuildArraySchema, BuildSchema } from "./build";
 import { CharacterSchema, ElementSchema } from "./character";
 import { Plan, PlanSchema } from "./plan";
-import { DesiredOverallStatSchema, OverallStatSchema, Stat, StatSchema, StatValueSchema } from "./stat";
+import {
+  DesiredOverallStatSchema,
+  OverallStatKeySchema,
+  OverallStatSchema,
+  StatKey,
+  StatKeySchema,
+  StatSchema,
+} from "./stat";
 import { WeaponSchema, WeaponTypeSchema } from "./weapon";
 
 export * from "./artifact";
@@ -61,32 +68,46 @@ ajv.addSchema(ElementSchema);
 ajv.addSchema(PlanSchema);
 
 ajv.addSchema(DesiredOverallStatSchema);
+ajv.addSchema(OverallStatKeySchema);
 ajv.addSchema(OverallStatSchema);
+ajv.addSchema(StatKeySchema);
 ajv.addSchema(StatSchema);
-ajv.addSchema(StatValueSchema);
 
 ajv.addSchema(WeaponSchema);
 ajv.addSchema(WeaponTypeSchema);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const initializeArtifact = ({ artifact }: { artifact: any }): void => {
-  if (!artifact.isLocked) {
+  if (artifact.isLocked === undefined) {
+    console.log("Artifact missing isLocked field.");
     artifact.isLocked = false;
   }
   if (!artifact.lastUpdatedDate) {
+    console.log("Artifact missing lastUpdatedDate field.");
     artifact.lastUpdatedDate = new Date().toISOString();
   }
   if (artifact.mainStat === "ATK") {
-    artifact.mainStat = Stat.ATK_FLAT;
+    console.log("Artifact has main stat of ATK (not ATK_FLAT).");
+    artifact.mainStat = StatKey.ATK_FLAT;
   }
   if (!artifact.metricsResults) {
+    console.log("Artifact missing metricsResults field.");
     artifact.metricsResults = {};
+  }
+  for (const subStat of artifact.subStats) {
+    if (!subStat.key) {
+      console.log(`Artifact ${artifact.id} missing subStat key field.`);
+      subStat.key = subStat.stat;
+      delete subStat.stat;
+    }
   }
   for (const artifactMetric of Object.values(ArtifactMetric)) {
     if (!artifact.metricsResults[artifactMetric]) {
+      console.log(`Artifact missing field for metric ${artifactMetric}.`);
       artifact.metricsResults[artifactMetric] = {};
     }
     if (!artifact.metricsResults[artifactMetric].buildResults) {
+      console.log(`Artifact missing buildResults for metric ${artifactMetric}.`);
       artifact.metricsResults[artifactMetric].buildResults = {};
     }
   }
@@ -94,11 +115,13 @@ const initializeArtifact = ({ artifact }: { artifact: any }): void => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const initializeBuild = ({ build }: { build: any }): void => {
-  if (!build.lastUpdatedDate) {
-    build.lastUpdatedDate = new Date().toISOString();
-  }
   if (!build.artifacts) {
+    console.log("Build missing artifacts field.");
     build.artifacts = {};
+  }
+  if (!build.lastUpdatedDate) {
+    console.log("Build missing lastUpdatedDate field.");
+    build.lastUpdatedDate = new Date().toISOString();
   }
   for (const artifactType of Object.values(ArtifactType)) {
     if (build.artifacts[artifactType]) {
@@ -111,17 +134,28 @@ const initializeBuild = ({ build }: { build: any }): void => {
         build.desiredArtifactMainStats[artifactType] &&
         !Array.isArray(build.desiredArtifactMainStats[artifactType])
       ) {
+        console.log(`Build has desiredArtifactMainStats for ${artifactType} as not an array.`);
         build.desiredArtifactMainStats[artifactType] = [build.desiredArtifactMainStats[artifactType]];
       }
     }
   }
   if (build.desiredStats) {
+    console.log("Build has desiredStats field.");
     delete build.desiredStats;
   }
   if (!build.desiredOverallStats) {
+    console.log("Build missing desiredOverallStats field.");
     build.desiredOverallStats = [];
   }
+  for (const desiredOverallStat of build.desiredOverallStats) {
+    if (typeof desiredOverallStat.stat === "string") {
+      console.log("Build has desiredOverallStat.stat as a string");
+      desiredOverallStat.stat = { key: desiredOverallStat.stat, value: desiredOverallStat.value };
+      delete desiredOverallStat.value;
+    }
+  }
   if (build.sortOrder === undefined) {
+    console.log("Build missing sortOrder field.");
     build.sortOrder = -1;
   }
 };
@@ -213,11 +247,11 @@ export const validatePlan = (data: unknown): Plan => {
     throw new Error("Unpexected error: validatePlan is not available.");
   }
 
-  ((data as any).artifacts as unknown[]).forEach((artifact) => {
+  (data as { artifacts: unknown[] }).artifacts.forEach((artifact) => {
     initializeArtifact({ artifact });
   });
 
-  ((data as any).builds as unknown[]).forEach((build) => {
+  (data as { builds: unknown[] }).builds.forEach((build) => {
     initializeBuild({ build });
   });
 

@@ -4,12 +4,12 @@ import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getMainStats } from "@/constants";
-import { ArtifactType, Stat } from "@/types";
+import { ArtifactType, StatKey } from "@/types";
 
 interface MainStatSelectorProps {
   artifactType: ArtifactType;
-  mainStat?: Stat;
-  onUpdate: (mainStat: Stat) => void;
+  mainStat?: StatKey;
+  onUpdate: (mainStat: StatKey) => void;
 }
 
 const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProps>(
@@ -35,7 +35,7 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
     }));
 
     const onMainStatChange = (mainStat: string) => {
-      onUpdate(mainStat as Stat);
+      onUpdate(mainStat as StatKey);
       setIsValid(true);
     };
 
@@ -55,7 +55,7 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
               <SelectValue placeholder="Select main stat" />
             </SelectTrigger>
             <SelectContent>
-              {getMainStats({ artifactType }).map((stat: Stat) => (
+              {getMainStats({ artifactType }).map((stat: StatKey) => (
                 <SelectItem key={stat} value={stat}>
                   {stat}
                 </SelectItem>

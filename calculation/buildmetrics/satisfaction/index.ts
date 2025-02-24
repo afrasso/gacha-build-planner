@@ -1,5 +1,5 @@
 import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Build, BuildArtifacts, DesiredOverallStat, OverallStat, StatValue } from "@/types";
+import { Build, BuildArtifacts, DesiredOverallStat, OverallStatKey, Stat } from "@/types";
 
 import { calculateStats } from "../../stats";
 import { calculateArtifactMainStatsSatisfaction } from "./artifactmainstats";
@@ -14,11 +14,11 @@ const getTargetStats = ({
   stats,
 }: {
   desiredOverallStats: DesiredOverallStat[];
-  stats: Record<OverallStat, number>;
-}): StatValue<OverallStat>[] => {
+  stats: Record<OverallStatKey, number>;
+}): Stat<OverallStatKey>[] => {
   return desiredOverallStats.map((desiredOverallStat) => ({
-    stat: desiredOverallStat.stat,
-    value: stats[desiredOverallStat.stat],
+    key: desiredOverallStat.stat.key,
+    value: stats[desiredOverallStat.stat.key],
   }));
 };
 
@@ -47,7 +47,7 @@ export const calculateBuildSatisfaction = ({
   const targetStats =
     targetStatsStrategy === TargetStatsStrategy.CURRENT
       ? getTargetStats({ desiredOverallStats: build.desiredOverallStats, stats })
-      : build.desiredOverallStats;
+      : build.desiredOverallStats.map((desiredStat) => desiredStat.stat);
   const statsSatisfaction = calculateTargetStatsSatisfaction({ stats, targetStats });
 
   return {

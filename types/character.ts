@@ -1,8 +1,8 @@
-import { Stat } from "./stat";
+import { StatKey } from "./stat";
 import { WeaponType } from "./weapon";
 
 export interface Character {
-  ascensionStat: Stat;
+  ascensionStat: StatKey;
   element: Element;
   iconUrl: string;
   id: string;

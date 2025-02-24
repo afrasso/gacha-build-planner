@@ -3,7 +3,7 @@ import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import DesiredArtifactMainStatsSelector from "@/components/BuildCard/EditableBuildContent/DesiredArtifactMainStatsSelector";
-import { ArtifactType, DesiredArtifactMainStats, Stat } from "@/types";
+import { ArtifactType, DesiredArtifactMainStats, StatKey } from "@/types";
 
 describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
   const mockOnChange = vi.fn();
@@ -19,9 +19,9 @@ describe("When the DesiredArtifactMainStatsSelector is rendered", () => {
 
   it("renders correctly", () => {
     const desiredArtifactMainStats: DesiredArtifactMainStats = {
-      [ArtifactType.CIRCLET]: [Stat.CRIT_RATE],
-      [ArtifactType.GOBLET]: [Stat.DMG_BONUS_PYRO],
-      [ArtifactType.SANDS]: [Stat.ATK_PERCENT],
+      [ArtifactType.CIRCLET]: [StatKey.CRIT_RATE],
+      [ArtifactType.GOBLET]: [StatKey.DMG_BONUS_PYRO],
+      [ArtifactType.SANDS]: [StatKey.ATK_PERCENT],
     };
 
     renderComponent(desiredArtifactMainStats);

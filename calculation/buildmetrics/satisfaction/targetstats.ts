@@ -1,4 +1,4 @@
-import { BuildStats, OverallStat, StatValue } from "@/types";
+import { OverallStatKey, Stat } from "@/types";
 
 import { SatisfactionResult, StatSatisfactionDetails } from "./types";
 
@@ -6,14 +6,13 @@ export const calculateTargetStatsSatisfaction = ({
   stats,
   targetStats,
 }: {
-  stats: BuildStats;
-  // TODO: GODDAMN IT RENAME STAT TO STAT KEY
-  targetStats: StatValue<OverallStat>[];
+  stats: Record<OverallStatKey, number>;
+  targetStats: Stat<OverallStatKey>[];
 }): SatisfactionResult<StatSatisfactionDetails> => {
   const details = targetStats.map((targetStat) => ({
-    satisfaction: targetStat.value <= stats[targetStat.stat],
-    statValue: stats[targetStat.stat],
-    targetStat: targetStat.stat,
+    satisfaction: targetStat.value <= stats[targetStat.key],
+    statValue: stats[targetStat.key],
+    targetStatKey: targetStat.key,
     targetStatValue: targetStat.value,
   }));
 

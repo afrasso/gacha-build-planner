@@ -10,10 +10,10 @@ import StarSelector from "@/components/ui/custom/StarSelector";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getOrderedOverallStats } from "@/constants";
-import { DesiredOverallStat, OverallStat } from "@/types";
+import { DesiredOverallStat, OverallStatKey } from "@/types";
 
 interface DesiredOverallStatsSelectorProps {
-  currentStats: Record<OverallStat, number>;
+  currentStats: Record<OverallStatKey, number>;
   desiredOverallStats: DesiredOverallStat[];
   onChange: (desiredOverallStats: DesiredOverallStat[]) => void;
 }
@@ -25,33 +25,33 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
 }) => {
   const [excessUseful, setExcessUseful] = useState(false);
   const [isAddingDesiredStat, setIsAddingDesiredStat] = useState(false);
-  const [isStatValid, setIsStatValid] = useState(true);
-  const [isValueValid, setIsValueValid] = useState(true);
+  const [isStatKeyValid, setIsStatKeyValid] = useState(true);
+  const [isStatValueValid, setIsStatValueValid] = useState(true);
   const [priority, setPriority] = useState(3);
-  const [stat, setStat] = useState<OverallStat | undefined>(undefined);
-  const [value, setValue] = useState<number | undefined>(undefined);
+  const [statKey, setStatKey] = useState<OverallStatKey | undefined>(undefined);
+  const [statValue, setStatValue] = useState<number | undefined>(undefined);
 
   const addSelector = () => {
     setIsAddingDesiredStat(true);
   };
 
   const canAddStatValue = () => {
-    return desiredOverallStats.length < Object.values(OverallStat).length;
+    return desiredOverallStats.length < Object.values(OverallStatKey).length;
   };
 
   const cancel = () => {
-    setStat(undefined);
-    setIsStatValid(true);
-    setValue(undefined);
-    setIsValueValid(true);
+    setStatKey(undefined);
+    setIsStatKeyValid(true);
+    setStatValue(undefined);
+    setIsStatValueValid(true);
     setIsAddingDesiredStat(false);
   };
 
   const confirm = () => {
     if (validate()) {
-      const desiredStat: DesiredOverallStat = { excessUseful, priority, stat: stat!, value: value! };
-      setStat(undefined);
-      setValue(undefined);
+      const desiredStat: DesiredOverallStat = { excessUseful, priority, stat: { key: statKey!, value: statValue! } };
+      setStatKey(undefined);
+      setStatValue(undefined);
       setIsAddingDesiredStat(false);
       onChange([...desiredOverallStats, desiredStat]);
     }
@@ -61,7 +61,7 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
     return desiredOverallStats.sort((stat1, stat2) => {
       if (stat1.priority === stat2.priority) {
         if (stat1.excessUseful === stat2.excessUseful) {
-          return getOrderedOverallStats().indexOf(stat1.stat) - getOrderedOverallStats().indexOf(stat2.stat);
+          return getOrderedOverallStats().indexOf(stat1.stat.key) - getOrderedOverallStats().indexOf(stat2.stat.key);
         } else {
           return (stat2.excessUseful ? 1 : 0) - (stat1.excessUseful ? 1 : 0);
         }
@@ -71,13 +71,13 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
   };
 
   const getOrderedRemainingStats = () => {
-    return Object.values(OverallStat)
-      .filter((stat) => !desiredOverallStats.map((desiredStat) => desiredStat.stat).includes(stat))
+    return Object.values(OverallStatKey)
+      .filter((stat) => !desiredOverallStats.map((desiredStat) => desiredStat.stat.key).includes(stat))
       .sort((stat1, stat2) => getOrderedOverallStats().indexOf(stat1) - getOrderedOverallStats().indexOf(stat2));
   };
 
-  const remove = (stat: OverallStat) => {
-    onChange(desiredOverallStats.filter((desiredStat) => desiredStat.stat !== stat));
+  const remove = (stat: OverallStatKey) => {
+    onChange(desiredOverallStats.filter((desiredStat) => desiredStat.stat.key !== stat));
   };
 
   const updateExcessUseful = (excessUseful: boolean) => {
@@ -88,30 +88,30 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
     setPriority(priority);
   };
 
-  const updateStat = (stat: OverallStat) => {
-    setStat(stat);
-    setValue(currentStats[stat]);
-    setIsStatValid(true);
+  const updateStat = (stat: OverallStatKey) => {
+    setStatKey(stat);
+    setStatValue(currentStats[stat]);
+    setIsStatKeyValid(true);
   };
 
   const updateValue = useCallback(
     (value: number | undefined) => {
-      setValue(value);
-      setIsValueValid(true);
+      setStatValue(value);
+      setIsStatValueValid(true);
     },
-    [setValue, setIsValueValid]
+    [setStatValue, setIsStatValueValid]
   );
 
   const validate = () => {
-    const newIsStatValid = !!stat;
-    setIsStatValid(newIsStatValid);
-    const newIsValueValid = value !== undefined && value >= 0 && value < 100000;
-    setIsValueValid(newIsValueValid);
+    const newIsStatValid = !!statKey;
+    setIsStatKeyValid(newIsStatValid);
+    const newIsValueValid = statValue !== undefined && statValue >= 0 && statValue < 100000;
+    setIsStatValueValid(newIsValueValid);
     return newIsStatValid && newIsValueValid;
   };
 
   return (
-    <div className={`${!isStatValid || !isValueValid ? "mb-8" : "mb-2"}`}>
+    <div className={`${!isStatKeyValid || !isStatValueValid ? "mb-8" : "mb-2"}`}>
       <div className="flex flex-grow items-center justify-between gap-2">
         <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Desired Stats:</Label>
         <div className="flex-grow flex items-center">
@@ -133,10 +133,10 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
       </div>
       <div className="flex flex-col justify-between">
         {getOrderedDesiredOverallStats().map((desiredStat) => (
-          <div className="flex-grow flex items-center" key={desiredStat.stat}>
+          <div className="flex-grow flex items-center" key={desiredStat.stat.key}>
             <div className="h-8 px-3 mr-2 text-sm flex items-center justify-between w-full">
-              <div className="flex-grow w-3/4">{desiredStat.stat}</div>
-              <div className="w-1/4 text-right text-sm text-muted-foreground mr-6">{desiredStat.value}</div>
+              <div className="flex-grow w-3/4">{desiredStat.stat.key}</div>
+              <div className="w-1/4 text-right text-sm text-muted-foreground mr-6">{desiredStat.stat.value}</div>
             </div>
             <div className="flex items-center space-x-4 mr-2">
               <StarSelector max={3} value={desiredStat.priority} />
@@ -151,7 +151,7 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
               <div className="w-6 h-8" />
               <Button
                 className="p-0 w-6 h-8 flex-shrink-0"
-                onClick={() => remove(desiredStat.stat)}
+                onClick={() => remove(desiredStat.stat.key)}
                 size="sm"
                 variant="ghost"
               >
@@ -170,10 +170,10 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
                   <div className="flex-grow w-3/4">
                     <Select onValueChange={updateStat}>
                       <SelectTrigger
-                        aria-describedby={!isStatValid ? "stat-error" : undefined}
-                        aria-invalid={!isStatValid}
+                        aria-describedby={!isStatKeyValid ? "stat-error" : undefined}
+                        aria-invalid={!isStatKeyValid}
                         className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
-                        isValid={isStatValid}
+                        isValid={isStatKeyValid}
                       >
                         <SelectValue placeholder="Select a stat" />
                       </SelectTrigger>
@@ -185,7 +185,7 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
                         ))}
                       </SelectContent>
                     </Select>
-                    {!isStatValid && (
+                    {!isStatKeyValid && (
                       <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="stat-error">
                         Please select a stat.
                       </p>
@@ -193,14 +193,14 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
                   </div>
                   <div className="w-1/4">
                     <DebouncedNumericInput
-                      aria-describedby={!isValueValid ? "value-error" : undefined}
-                      aria-invalid={!isValueValid}
+                      aria-describedby={!isStatValueValid ? "value-error" : undefined}
+                      aria-invalid={!isStatValueValid}
                       className="h-8 px-3 text-sm border rounded-md bg-background w-full"
-                      isValid={isValueValid}
+                      isValid={isStatValueValid}
                       onChange={updateValue}
-                      value={value}
+                      value={statValue}
                     />
-                    {!isValueValid && (
+                    {!isStatValueValid && (
                       <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="bonus-type-error">
                         Please enter a value less than 1000.
                       </p>
