@@ -1,5 +1,5 @@
 import { ArtifactMetricsResults } from "./artifactmetrics";
-import { Stat, StatValue } from "./stat";
+import { Stat, StatKey } from "./stat";
 
 export interface Artifact {
   characterId?: string;
@@ -7,30 +7,28 @@ export interface Artifact {
   isLocked: boolean;
   lastUpdatedDate: string;
   level: number;
-  mainStat: Stat;
+  mainStat: StatKey;
   metricsResults: ArtifactMetricsResults;
   rarity: number;
   setId: string;
-  subStats: StatValue<Stat>[];
+  subStats: Stat<StatKey>[];
   type: ArtifactType;
 }
 
 export const ArtifactSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/Artifact",
-  // TODO: Fix this
-  // additionalProperties: false
   properties: {
     characterId: { type: "string" },
     id: { type: "string" },
     isLocked: { type: "boolean" },
     lastUpdatedDate: { format: "date-time", type: "string" },
     level: { type: "integer" },
-    mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
+    mainStat: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatKey" },
     metricsResults: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactMetricsResults" },
     rarity: { type: "integer" },
     setId: { type: "string" },
     subStats: {
-      items: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatValue" },
+      items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
       type: "array",
     },
     type: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactType" },
@@ -67,8 +65,6 @@ export interface ArtifactSet {
 
 export const ArtifactSetSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/ArtifactSet",
-  // TODO: Fix this
-  // additionalProperties: false,
   properties: {
     hasArtifactTypes: {
       properties: {
@@ -156,17 +152,17 @@ export const BuildArtifactsSchema = {
   type: "object",
 };
 
-export type DesiredArtifactMainStats = Partial<Record<ArtifactType, Stat[]>>;
+export type DesiredArtifactMainStats = Partial<Record<ArtifactType, StatKey[]>>;
 
 export const DesiredArtifactMainStatsSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/DesiredArtifactMainStats",
   additionalProperties: false,
   properties: {
-    CIRCLET: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
-    FLOWER: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
-    GOBLET: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
-    PLUME: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
-    SANDS: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" }, type: "array" },
+    CIRCLET: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatKey" }, type: "array" },
+    FLOWER: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatKey" }, type: "array" },
+    GOBLET: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatKey" }, type: "array" },
+    PLUME: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatKey" }, type: "array" },
+    SANDS: { items: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatKey" }, type: "array" },
   },
   required: [],
   type: "object",

@@ -5,14 +5,14 @@ import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { ArtifactType, Stat } from "@/types";
+import { ArtifactType, StatKey } from "@/types";
 
 import { MainStatsDialogContent } from "./MainStatsDialogContent";
 
 interface DesiredArtifactMainStatSelectorProps {
   artifactType: ArtifactType;
-  mainStats: Stat[];
-  onUpdate: (mainStat: Stat[]) => void;
+  mainStats: StatKey[];
+  onUpdate: (mainStat: StatKey[]) => void;
 }
 
 const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatSelectorProps> = ({

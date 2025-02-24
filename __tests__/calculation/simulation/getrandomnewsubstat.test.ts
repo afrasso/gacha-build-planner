@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
 
 import { getRandomNewSubStat } from "@/calculation/simulation/getrandomnewsubstat";
-import { Stat } from "@/types";
+import { StatKey } from "@/types";
 
 describe("getRandomNewSubStat()", () => {
   let randomSpy: MockInstance<() => number>;
@@ -16,30 +16,30 @@ describe("getRandomNewSubStat()", () => {
 
   describe("When I get a new sub-stat", () => {
     it("should not match the artifact main stat or any of the existing sub-stats", () => {
-      const mainStat = Stat.ATK_FLAT;
-      const subStats = [Stat.ATK_PERCENT, Stat.CRIT_DMG, Stat.CRIT_RATE];
+      const mainStat = StatKey.ATK_FLAT;
+      const subStats = [StatKey.ATK_PERCENT, StatKey.CRIT_DMG, StatKey.CRIT_RATE];
       randomSpy.mockReturnValue(0);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.DEF_FLAT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.DEF_FLAT);
       randomSpy.mockReturnValue(0.1);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.DEF_FLAT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.DEF_FLAT);
       randomSpy.mockReturnValue(0.2);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.DEF_FLAT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.DEF_FLAT);
       randomSpy.mockReturnValue(0.3);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.DEF_PERCENT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.DEF_PERCENT);
       randomSpy.mockReturnValue(0.4);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.ELEMENTAL_MASTERY);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.ELEMENTAL_MASTERY);
       randomSpy.mockReturnValue(0.5);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.ENERGY_RECHARGE);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.ENERGY_RECHARGE);
       randomSpy.mockReturnValue(0.6);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.ENERGY_RECHARGE);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.ENERGY_RECHARGE);
       randomSpy.mockReturnValue(0.7);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.HP_FLAT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.HP_FLAT);
       randomSpy.mockReturnValue(0.8);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.HP_FLAT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.HP_FLAT);
       randomSpy.mockReturnValue(0.9);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.HP_PERCENT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.HP_PERCENT);
       randomSpy.mockReturnValue(0.99);
-      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(Stat.HP_PERCENT);
+      expect(getRandomNewSubStat({ mainStat, subStats })).toBe(StatKey.HP_PERCENT);
     });
   });
 });

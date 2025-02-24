@@ -104,10 +104,10 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                       className={`p-0.5 text-left overflow-hidden rounded ${
                         artifact.subStats[index] ? "" : "invisible"
                       }`}
-                      key={artifact.subStats[index]?.stat || `empty-${index}`}
+                      key={artifact.subStats[index]?.key || `empty-${index}`}
                     >
                       <span className={`font-medium block truncate ${textSize2}`}>
-                        {artifact.subStats[index]?.stat || ""}
+                        {artifact.subStats[index]?.key || ""}
                       </span>
                     </div>
                   ))}
@@ -116,7 +116,7 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                   {[...Array(4)].map((_, index) => (
                     <div
                       className={`p-0.5 text-right rounded ${artifact.subStats[index] ? "bg-secondary" : "invisible"}`}
-                      key={artifact.subStats[index]?.stat || `empty-value-${index}`}
+                      key={artifact.subStats[index]?.key || `empty-value-${index}`}
                     >
                       <span className={textSize2}>{artifact.subStats[index]?.value || ""}</span>
                     </div>

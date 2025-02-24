@@ -1,8 +1,8 @@
 import { getMainStatOdds, getMainStats } from "@/constants";
-import { ArtifactType, Stat } from "@/types";
+import { ArtifactType, StatKey } from "@/types";
 import getCumulativeMainStatOdds from "../getcumulativemainstatodds";
 
-export const getRandomMainStat = ({ mainStats, type }: { mainStats?: Stat[]; type: ArtifactType }): Stat => {
+export const getRandomMainStat = ({ mainStats, type }: { mainStats?: StatKey[]; type: ArtifactType }): StatKey => {
   const unfilteredMainStats = getMainStats({ artifactType: type });
   const filteredMainStats =
     mainStats && mainStats.length > 0

@@ -10,7 +10,7 @@ import {
 } from "@/calculation/buildmetrics/satisfaction";
 import ImageWithTooltip from "@/components/ui/custom/ImageWithTooltip";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { ArtifactType, OverallStat } from "@/types";
+import { ArtifactType, OverallStatKey } from "@/types";
 
 import SatisfactionIcon from "./SatisfactionIcon";
 
@@ -84,24 +84,24 @@ const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMa
   );
 };
 
-const getStatIconUrl = (stat: OverallStat): string => {
+const getStatIconUrl = (stat: OverallStatKey): string => {
   const statToUrlMapping = {
-    [OverallStat.ATK]: "/genshin/icons/attack.png",
-    [OverallStat.CRIT_DMG]: "/genshin/icons/crit_dmg.png",
-    [OverallStat.CRIT_RATE]: "/genshin/icons/crit_rate.png",
-    [OverallStat.DEF]: "/genshin/icons/defense.png",
-    [OverallStat.DMG_BONUS_ANEMO]: "/genshin/icons/anemo.png",
-    [OverallStat.DMG_BONUS_CRYO]: "/genshin/icons/cryo.png",
-    [OverallStat.DMG_BONUS_DENDRO]: "/genshin/icons/dendro.png",
-    [OverallStat.DMG_BONUS_ELECTRO]: "/genshin/icons/electro.png",
-    [OverallStat.DMG_BONUS_GEO]: "/genshin/icons/geo.png",
-    [OverallStat.DMG_BONUS_HYDRO]: "/genshin/icons/hydro.png",
-    [OverallStat.DMG_BONUS_PHYSICAL]: "/genshin/icons/physical.png",
-    [OverallStat.DMG_BONUS_PYRO]: "/genshin/icons/pyro.png",
-    [OverallStat.ELEMENTAL_MASTERY]: "/genshin/icons/elemental_mastery.png",
-    [OverallStat.ENERGY_RECHARGE]: "/genshin/icons/energy_recharge.png",
-    [OverallStat.HEALING_BONUS]: "/genshin/icons/healing_bonus.png",
-    [OverallStat.MAX_HP]: "/genshin/icons/hp.png",
+    [OverallStatKey.ATK]: "/genshin/icons/attack.png",
+    [OverallStatKey.CRIT_DMG]: "/genshin/icons/crit_dmg.png",
+    [OverallStatKey.CRIT_RATE]: "/genshin/icons/crit_rate.png",
+    [OverallStatKey.DEF]: "/genshin/icons/defense.png",
+    [OverallStatKey.DMG_BONUS_ANEMO]: "/genshin/icons/anemo.png",
+    [OverallStatKey.DMG_BONUS_CRYO]: "/genshin/icons/cryo.png",
+    [OverallStatKey.DMG_BONUS_DENDRO]: "/genshin/icons/dendro.png",
+    [OverallStatKey.DMG_BONUS_ELECTRO]: "/genshin/icons/electro.png",
+    [OverallStatKey.DMG_BONUS_GEO]: "/genshin/icons/geo.png",
+    [OverallStatKey.DMG_BONUS_HYDRO]: "/genshin/icons/hydro.png",
+    [OverallStatKey.DMG_BONUS_PHYSICAL]: "/genshin/icons/physical.png",
+    [OverallStatKey.DMG_BONUS_PYRO]: "/genshin/icons/pyro.png",
+    [OverallStatKey.ELEMENTAL_MASTERY]: "/genshin/icons/elemental_mastery.png",
+    [OverallStatKey.ENERGY_RECHARGE]: "/genshin/icons/energy_recharge.png",
+    [OverallStatKey.HEALING_BONUS]: "/genshin/icons/healing_bonus.png",
+    [OverallStatKey.MAX_HP]: "/genshin/icons/hp.png",
   };
   return statToUrlMapping[stat];
 };
@@ -110,14 +110,14 @@ const StatsDisplay: React.FC<{ result: SatisfactionResult<StatSatisfactionDetail
   return (
     <div className="flex flex-col items-center justify-center h-full">
       {result.details.map((statSatisfaction) => {
-        const comparatorSymbol = statSatisfaction.statValue >= statSatisfaction.targetStatValue ? ">=" : "<";
+        const comparatorSymbol = statSatisfaction.currentStatValue >= statSatisfaction.targetStatValue ? ">=" : "<";
         return (
-          <div className="flex items-center gap-2 mb-2" key={statSatisfaction.targetStat}>
+          <div className="flex items-center gap-2 mb-2" key={statSatisfaction.statKey}>
             <ImageWithTooltip
-              alt={statSatisfaction.targetStat}
+              alt={statSatisfaction.statKey}
               height={32}
-              src={getStatIconUrl(statSatisfaction.targetStat)}
-              tooltipText={`${statSatisfaction.targetStat}: ${statSatisfaction.statValue} ${comparatorSymbol} ${statSatisfaction.targetStatValue}`}
+              src={getStatIconUrl(statSatisfaction.statKey)}
+              tooltipText={`${statSatisfaction.statKey}: ${statSatisfaction.currentStatValue} ${comparatorSymbol} ${statSatisfaction.targetStatValue}`}
               width={32}
             />
             <SatisfactionIcon isSatisfied={statSatisfaction.satisfaction} />

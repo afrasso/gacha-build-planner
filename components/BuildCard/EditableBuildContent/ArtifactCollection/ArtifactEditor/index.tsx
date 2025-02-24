@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Button } from "@/components/ui/button";
-import { Artifact, ArtifactType, Stat, StatValue } from "@/types";
+import { Artifact, ArtifactType, Stat, StatKey } from "@/types";
 
 import LevelSelector from "./LevelSelector";
 import MainStatSelector from "./MainStatSelector";
@@ -46,11 +46,11 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType,
     setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, level }));
   };
 
-  const updateMainStat = (mainStat: Stat) => {
+  const updateMainStat = (mainStat: StatKey) => {
     setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, mainStat }));
   };
 
-  const updateSubStats = (subStats: StatValue<Stat>[]) => {
+  const updateSubStats = (subStats: Stat<StatKey>[]) => {
     setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, subStats }));
   };
 

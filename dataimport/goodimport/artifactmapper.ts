@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import { v4 as uuidv4 } from "uuid";
 
-import { Artifact, ArtifactMetric, ArtifactSet, ArtifactType, Character, Stat, StatValue } from "@/types";
+import { Artifact, ArtifactMetric, ArtifactSet, ArtifactType, Character, Stat, StatKey } from "@/types";
 
 import { mapEnumsByKey } from "./mapenumsbykey";
 import { Artifact as GOODArtifact, Slot as GOODSlot, Stat as GOODStat } from "./types";
@@ -15,21 +15,21 @@ const calculateArtifactHash = ({
   type,
 }: {
   level: number;
-  mainStat: Stat;
+  mainStat: StatKey;
   rarity: number;
   setId: string;
-  subStats: StatValue<Stat>[];
+  subStats: Stat<StatKey>[];
   type: ArtifactType;
 }) => {
-  const sortedSubStats = subStats.sort((a, b) => a.stat.localeCompare(b.stat));
+  const sortedSubStats = subStats.sort((a, b) => a.key.localeCompare(b.key));
   const hashString = JSON.stringify({ level, mainStat, rarity, setId, subStats: sortedSubStats, type });
   const hash = crypto.createHash("sha256").update(hashString).digest("hex");
   return hash;
 };
 
-const mapGOODSubstat = (goodSubstat: { key: GOODStat; value: number }): StatValue<Stat> => {
+const mapGOODSubstat = (goodSubstat: { key: GOODStat; value: number }): Stat<StatKey> => {
   return {
-    stat: mapEnumsByKey(GOODStat, Stat, goodSubstat.key),
+    key: mapEnumsByKey(GOODStat, StatKey, goodSubstat.key),
     value: goodSubstat.value,
   };
 };
@@ -52,7 +52,7 @@ export const artifactMapper = ({
   const mapGOODArtifactToArtifact = ({ goodArtifact }: { goodArtifact: GOODArtifact }): Artifact => {
     const artifactSet = lookupArtifactSet(goodArtifact.setKey);
     const level = goodArtifact.level;
-    const mainStat = mapEnumsByKey(GOODStat, Stat, goodArtifact.mainStatKey);
+    const mainStat = mapEnumsByKey(GOODStat, StatKey, goodArtifact.mainStatKey);
     const rarity = goodArtifact.rarity;
     const setId = artifactSet.id;
     const subStats = goodArtifact.substats.map(mapGOODSubstat);

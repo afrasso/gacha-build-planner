@@ -1,9 +1,9 @@
-import { Stat } from "./stat";
+import { StatKey } from "./stat";
 
 export interface Weapon {
   iconUrl: string;
   id: string;
-  mainStat: Stat;
+  mainStat: StatKey;
   maxLvlStats: {
     ATK: number;
     mainStat: number;

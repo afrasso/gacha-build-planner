@@ -1,9 +1,9 @@
-import { ArtifactSetBonusType, ArtifactType, OverallStat, Stat } from "@/types";
+import { ArtifactSetBonusType, ArtifactType, OverallStatKey, StatKey } from "@/types";
 
 export interface ArtifactMainStatSatisfactionDetails {
   artifactType: ArtifactType;
-  desiredMainStats: Stat[];
-  mainStat: Stat | undefined;
+  desiredMainStats: StatKey[];
+  mainStat: StatKey | undefined;
   satisfaction: boolean;
 }
 
@@ -26,9 +26,9 @@ export interface SatisfactionResult<T> {
 }
 
 export interface StatSatisfactionDetails {
+  currentStatValue: number;
   satisfaction: boolean;
-  statValue: number;
-  targetStat: OverallStat;
+  statKey: OverallStatKey;
   targetStatValue: number;
 }
 

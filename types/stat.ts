@@ -1,10 +1,7 @@
-export type BuildStats = Record<OverallStat, number>;
-
 export type DesiredOverallStat = {
   excessUseful: boolean;
   priority: number;
-  stat: OverallStat;
-  value: number;
+  stat: Stat<OverallStatKey>;
 };
 
 export const DesiredOverallStatSchema = {
@@ -14,13 +11,12 @@ export const DesiredOverallStatSchema = {
     excessUseful: { type: "boolean" },
     priority: { type: "number" },
     stat: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStat" },
-    value: { type: "number" },
   },
-  required: ["excessUseful", "priority", "stat", "value"],
+  required: ["excessUseful", "priority", "stat"],
   type: "object",
 };
 
-export enum OverallStat {
+export enum OverallStatKey {
   ATK = "ATK",
   CRIT_DMG = "CRIT_DMG",
   CRIT_RATE = "CRIT_RATE",
@@ -39,8 +35,8 @@ export enum OverallStat {
   MAX_HP = "MAX_HP",
 }
 
-export const OverallStatSchema = {
-  $id: "https://gacha-build-planner.vercel.app/schemas/OverallStat",
+export const OverallStatKeySchema = {
+  $id: "https://gacha-build-planner.vercel.app/schemas/OverallStatKey",
   enum: [
     "ATK",
     "CRIT_DMG",
@@ -62,7 +58,34 @@ export const OverallStatSchema = {
   type: "string",
 };
 
-export enum Stat {
+export const OverallStatSchema = {
+  $id: "https://gacha-build-planner.vercel.app/schemas/OverallStat",
+  additionalProperties: false,
+  properties: {
+    key: { $ref: "https://gacha-build-planner.vercel.app/schemas/OverallStatKey" },
+    value: { type: "number" },
+  },
+  required: [],
+  type: "object",
+};
+
+export interface Stat<T extends OverallStatKey | StatKey> {
+  key: T;
+  value: number;
+}
+
+export const StatSchema = {
+  $id: "https://gacha-build-planner.vercel.app/schemas/Stat",
+  additionalProperties: false,
+  properties: {
+    key: { $ref: "https://gacha-build-planner.vercel.app/schemas/StatKey" },
+    value: { type: "number" },
+  },
+  required: [],
+  type: "object",
+};
+
+export enum StatKey {
   ATK_FLAT = "ATK_FLAT",
   ATK_PERCENT = "ATK_PERCENT",
   CRIT_DMG = "CRIT_DMG",
@@ -84,8 +107,8 @@ export enum Stat {
   HP_PERCENT = "HP_PERCENT",
 }
 
-export const StatSchema = {
-  $id: "https://gacha-build-planner.vercel.app/schemas/Stat",
+export const StatKeySchema = {
+  $id: "https://gacha-build-planner.vercel.app/schemas/StatKey",
   enum: [
     "ATK_FLAT",
     "ATK_PERCENT",
@@ -108,20 +131,4 @@ export const StatSchema = {
     "HP_PERCENT",
   ],
   type: "string",
-};
-
-export interface StatValue<T extends OverallStat | Stat> {
-  stat: T;
-  value: number;
-}
-
-export const StatValueSchema = {
-  $id: "https://gacha-build-planner.vercel.app/schemas/StatValue",
-  additionalProperties: false,
-  properties: {
-    stat: { $ref: "https://gacha-build-planner.vercel.app/schemas/Stat" },
-    value: { type: "number" },
-  },
-  required: [],
-  type: "object",
 };

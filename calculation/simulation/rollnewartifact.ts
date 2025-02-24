@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { Artifact, ArtifactMetric, ArtifactType, Stat } from "@/types";
+import { Artifact, ArtifactMetric, ArtifactType, StatKey } from "@/types";
 
 import { getRandomInitialSubStats } from "./getrandominitialsubstats";
 import { getRandomMainStat } from "./getrandommainstat";
@@ -13,7 +13,7 @@ export const rollNewArtifact = ({
   type,
 }: {
   level: number;
-  mainStats?: Stat[];
+  mainStats?: StatKey[];
   rarity: number;
   setId: string;
   type: ArtifactType;

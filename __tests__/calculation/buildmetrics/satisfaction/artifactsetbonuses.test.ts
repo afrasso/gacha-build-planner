@@ -10,7 +10,7 @@ import {
   ArtifactSetBonusType,
   ArtifactType,
   BuildArtifacts,
-  Stat,
+  StatKey,
 } from "@/types";
 
 describe("Artifact Set Bonuses Satisfaction Tests", () => {
@@ -19,7 +19,7 @@ describe("Artifact Set Bonuses Satisfaction Tests", () => {
       id: uuidv4(),
       lastUpdatedDate: new Date().toISOString(),
       level: 20,
-      mainStat: getRandomEnumValue(Stat),
+      mainStat: getRandomEnumValue(StatKey),
       metricsResults: {
         [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
         [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },

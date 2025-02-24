@@ -1,10 +1,10 @@
 import { getSubStats, getSubStatWeight } from "@/constants";
-import { Stat } from "@/types";
+import { StatKey } from "@/types";
 
-export const getRandomNewSubStat = ({ mainStat, subStats }: { mainStat: Stat; subStats: Stat[] }): Stat => {
+export const getRandomNewSubStat = ({ mainStat, subStats }: { mainStat: StatKey; subStats: StatKey[] }): StatKey => {
   const currentStats = new Set([mainStat, ...subStats]);
   const remainingStats = getSubStats().filter((subStat) => !currentStats.has(subStat));
-  const remainingSubStatWeights: [Stat, number][] = remainingStats.map((stat) => {
+  const remainingSubStatWeights: [StatKey, number][] = remainingStats.map((stat) => {
     const weight = getSubStatWeight({ subStat: stat });
     return [stat, weight];
   });
@@ -13,7 +13,7 @@ export const getRandomNewSubStat = ({ mainStat, subStats }: { mainStat: Stat; su
   let current = 0;
   for (const [key, value] of remainingSubStatWeights) {
     if (random < current + value) {
-      return key as Stat;
+      return key as StatKey;
     }
     current += value;
   }

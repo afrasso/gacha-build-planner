@@ -1,12 +1,12 @@
 import { getMainStatOdds } from "@/constants";
-import { ArtifactType, Stat } from "@/types";
+import { ArtifactType, StatKey } from "@/types";
 
 const getCumulativeMainStatOdds = ({
   artifactType,
   mainStats,
 }: {
   artifactType: ArtifactType;
-  mainStats?: Stat[];
+  mainStats?: StatKey[];
 }): number => {
   // If no main stats are specified, we can assume that any main stat is acceptable, and thus the odds of getting an
   // main stat is 1.

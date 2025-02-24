@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Toggle } from "@/components/ui/toggle";
 import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Artifact, ArtifactType, Stat } from "@/types";
+import { Artifact, ArtifactType, StatKey } from "@/types";
 
 export enum EquipStatus {
   EQUIPPED = "EQUIPPED",
@@ -25,7 +25,7 @@ export enum LockStatus {
 export interface ArtifactFilter {
   equipStatuses: Partial<Record<EquipStatus, boolean>>;
   lockStatuses: Partial<Record<LockStatus, boolean>>;
-  mainStats: Partial<Record<Stat, boolean>>;
+  mainStats: Partial<Record<StatKey, boolean>>;
   maxLevel: number;
   maxRarity: number;
   minLevel: number;
@@ -87,7 +87,7 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
     filter?.equipStatuses || {}
   );
   const [lockStatuses, setLockStatuses] = useState<Partial<Record<LockStatus, boolean>>>(filter?.lockStatuses || {});
-  const [mainStats, setMainStats] = useState<Partial<Record<Stat, boolean>>>(filter?.mainStats || {});
+  const [mainStats, setMainStats] = useState<Partial<Record<StatKey, boolean>>>(filter?.mainStats || {});
   const [maxLevel, setMaxLevel] = useState<number>(MAX_LEVEL);
   const [maxRarity, setMaxRarity] = useState<number>(MAX_RARITY);
   const [minLevel, setMinLevel] = useState<number>(MIN_LEVEL);
@@ -115,7 +115,7 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
     setLockStatuses((prev) => ({ ...prev, [lockStatus]: pressed }));
   };
 
-  const onMainStatToggle = ({ mainStat, pressed }: { mainStat: Stat; pressed: boolean }) =>
+  const onMainStatToggle = ({ mainStat, pressed }: { mainStat: StatKey; pressed: boolean }) =>
     setMainStats((prev) => ({ ...prev, [mainStat]: pressed }));
 
   const onSetIdToggle = ({ pressed, setId }: { pressed: boolean; setId: string }) =>
@@ -128,7 +128,7 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
 
   const isLockStatusToggled = (lockStatus: LockStatus) => !!lockStatuses[lockStatus];
 
-  const isMainStatToggled = (mainStat: Stat) => !!mainStats[mainStat];
+  const isMainStatToggled = (mainStat: StatKey) => !!mainStats[mainStat];
 
   const isSetIdToggled = (setId: string) => !!setIds[setId];
 
@@ -271,7 +271,7 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
               <Label className="text-md font-semibold text-primary">Main Stat</Label>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 justify-items-center">
-              {Object.values(Stat).map((stat) => (
+              {Object.values(StatKey).map((stat) => (
                 <Toggle
                   key={stat}
                   onPressedChange={(pressed) => onMainStatToggle({ mainStat: stat, pressed })}
