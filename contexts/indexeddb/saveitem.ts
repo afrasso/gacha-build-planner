@@ -6,6 +6,8 @@ export const saveItem = async <T>({ collectionName, item }: { collectionName: st
   const store = transaction.objectStore(collectionName);
 
   return new Promise((resolve, reject) => {
+    console.log(item);
+
     const putRequest = store.put(item);
 
     // If we later want to add a console.log for debugging purposes, this is where it would go.

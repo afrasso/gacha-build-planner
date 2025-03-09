@@ -3,17 +3,18 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { getMainStats } from "@/constants";
-import { ArtifactType, StatKey } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
 
 interface MainStatSelectorProps {
-  artifactType: ArtifactType;
-  mainStat?: StatKey;
-  onUpdate: (mainStat: StatKey) => void;
+  artifactTypeKey: string;
+  mainStatKey?: string;
+  onUpdate: (mainStatKey: string) => void;
 }
 
 const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProps>(
-  ({ artifactType, mainStat, onUpdate }, ref) => {
+  ({ artifactTypeKey, mainStatKey, onUpdate }, ref) => {
+    const { getPossibleArtifactMainStats } = useDataContext();
+
     const [isValid, setIsValid] = useState(true);
 
     const cancel = () => {};
@@ -23,7 +24,7 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
     };
 
     const validate = () => {
-      const newIsValid = !!mainStat;
+      const newIsValid = !!mainStatKey;
       setIsValid(newIsValid);
       return newIsValid;
     };
@@ -34,8 +35,8 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
       validate,
     }));
 
-    const onMainStatChange = (mainStat: string) => {
-      onUpdate(mainStat as StatKey);
+    const onMainStatChange = (mainStatKey: string) => {
+      onUpdate(mainStatKey);
       setIsValid(true);
     };
 
@@ -45,7 +46,7 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
           Main Stat
         </Label>
         <div className="flex-grow relative">
-          <Select onValueChange={onMainStatChange} value={mainStat}>
+          <Select onValueChange={onMainStatChange} value={mainStatKey}>
             <SelectTrigger
               aria-describedby={!isValid ? "error" : undefined}
               aria-invalid={!isValid}
@@ -55,9 +56,9 @@ const MainStatSelector = forwardRef<ISaveableContentHandle, MainStatSelectorProp
               <SelectValue placeholder="Select main stat" />
             </SelectTrigger>
             <SelectContent>
-              {getMainStats({ artifactType }).map((stat: StatKey) => (
-                <SelectItem key={stat} value={stat}>
-                  {stat}
+              {getPossibleArtifactMainStats({ artifactTypeKey }).map((statKey) => (
+                <SelectItem key={statKey} value={statKey}>
+                  {statKey}
                 </SelectItem>
               ))}
             </SelectContent>

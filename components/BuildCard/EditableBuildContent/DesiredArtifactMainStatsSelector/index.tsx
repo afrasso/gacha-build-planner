@@ -1,19 +1,21 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
-import { ArtifactType, DesiredArtifactMainStats } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
 
 import DesiredArtifactMainStatSelector from "./DesiredArtifactMainStatSelector";
 
 interface DesiredArtifactMainStatsSelectorProps {
-  desiredArtifactMainStats: DesiredArtifactMainStats;
-  onChange: (desiredArtifactMainStats: DesiredArtifactMainStats) => void;
+  desiredArtifactMainStats: Record<string, string[]>;
+  onChange: (desiredArtifactMainStats: Record<string, string[]>) => void;
 }
 
 const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelectorProps> = ({
   desiredArtifactMainStats,
   onChange,
 }) => {
+  const { getArtifactTypesWithVariableMainStats } = useDataContext();
+
   return (
     <div className="mb-2">
       <div className="h-8 items-center flex">
@@ -21,12 +23,12 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatsSelecto
           Main Stats:
         </Label>
       </div>
-      {[ArtifactType.SANDS, ArtifactType.GOBLET, ArtifactType.CIRCLET].map((artifactType) => (
+      {getArtifactTypesWithVariableMainStats().map((artifactType) => (
         <DesiredArtifactMainStatSelector
-          artifactType={artifactType}
-          key={artifactType}
-          mainStats={desiredArtifactMainStats[artifactType] || []}
-          onUpdate={(mainStats) => onChange({ ...desiredArtifactMainStats, [artifactType]: mainStats })}
+          artifactTypeKey={artifactType.key}
+          key={artifactType.key}
+          mainStatKeys={desiredArtifactMainStats[artifactType.key] || []}
+          onUpdate={(mainStatKeys) => onChange({ ...desiredArtifactMainStats, [artifactType.key]: mainStatKeys })}
         />
       ))}
     </div>

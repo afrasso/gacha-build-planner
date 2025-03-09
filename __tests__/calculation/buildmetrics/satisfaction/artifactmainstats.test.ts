@@ -3,16 +3,16 @@ import { describe, expect, it } from "vitest";
 
 import { getRandomEnumValue } from "@/__tests__/testhelpers";
 import { calculateArtifactMainStatsSatisfaction } from "@/calculation/buildmetrics/satisfaction/artifactmainstats";
-import { Artifact, ArtifactMetric, ArtifactType, BuildArtifacts, DesiredArtifactMainStats, StatKey } from "@/types";
+import { IArtifact, ArtifactMetric } from "@/types";
 
 describe("Artifact Main Stats Satisfaction Tests", () => {
-  const generateArtifact = ({ mainStat, type }: { mainStat: StatKey; type: ArtifactType }): Artifact => {
-    const artifact: Artifact = {
+  const generateArtifact = ({ mainStatKey, typeKey }: { mainStatKey: string; typeKey: string }): IArtifact => {
+    const artifact: IArtifact = {
       id: uuidv4(),
       isLocked: false,
       lastUpdatedDate: new Date().toISOString(),
       level: 20,
-      mainStat,
+      mainStatKey,
       metricsResults: {
         [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
         [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
@@ -25,7 +25,7 @@ describe("Artifact Main Stats Satisfaction Tests", () => {
       rarity: 5,
       setId: uuidv4(),
       subStats: [],
-      type,
+      typeKey,
     };
     return artifact;
   };
@@ -42,7 +42,7 @@ describe("Artifact Main Stats Satisfaction Tests", () => {
             [ArtifactType.SANDS]: getRandomEnumValue(StatKey),
           };
 
-          const artifacts: BuildArtifacts = {
+          const artifacts: Record<string, IArtifact> = {
             [ArtifactType.CIRCLET]: generateArtifact({
               mainStat: mainStats[ArtifactType.CIRCLET],
               type: ArtifactType.CIRCLET,

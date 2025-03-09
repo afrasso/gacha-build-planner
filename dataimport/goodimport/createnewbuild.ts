@@ -1,4 +1,5 @@
-import { Build, Character } from "@/types";
+import { BuildData, ICharacter } from "@/types";
+import { Build } from "@/types/genshin/build";
 
 import { Character as GOODCharacter } from "./types";
 
@@ -7,21 +8,11 @@ export const createNewBuild = ({
   lookupCharacter,
 }: {
   goodCharacter: GOODCharacter;
-  lookupCharacter: (goodCharacterKey: string) => Character;
-}): Build => {
+  lookupCharacter: (goodCharacterKey: string) => ICharacter;
+}): BuildData => {
   const character = lookupCharacter(goodCharacter.key);
   if (!character) {
     throw new Error(`Could not find the character ${goodCharacter.key}`);
   }
-  const build = {
-    artifacts: {},
-    characterId: character.id,
-    desiredArtifactMainStats: {},
-    desiredArtifactSetBonuses: [],
-    desiredOverallStats: [],
-    lastUpdatedDate: new Date().toISOString(),
-    sortOrder: -1,
-    weaponId: undefined,
-  };
-  return build;
+  return new Build({ characterId: character.id }).toBuildData();
 };

@@ -1,21 +1,24 @@
-import { getMainStatOdds } from "@/constants";
-import { ArtifactType, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
 
 const getCumulativeMainStatOdds = ({
-  artifactType,
-  mainStats,
+  artifactTypeKey,
+  dataContext,
+  mainStatKeys,
 }: {
-  artifactType: ArtifactType;
-  mainStats?: StatKey[];
+  artifactTypeKey: string;
+  dataContext: IDataContext;
+  mainStatKeys?: string[];
 }): number => {
+  const { getArtifactMainStatOdds } = dataContext;
+
   // If no main stats are specified, we can assume that any main stat is acceptable, and thus the odds of getting an
   // main stat is 1.
-  if (!mainStats || mainStats.length === 0) {
+  if (!mainStatKeys || mainStatKeys.length === 0) {
     return 1;
   }
 
-  return mainStats.reduce((acc, mainStat) => {
-    acc += getMainStatOdds({ artifactType, mainStat });
+  return mainStatKeys.reduce((acc, mainStatKey) => {
+    acc += getArtifactMainStatOdds({ artifactTypeKey, mainStatKey });
     return acc;
   }, 0);
 };

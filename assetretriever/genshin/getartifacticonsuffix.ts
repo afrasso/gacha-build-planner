@@ -1,4 +1,4 @@
-import { ArtifactType } from "@/types";
+import { ArtifactType } from "./types";
 
 const getArtifactIconSuffix = (type: ArtifactType) => {
   switch (type) {

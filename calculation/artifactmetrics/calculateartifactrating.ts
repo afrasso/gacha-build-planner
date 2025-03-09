@@ -1,5 +1,5 @@
-import { getSubStatRollValues } from "@/constants";
-import { Artifact, Build, DesiredOverallStat, OverallStatKey, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { DesiredOverallStat, IArtifact, IBuild } from "@/types";
 
 import { rollArtifact } from "../simulation";
 import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
@@ -12,21 +12,18 @@ const PRIORITY_WEIGHTS: Record<number, number> = {
 
 const calculateSubstatRating = ({
   artifact,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  dataContext,
   desiredOverallStat,
 }: {
-  artifact: Artifact;
+  artifact: IArtifact;
+  dataContext: IDataContext;
   desiredOverallStat: DesiredOverallStat;
 }): number => {
+  const { getPossibleArtifactSubStatRollValues, getStatDefinitions } = dataContext;
+
   let rating = 0;
 
-  const calculateSubstatRollValue = ({
-    overallStatKey,
-    statKey,
-  }: {
-    overallStatKey: OverallStatKey;
-    statKey: StatKey;
-  }) => {
+  const calculateSubstatRollValue = ({ overallStatKey, statKey }: { overallStatKey: string; statKey: string }) => {
     if (desiredOverallStat.stat.key !== overallStatKey) {
       return;
     }
@@ -34,44 +31,43 @@ const calculateSubstatRating = ({
     if (!subStatValue) {
       return;
     }
-    const maxRoll = Math.max(...getSubStatRollValues({ rarity: artifact.rarity, statKey: subStatValue.key }));
+    const maxRoll = Math.max(
+      ...getPossibleArtifactSubStatRollValues({ rarity: artifact.rarity, subStatKey: subStatValue.key })
+    );
     rating += (PRIORITY_WEIGHTS[desiredOverallStat.priority] * subStatValue.value) / maxRoll;
   };
 
-  // For now, let's ignore flat stats, since while they do have some value, they certainly don't have full value, and
-  // worse, the value of a flat substat relative to a percent substat is going to depend on the build.
-  // calculateSubstatRollValue({ overallStat: OverallStat.ATK, stat: Stat.ATK_FLAT });
-  // calculateSubstatRollValue({ overallStat: OverallStat.DEF, stat: Stat.DEF_FLAT });
-  // calculateSubstatRollValue({ overallStat: OverallStat.HP, stat: Stat.HP_FLAT });
-
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.ATK, statKey: StatKey.ATK_PERCENT });
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.CRIT_DMG, statKey: StatKey.CRIT_DMG });
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.CRIT_RATE, statKey: StatKey.CRIT_RATE });
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.DEF, statKey: StatKey.DEF_PERCENT });
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.ELEMENTAL_MASTERY, statKey: StatKey.ELEMENTAL_MASTERY });
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.ENERGY_RECHARGE, statKey: StatKey.ENERGY_RECHARGE });
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.HEALING_BONUS, statKey: StatKey.HEALING_BONUS });
-  calculateSubstatRollValue({ overallStatKey: OverallStatKey.MAX_HP, statKey: StatKey.HP_PERCENT });
+  getStatDefinitions().forEach((statDefinition) => {
+    calculateSubstatRollValue({ overallStatKey: statDefinition.overallStatKey, statKey: statDefinition.key });
+  });
 
   return rating;
 };
 
-const calculateRating = ({ artifact, build }: { artifact: Artifact; build: Build }): number => {
+const calculateRating = ({
+  artifact,
+  build,
+  dataContext,
+}: {
+  artifact: IArtifact;
+  build: IBuild;
+  dataContext: IDataContext;
+}): number => {
   // If the build requires a specific main stat, and the current artifact doesn't have it, the artifact has no value.
   if (
-    build.desiredArtifactMainStats[artifact.type] &&
-    !build.desiredArtifactMainStats[artifact.type]?.includes(artifact.mainStat)
+    build.desiredArtifactMainStats[artifact.typeKey] &&
+    !build.desiredArtifactMainStats[artifact.typeKey]?.includes(artifact.mainStatKey)
   ) {
     return 0;
   }
 
-  const rolledArtifact = rollArtifact({ artifact });
+  const rolledArtifact = rollArtifact({ artifact, dataContext });
 
   // TODO: The max rating is actually based on the build criteria. At some point we can make the rating relative to max
   // possible rating given the build's desired stats.
   const initialRating = 1;
   return build.desiredOverallStats.reduce((total, desiredOverallStat) => {
-    total += calculateSubstatRating({ artifact: rolledArtifact, desiredOverallStat });
+    total += calculateSubstatRating({ artifact: rolledArtifact, dataContext, desiredOverallStat });
     return total;
   }, initialRating);
 };
@@ -85,14 +81,17 @@ export interface ArtifactRatingMetricsResults {
 export const calculateArtifactRatingMetrics = ({
   artifact,
   build,
+  dataContext,
   iterations,
 }: {
-  artifact: Artifact;
-  build: Build;
+  artifact: IArtifact;
+  build: IBuild;
+  dataContext: IDataContext;
   iterations: number;
 }): ArtifactRatingMetricsResults => {
   const weightedFactor = getWeightedArtifactSetBonusFactor({
     artifact,
+    dataContext,
     desiredArtifactMainStats: build.desiredArtifactMainStats,
     desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
   });
@@ -101,9 +100,9 @@ export const calculateArtifactRatingMetrics = ({
   let totalPlusMinus = 0;
   let positivePlusMinusCount = 0;
   for (let i = 0; i < iterations; i++) {
-    const artifactRating = calculateRating({ artifact, build });
-    const buildArtifact = build.artifacts[artifact.type];
-    const buildArtifactRating = buildArtifact ? calculateRating({ artifact: buildArtifact, build }) : 0;
+    const artifactRating = calculateRating({ artifact, build, dataContext });
+    const buildArtifact = build.artifacts[artifact.typeKey];
+    const buildArtifactRating = buildArtifact ? calculateRating({ artifact: buildArtifact, build, dataContext }) : 0;
     totalRating += artifactRating;
     totalPlusMinus += artifactRating - buildArtifactRating;
     positivePlusMinusCount += artifactRating > buildArtifactRating ? 1 : 0;

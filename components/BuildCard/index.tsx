@@ -1,24 +1,24 @@
 import { calculateBuildSatisfaction } from "@/calculation/buildmetrics/satisfaction";
 import { Card } from "@/components/ui/card";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Build } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { BuildData } from "@/types";
 
 import BuildSatisfactionComponent from "./BuildSatisfactionComponent";
 import EditableBuildContent from "./EditableBuildContent";
 import Header from "./Header";
 
 interface BuildCardProps {
-  build: Build;
+  build: BuildData;
   onRemove?: (buildId: string) => void;
-  onUpdate: (buildId: string, build: Partial<Build>) => void;
+  onUpdate: (buildId: string, build: Partial<BuildData>) => void;
   showInfoButton: boolean;
 }
 
 const BuildCard: React.FC<BuildCardProps> = ({ build, onRemove, onUpdate, showInfoButton }) => {
-  const genshinDataContext = useGenshinDataContext();
-  const { artifactSets } = genshinDataContext;
+  const dataContext = useDataContext();
+  const { constructBuild, getArtifactSets } = dataContext;
 
-  const satisfactionResults = calculateBuildSatisfaction({ build, genshinDataContext });
+  const satisfactionResults = calculateBuildSatisfaction({ build: constructBuild(build), dataContext });
 
   return (
     <Card className="w-full h-full">
@@ -29,7 +29,7 @@ const BuildCard: React.FC<BuildCardProps> = ({ build, onRemove, onUpdate, showIn
         showInfoButton={showInfoButton}
       />
       <BuildSatisfactionComponent result={satisfactionResults} />
-      <EditableBuildContent artifactSets={artifactSets} build={build} onUpdate={onUpdate} />
+      <EditableBuildContent artifactSets={getArtifactSets()} build={build} onUpdate={onUpdate} />
     </Card>
   );
 };

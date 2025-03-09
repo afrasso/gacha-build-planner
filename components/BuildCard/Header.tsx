@@ -6,20 +6,20 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Build } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { BuildData } from "@/types";
 
 import SatisfactionIcon from "./SatisfactionIcon";
 
 interface HeaderProps {
-  build: Build;
+  build: BuildData;
   isSatisfied: boolean;
   onRemove?: (buildId: string) => void;
   showInfoButton: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove, showInfoButton }) => {
-  const { getCharacter } = useGenshinDataContext();
+  const { getCharacter } = useDataContext();
   const router = useRouter();
 
   const remove = () => {

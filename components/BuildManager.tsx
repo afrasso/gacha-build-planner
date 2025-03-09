@@ -4,9 +4,9 @@ import { List } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { useAuthContext } from "@/contexts/AuthContext";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
-import { Build, Character } from "@/types";
+import { BuildData, ICharacter } from "@/types";
 
 import BuildCard from "./BuildCard";
 import CharacterSelector from "./CharacterSelector";
@@ -15,10 +15,11 @@ import { Button } from "./ui/button";
 
 const BuildManager = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
-  const { characters } = useGenshinDataContext();
+  const dataContext = useDataContext();
+  const { constructBuild, getCharacters } = dataContext;
   const { deleteBuild, loadBuilds, saveBuilds } = useStorageContext();
 
-  const [builds, setBuilds] = useState<Build[]>([]);
+  const [builds, setBuilds] = useState<BuildData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isReorderDialogOpen, setIsReorderDialogOpen] = useState(false);
 
@@ -44,24 +45,13 @@ const BuildManager = () => {
     return <div>Loading builds...</div>;
   }
 
-  const addBuild = (character: Character) => {
+  const addBuild = (character: ICharacter) => {
     if (character && !builds.some((build) => build.characterId === character.id)) {
-      setBuilds([
-        ...builds,
-        {
-          artifacts: {},
-          characterId: character.id,
-          desiredArtifactMainStats: {},
-          desiredArtifactSetBonuses: [],
-          desiredOverallStats: [],
-          lastUpdatedDate: new Date().toISOString(),
-          sortOrder: builds.length,
-        },
-      ]);
+      setBuilds([...builds, constructBuild({ characterId: character.id }).toBuildData()]);
     }
   };
 
-  const updateBuild = (buildId: string, updates: Partial<Build>) => {
+  const updateBuild = (buildId: string, updates: Partial<BuildData>) => {
     const characterId = buildId;
     setBuilds((builds) =>
       builds.map((build) => (build.characterId === characterId ? { ...build, ...updates } : build))
@@ -74,7 +64,7 @@ const BuildManager = () => {
     setBuilds((builds) => builds.filter((build) => build.characterId !== characterId));
   };
 
-  const handleReorderBuilds = (newOrder: Build[]) => {
+  const handleReorderBuilds = (newOrder: BuildData[]) => {
     setBuilds(newOrder);
   };
 
@@ -82,7 +72,7 @@ const BuildManager = () => {
     <>
       <div className="flex items-center space-x-2 mb-4">
         <CharacterSelector
-          characters={characters.filter(
+          characters={getCharacters().filter(
             (character) => !builds.map((build) => build.characterId).includes(character.id)
           )}
           onAdd={addBuild}

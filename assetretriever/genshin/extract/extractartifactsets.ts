@@ -2,13 +2,12 @@ import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
 
-import { ArtifactType } from "@/types";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
 import downloadImage from "@/utils/downloadimage";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import getArtifactIconPath from "../getartifacticonpath";
-import { FailedArtifactIconDownload } from "../types";
+import { ArtifactType, FailedArtifactIconDownload } from "../types";
 
 const downloadArtifactIcon = async ({
   setId,

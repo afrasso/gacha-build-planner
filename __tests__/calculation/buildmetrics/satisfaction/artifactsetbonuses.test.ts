@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { getRandomEnumValue } from "@/__tests__/testhelpers";
 import { calculateArtifactSetBonusesSatisfaction } from "@/calculation/buildmetrics/satisfaction/artifactsetbonuses";
 import {
-  Artifact,
+  IArtifact,
   ArtifactMetric,
   ArtifactSetBonus,
   ArtifactSetBonusType,
@@ -14,8 +14,8 @@ import {
 } from "@/types";
 
 describe("Artifact Set Bonuses Satisfaction Tests", () => {
-  const generateArtifact = ({ setId, type }: { setId: string; type: ArtifactType }): Artifact => {
-    const artifact: Artifact = {
+  const generateArtifact = ({ setId, type }: { setId: string; type: ArtifactType }): IArtifact => {
+    const artifact: IArtifact = {
       id: uuidv4(),
       lastUpdatedDate: new Date().toISOString(),
       level: 20,

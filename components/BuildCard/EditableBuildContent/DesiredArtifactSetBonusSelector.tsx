@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { useDataContext } from "@/contexts/DataContext";
 import { ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
 
 interface DesiredArtifactSetBonusSelectorProps {
@@ -19,7 +19,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   desiredArtifactSetBonuses = [],
   onChange,
 }) => {
-  const { artifactSets, getArtifactSet } = useGenshinDataContext();
+  const { getArtifactSet, getArtifactSets } = useDataContext();
 
   const [isAddingSetBonus, setIsAddingSetBonus] = useState(false);
   const [setId, setSetId] = useState<string | undefined>(undefined);
@@ -150,7 +150,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                   <SelectValue placeholder="Select an artifact set" />
                 </SelectTrigger>
                 <SelectContent>
-                  {artifactSets.map((artifactSet) => (
+                  {getArtifactSets().map((artifactSet) => (
                     <SelectItem key={artifactSet.id} value={artifactSet.id}>
                       <div className="flex items-center">
                         <Image

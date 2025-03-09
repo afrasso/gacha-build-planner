@@ -1,4 +1,4 @@
-import { ArtifactSetBonus, ArtifactSetBonusType, BuildArtifacts } from "@/types";
+import { IArtifact, ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
 
 import { ArtifactSetBonusSatisfactionDetails, SatisfactionResult } from "./types";
 
@@ -6,7 +6,7 @@ const calculateArtifactSetBonusSatisfaction = ({
   artifacts,
   setBonus,
 }: {
-  artifacts: BuildArtifacts;
+  artifacts: Record<string, IArtifact>;
   setBonus: ArtifactSetBonus;
 }): boolean => {
   const matchingArtifacts = Object.values(artifacts).filter((artifact) => artifact.setId === setBonus.setId);
@@ -20,7 +20,7 @@ export const calculateArtifactSetBonusesSatisfaction = ({
   artifacts,
   desiredArtifactSetBonuses,
 }: {
-  artifacts: BuildArtifacts;
+  artifacts: Record<string, IArtifact>;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
 }): SatisfactionResult<ArtifactSetBonusSatisfactionDetails> => {
   const details = desiredArtifactSetBonuses.map((setBonus) => ({

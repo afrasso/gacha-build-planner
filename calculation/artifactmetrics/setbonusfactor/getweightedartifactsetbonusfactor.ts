@@ -1,17 +1,22 @@
-import { Artifact, ArtifactSetBonus, ArtifactSetBonusType, ArtifactType, DesiredArtifactMainStats } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { IArtifact, ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
 
 import calculateOddsOfOnSetPieces from "./calculateoddsofonsetpieces";
 import getArtifactTypeCombinations from "./getartifacttypecombinations";
 
 const getWeightedArtifactSetBonusFactor = ({
   artifact,
+  dataContext,
   desiredArtifactMainStats,
   desiredArtifactSetBonuses,
 }: {
-  artifact: Artifact;
-  desiredArtifactMainStats: DesiredArtifactMainStats;
+  artifact: IArtifact;
+  dataContext: IDataContext;
+  desiredArtifactMainStats: Record<string, string[]>;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
 }): number => {
+  const { getArtifactTypes } = dataContext;
+
   // If there are no desired set bonuses, the odds of getting an artifact with a set we're happy with is 1.
   if (!desiredArtifactSetBonuses || desiredArtifactSetBonuses.length === 0) {
     return 1;
@@ -28,10 +33,11 @@ const getWeightedArtifactSetBonusFactor = ({
     return result;
   }, 0);
 
-  const artifactTypes = Object.values(ArtifactType);
-
   // Get all of combinations of artifacts that must be on set to meet the artifact set bonus criteria.
-  const combinations = getArtifactTypeCombinations({ artifactTypes, count: onSetArtifactCount });
+  const combinations = getArtifactTypeCombinations({
+    artifactTypeKeys: getArtifactTypes().map((type) => type.key),
+    count: onSetArtifactCount,
+  });
 
   // Calculate the odds that each particular combination is what would meet the artifact set bonus criteria, and add it
   // to the total weighted odds, and the weighted odds only if the specified artifact is one that needs to meet the set
@@ -39,9 +45,9 @@ const getWeightedArtifactSetBonusFactor = ({
   let totalWeight = 0;
   let artifactWeight = 0;
   for (const combination of combinations) {
-    const weight = calculateOddsOfOnSetPieces({ artifactTypes: combination, desiredArtifactMainStats });
+    const weight = calculateOddsOfOnSetPieces({ artifactTypeKeys: combination, dataContext, desiredArtifactMainStats });
     totalWeight += weight;
-    if (!combination.includes(artifact.type)) {
+    if (!combination.includes(artifact.typeKey)) {
       artifactWeight += weight;
     }
   }

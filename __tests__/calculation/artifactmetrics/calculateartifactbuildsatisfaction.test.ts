@@ -3,9 +3,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { calculateArtifactBuildSatisfaction } from "@/calculation/artifactmetrics/calculateartifactbuildsatisfaction";
 import * as statsModule from "@/calculation/stats";
-import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { DataContext } from "@/contexts/DataContext";
 import {
-  Artifact,
+  IArtifact,
   ArtifactMetric,
   ArtifactSet,
   ArtifactSetBonusType,
@@ -21,7 +21,7 @@ describe("calculateArtifactBuildSatisfaction()", () => {
   let artifactSet: ArtifactSet;
   let character: Character;
   let weapon: Weapon;
-  const genshinDataContext: GenshinDataContext = {
+  const dataContext: DataContext = {
     artifactSets: [],
     characters: [],
     getArtifactSet: () => artifactSet,
@@ -31,7 +31,7 @@ describe("calculateArtifactBuildSatisfaction()", () => {
   };
 
   const generateArtifact = ({ setId, type }: { setId?: string; type: ArtifactType }) => {
-    const artifact: Artifact = {
+    const artifact: IArtifact = {
       id: uuidv4(),
       isLocked: false,
       lastUpdatedDate: new Date().toISOString(),
@@ -122,7 +122,7 @@ describe("calculateArtifactBuildSatisfaction()", () => {
             artifact,
             build,
             calculationType: ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS,
-            genshinDataContext,
+            dataContext,
             iterations: 1,
           });
 

@@ -8,9 +8,9 @@ import BuildCard from "@/components/BuildCard";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
-import { Artifact, Build } from "@/types";
+import { Artifact, ArtifactData, BuildData } from "@/types";
 
 import TopArtifacts from "./TopArtifacts";
 
@@ -20,11 +20,12 @@ interface BuildDetailsProps {
 
 const BuildDetails: React.FC<BuildDetailsProps> = ({ characterId }) => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
-  const genshinDataContext = useGenshinDataContext();
+  const dataContext = useDataContext();
+  const { constructBuild } = dataContext;
   const { loadArtifacts, loadBuild, saveBuild } = useStorageContext();
 
-  const [artifacts, setArtifacts] = useState<Artifact[]>([]);
-  const [build, setBuild] = useState<Build>();
+  const [artifacts, setArtifacts] = useState<ArtifactData[]>([]);
+  const [build, setBuild] = useState<BuildData>();
   const [calculationCanceled, setCalculationCanceled] = useState<boolean>(false);
   const [calculationCount, setCalculationCount] = useState<number>(0);
   const [calculationProgress, setCalculationProgress] = useState<number>(0);
@@ -98,7 +99,7 @@ const BuildDetails: React.FC<BuildDetailsProps> = ({ characterId }) => {
   }
 
   // TODO: Build ID is probably not necessary.
-  const updateBuild = (buildId: string, updates: Partial<Build>) => {
+  const updateBuild = (buildId: string, updates: Partial<BuildData>) => {
     setBuild((prev) => {
       if (!prev) {
         throw new Error("Unexpected event: an attempt was made to update an undefined build.");
@@ -112,11 +113,11 @@ const BuildDetails: React.FC<BuildDetailsProps> = ({ characterId }) => {
     // TODO: This needs to be a deep copy before performing a side effect on the artifacts!
     for (const [index, artifact] of artifacts.entries()) {
       await updateAllMetrics({
-        artifact,
-        builds: [build],
+        artifact: new Artifact(artifact),
+        builds: [constructBuild(build)],
         callback: async (p) => await callback((index + p) / artifacts.length),
+        dataContext,
         forceRecalculate: true,
-        genshinDataContext,
         iterations: 1000,
       });
       setCalculationCount(index + 1);

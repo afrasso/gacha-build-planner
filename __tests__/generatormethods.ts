@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { getMainStats, getSubStats } from "@/constants";
 import {
-  Artifact,
+  IArtifact,
   ArtifactMetric,
   ArtifactSet,
   ArtifactSetBonus,
@@ -48,7 +48,7 @@ export const generateSubStats = (): Stat<StatKey>[] => {
   }));
 };
 
-export const generateArtifact = (type: ArtifactType): Artifact => {
+export const generateArtifact = (type: ArtifactType): IArtifact => {
   return {
     id: uuidv4(),
     isLocked: false,

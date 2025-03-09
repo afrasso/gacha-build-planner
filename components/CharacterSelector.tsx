@@ -6,15 +6,15 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button"; // Import your button component
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Character } from "@/types";
+import { ICharacter } from "@/types";
 
 interface CharacterSelectorProps {
-  characters: Character[];
-  onAdd: (character: Character) => void;
+  characters: ICharacter[];
+  onAdd: (character: ICharacter) => void;
 }
 
 const CharacterSelector: React.FC<CharacterSelectorProps> = ({ characters, onAdd }) => {
-  const [selectedCharacter, setSelectedCharacter] = useState<Character>();
+  const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>();
 
   const handleCharacterSelection = (characterId: string) => {
     const character = characters.find((character) => character.id === characterId);

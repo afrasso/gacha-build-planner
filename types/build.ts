@@ -1,10 +1,14 @@
-import { ArtifactSetBonus, BuildArtifacts, DesiredArtifactMainStats } from "./artifact";
+import { IDataContext } from "@/contexts/DataContext";
+
+import { ArtifactData, IArtifact } from "./artifact";
+import { ArtifactSetBonus } from "./artifactset";
 import { DesiredOverallStat } from "./stat";
 
-export interface Build {
-  artifacts: BuildArtifacts;
+export interface BuildData {
+  readonly _typeBrand: "BuildData";
+  artifacts: Record<string, ArtifactData>;
   characterId: string;
-  desiredArtifactMainStats: DesiredArtifactMainStats;
+  desiredArtifactMainStats: Record<string, string[]>;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
   desiredOverallStats: DesiredOverallStat[];
   lastUpdatedDate: string;
@@ -12,13 +16,40 @@ export interface Build {
   weaponId?: string;
 }
 
+export interface IBuild {
+  readonly _typeBrand: "IBuild";
+  artifacts: Record<string, IArtifact>;
+  calculateStats: ({
+    artifacts,
+    dataContext,
+  }: {
+    artifacts?: Record<string, IArtifact>;
+    dataContext: IDataContext;
+  }) => Record<string, number>;
+  characterId: string;
+  desiredArtifactMainStats: Record<string, string[]>;
+  desiredArtifactSetBonuses: ArtifactSetBonus[];
+  desiredOverallStats: DesiredOverallStat[];
+  lastUpdatedDate: string;
+  sortOrder: number;
+  toBuildData: () => BuildData;
+  weaponId?: string;
+}
+
 export const BuildSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/Build",
   additionalProperties: false,
   properties: {
-    artifacts: { $ref: "https://gacha-build-planner.vercel.app/schemas/BuildArtifacts" },
+    _typeBrand: { const: "BuildData", type: "string" },
+    artifacts: {
+      additionalProperties: { $ref: "https://gacha-build-planner.vercel.app/schemas/Artifact" },
+      type: "object",
+    },
     characterId: { type: "string" },
-    desiredArtifactMainStats: { $ref: "https://gacha-build-planner.vercel.app/schemas/DesiredArtifactMainStats" },
+    desiredArtifactMainStats: {
+      additionalProperties: { items: { type: "string" }, type: "array" },
+      type: "object",
+    },
     desiredArtifactSetBonuses: {
       items: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactSetBonus" },
       type: "array",
@@ -32,6 +63,7 @@ export const BuildSchema = {
     weaponId: { type: "string" },
   },
   required: [
+    "_typeBrand",
     "artifacts",
     "characterId",
     "desiredArtifactMainStats",

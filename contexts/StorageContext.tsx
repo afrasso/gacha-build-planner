@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-import { Artifact, Build } from "@/types";
+import { ArtifactData, BuildData } from "@/types";
 
 import {
   deleteArtifactFromIndexedDB,
@@ -25,14 +25,14 @@ interface StorageContextType {
   deleteArtifacts: () => Promise<void>;
   deleteBuild: (characterId: string) => Promise<void>;
   deleteBuilds: () => Promise<void>;
-  loadArtifact: (id: string) => Promise<StorageRetrievalResult<Artifact>>;
-  loadArtifacts: () => Promise<StorageRetrievalResult<Artifact[]>>;
-  loadBuild: (characterId: string) => Promise<StorageRetrievalResult<Build>>;
-  loadBuilds: () => Promise<StorageRetrievalResult<Build[]>>;
-  saveArtifact: (artifact: Artifact) => Promise<void>;
-  saveArtifacts: (artifacts: Artifact[]) => Promise<void>;
-  saveBuild: (build: Build) => Promise<void>;
-  saveBuilds: (builds: Build[]) => Promise<void>;
+  loadArtifact: (id: string) => Promise<StorageRetrievalResult<ArtifactData>>;
+  loadArtifacts: () => Promise<StorageRetrievalResult<ArtifactData[]>>;
+  loadBuild: (characterId: string) => Promise<StorageRetrievalResult<BuildData>>;
+  loadBuilds: () => Promise<StorageRetrievalResult<BuildData[]>>;
+  saveArtifact: (artifact: ArtifactData) => Promise<void>;
+  saveArtifacts: (artifacts: ArtifactData[]) => Promise<void>;
+  saveBuild: (build: BuildData) => Promise<void>;
+  saveBuilds: (builds: BuildData[]) => Promise<void>;
 }
 
 const StorageContext = createContext<StorageContextType | undefined>(undefined);
@@ -77,7 +77,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     await deleteBuildsFromIndexedDB();
   };
 
-  const loadArtifact = async (id: string): Promise<StorageRetrievalResult<Artifact>> => {
+  const loadArtifact = async (id: string): Promise<StorageRetrievalResult<ArtifactData>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
@@ -88,7 +88,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return { status: StorageRetrievalStatus.FOUND, value: artifact };
   };
 
-  const loadArtifacts = async (): Promise<StorageRetrievalResult<Artifact[]>> => {
+  const loadArtifacts = async (): Promise<StorageRetrievalResult<ArtifactData[]>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
@@ -96,7 +96,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return { status: StorageRetrievalStatus.FOUND, value: artifacts };
   };
 
-  const loadBuild = async (characterId: string): Promise<StorageRetrievalResult<Build>> => {
+  const loadBuild = async (characterId: string): Promise<StorageRetrievalResult<BuildData>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
@@ -107,7 +107,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return { status: StorageRetrievalStatus.FOUND, value: build };
   };
 
-  const loadBuilds = async (): Promise<StorageRetrievalResult<Build[]>> => {
+  const loadBuilds = async (): Promise<StorageRetrievalResult<BuildData[]>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
@@ -138,19 +138,19 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     return { status: StorageRetrievalStatus.FOUND, value: builds };
   };
 
-  const saveArtifact = async (artifact: Artifact): Promise<void> => {
+  const saveArtifact = async (artifact: ArtifactData): Promise<void> => {
     await saveArtifactToIndexedDB(artifact);
   };
 
-  const saveArtifacts = async (artifacts: Artifact[]): Promise<void> => {
+  const saveArtifacts = async (artifacts: ArtifactData[]): Promise<void> => {
     await saveArtifactsToIndexedDB(artifacts);
   };
 
-  const saveBuild = async (build: Build): Promise<void> => {
+  const saveBuild = async (build: BuildData): Promise<void> => {
     await saveBuildToIndexedDB(build);
   };
 
-  const saveBuilds = async (builds: Build[]): Promise<void> => {
+  const saveBuilds = async (builds: BuildData[]): Promise<void> => {
     // const savePlan = async () => {
     //   if (isAuthenticated) {
     //     try {

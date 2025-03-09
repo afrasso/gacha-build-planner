@@ -6,24 +6,26 @@ import { Button } from "@/components/ui/button";
 import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { getSubStats } from "@/constants";
-import { Stat, StatKey } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { Stat } from "@/types";
 
 interface SubStatsSelectorProps {
-  mainStat?: StatKey;
-  onUpdate: (subStats: Stat<StatKey>[]) => void;
-  subStats?: Stat<StatKey>[];
+  mainStatKey?: string;
+  onUpdate: (subStats: Stat[]) => void;
+  subStats?: Stat[];
 }
 
 const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProps>(
-  ({ mainStat, onUpdate, subStats = [] }, ref) => {
+  ({ mainStatKey, onUpdate, subStats = [] }, ref) => {
+    const { getPossibleArtifactSubStats } = useDataContext();
+
     const MIN_SUB_STATS = 1;
     const MAX_SUB_STATS = 4;
 
     const [areSubStatsValid, setAreSubStatsValid] = useState(true);
     const [isSelectorPresent, setIsSelectorPresent] = useState(false);
     const [isSelectorPresenceValid, setIsSelectorPresenceValid] = useState(false);
-    const [statKey, setStatKey] = useState<StatKey | undefined>(undefined);
+    const [statKey, setStatKey] = useState<string | undefined>(undefined);
     const [isStatKeyValid, setIsStatKeyValid] = useState(true);
     const [statValue, setStatValue] = useState<number | undefined>(undefined);
     const [isStatValueValid, setIsStatValueValid] = useState(true);
@@ -61,7 +63,7 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
     };
 
     const changeSelectorStat = (stat: string) => {
-      setStatKey(stat as StatKey);
+      setStatKey(stat);
       setIsStatKeyValid(true);
     };
 
@@ -92,7 +94,7 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
 
     const confirmSelector = () => {
       if (validateSelector()) {
-        const subStat: Stat<StatKey> = { key: statKey!, value: statValue! };
+        const subStat: Stat = { key: statKey!, value: statValue! };
         setIsSelectorPresent(false);
         setIsSelectorPresenceValid(true);
         setStatKey(undefined);
@@ -104,7 +106,7 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
       }
     };
 
-    const removeSubStat = (statKey: StatKey) => {
+    const removeSubStat = (statKey: string) => {
       onUpdate(subStats.filter((subStat) => subStat.key !== statKey));
     };
 
@@ -173,9 +175,9 @@ const SubStatsSelector = forwardRef<ISaveableContentHandle, SubStatsSelectorProp
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                          {getSubStats().map((stat: StatKey) => (
-                            <SelectItem disabled={stat === mainStat} key={stat} value={stat}>
-                              {stat}
+                          {getPossibleArtifactSubStats().map((statKey) => (
+                            <SelectItem disabled={statKey === mainStatKey} key={statKey} value={statKey}>
+                              {statKey}
                             </SelectItem>
                           ))}
                         </SelectContent>

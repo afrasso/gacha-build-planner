@@ -7,7 +7,7 @@ import downloadImage from "@/utils/downloadimage";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedLightConeIconDownload } from "../types";
-import mapDbBaseStat from "./mapdbbasestat";
+import mapDbStatKey from "./mapdbstatkey";
 
 const extractLightCones = async ({
   downloadIcons = false,
@@ -31,8 +31,8 @@ const extractLightCones = async ({
     const name = dbLightCone.name.get("en");
 
     const maxLvlStats = dbLightCone.getStatsByLevel(6, 80).reduce((acc, dbStat) => {
-      const stat = mapDbBaseStat(dbStat);
-      acc[stat.key] = stat.value;
+      const statKey = mapDbStatKey(dbStat.type);
+      acc[statKey] = dbStat.value;
       return acc;
     }, {} as Record<string, number>);
 

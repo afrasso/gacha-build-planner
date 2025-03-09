@@ -2,14 +2,14 @@
 
 import ImportExportComponent from "@/components/ImportExportComponent";
 import ImportGameDataComponent from "@/components/ImportGameDataComponent";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
 import { updateBuildsWithGameData } from "@/dataimport/goodimport";
 import { validateGOOD } from "@/dataimport/goodimport/types";
 import { Plan, validatePlan } from "@/types";
 
 export default function ImportExportPage() {
-  const genshinDataContext = useGenshinDataContext();
+  const dataContext = useDataContext();
   const { deleteArtifacts, loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
 
   const loadPlan = async (): Promise<Plan> => {
@@ -50,7 +50,7 @@ export default function ImportExportPage() {
     const { artifacts: updatedArtifacts, builds: updatedBuilds } = updateBuildsWithGameData({
       artifacts: plan.artifacts,
       builds: plan.builds,
-      genshinDataContext,
+      dataContext,
       goodArtifacts,
       goodCharacters,
       goodWeapons,

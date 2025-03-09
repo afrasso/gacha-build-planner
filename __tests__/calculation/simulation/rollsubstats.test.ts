@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "v
 
 import { rollSubStats } from "@/calculation/simulation/rollsubstats";
 import { getSubStatRollValues } from "@/constants";
-import { Artifact, ArtifactMetric, ArtifactType, Stat, StatKey } from "@/types";
+import { IArtifact, ArtifactMetric, ArtifactType, Stat, StatKey } from "@/types";
 
 describe("rollSubStats()", () => {
   let randomSpy: MockInstance<() => number>;
@@ -24,8 +24,8 @@ describe("rollSubStats()", () => {
     level: number;
     rarity: number;
     subStats: Stat<StatKey>[];
-  }): Artifact => {
-    const artifact: Artifact = {
+  }): IArtifact => {
+    const artifact: IArtifact = {
       id: uuidv4(),
       isLocked: false,
       lastUpdatedDate: new Date().toISOString(),

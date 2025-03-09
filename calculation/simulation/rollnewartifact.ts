@@ -1,43 +1,25 @@
-import { v4 as uuidv4 } from "uuid";
-
-import { Artifact, ArtifactMetric, ArtifactType, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { Artifact, IArtifact } from "@/types";
 
 import { getRandomInitialSubStats } from "./getrandominitialsubstats";
 import { getRandomMainStat } from "./getrandommainstat";
 
 export const rollNewArtifact = ({
+  dataContext,
   level,
-  mainStats,
+  mainStatKeys,
   rarity,
   setId,
-  type,
+  typeKey,
 }: {
+  dataContext: IDataContext;
   level: number;
-  mainStats?: StatKey[];
+  mainStatKeys?: string[];
   rarity: number;
   setId: string;
-  type: ArtifactType;
-}): Artifact => {
-  const actualMainStat = getRandomMainStat({ mainStats, type });
-  const subStats = getRandomInitialSubStats({ mainStat: actualMainStat, rarity });
-  return {
-    id: uuidv4(),
-    isLocked: false,
-    lastUpdatedDate: new Date().toISOString(),
-    level,
-    mainStat: actualMainStat,
-    metricsResults: {
-      [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
-      [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
-      [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
-      [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
-      [ArtifactMetric.PLUS_MINUS]: { buildResults: {} },
-      [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
-      [ArtifactMetric.RATING]: { buildResults: {} },
-    },
-    rarity,
-    setId,
-    subStats,
-    type,
-  };
+  typeKey: string;
+}): IArtifact => {
+  const mainStatKey = getRandomMainStat({ artifactTypeKey: typeKey, dataContext, mainStatKeys });
+  const subStats = getRandomInitialSubStats({ dataContext, mainStatKey, rarity });
+  return new Artifact({ level, mainStatKey, rarity, setId, subStats, typeKey });
 };

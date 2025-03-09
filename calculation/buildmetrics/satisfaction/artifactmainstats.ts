@@ -1,4 +1,4 @@
-import { ArtifactType, BuildArtifacts, DesiredArtifactMainStats, StatKey } from "@/types";
+import { IArtifact } from "@/types";
 
 import { ArtifactMainStatSatisfactionDetails, SatisfactionResult } from "./types";
 
@@ -6,17 +6,17 @@ export const calculateArtifactMainStatsSatisfaction = ({
   artifacts,
   desiredArtifactMainStats,
 }: {
-  artifacts: BuildArtifacts;
-  desiredArtifactMainStats: DesiredArtifactMainStats;
+  artifacts: Record<string, IArtifact>;
+  desiredArtifactMainStats: Record<string, string[]>;
 }): SatisfactionResult<ArtifactMainStatSatisfactionDetails> => {
-  const details = (Object.entries(desiredArtifactMainStats) as [ArtifactType, StatKey[]][]).map(
-    ([artifactType, mainStats]) => {
-      const mainStat = artifacts[artifactType]?.mainStat;
+  const details = (Object.entries(desiredArtifactMainStats) as [string, string[]][]).map(
+    ([artifactTypeKey, mainStatKeys]) => {
+      const currentMainStatKey = artifacts[artifactTypeKey]?.mainStatKey;
       return {
-        artifactType,
-        desiredMainStats: mainStats,
-        mainStat,
-        satisfaction: !!mainStat && mainStats.includes(mainStat),
+        artifactTypeKey,
+        currentMainStatKey,
+        desiredMainStatKeys: mainStatKeys,
+        satisfaction: !!currentMainStatKey && mainStatKeys.includes(currentMainStatKey),
       };
     }
   );

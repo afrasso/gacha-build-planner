@@ -1,26 +1,40 @@
-import { getMainStatOdds, getMainStats } from "@/constants";
-import { ArtifactType, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+
 import getCumulativeMainStatOdds from "../getcumulativemainstatodds";
 
-export const getRandomMainStat = ({ mainStats, type }: { mainStats?: StatKey[]; type: ArtifactType }): StatKey => {
-  const unfilteredMainStats = getMainStats({ artifactType: type });
-  const filteredMainStats =
-    mainStats && mainStats.length > 0
-      ? unfilteredMainStats.filter((stat) => mainStats?.includes(stat))
-      : unfilteredMainStats;
-  const cumulativeOdds = getCumulativeMainStatOdds({ artifactType: type, mainStats: filteredMainStats });
+export const getRandomMainStat = ({
+  artifactTypeKey,
+  dataContext,
+  mainStatKeys,
+}: {
+  artifactTypeKey: string;
+  dataContext: IDataContext;
+  mainStatKeys?: string[];
+}): string => {
+  const { getArtifactMainStatOdds, getPossibleArtifactMainStats } = dataContext;
+
+  const unfilteredMainStatKeys = getPossibleArtifactMainStats({ artifactTypeKey });
+  const filteredMainStatKeys =
+    mainStatKeys && mainStatKeys.length > 0
+      ? unfilteredMainStatKeys.filter((statKey) => mainStatKeys?.includes(statKey))
+      : unfilteredMainStatKeys;
+  const cumulativeOdds = getCumulativeMainStatOdds({
+    artifactTypeKey,
+    dataContext,
+    mainStatKeys: filteredMainStatKeys,
+  });
 
   const random = Math.random() * cumulativeOdds;
   let currentCumulativeOdds = 0;
-  for (const mainStat of filteredMainStats) {
-    const odds = getMainStatOdds({ artifactType: type, mainStat });
+  for (const mainStatKey of filteredMainStatKeys) {
+    const odds = getArtifactMainStatOdds({ artifactTypeKey, mainStatKey });
     if (random < currentCumulativeOdds + odds) {
-      return mainStat;
+      return mainStatKey;
     }
     currentCumulativeOdds += odds;
   }
 
   throw new Error(
-    `Unexpected error: the actual cumulative main stat odds for the artifact type ${type} are greater than the expected cumulative odds: ${currentCumulativeOdds}.`
+    `Unexpected error: the actual cumulative main stat odds for the artifact type ${artifactTypeKey} are greater than the expected cumulative odds: ${currentCumulativeOdds}.`
   );
 };

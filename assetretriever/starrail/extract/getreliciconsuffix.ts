@@ -1,4 +1,4 @@
-import { ArtifactType } from "@/types/starrail";
+import { ArtifactType } from "../types";
 
 const getRelicIconSuffix = (type: ArtifactType) => {
   switch (type) {

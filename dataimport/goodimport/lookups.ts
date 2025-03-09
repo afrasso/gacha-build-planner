@@ -1,5 +1,5 @@
-import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { ArtifactSet, Build, Character, Weapon } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { ArtifactSet, BuildData, ICharacter, IWeapon } from "@/types";
 
 export const toPascalCase = (input: string): string => {
   return input
@@ -12,9 +12,9 @@ export const getLookupValueFromGOODCharacterKey = (goodCharacterKey: string) => 
   return !goodCharacterKey.startsWith("Traveler") ? goodCharacterKey : "Traveler";
 };
 
-export const artifactSetLookup = ({ genshinDataContext }: { genshinDataContext: GenshinDataContext }) => {
-  const { artifactSets } = genshinDataContext;
-  const lookup = artifactSets.reduce((acc, artifactSet) => {
+export const artifactSetLookup = ({ dataContext }: { dataContext: IDataContext }) => {
+  const { getArtifactSets } = dataContext;
+  const lookup = getArtifactSets().reduce((acc, artifactSet) => {
     acc[toPascalCase(artifactSet.name)] = artifactSet;
     return acc;
   }, {} as Record<string, ArtifactSet>);
@@ -30,18 +30,12 @@ export const artifactSetLookup = ({ genshinDataContext }: { genshinDataContext: 
   return { lookupArtifactSet };
 };
 
-export const buildLookup = ({
-  builds,
-  genshinDataContext,
-}: {
-  builds: Build[];
-  genshinDataContext: GenshinDataContext;
-}) => {
-  const { getCharacter } = genshinDataContext;
+export const buildLookup = ({ builds, dataContext }: { builds: BuildData[]; dataContext: IDataContext }) => {
+  const { getCharacter } = dataContext;
 
-  const lookup = {} as Record<string, Build>;
+  const lookup = {} as Record<string, BuildData>;
 
-  const addBuild = (build: Build) => {
+  const addBuild = (build: BuildData) => {
     const character = getCharacter(build.characterId);
     const lookupValue = toPascalCase(character.name);
     lookup[lookupValue] = build;
@@ -53,7 +47,7 @@ export const buildLookup = ({
   }: {
     goodCharacterKey: string;
     throwErrorOnNotFound?: boolean;
-  }): Build => {
+  }): BuildData => {
     const lookupValue = !goodCharacterKey.startsWith("Traveler") ? goodCharacterKey : "Traveler";
     const build = lookup[lookupValue];
     if (!build && throwErrorOnNotFound) {
@@ -69,14 +63,14 @@ export const buildLookup = ({
   return { addBuild, lookupBuild };
 };
 
-export const characterLookup = ({ genshinDataContext }: { genshinDataContext: GenshinDataContext }) => {
-  const { characters } = genshinDataContext;
-  const lookup = characters.reduce((acc, character) => {
+export const characterLookup = ({ dataContext }: { dataContext: IDataContext }) => {
+  const { getCharacters } = dataContext;
+  const lookup = getCharacters().reduce((acc, character) => {
     acc[toPascalCase(character.name)] = character;
     return acc;
-  }, {} as Record<string, Character>);
+  }, {} as Record<string, ICharacter>);
 
-  const lookupCharacter = (goodCharacterKey: string): Character => {
+  const lookupCharacter = (goodCharacterKey: string): ICharacter => {
     const lookupValue = !goodCharacterKey.startsWith("Traveler") ? goodCharacterKey : "Traveler";
     const character = lookup[lookupValue];
     if (!character) {
@@ -88,14 +82,14 @@ export const characterLookup = ({ genshinDataContext }: { genshinDataContext: Ge
   return { lookupCharacter };
 };
 
-export const weaponLookup = ({ genshinDataContext }: { genshinDataContext: GenshinDataContext }) => {
-  const { weapons } = genshinDataContext;
-  const lookup = weapons.reduce((acc, weapon) => {
+export const weaponLookup = ({ dataContext }: { dataContext: IDataContext }) => {
+  const { getWeapons } = dataContext;
+  const lookup = getWeapons().reduce((acc, weapon) => {
     acc[toPascalCase(weapon.name)] = weapon;
     return acc;
-  }, {} as Record<string, Weapon>);
+  }, {} as Record<string, IWeapon>);
 
-  const lookupWeapon = (goodWeaponKey: string): Weapon => {
+  const lookupWeapon = (goodWeaponKey: string): IWeapon => {
     const weapon = lookup[goodWeaponKey];
     if (!weapon) {
       console.error(`Unexpected error: the weapon name ${goodWeaponKey} could not be found.`);

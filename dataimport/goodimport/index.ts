@@ -1,5 +1,5 @@
-import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Artifact, Build, Weapon } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { ArtifactData, BuildData, IWeapon } from "@/types";
 
 import { artifactMapper } from "./artifactmapper";
 import { createNewBuild } from "./createnewbuild";
@@ -9,27 +9,27 @@ import { Artifact as GOODArtifact, Character as GOODCharacter, Weapon as GOODWea
 export const updateBuildsWithGameData = ({
   artifacts,
   builds,
-  genshinDataContext,
+  dataContext,
   goodArtifacts,
   goodCharacters,
   goodWeapons,
 }: {
-  artifacts: Artifact[];
-  builds: Build[];
-  genshinDataContext: GenshinDataContext;
+  artifacts: ArtifactData[];
+  builds: BuildData[];
+  dataContext: IDataContext;
   goodArtifacts: GOODArtifact[];
   goodCharacters: GOODCharacter[];
   goodWeapons: GOODWeapon[];
-}): { artifacts: Artifact[]; builds: Build[] } => {
-  const { lookupArtifactSet } = artifactSetLookup({ genshinDataContext });
-  const { lookupCharacter } = characterLookup({ genshinDataContext });
-  const { lookupWeapon } = weaponLookup({ genshinDataContext });
+}): { artifacts: ArtifactData[]; builds: BuildData[] } => {
+  const { lookupArtifactSet } = artifactSetLookup({ dataContext });
+  const { lookupCharacter } = characterLookup({ dataContext });
+  const { lookupWeapon } = weaponLookup({ dataContext });
 
   const updatedBuilds = builds.map((build) => structuredClone(build));
-  const updatedArtifacts: Artifact[] = [];
-  const { addBuild, lookupBuild } = buildLookup({ builds: updatedBuilds, genshinDataContext });
+  const updatedArtifacts: ArtifactData[] = [];
+  const { addBuild, lookupBuild } = buildLookup({ builds: updatedBuilds, dataContext });
 
-  const mapGOODWeaponToWeapon = ({ goodWeapon }: { goodWeapon: GOODWeapon }): Weapon => {
+  const mapGOODWeaponToWeapon = ({ goodWeapon }: { goodWeapon: GOODWeapon }): IWeapon => {
     const weapon = lookupWeapon(goodWeapon.key);
     if (!weapon) {
       throw new Error(`Could not find the weapon ${goodWeapon.key}.`);
@@ -62,7 +62,7 @@ export const updateBuildsWithGameData = ({
     const artifact = mapGOODArtifactToArtifact({ goodArtifact });
     if (goodArtifact.location && goodArtifact.location !== "") {
       const build = lookupBuild({ goodCharacterKey: goodArtifact.location, throwErrorOnNotFound: true });
-      build.artifacts[artifact.type] = artifact;
+      build.artifacts[artifact.typeKey] = artifact;
     }
     updatedArtifacts.push(artifact);
   }

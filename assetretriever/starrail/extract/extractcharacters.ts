@@ -7,8 +7,7 @@ import downloadImage from "@/utils/downloadimage";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedCharacterIconDownload } from "../types";
-import mapDbBaseStat from "./mapdbbasestat";
-import mapDbTraceStat from "./mapdbtracestat";
+import mapDbStatKey from "./mapdbstatkey";
 
 const extractCharacters = async ({
   downloadIcons = false,
@@ -37,16 +36,16 @@ const extractCharacters = async ({
     const pathName = dbCharacter.path.name.get("en");
 
     const maxLvlStats = dbCharacter.getStatsByLevel(6, 80).reduce((acc, dbStat) => {
-      const stat = mapDbBaseStat(dbStat);
-      acc[stat.key] = stat.value;
+      const statKey = mapDbStatKey(dbStat.type);
+      acc[statKey] = dbStat.value;
       return acc;
     }, {} as Record<string, number>);
 
     const statTraces = dbCharacter.skillTreeNodes
       .flatMap((node) => node.getSkillTreeNodeByLevel(new SkillLevel(node.maxLevel, 0)).stats)
       .reduce((acc, dbStat) => {
-        const stat = mapDbTraceStat(dbStat);
-        acc[stat.key] = (acc[stat.key] || 0) + stat.value;
+        const statKey = mapDbStatKey(dbStat.type);
+        acc[statKey] = (acc[statKey] || 0) + dbStat.value;
         return acc;
       }, {} as Record<string, number>);
 

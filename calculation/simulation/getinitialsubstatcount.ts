@@ -1,9 +1,17 @@
-import { getInitialSubstatCountOdds } from "@/constants";
+import { IDataContext } from "@/contexts/DataContext";
 
-export const getInitialSubStatCount = ({ rarity }: { rarity: number }): number => {
+export const getInitialSubStatCount = ({
+  dataContext,
+  rarity,
+}: {
+  dataContext: IDataContext;
+  rarity: number;
+}): number => {
+  const { getInitialArtifactSubStatCountOdds } = dataContext;
+
   const random = Math.random();
   let cumulativeOdds = 0;
-  for (const [count, odds] of Object.entries(getInitialSubstatCountOdds({ rarity }))) {
+  for (const { count, odds } of getInitialArtifactSubStatCountOdds({ rarity })) {
     if (random < cumulativeOdds + odds) {
       return Number(count);
     }

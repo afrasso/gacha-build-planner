@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { rollArtifact } from "@/calculation/simulation";
 import { getArtifactMaxLevel } from "@/constants";
-import { Artifact, ArtifactMetric, ArtifactType, StatKey, Stat } from "@/types";
+import { IArtifact, ArtifactMetric, ArtifactType, StatKey, Stat } from "@/types";
 
 describe("rollArtifact()", () => {
   const generateArtifact = ({
@@ -14,8 +14,8 @@ describe("rollArtifact()", () => {
     level: number;
     rarity: number;
     subStats: Stat<StatKey>[];
-  }): Artifact => {
-    const artifact: Artifact = {
+  }): IArtifact => {
+    const artifact: IArtifact = {
       id: uuidv4(),
       isLocked: false,
       lastUpdatedDate: new Date().toISOString(),

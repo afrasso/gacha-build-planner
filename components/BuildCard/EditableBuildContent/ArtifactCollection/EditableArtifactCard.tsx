@@ -4,29 +4,29 @@ import React, { useState } from "react";
 
 import ArtifactCard from "@/components/artifacts/ArtifactCard";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Artifact, ArtifactType } from "@/types";
+import { ArtifactData } from "@/types";
 
 import ArtifactEditor from "./ArtifactEditor";
 
 interface EditableArtifactCardProps {
-  artifact?: Artifact;
-  artifactType: ArtifactType;
-  onUpdate: (artifact: Artifact) => void;
+  artifact?: ArtifactData;
+  artifactTypeKey: string;
+  onUpdate: (artifact: ArtifactData) => void;
 }
 
-const EditableArtifactCard: React.FC<EditableArtifactCardProps> = ({ artifact, artifactType, onUpdate }) => {
+const EditableArtifactCard: React.FC<EditableArtifactCardProps> = ({ artifact, artifactTypeKey, onUpdate }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const update = (artifact: Artifact) => {
+  const update = (artifact: ArtifactData) => {
     onUpdate(artifact);
     setIsDialogOpen(false);
   };
 
   return (
-    <Dialog key={artifactType} onOpenChange={setIsDialogOpen} open={isDialogOpen}>
+    <Dialog key={artifactTypeKey} onOpenChange={setIsDialogOpen} open={isDialogOpen}>
       <ArtifactCard
         artifact={artifact}
-        artifactType={artifactType}
+        artifactTypeKey={artifactTypeKey}
         onEdit={() => setIsDialogOpen(true)}
         showInfoButton={true}
         showMetrics={false}
@@ -34,10 +34,10 @@ const EditableArtifactCard: React.FC<EditableArtifactCardProps> = ({ artifact, a
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>
-            {artifact ? "Edit" : "Add"} {artifactType} Artifact
+            {artifact ? "Edit" : "Add"} {artifactTypeKey} Artifact
           </DialogTitle>
         </DialogHeader>
-        <ArtifactEditor artifact={artifact} artifactType={artifactType} onUpdate={update} />
+        <ArtifactEditor artifact={artifact} artifactTypeKey={artifactTypeKey} onUpdate={update} />
       </DialogContent>
     </Dialog>
   );

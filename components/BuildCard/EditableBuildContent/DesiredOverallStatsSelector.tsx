@@ -9,11 +9,11 @@ import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput"
 import StarSelector from "@/components/ui/custom/StarSelector";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { getOrderedOverallStats } from "@/constants";
-import { DesiredOverallStat, OverallStatKey } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { DesiredOverallStat } from "@/types";
 
 interface DesiredOverallStatsSelectorProps {
-  currentStats: Record<OverallStatKey, number>;
+  currentStats: Record<string, number>;
   desiredOverallStats: DesiredOverallStat[];
   onChange: (desiredOverallStats: DesiredOverallStat[]) => void;
 }
@@ -23,12 +23,15 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
   desiredOverallStats,
   onChange,
 }) => {
+  const { getOverallStatDefinitions } = useDataContext();
+  const orderedOverallStatKeys = getOverallStatDefinitions().map((definition) => definition.key);
+
   const [excessUseful, setExcessUseful] = useState(false);
   const [isAddingDesiredStat, setIsAddingDesiredStat] = useState(false);
   const [isStatKeyValid, setIsStatKeyValid] = useState(true);
   const [isStatValueValid, setIsStatValueValid] = useState(true);
   const [priority, setPriority] = useState(3);
-  const [statKey, setStatKey] = useState<OverallStatKey | undefined>(undefined);
+  const [statKey, setStatKey] = useState<string | undefined>(undefined);
   const [statValue, setStatValue] = useState<number | undefined>(undefined);
 
   const addSelector = () => {
@@ -36,7 +39,7 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
   };
 
   const canAddStatValue = () => {
-    return desiredOverallStats.length < Object.values(OverallStatKey).length;
+    return desiredOverallStats.length < orderedOverallStatKeys.length;
   };
 
   const cancel = () => {
@@ -61,7 +64,7 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
     return desiredOverallStats.sort((stat1, stat2) => {
       if (stat1.priority === stat2.priority) {
         if (stat1.excessUseful === stat2.excessUseful) {
-          return getOrderedOverallStats().indexOf(stat1.stat.key) - getOrderedOverallStats().indexOf(stat2.stat.key);
+          return orderedOverallStatKeys.indexOf(stat1.stat.key) - orderedOverallStatKeys.indexOf(stat2.stat.key);
         } else {
           return (stat2.excessUseful ? 1 : 0) - (stat1.excessUseful ? 1 : 0);
         }
@@ -71,13 +74,15 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
   };
 
   const getOrderedRemainingStats = () => {
-    return Object.values(OverallStatKey)
-      .filter((stat) => !desiredOverallStats.map((desiredStat) => desiredStat.stat.key).includes(stat))
-      .sort((stat1, stat2) => getOrderedOverallStats().indexOf(stat1) - getOrderedOverallStats().indexOf(stat2));
+    return orderedOverallStatKeys
+      .filter((statKey) => !desiredOverallStats.map((desiredStat) => desiredStat.stat.key).includes(statKey))
+      .sort(
+        (statKey1, statKey2) => orderedOverallStatKeys.indexOf(statKey1) - orderedOverallStatKeys.indexOf(statKey2)
+      );
   };
 
-  const remove = (stat: OverallStatKey) => {
-    onChange(desiredOverallStats.filter((desiredStat) => desiredStat.stat.key !== stat));
+  const remove = (statKey: string) => {
+    onChange(desiredOverallStats.filter((desiredOverallStat) => desiredOverallStat.stat.key !== statKey));
   };
 
   const updateExcessUseful = (excessUseful: boolean) => {
@@ -88,9 +93,9 @@ const DesiredOverallStatsSelector: React.FC<DesiredOverallStatsSelectorProps> = 
     setPriority(priority);
   };
 
-  const updateStat = (stat: OverallStatKey) => {
-    setStatKey(stat);
-    setStatValue(currentStats[stat]);
+  const updateStat = (statKey: string) => {
+    setStatKey(statKey);
+    setStatValue(currentStats[statKey]);
     setIsStatKeyValid(true);
   };
 

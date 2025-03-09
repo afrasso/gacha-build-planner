@@ -5,19 +5,18 @@ import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { ArtifactType, StatKey } from "@/types";
 
 import { MainStatsDialogContent } from "./MainStatsDialogContent";
 
 interface DesiredArtifactMainStatSelectorProps {
-  artifactType: ArtifactType;
-  mainStats: StatKey[];
-  onUpdate: (mainStat: StatKey[]) => void;
+  artifactTypeKey: string;
+  mainStatKeys: string[];
+  onUpdate: (mainStatKeys: string[]) => void;
 }
 
 const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatSelectorProps> = ({
-  artifactType,
-  mainStats,
+  artifactTypeKey,
+  mainStatKeys,
   onUpdate,
 }) => {
   return (
@@ -25,11 +24,11 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatSelector
       <div className="flex flex-grow items-center justify-between gap-2">
         <Label
           className="text-sm font-semibold text-primary whitespace-nowrap w-24 pl-4"
-          data-testid={`${artifactType}-label`}
+          data-testid={`${artifactTypeKey}-label`}
         >
-          {artifactType}:
+          {artifactTypeKey}:
         </Label>
-        <div className="flex-grow relative">{JSON.stringify(mainStats)}</div>
+        <div className="flex-grow relative">{JSON.stringify(mainStatKeys)}</div>
         <div>
           <Dialog>
             <DialogTrigger asChild>
@@ -38,8 +37,8 @@ const DesiredArtifactMainStatsSelector: React.FC<DesiredArtifactMainStatSelector
               </Button>
             </DialogTrigger>
             <MainStatsDialogContent
-              artifactType={artifactType}
-              mainStats={mainStats}
+              artifactTypeKey={artifactTypeKey}
+              mainStatKeys={mainStatKeys}
               onUpdate={onUpdate}
             ></MainStatsDialogContent>
           </Dialog>

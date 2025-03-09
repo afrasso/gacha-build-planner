@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { getWeightedArtifactSetBonusFactor } from "@/calculation/artifactmetrics/setbonusfactor";
 import { getMainStatOdds } from "@/constants";
-import { Artifact, ArtifactSetBonus, ArtifactSetBonusType, ArtifactType, StatKey } from "@/types";
+import { IArtifact, ArtifactSetBonus, ArtifactSetBonusType, ArtifactType, StatKey } from "@/types";
 
 describe("getWeightedArtifactSetBonusFactor()", () => {
   const generateArtifact = ({
@@ -14,12 +14,12 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
     mainStat: StatKey;
     setId: string;
     type: ArtifactType;
-  }): Artifact => {
+  }): IArtifact => {
     return {
       mainStat,
       setId,
       type,
-    } as Artifact;
+    } as IArtifact;
   };
 
   describe("When there are no main stat requirements", () => {

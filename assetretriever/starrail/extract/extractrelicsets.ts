@@ -2,12 +2,11 @@ import _ from "lodash";
 import path from "path";
 import { StarRail } from "starrail.js";
 
-import { ArtifactSet, ArtifactType } from "@/types/starrail";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
 import downloadImage from "@/utils/downloadimage";
 import { saveYaml } from "@/utils/yamlhelper";
 
-import { FailedRelicIconDownload, FailedRelicSetIconDownload } from "../types";
+import { ArtifactSet, ArtifactType, FailedRelicIconDownload, FailedRelicSetIconDownload } from "../types";
 import getRelicIconSuffix from "./getreliciconsuffix";
 
 const extractRelicSets = async ({
@@ -21,7 +20,7 @@ const extractRelicSets = async ({
 }): Promise<{ failures: FailedRelicIconDownload[]; setFailures: FailedRelicSetIconDownload[] }> => {
   console.log("Extracting relic sets...");
 
-  const relicSetHash = {} as Record<string, Partial<ArtifactSet<ArtifactType>>>;
+  const relicSetHash = {} as Record<string, Partial<ArtifactSet>>;
   const failures: FailedRelicIconDownload[] = [];
   const setFailures: FailedRelicSetIconDownload[] = [];
 
@@ -33,7 +32,7 @@ const extractRelicSets = async ({
     const setName = dbRelic.name.get("en");
     const type = dbRelic.type.id as ArtifactType;
     if (!relicSetHash[setId]) {
-      const relicSet: ArtifactSet<ArtifactType> = {
+      const relicSet: ArtifactSet = {
         hasArtifactTypes: {
           [ArtifactType.BODY]: false,
           [ArtifactType.FOOT]: false,

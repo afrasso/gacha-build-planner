@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Button } from "@/components/ui/button";
-import { Artifact, ArtifactType, Stat, StatKey } from "@/types";
+import { ArtifactData, Stat } from "@/types";
 
 import LevelSelector from "./LevelSelector";
 import MainStatSelector from "./MainStatSelector";
@@ -14,14 +14,18 @@ import SetSelector from "./SetSelector";
 import SubStatsSelector from "./SubStatsSelector";
 
 interface ArtifactEditorProps {
-  artifact?: Partial<Artifact>;
-  artifactType: ArtifactType;
-  onUpdate: (artifact: Artifact) => void;
+  artifact?: Partial<ArtifactData>;
+  artifactTypeKey: string;
+  onUpdate: (artifact: ArtifactData) => void;
 }
 
-const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType, onUpdate }: ArtifactEditorProps) => {
-  const [internalArtifact, setInternalArtifact] = useState<Partial<Artifact>>(
-    artifact || { id: uuidv4(), type: artifactType }
+const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
+  artifact,
+  artifactTypeKey,
+  onUpdate,
+}: ArtifactEditorProps) => {
+  const [internalArtifact, setInternalArtifact] = useState<Partial<ArtifactData>>(
+    artifact || { id: uuidv4(), typeKey: artifactTypeKey }
   );
 
   const setSelectorRef = useRef<ISaveableContentHandle>(null);
@@ -30,28 +34,28 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType,
 
   const save = () => {
     if (validate() && subStatsSelectorRef.current?.validate()) {
-      onUpdate(internalArtifact as Artifact);
+      onUpdate(internalArtifact as ArtifactData);
     }
   };
 
   const updateSetId = (setId: string) => {
-    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, setId }));
+    setInternalArtifact((prev: Partial<ArtifactData>) => ({ ...prev, setId }));
   };
 
   const updateRarity = (rarity: number) => {
-    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, rarity }));
+    setInternalArtifact((prev: Partial<ArtifactData>) => ({ ...prev, rarity }));
   };
 
   const updateLevel = (level: number) => {
-    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, level }));
+    setInternalArtifact((prev: Partial<ArtifactData>) => ({ ...prev, level }));
   };
 
-  const updateMainStat = (mainStat: StatKey) => {
-    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, mainStat }));
+  const updateMainStat = (mainStatKey: string) => {
+    setInternalArtifact((prev: Partial<ArtifactData>) => ({ ...prev, mainStatKey }));
   };
 
-  const updateSubStats = (subStats: Stat<StatKey>[]) => {
-    setInternalArtifact((prev: Partial<Artifact>) => ({ ...prev, subStats }));
+  const updateSubStats = (subStats: Stat[]) => {
+    setInternalArtifact((prev: Partial<ArtifactData>) => ({ ...prev, subStats }));
   };
 
   const validate = () => {
@@ -64,7 +68,7 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType,
   return (
     <div>
       <SetSelector
-        artifactType={artifactType}
+        artifactTypeKey={artifactTypeKey}
         onUpdate={updateSetId}
         ref={setSelectorRef}
         setId={internalArtifact?.setId}
@@ -72,13 +76,13 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({ artifact, artifactType,
       <RaritySelector onUpdate={updateRarity} rarity={internalArtifact.rarity} />
       <LevelSelector level={internalArtifact.level} onUpdate={updateLevel} />
       <MainStatSelector
-        artifactType={artifactType}
-        mainStat={internalArtifact.mainStat}
+        artifactTypeKey={artifactTypeKey}
+        mainStatKey={internalArtifact.mainStatKey}
         onUpdate={updateMainStat}
         ref={mainStatSelectorRef}
       />
       <SubStatsSelector
-        mainStat={internalArtifact.mainStat}
+        mainStatKey={internalArtifact.mainStatKey}
         onUpdate={updateSubStats}
         ref={subStatsSelectorRef}
         subStats={internalArtifact?.subStats}

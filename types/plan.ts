@@ -1,9 +1,9 @@
-import { Artifact } from "./artifact";
-import { Build } from "./build";
+import { ArtifactData } from "./artifact";
+import { BuildData } from "./build";
 
 export interface Plan {
-  artifacts: Artifact[];
-  builds: Build[];
+  artifacts: ArtifactData[];
+  builds: BuildData[];
   id?: string;
   userId?: string;
 }

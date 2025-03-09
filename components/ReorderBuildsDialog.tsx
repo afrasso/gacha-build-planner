@@ -23,15 +23,15 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Build } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { BuildData } from "@/types";
 
 interface SortableBuildProps {
-  build: Build;
+  build: BuildData;
 }
 
 const SortableBuild = ({ build }: SortableBuildProps) => {
-  const { getCharacter } = useGenshinDataContext();
+  const { getCharacter } = useDataContext();
 
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: build.characterId });
 
@@ -57,14 +57,14 @@ const SortableBuild = ({ build }: SortableBuildProps) => {
 };
 
 interface ReorderBuildsDialogProps {
-  builds: Build[];
+  builds: BuildData[];
   isOpen: boolean;
   onClose: () => void;
-  onReorder: (newOrder: Build[]) => void;
+  onReorder: (newOrder: BuildData[]) => void;
 }
 
 export function ReorderBuildsDialog({ builds, isOpen, onClose, onReorder }: ReorderBuildsDialogProps) {
-  const [items, setItems] = useState<Build[]>([]);
+  const [items, setItems] = useState<BuildData[]>([]);
 
   useEffect(() => {
     setItems(builds);
