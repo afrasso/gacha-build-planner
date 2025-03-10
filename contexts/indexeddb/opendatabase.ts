@@ -1,11 +1,11 @@
 const DB_VERSION = 1;
 
-export const openDatabase = (): Promise<IDBDatabase> => {
+export const openDatabase = ({ databaseName }: { databaseName: string }): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     // A flag to prevent multiple resolve/reject calls.
     let upgradeFailed = false;
 
-    const request = indexedDB.open("genshin", DB_VERSION);
+    const request = indexedDB.open(databaseName, DB_VERSION);
 
     request.onupgradeneeded = (event) => {
       const target = event.target as IDBOpenDBRequest;

@@ -50,9 +50,10 @@ export interface StorageRetrievalResult<T> {
 
 interface StorageProviderProps {
   children: React.ReactNode;
+  game: string;
 }
 
-export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) => {
+export const StorageProvider: React.FC<StorageProviderProps> = ({ children, game }) => {
   const [isClient, setIsClient] = useState(false);
 
   // const { authFetch, isAuthenticated, user } = useAuthContext();
@@ -62,26 +63,26 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
   }, []);
 
   const deleteArtifact = async (id: string): Promise<void> => {
-    await deleteArtifactFromIndexedDB(id);
+    await deleteArtifactFromIndexedDB({ game, id });
   };
 
   const deleteArtifacts = async (): Promise<void> => {
-    await deleteArtifactsFromIndexedDB();
+    await deleteArtifactsFromIndexedDB({ game });
   };
 
   const deleteBuild = async (characterId: string): Promise<void> => {
-    await deleteBuildFromIndexedDB(characterId);
+    await deleteBuildFromIndexedDB({ characterId, game });
   };
 
   const deleteBuilds = async (): Promise<void> => {
-    await deleteBuildsFromIndexedDB();
+    await deleteBuildsFromIndexedDB({ game });
   };
 
   const loadArtifact = async (id: string): Promise<StorageRetrievalResult<ArtifactData>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const artifact = await loadArtifactFromIndexedDB(id);
+    const artifact = await loadArtifactFromIndexedDB({ game, id });
     if (!artifact) {
       return { status: StorageRetrievalStatus.NOT_FOUND };
     }
@@ -92,7 +93,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const artifacts = await loadArtifactsFromIndexedDB();
+    const artifacts = await loadArtifactsFromIndexedDB({ game });
     return { status: StorageRetrievalStatus.FOUND, value: artifacts };
   };
 
@@ -100,7 +101,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const build = await loadBuildFromIndexedDB(characterId);
+    const build = await loadBuildFromIndexedDB({ characterId, game });
     if (!build) {
       return { status: StorageRetrievalStatus.NOT_FOUND };
     }
@@ -134,20 +135,20 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     //   }
     // };
 
-    const builds = await loadBuildsFromIndexedDB();
+    const builds = await loadBuildsFromIndexedDB({ game });
     return { status: StorageRetrievalStatus.FOUND, value: builds };
   };
 
   const saveArtifact = async (artifact: ArtifactData): Promise<void> => {
-    await saveArtifactToIndexedDB(artifact);
+    await saveArtifactToIndexedDB({ artifact, game });
   };
 
   const saveArtifacts = async (artifacts: ArtifactData[]): Promise<void> => {
-    await saveArtifactsToIndexedDB(artifacts);
+    await saveArtifactsToIndexedDB({ artifacts, game });
   };
 
   const saveBuild = async (build: BuildData): Promise<void> => {
-    await saveBuildToIndexedDB(build);
+    await saveBuildToIndexedDB({ build, game });
   };
 
   const saveBuilds = async (builds: BuildData[]): Promise<void> => {
@@ -185,7 +186,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     // };
 
     // savePlan();
-    await saveBuildsToIndexedDB(builds);
+    await saveBuildsToIndexedDB({ builds, game });
   };
 
   return (

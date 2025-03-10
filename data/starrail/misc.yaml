@@ -1,0 +1,512 @@
+artifactLevelsPerSubStatRoll: 3
+# Source: https://honkai-star-rail.fandom.com/wiki/Relic/Stats#Main_Stat_Values
+artifactMainStatMaxValuesByRarity:
+  - rarity: 2
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 69.9955
+      - statKey: ATK_PERCENT
+        value: 8.57
+      - statKey: BREAK_EFF
+        value: 12.86
+      - statKey: CRIT_DMG
+        value: 12.86
+      - statKey: CRIT_RATE
+        value: 6.43
+      - statKey: DEF_PERCENT
+        value: 10.71
+      - statKey: DMG_BONUS_FIRE
+        value: 7.71
+      - statKey: DMG_BONUS_ICE
+        value: 7.71
+      - statKey: DMG_BONUS_IMAGINARY
+        value: 7.71
+      - statKey: DMG_BONUS_LIGHTNING
+        value: 7.71
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 7.71
+      - statKey: DMG_BONUS_QUANTUM
+        value: 7.71
+      - statKey: DMG_BONUS_WIND
+        value: 7.71
+      - statKey: EFF_HIT_RATE
+        value: 8.57
+      - statKey: ENERGY_RECHARGE
+        value: 3.86
+      - statKey: HEALING_BONUS
+        value: 6.86
+      - statKey: HP_FLAT
+        value: 139.991
+      - statKey: HP_PERCENT
+        value: 8.57
+      - statKey: SPD
+        value: 7.6128
+  - rarity: 3
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 140.5555
+      - statKey: ATK_PERCENT
+        value: 17.21
+      - statKey: BREAK_EFF
+        value: 25.82
+      - statKey: CRIT_DMG
+        value: 25.82
+      - statKey: CRIT_RATE
+        value: 12.91
+      - statKey: DEF_PERCENT
+        value: 21.91
+      - statKey: DMG_BONUS_FIRE
+        value: 15.49
+      - statKey: DMG_BONUS_ICE
+        value: 15.49
+      - statKey: DMG_BONUS_IMAGINARY
+        value: 15.49
+      - statKey: DMG_BONUS_LIGHTNING
+        value: 15.49
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 15.49
+      - statKey: DMG_BONUS_QUANTUM
+        value: 15.49
+      - statKey: DMG_BONUS_WIND
+        value: 15.49
+      - statKey: EFF_HIT_RATE
+        value: 17.21
+      - statKey: ENERGY_RECHARGE
+        value: 7.75
+      - statKey: HEALING_BONUS
+        value: 13.77
+      - statKey: HP_FLAT
+        value: 281.111
+      - statKey: HP_PERCENT
+        value: 17.21
+      - statKey: SPD
+        value: 11.4192
+  - rarity: 4
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 234.8237
+      - statKey: ATK_PERCENT
+        value: 28.75
+      - statKey: BREAK_EFF
+        value: 43.13
+      - statKey: CRIT_DMG
+        value: 43.13
+      - statKey: CRIT_RATE
+        value: 21.57
+      - statKey: DEF_PERCENT
+        value: 35.94
+      - statKey: DMG_BONUS_FIRE
+        value: 25.88
+      - statKey: DMG_BONUS_ICE
+        value: 25.88
+      - statKey: DMG_BONUS_IMAGINARY
+        value: 25.88
+      - statKey: DMG_BONUS_LIGHTNING
+        value: 25.88
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 25.88
+      - statKey: DMG_BONUS_QUANTUM
+        value: 25.88
+      - statKey: DMG_BONUS_WIND
+        value: 25.88
+      - statKey: EFF_HIT_RATE
+        value: 28.75
+      - statKey: ENERGY_RECHARGE
+        value: 12.94
+      - statKey: HEALING_BONUS
+        value: 23.00
+      - statKey: HP_FLAT
+        value: 469.6474
+      - statKey: HP_PERCENT
+        value: 28.75
+      - statKey: SPD
+        value: 16.4256
+  - rarity: 5
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 352.8
+      - statKey: ATK_PERCENT
+        value: 43.20
+      - statKey: BREAK_EFF
+        value: 64.80
+      - statKey: CRIT_DMG
+        value: 64.80
+      - statKey: CRIT_RATE
+        value: 32.40
+      - statKey: DEF_PERCENT
+        value: 54
+      - statKey: DMG_BONUS_FIRE
+        value: 38.88
+      - statKey: DMG_BONUS_ICE
+        value: 38.88
+      - statKey: DMG_BONUS_IMAGINARY
+        value: 38.88
+      - statKey: DMG_BONUS_LIGHTNING
+        value: 38.88
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 38.88
+      - statKey: DMG_BONUS_QUANTUM
+        value: 38.88
+      - statKey: DMG_BONUS_WIND
+        value: 38.88
+      - statKey: EFF_HIT_RATE
+        value: 43.20
+      - statKey: ENERGY_RECHARGE
+        value: 19.44
+      - statKey: HEALING_BONUS
+        value: 34.56
+      - statKey: HP_FLAT
+        value: 705.6
+      - statKey: HP_PERCENT
+        value: 43.20
+      - statKey: SPD
+        value: 25.032
+# Source: https://honkai-star-rail.fandom.com/wiki/Relic/Stats#Main_Stat_Availability
+artifactMainStatOddsByType:
+  - typeKey: BODY
+    mainStatOdds:
+      - statKey: ATK_PERCENT
+        odds: 0.2
+      - statKey: CRIT_DMG
+        odds: 0.1
+      - statKey: CRIT_RATE
+        odds: 0.1
+      - statKey: DEF_PERCENT
+        odds: 0.2
+      - statKey: EFF_HIT_RATE
+        odds: 0.1
+      - statKey: HEALING_BONUS
+        odds: 0.1
+      - statKey: HP_PERCENT
+        odds: 0.2
+  - typeKey: FOOT
+    mainStatOdds:
+      - statKey: ATK_PERCENT
+        odds: 0.3
+      - statKey: DEF_PERCENT
+        odds: 0.3
+      - statKey: HP_PERCENT
+        odds: 0.28
+      - statKey: SPD
+        odds: 0.12
+  - typeKey: HAND
+    mainStatOdds:
+      - statKey: ATK_FLAT
+        odds: 1
+  - typeKey: HEAD
+    mainStatOdds:
+      - statKey: HP_FLAT
+        odds: 1
+  - typeKey: NECK
+    mainStatOdds:
+      - statKey: ATK_PERCENT
+        odds: 0.13
+      - statKey: DEF_PERCENT
+        odds: 0.12
+      - statKey: DMG_BONUS_FIRE
+        odds: 0.09
+      - statKey: DMG_BONUS_ICE
+        odds: 0.09
+      - statKey: DMG_BONUS_IMAGINARY
+        odds: 0.09
+      - statKey: DMG_BONUS_LIGHTNING
+        odds: 0.09
+      - statKey: DMG_BONUS_PHYSICAL
+        odds: 0.09
+      - statKey: DMG_BONUS_QUANTUM
+        odds: 0.09
+      - statKey: DMG_BONUS_WIND
+        odds: 0.09
+      - statKey: HP_PERCENT
+        odds: 0.12
+  - typeKey: OBJECT
+    mainStatOdds:
+      - statKey: ATK_PERCENT
+        odds: 0.27
+      - statKey: BREAK_EFF
+        odds: 0.16
+      - statKey: DEF_PERCENT
+        odds: 0.24
+      - statKey: ENERGY_RECHARGE
+        odds: 0.05
+      - statKey: HP_PERCENT
+        odds: 0.26
+# Source: https://honkai-star-rail.fandom.com/wiki/Relic/Stats#Subsidiary_Stat_Availability
+artifactMaxLevelByRarity:
+  - rarity: 2
+    maxLevel: 6
+  - rarity: 3
+    maxLevel: 9
+  - rarity: 4
+    maxLevel: 12
+  - rarity: 5
+    maxLevel: 15
+# Source: https://honkai-star-rail.fandom.com/wiki/Relic/Stats#Subsidiary_Stat_Availability
+artifactSubStatRelativeLikelihoods:
+  - statKey: ATK_FLAT
+    value: 10
+  - statKey: ATK_PERCENT
+    value: 10
+  - statKey: BREAK_EFF
+    value: 8
+  - statKey: CRIT_DMG
+    value: 6
+  - statKey: CRIT_RATE
+    value: 6
+  - statKey: DEF_FLAT
+    value: 10
+  - statKey: DEF_PERCENT
+    value: 10
+  - statKey: EFF_HIT_RATE
+    value: 8
+  - statKey: EFF_RES
+    value: 8
+  - statKey: HP_FLAT
+    value: 10
+  - statKey: HP_PERCENT
+    value: 10
+  - statKey: SPD
+    value: 4
+# Source: https://honkai-star-rail.fandom.com/wiki/Relic/Stats#Subsidiary_Stat_Values
+artifactSubStatRollValuesByRarity:
+  - rarity: 2
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [6.774, 7.62075, 8.4675]
+      - statKey: ATK_PERCENT
+        values: [1.3824, 1.5552, 1.728]
+      - statKey: BREAK_EFF
+        values: [2.0736, 2.3328, 2.592]
+      - statKey: CRIT_DMG
+        values: [2.0736, 2.3328, 2.592]
+      - statKey: CRIT_RATE
+        values: [1.0368, 1.1664, 1.296]
+      - statKey: DEF_FLAT
+        values: [6.774, 7.62075, 8.4675]
+      - statKey: DEF_PERCENT
+        values: [1.728, 1.944, 2.16]
+      - statKey: EFF_HIT_RATE
+        values: [1.3824, 1.5552, 1.728]
+      - statKey: EFF_RES
+        values: [1.3824, 1.5552, 1.728]
+      - statKey: HP_FLAT
+        values: [13.548, 15.2415, 16.935]
+      - statKey: HP_PERCENT
+        values: [1.3824, 1.5552, 1.728]
+      - statKey: SPD
+        values: [1, 1.1, 1.2]
+  - rarity: 3
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [10.161, 11.431126, 12.701252]
+      - statKey: ATK_PERCENT
+        values: [2.0736, 2.3328, 2.592]
+      - statKey: BREAK_EFF
+        values: [3.1104, 3.4992, 3.888]
+      - statKey: CRIT_DMG
+        values: [3.1104, 3.4992, 3.888]
+      - statKey: CRIT_RATE
+        values: [1.5552, 1.7496, 1.944]
+      - statKey: DEF_FLAT
+        values: [10.161, 11.431126, 12.701252]
+      - statKey: DEF_PERCENT
+        values: [2.592, 2.916, 3.24]
+      - statKey: EFF_HIT_RATE
+        values: [2.0736, 2.3328, 2.592]
+      - statKey: EFF_RES
+        values: [2.0736, 2.3328, 2.592]
+      - statKey: HP_FLAT
+        values: [20.322, 22.862253, 25.402506]
+      - statKey: HP_PERCENT
+        values: [2.0736, 2.3328, 2.592]
+      - statKey: SPD
+        values: [1.2, 1.3, 1.4]
+  - rarity: 4
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [13.548, 15.2415, 16.935]
+      - statKey: ATK_PERCENT
+        values: [2.7648, 3.1104, 3.456]
+      - statKey: BREAK_EFF
+        values: [4.1472, 4.6656, 5.184]
+      - statKey: CRIT_DMG
+        values: [4.1472, 4.6656, 5.184]
+      - statKey: CRIT_RATE
+        values: [2.0736, 2.3328, 2.592]
+      - statKey: DEF_FLAT
+        values: [13.548, 15.2415, 16.935]
+      - statKey: DEF_PERCENT
+        values: [3.456, 3.888, 4.32]
+      - statKey: EFF_HIT_RATE
+        values: [2.7648, 3.1104, 3.456]
+      - statKey: EFF_RES
+        values: [2.7648, 3.1104, 3.456]
+      - statKey: HP_FLAT
+        values: [27.096, 30.483, 33.87]
+      - statKey: HP_PERCENT
+        values: [2.7648, 3.1104, 3.456]
+      - statKey: SPD
+        values: [1.6, 1.8, 2]
+  - rarity: 5
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [16.935, 19.051877, 21.168754]
+      - statKey: ATK_PERCENT
+        values: [3.456, 3.888, 4.32]
+      - statKey: BREAK_EFF
+        values: [5.184, 5.832, 6.48]
+      - statKey: CRIT_DMG
+        values: [5.184, 5.832, 6.48]
+      - statKey: CRIT_RATE
+        values: [2.592, 2.916, 3.24]
+      - statKey: DEF_FLAT
+        values: [16.935, 19.051877, 21.168754]
+      - statKey: DEF_PERCENT
+        values: [4.32, 4.86, 5.4]
+      - statKey: EFF_HIT_RATE
+        values: [3.456, 3.888, 4.32]
+      - statKey: EFF_RES
+        values: [3.456, 3.888, 4.32]
+      - statKey: HP_FLAT
+        values: [33.87, 38.103755, 42.33751]
+      - statKey: HP_PERCENT
+        values: [3.456, 3.888, 4.32]
+      - statKey: SPD
+        values: [2, 2.3, 2.6]
+# These must be in canonical order.
+artifactTypes:
+  - iconUrl: /starrail/icons/head.png
+    key: HEAD
+  - iconUrl: /genshin/icons/hand.png
+    key: HAND
+  - iconUrl: /genshin/icons/body.png
+    key: BODY
+  - iconUrl: /genshin/icons/foot.png
+    key: FOOT
+  - iconUrl: /genshin/icons/neck.png
+    key: NECK
+  - iconUrl: /genshin/icons/object.png
+    key: OBJECT
+# Source: https://honkai-star-rail.fandom.com/wiki/Relic/Stats#Subsidiary_Stat_Availability
+# Specific odds are not available, so assuming the odds same as Genshin (only a 20% chance of getting the extra
+# substat).
+initialArtifactSubStatCountOddsByRarity:
+  - rarity: 2
+    subStatCountOdds:
+      - count: 0
+        odds: 1
+  - rarity: 3
+    subStatCountOdds:
+      - count: 1
+        odds: 0.8
+      - count: 2
+        odds: 0.2
+  - rarity: 4
+    subStatCountOdds:
+      - count: 2
+        odds: 0.8
+      - count: 3
+        odds: 0.2
+  - rarity: 5
+    subStatCountOdds:
+      - count: 3
+        odds: 0.8
+      - count: 4
+        odds: 0.2
+maxArtifactSubStatCount: 4
+# These must be in canonical order.
+overallStats:
+  - iconUrl: /starrail/icons/hp.png
+    key: MAX_HP
+  - iconUrl: /starrail/icons/attack.png
+    key: ATK
+  - iconUrl: /starrail/icons/defense.png
+    key: DEF
+  - iconUrl: /starrail/icons/speed.png
+    key: SPD
+  - iconUrl: /starrail/icons/crit_rate.png
+    key: CRIT_RATE
+  - iconUrl: /starrail/icons/crit_dmg.png
+    key: CRIT_DMG
+  - iconUrl: /starrail/icons/break_effect.png
+    key: BREAK_EFF
+  - iconUrl: /starrail/icons/healing.png
+    key: HEALING_BONUS
+  - iconUrl: /starrail/icons/energy_recharge.png
+    key: ENERGY_RECHARGE
+  - iconUrl: /starrail/icons/hit_rate.png
+    key: EFF_HIT_RATE
+  - iconUrl: /starrail/icons/effect_resistance.png
+    key: EFF_RES
+  - iconUrl: /starrail/icons/physical.png
+    key: DMG_BONUS_PHYSICAL
+  - iconUrl: /starrail/icons/fire.png
+    key: DMG_BONUS_FIRE
+  - iconUrl: /starrail/icons/ice.png
+    key: DMG_BONUS_ICE
+  - iconUrl: /starrail/icons/lightning.png
+    key: DMG_BONUS_LIGHTNING
+  - iconUrl: /starrail/icons/wind.png
+    key: DMG_BONUS_WIND
+  - iconUrl: /starrail/icons/quantum.png
+    key: DMG_BONUS_QUANTUM
+  - iconUrl: /starrail/icons/imaginary.png
+    key: DMG_BONUS_IMAGINARY
+stats:
+  # For now, assume flat stats don't contribute to overall stats.
+  - iconUrl: /starrail/icons/attack.png
+    key: ATK_FLAT
+  - iconUrl: /starrail/icons/attack.png
+    key: ATK_PERCENT
+    overallStatKey: ATK
+  - iconUrl: /starrail/icons/break_effect.png
+    key: BREAK_EFF
+    overallStatKey: BREAK_EFF
+  - iconUrl: /starrail/icons/crit_dmg.png
+    key: CRIT_DMG
+    overallStatKey: CRIT_DMG
+  - iconUrl: /starrail/icons/crit_rate.png
+    key: CRIT_RATE
+    overallStatKey: CRIT_RATE
+  # For now, assume flat stats don't contribute to overall stats.
+  - iconUrl: /starrail/icons/defense.png
+    key: DEF_FLAT
+  - iconUrl: /starrail/icons/defense.png
+    key: DEF_PERCENT
+    overallStatKey: DEF
+  - iconUrl: /starrail/icons/fire.png
+    key: DMG_BONUS_FIRE
+    overallStatKey: DMG_BONUS_FIRE
+  - iconUrl: /starrail/icons/ice.png
+    key: DMG_BONUS_ICE
+    overallStatKey: DMG_BONUS_ICE
+  - iconUrl: /starrail/icons/imaginary.png
+    key: DMG_BONUS_IMAGINARY
+    overallStatKey: DMG_BONUS_IMAGINARY
+  - iconUrl: /starrail/icons/lightning.png
+    key: DMG_BONUS_LIGHTNING
+    overallStatKey: DMG_BONUS_LIGHTNING
+  - iconUrl: /starrail/icons/physical.png
+    key: DMG_BONUS_PHYSICAL
+    overallStatKey: DMG_BONUS_PHYSICAL
+  - iconUrl: /starrail/icons/quantum.png
+    key: DMG_BONUS_QUANTUM
+    overallStatKey: DMG_BONUS_QUANTUM
+  - iconUrl: /starrail/icons/wind.png
+    key: DMG_BONUS_WIND
+    overallStatKey: DMG_BONUS_WIND
+  - iconUrl: /starrail/icons/energy_recharge.png
+    key: ENERGY_RECHARGE
+    overallStatKey: ENERGY_RECHARGE
+  - iconUrl: /starrail/icons/healing.png
+    key: HEALING_BONUS
+    overallStatKey: HEALING_BONUS
+  # For now, assume flat stats don't contribute to overall stats.
+  - iconUrl: /starrail/icons/hp.png
+    key: HP_FLAT
+  - iconUrl: /starrail/icons/hp.png
+    key: HP_PERCENT
+    overallStatKey: MAX_HP
+  - iconUrl: /starrail/icons/speed.png
+    key: SPD
+    overallStatKey: SPD

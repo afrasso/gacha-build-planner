@@ -35,7 +35,9 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
     const sizeClasses = size === "large" ? "w-96 h-120" : "w-48 h-92";
     const textSize1 = size === "large" ? "text-xl" : "text-sm";
     const textSize2 = size === "large" ? "text-base" : "text-xs";
-    const { getArtifactSet, getCharacter } = useDataContext();
+
+    const { getArtifactSet, getCharacter, resolvePath } = useDataContext();
+
     const artifactSet = artifact?.setId ? getArtifactSet(artifact.setId) : undefined;
     const character = artifact?.characterId ? getCharacter(artifact?.characterId) : undefined;
 
@@ -70,7 +72,7 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                 )}
                 {showInfoButton ? (
                   <Button asChild className="p-0 w-6 h-8 flex-shrink-0" size="sm" variant="ghost">
-                    <Link href={`/genshin/artifacts/${artifact.id}`}>
+                    <Link href={resolvePath(`/artifacts/${artifact.id}`)}>
                       <Info size={16} />
                     </Link>
                   </Button>

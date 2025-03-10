@@ -1,4 +1,5 @@
 artifactLevelsPerSubStatRoll: 4
+# Source: https://genshin-impact.fandom.com/wiki/Artifact/Stats
 artifactMainStatMaxValuesByRarity:
   - rarity: 1
     mainStatMaxValues:
@@ -413,7 +414,6 @@ artifactTypes:
   - iconUrl: /genshin/icons/circlet.png
     key: CIRCLET
 # Source: https://keqingmains.com/misc/artifacts/
-# These odds assume the artifact source is a domain.
 initialArtifactSubStatCountOddsByRarity:
   - rarity: 1
     subStatCountOdds:

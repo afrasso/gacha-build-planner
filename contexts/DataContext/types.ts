@@ -53,6 +53,7 @@ export interface IDataContext {
   getInitialArtifactSubStatCountOdds: ({ rarity }: { rarity: number }) => InitialArtifactSubStatCountOdds[];
   getOverallStatDefinition: (key: string) => OverallStatDefinition;
   getOverallStatDefinitions: () => OverallStatDefinition[];
+
   getPossibleArtifactMainStats: ({ artifactTypeKey }: { artifactTypeKey: string }) => string[];
   getPossibleArtifactSubStatRollValues: ({ rarity, subStatKey }: { rarity: number; subStatKey: string }) => number[];
   getPossibleArtifactSubStats: () => string[];
@@ -60,4 +61,5 @@ export interface IDataContext {
   getStatDefinitions: () => StatDefinition[];
   getWeapon: (id: string) => IWeapon;
   getWeapons: () => IWeapon[];
+  resolvePath: (path: string) => string;
 }

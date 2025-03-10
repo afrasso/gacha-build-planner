@@ -19,7 +19,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove, showInfoButton }) => {
-  const { getCharacter } = useDataContext();
+  const { getCharacter, resolvePath } = useDataContext();
   const router = useRouter();
 
   const remove = () => {
@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ build, isSatisfied, onRemove, showInfoB
           {showInfoButton && (
             <Button
               className="p-0 w-6 h-8 flex-shrink-0"
-              onClick={() => router.push(`/genshin/builds/${build.characterId}`)}
+              onClick={() => router.push(resolvePath(`/builds/${build.characterId}`))}
               size="sm"
               variant="ghost"
             >

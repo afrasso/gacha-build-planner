@@ -2,14 +2,16 @@ import { openDatabase } from "./opendatabase";
 
 export const loadItem = async <T>({
   collectionName,
+  databaseName,
   id,
   validate,
 }: {
   collectionName: string;
+  databaseName: string;
   id: string;
   validate: (data: unknown) => T;
 }): Promise<T | undefined> => {
-  const db = await openDatabase();
+  const db = await openDatabase({ databaseName });
   const transaction = db.transaction(collectionName, "readonly");
   const store = transaction.objectStore(collectionName);
 

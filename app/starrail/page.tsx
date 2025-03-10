@@ -9,7 +9,7 @@ export default function HomePage() {
   // Rail.
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Genshin Impact Build Planner</h1>
+      <h1 className="text-4xl font-bold mb-8">Honkai: Star Rail Build Planner</h1>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <Card className="flex flex-col">
@@ -22,7 +22,7 @@ export default function HomePage() {
             <p>Optimize your team compositions and individual character builds.</p>
           </CardContent>
           <CardFooter>
-            <Link className="w-full" href="/genshin/builds">
+            <Link className="w-full" href="/starrail/builds">
               <Button className="w-full">Go to Builds</Button>
             </Link>
           </CardFooter>
@@ -38,7 +38,7 @@ export default function HomePage() {
             <p>Manage your artifact collection and find the best pieces for your characters.</p>
           </CardContent>
           <CardFooter>
-            <Link className="w-full" href="/genshin/artifacts">
+            <Link className="w-full" href="/starrail/artifacts">
               <Button className="w-full">View Artifacts</Button>
             </Link>
           </CardFooter>
@@ -54,7 +54,7 @@ export default function HomePage() {
             <p>Save your progress or import data from external sources.</p>
           </CardContent>
           <CardFooter>
-            <Link className="w-full" href="/genshin/importexport">
+            <Link className="w-full" href="/starrail/importexport">
               <Button className="w-full">Manage Data</Button>
             </Link>
           </CardFooter>

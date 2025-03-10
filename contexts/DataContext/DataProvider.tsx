@@ -49,6 +49,7 @@ interface DataProviderProps {
     sortOrder?: number;
     weaponId?: string;
   }) => IBuild;
+  gamePathSegment: string;
   misc: Misc;
   weapons: IWeapon[];
 }
@@ -58,6 +59,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   characters,
   children,
   constructBuild,
+  gamePathSegment,
   misc,
   weapons,
 }) => {
@@ -83,6 +85,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   const getStatDefinitions = buildGetStatDefinitions(misc);
   const getWeapon = buildGetWeapon(weapons);
   const getWeapons = () => weapons;
+  const resolvePath = (path: string) => `/${gamePathSegment}${path}`;
 
   return (
     <DataContext.Provider
@@ -110,6 +113,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
         getStatDefinitions,
         getWeapon,
         getWeapons,
+        resolvePath,
       }}
     >
       {children}

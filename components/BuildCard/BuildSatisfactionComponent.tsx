@@ -43,12 +43,6 @@ const ArtifactSetBonusesDisplay: React.FC<{ result: SatisfactionResult<ArtifactS
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getArtifactTypeIconUrl = (artifactTypeKey: string): string => {
-  // TODO: Create mapping between stat key and icon url.
-  return "/genshin/icons/flower.png";
-};
-
 const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMainStatSatisfactionDetails> }> = ({
   result,
 }) => {

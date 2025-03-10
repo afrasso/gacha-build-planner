@@ -1,9 +1,9 @@
 "use client";
 
 import { ArtifactData, ArtifactSet, ArtifactSetBonus, DesiredOverallStat, ICharacter, IWeapon } from "@/types";
-import { Character, CharacterData, Weapon, WeaponData } from "@/types/genshin";
-import { Build } from "@/types/genshin/build";
 import { Misc } from "@/types/misc";
+import { Character, CharacterData, Weapon, WeaponData } from "@/types/starrail";
+import { Build } from "@/types/starrail/build";
 
 import { DataProvider as GenericDataProvider } from "../DataProvider";
 
@@ -61,7 +61,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
     characters,
     children,
     constructBuild,
-    gamePathSegment: "genshin",
+    gamePathSegment: "starrail",
     misc,
     weapons,
   });

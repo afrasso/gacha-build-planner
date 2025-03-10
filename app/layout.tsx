@@ -6,7 +6,6 @@ import "./globals.css";
 
 import Header from "@/components/Header";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { StorageProvider } from "@/contexts/StorageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import getEnvVariable from "@/utils/getenvvariable";
 
@@ -22,8 +21,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  description: "Manage your Genshin Impact character builds.",
-  title: "Genshin Impact Build Manager",
+  description: "Manage your Gacha character builds.",
+  title: "Gacha Build Manager",
 };
 
 const apiUrl = getEnvVariable("API_URL");
@@ -38,10 +37,8 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider apiUrl={apiUrl}>
           <ThemeProvider>
-            <StorageProvider>
-              <Header />
-              {children}
-            </StorageProvider>
+            <Header />
+            {children}
           </ThemeProvider>
         </AuthProvider>
       </body>

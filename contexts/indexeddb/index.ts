@@ -7,50 +7,80 @@ import { loadItems } from "./loaditems";
 import { saveItem } from "./saveitem";
 import { saveItems } from "./saveitems";
 
-export const deleteArtifactFromIndexedDB = async (id: string): Promise<void> => {
-  return deleteItem({ collectionName: "artifacts", id });
+export const deleteArtifactFromIndexedDB = async ({ game, id }: { game: string; id: string }): Promise<void> => {
+  return deleteItem({ collectionName: "artifacts", databaseName: game, id });
 };
 
-export const deleteArtifactsFromIndexedDB = async (): Promise<void> => {
-  return deleteItems({ collectionName: "artifacts" });
+export const deleteArtifactsFromIndexedDB = async ({ game }: { game: string }): Promise<void> => {
+  return deleteItems({ collectionName: "artifacts", databaseName: game });
 };
 
-export const deleteBuildFromIndexedDB = async (characterId: string): Promise<void> => {
-  return deleteItem({ collectionName: "builds", id: characterId });
+export const deleteBuildFromIndexedDB = async ({
+  characterId,
+  game,
+}: {
+  characterId: string;
+  game: string;
+}): Promise<void> => {
+  return deleteItem({ collectionName: "builds", databaseName: game, id: characterId });
 };
 
-export const deleteBuildsFromIndexedDB = async (): Promise<void> => {
-  return deleteItems({ collectionName: "builds" });
+export const deleteBuildsFromIndexedDB = async ({ game }: { game: string }): Promise<void> => {
+  return deleteItems({ collectionName: "builds", databaseName: game });
 };
 
-export const loadArtifactFromIndexedDB = async (id: string): Promise<ArtifactData | undefined> => {
-  return loadItem({ collectionName: "artifacts", id, validate: validateArtifact });
+export const loadArtifactFromIndexedDB = async ({
+  game,
+  id,
+}: {
+  game: string;
+  id: string;
+}): Promise<ArtifactData | undefined> => {
+  return loadItem({ collectionName: "artifacts", databaseName: game, id, validate: validateArtifact });
 };
 
-export const loadArtifactsFromIndexedDB = async (): Promise<ArtifactData[]> => {
-  return loadItems({ collectionName: "artifacts", validate: validateArtifacts });
+export const loadArtifactsFromIndexedDB = async ({ game }: { game: string }): Promise<ArtifactData[]> => {
+  return loadItems({ collectionName: "artifacts", databaseName: game, validate: validateArtifacts });
 };
 
-export const loadBuildFromIndexedDB = async (characterId: string): Promise<BuildData | undefined> => {
-  return loadItem({ collectionName: "builds", id: characterId, validate: validateBuild });
+export const loadBuildFromIndexedDB = async ({
+  characterId,
+  game,
+}: {
+  characterId: string;
+  game: string;
+}): Promise<BuildData | undefined> => {
+  return loadItem({ collectionName: "builds", databaseName: game, id: characterId, validate: validateBuild });
 };
 
-export const loadBuildsFromIndexedDB = async (): Promise<BuildData[]> => {
-  return loadItems({ collectionName: "builds", validate: validateBuilds });
+export const loadBuildsFromIndexedDB = async ({ game }: { game: string }): Promise<BuildData[]> => {
+  return loadItems({ collectionName: "builds", databaseName: game, validate: validateBuilds });
 };
 
-export const saveArtifactToIndexedDB = async (artifact: ArtifactData): Promise<void> => {
-  return saveItem({ collectionName: "artifacts", item: artifact });
+export const saveArtifactToIndexedDB = async ({
+  artifact,
+  game,
+}: {
+  artifact: ArtifactData;
+  game: string;
+}): Promise<void> => {
+  return saveItem({ collectionName: "artifacts", databaseName: game, item: artifact });
 };
 
-export const saveArtifactsToIndexedDB = async (artifacts: ArtifactData[]): Promise<void> => {
-  return saveItems({ collectionName: "artifacts", items: artifacts });
+export const saveArtifactsToIndexedDB = async ({
+  artifacts,
+  game,
+}: {
+  artifacts: ArtifactData[];
+  game: string;
+}): Promise<void> => {
+  return saveItems({ collectionName: "artifacts", databaseName: game, items: artifacts });
 };
 
-export const saveBuildToIndexedDB = async (build: BuildData): Promise<void> => {
-  return saveItem({ collectionName: "builds", item: build });
+export const saveBuildToIndexedDB = async ({ build, game }: { build: BuildData; game: string }): Promise<void> => {
+  return saveItem({ collectionName: "builds", databaseName: game, item: build });
 };
 
-export const saveBuildsToIndexedDB = async (builds: BuildData[]): Promise<void> => {
-  return saveItems({ collectionName: "builds", items: builds });
+export const saveBuildsToIndexedDB = async ({ builds, game }: { builds: BuildData[]; game: string }): Promise<void> => {
+  return saveItems({ collectionName: "builds", databaseName: game, items: builds });
 };

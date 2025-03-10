@@ -62,7 +62,7 @@ interface BuildCardProps {
 }
 
 const BuildCard: React.FC<BuildCardProps> = ({ build, metricsResults, rank }) => {
-  const { getCharacter } = useDataContext();
+  const { getCharacter, resolvePath } = useDataContext();
 
   const character = getCharacter(build.characterId);
 
@@ -70,7 +70,7 @@ const BuildCard: React.FC<BuildCardProps> = ({ build, metricsResults, rank }) =>
     <div className="bg-secondary p-1 rounded-lg flex items-center w-full max-w-96 h-28 gap-2">
       <div className="text-3xl font-bold text-right mr-1 w-12">{rank}.</div>
       <div className="flex flex-col items-center w-24">
-        <Link href={`/genshin/builds/${build.characterId}`}>
+        <Link href={resolvePath(`/builds/${build.characterId}`)}>
           <Image alt={character.name} className="rounded-full" height={50} src={character.iconUrl} width={50} />
         </Link>
         <div className="text-center text-l font-semibold">{character.name}</div>

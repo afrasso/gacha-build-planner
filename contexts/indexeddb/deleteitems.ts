@@ -1,7 +1,13 @@
 import { openDatabase } from "./opendatabase";
 
-export const deleteItems = async ({ collectionName }: { collectionName: string }): Promise<void> => {
-  const db = await openDatabase();
+export const deleteItems = async ({
+  collectionName,
+  databaseName,
+}: {
+  collectionName: string;
+  databaseName: string;
+}): Promise<void> => {
+  const db = await openDatabase({ databaseName });
   const transaction = db.transaction(collectionName, "readwrite");
   const store = transaction.objectStore(collectionName);
 

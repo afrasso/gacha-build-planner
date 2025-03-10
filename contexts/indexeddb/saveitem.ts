@@ -1,7 +1,15 @@
 import { openDatabase } from "./opendatabase";
 
-export const saveItem = async <T>({ collectionName, item }: { collectionName: string; item: T }): Promise<void> => {
-  const db = await openDatabase();
+export const saveItem = async <T>({
+  collectionName,
+  databaseName,
+  item,
+}: {
+  collectionName: string;
+  databaseName: string;
+  item: T;
+}): Promise<void> => {
+  const db = await openDatabase({ databaseName });
   const transaction = db.transaction(collectionName, "readwrite");
   const store = transaction.objectStore(collectionName);
 
