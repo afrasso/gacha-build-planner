@@ -1,5 +1,6 @@
 "use client";
 
+import { ImportedData } from "@/dataimport";
 import { ArtifactData, ArtifactSet, ArtifactSetBonus, DesiredOverallStat, IBuild, ICharacter, IWeapon } from "@/types";
 import { Misc } from "@/types/misc";
 
@@ -25,6 +26,7 @@ import {
   buildGetWeapon,
 } from "./builders";
 import { DataContext } from "./DataContext";
+import { IDataContext } from "./types";
 
 interface DataProviderProps {
   artifactSets: ArtifactSet[];
@@ -51,6 +53,7 @@ interface DataProviderProps {
   }) => IBuild;
   gamePathSegment: string;
   misc: Misc;
+  validateImport: ({ data, dataContext }: { data: unknown; dataContext: IDataContext }) => ImportedData;
   weapons: IWeapon[];
 }
 
@@ -61,6 +64,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   constructBuild,
   gamePathSegment,
   misc,
+  validateImport,
   weapons,
 }) => {
   const getArtifactLevelsPerSubStatRoll = buildGetArtifactLevelsPerSubstatRoll(misc);
@@ -69,12 +73,12 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   const getArtifactMaxLevel = buildGetArtifactMaxLevel(misc);
   const getArtifactMaxSubStatCount = buildGetArtifactMaxSubStatCount(misc);
   const getArtifactSet = buildGetArtifactSet(artifactSets);
-  const getArtifactSets = () => artifactSets;
+  const getArtifactSets = () => artifactSets.sort((a, b) => a.name.localeCompare(b.name));
   const getArtifactSubStatRelativeLikelihood = buildGetArtifactSubStatRelativeLikelihood(misc);
   const getArtifactTypes = buildGetArtifactTypes(misc);
   const getArtifactTypesWithVariableMainStats = buildGetArtifactTypesWithVariableMainStats(misc);
   const getCharacter = buildGetCharacter(characters);
-  const getCharacters = () => characters;
+  const getCharacters = () => characters.sort((a, b) => a.name.localeCompare(b.name));
   const getInitialArtifactSubStatCountOdds = buildGetInitialArtifactSubStatCountOdds(misc);
   const getPossibleArtifactMainStats = buildGetPossibleArtifactMainStats(misc);
   const getPossibleArtifactSubStatRollValues = buildGetPossibleArtifactSubStatRollValues(misc);
@@ -84,7 +88,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   const getStatDefinition = buildGetStatDefinition(misc);
   const getStatDefinitions = buildGetStatDefinitions(misc);
   const getWeapon = buildGetWeapon(weapons);
-  const getWeapons = () => weapons;
+  const getWeapons = () => weapons.sort((a, b) => a.name.localeCompare(b.name));
   const resolvePath = (path: string) => `/${gamePathSegment}${path}`;
 
   return (
@@ -114,6 +118,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
         getWeapon,
         getWeapons,
         resolvePath,
+        validateImport,
       }}
     >
       {children}

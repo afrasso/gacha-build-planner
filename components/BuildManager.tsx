@@ -15,8 +15,7 @@ import { Button } from "./ui/button";
 
 const BuildManager = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
-  const dataContext = useDataContext();
-  const { constructBuild, getCharacters } = dataContext;
+  const { constructBuild, getCharacters } = useDataContext();
   const { deleteBuild, loadBuilds, saveBuilds } = useStorageContext();
 
   const [builds, setBuilds] = useState<BuildData[]>([]);

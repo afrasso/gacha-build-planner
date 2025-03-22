@@ -39,6 +39,7 @@ export interface ArtifactSubStatRollValuesByRarity {
 }
 
 export interface ArtifactType {
+  css: string;
   iconUrl: string;
   key: string;
 }
@@ -68,11 +69,13 @@ export interface Misc {
 }
 
 export interface OverallStatDefinition {
+  css: string;
   iconUrl: string;
   key: string;
 }
 
 export interface StatDefinition {
+  css: string;
   iconUrl: string;
   key: string;
   overallStatKey: string;

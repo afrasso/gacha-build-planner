@@ -1,11 +1,17 @@
 "use client";
 
 import ImportExportComponent from "@/components/ImportExportComponent";
+import ImportGameDataComponent from "@/components/ImportGameDataComponent";
+import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
+import { updatePlan } from "@/dataimport";
 import { Plan, validatePlan } from "@/types";
 
+// TODO: After refactoring, this is now exactly the same code between Genshin and Star Rail; refactor into a single
+// component.
 export default function ImportExportPage() {
-  const { loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
+  const dataContext = useDataContext();
+  const { deleteArtifacts, loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
 
   const loadPlan = async (): Promise<Plan> => {
     const artifactsRetrievalResult = await loadArtifacts();
@@ -39,10 +45,18 @@ export default function ImportExportPage() {
     await saveBuilds(builds);
   };
 
+  const handleGameDataImport = async (data: unknown) => {
+    const plan = await loadPlan();
+    const { artifacts, builds } = updatePlan({ data, dataContext, plan });
+    await deleteArtifacts();
+    await saveArtifacts(artifacts);
+    await saveBuilds(builds);
+  };
+
   return (
     <main className="p-8">
       <ImportExportComponent onExport={handleExport} onImport={handleImport} />
-      Game Data Import TBD...
+      <ImportGameDataComponent onImport={handleGameDataImport} />
     </main>
   );
 }

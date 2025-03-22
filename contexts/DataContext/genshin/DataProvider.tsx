@@ -1,5 +1,6 @@
 "use client";
 
+import { validateImport } from "@/dataimport/good";
 import { ArtifactData, ArtifactSet, ArtifactSetBonus, DesiredOverallStat, ICharacter, IWeapon } from "@/types";
 import { Character, CharacterData, Weapon, WeaponData } from "@/types/genshin";
 import { Build } from "@/types/genshin/build";
@@ -63,6 +64,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
     constructBuild,
     gamePathSegment: "genshin",
     misc,
+    validateImport,
     weapons,
   });
 };

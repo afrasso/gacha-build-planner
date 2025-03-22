@@ -29,39 +29,37 @@ const CharacterSelector: React.FC<CharacterSelectorProps> = ({ characters, onAdd
   };
 
   return (
-    <div className="mb-4">
-      <div className="flex items-center">
-        <Select onValueChange={handleCharacterSelection} value={selectedCharacter?.id || ""}>
-          <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder="Add a character" />
-          </SelectTrigger>
-          <SelectContent>
-            {characters.map((character) => (
-              <SelectItem key={character.id} value={character.id}>
-                <div className="flex items-center">
-                  <Image
-                    alt={character.name}
-                    className="mr-2 rounded-full"
-                    height={30}
-                    src={character.iconUrl}
-                    width={30}
-                  />
-                  {character.name}
-                </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Button
-          className="h-9 w-9 flex items-center justify-center ml-2"
-          onClick={handleAddBuild}
-          size="icon"
-          variant="ghost"
-        >
-          <PlusCircle className="h-4 w-4" />
-          <span className="sr-only">Add build</span>
-        </Button>
-      </div>
+    <div className="flex items-center">
+      <Select onValueChange={handleCharacterSelection} value={selectedCharacter?.id || ""}>
+        <SelectTrigger className="w-[200px]">
+          <SelectValue placeholder="Add a character" />
+        </SelectTrigger>
+        <SelectContent>
+          {characters.map((character) => (
+            <SelectItem key={character.id} value={character.id}>
+              <div className="flex items-center">
+                <Image
+                  alt={character.name}
+                  className="mr-2 rounded-full"
+                  height={30}
+                  src={character.iconUrl}
+                  width={30}
+                />
+                {character.name}
+              </div>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <Button
+        className="h-9 w-9 flex items-center justify-center ml-2"
+        onClick={handleAddBuild}
+        size="icon"
+        variant="ghost"
+      >
+        <PlusCircle className="h-4 w-4" />
+        <span className="sr-only">Add build</span>
+      </Button>
     </div>
   );
 };

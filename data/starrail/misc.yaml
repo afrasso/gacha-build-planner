@@ -375,17 +375,23 @@ artifactSubStatRollValuesByRarity:
         values: [2, 2.3, 2.6]
 # These must be in canonical order.
 artifactTypes:
-  - iconUrl: /starrail/icons/head.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/head.png
     key: HEAD
-  - iconUrl: /genshin/icons/hand.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/hand.png
     key: HAND
-  - iconUrl: /genshin/icons/body.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/body.png
     key: BODY
-  - iconUrl: /genshin/icons/foot.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/foot.png
     key: FOOT
-  - iconUrl: /genshin/icons/neck.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/neck.png
     key: NECK
-  - iconUrl: /genshin/icons/object.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/object.png
     key: OBJECT
 # Source: https://honkai-star-rail.fandom.com/wiki/Relic/Stats#Subsidiary_Stat_Availability
 # Specific odds are not available, so assuming the odds same as Genshin (only a 20% chance of getting the extra
@@ -416,97 +422,134 @@ initialArtifactSubStatCountOddsByRarity:
 maxArtifactSubStatCount: 4
 # These must be in canonical order.
 overallStats:
-  - iconUrl: /starrail/icons/hp.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/hp.png
     key: MAX_HP
-  - iconUrl: /starrail/icons/attack.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/attack.png
     key: ATK
-  - iconUrl: /starrail/icons/defense.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/defense.png
     key: DEF
-  - iconUrl: /starrail/icons/speed.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/speed.png
     key: SPD
-  - iconUrl: /starrail/icons/crit_rate.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/crit_rate.png
     key: CRIT_RATE
-  - iconUrl: /starrail/icons/crit_dmg.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/crit_dmg.png
     key: CRIT_DMG
-  - iconUrl: /starrail/icons/break_effect.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/break_effect.png
     key: BREAK_EFF
-  - iconUrl: /starrail/icons/healing.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/healing.png
     key: HEALING_BONUS
-  - iconUrl: /starrail/icons/energy_recharge.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/energy_recharge.png
     key: ENERGY_RECHARGE
-  - iconUrl: /starrail/icons/hit_rate.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/hit_rate.png
     key: EFF_HIT_RATE
-  - iconUrl: /starrail/icons/effect_resistance.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/effect_resistance.png
     key: EFF_RES
-  - iconUrl: /starrail/icons/physical.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/physical.png
     key: DMG_BONUS_PHYSICAL
-  - iconUrl: /starrail/icons/fire.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/fire.png
     key: DMG_BONUS_FIRE
-  - iconUrl: /starrail/icons/ice.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/ice.png
     key: DMG_BONUS_ICE
-  - iconUrl: /starrail/icons/lightning.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/lightning.png
     key: DMG_BONUS_LIGHTNING
-  - iconUrl: /starrail/icons/wind.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/wind.png
     key: DMG_BONUS_WIND
-  - iconUrl: /starrail/icons/quantum.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/quantum.png
     key: DMG_BONUS_QUANTUM
-  - iconUrl: /starrail/icons/imaginary.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/imaginary.png
     key: DMG_BONUS_IMAGINARY
 stats:
   # For now, assume flat stats don't contribute to overall stats.
-  - iconUrl: /starrail/icons/attack.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/attack.png
     key: ATK_FLAT
-  - iconUrl: /starrail/icons/attack.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/attack.png
     key: ATK_PERCENT
     overallStatKey: ATK
-  - iconUrl: /starrail/icons/break_effect.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/break_effect.png
     key: BREAK_EFF
     overallStatKey: BREAK_EFF
-  - iconUrl: /starrail/icons/crit_dmg.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/crit_dmg.png
     key: CRIT_DMG
     overallStatKey: CRIT_DMG
-  - iconUrl: /starrail/icons/crit_rate.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/crit_rate.png
     key: CRIT_RATE
     overallStatKey: CRIT_RATE
   # For now, assume flat stats don't contribute to overall stats.
-  - iconUrl: /starrail/icons/defense.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/defense.png
     key: DEF_FLAT
-  - iconUrl: /starrail/icons/defense.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/defense.png
     key: DEF_PERCENT
     overallStatKey: DEF
-  - iconUrl: /starrail/icons/fire.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/fire.png
     key: DMG_BONUS_FIRE
     overallStatKey: DMG_BONUS_FIRE
-  - iconUrl: /starrail/icons/ice.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/ice.png
     key: DMG_BONUS_ICE
     overallStatKey: DMG_BONUS_ICE
-  - iconUrl: /starrail/icons/imaginary.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/imaginary.png
     key: DMG_BONUS_IMAGINARY
     overallStatKey: DMG_BONUS_IMAGINARY
-  - iconUrl: /starrail/icons/lightning.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/lightning.png
     key: DMG_BONUS_LIGHTNING
     overallStatKey: DMG_BONUS_LIGHTNING
-  - iconUrl: /starrail/icons/physical.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/physical.png
     key: DMG_BONUS_PHYSICAL
     overallStatKey: DMG_BONUS_PHYSICAL
-  - iconUrl: /starrail/icons/quantum.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/quantum.png
     key: DMG_BONUS_QUANTUM
     overallStatKey: DMG_BONUS_QUANTUM
-  - iconUrl: /starrail/icons/wind.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/wind.png
     key: DMG_BONUS_WIND
     overallStatKey: DMG_BONUS_WIND
-  - iconUrl: /starrail/icons/energy_recharge.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/energy_recharge.png
     key: ENERGY_RECHARGE
     overallStatKey: ENERGY_RECHARGE
-  - iconUrl: /starrail/icons/healing.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/healing.png
     key: HEALING_BONUS
     overallStatKey: HEALING_BONUS
   # For now, assume flat stats don't contribute to overall stats.
-  - iconUrl: /starrail/icons/hp.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/hp.png
     key: HP_FLAT
-  - iconUrl: /starrail/icons/hp.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/hp.png
     key: HP_PERCENT
     overallStatKey: MAX_HP
-  - iconUrl: /starrail/icons/speed.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/speed.png
     key: SPD
     overallStatKey: SPD

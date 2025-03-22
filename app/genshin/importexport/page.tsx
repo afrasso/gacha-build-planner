@@ -4,10 +4,11 @@ import ImportExportComponent from "@/components/ImportExportComponent";
 import ImportGameDataComponent from "@/components/ImportGameDataComponent";
 import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
-import { updateBuildsWithGameData } from "@/dataimport/goodimport";
-import { validateGOOD } from "@/dataimport/goodimport/types";
+import { updatePlan } from "@/dataimport";
 import { Plan, validatePlan } from "@/types";
 
+// TODO: After refactoring, this is now exactly the same code between Genshin and Star Rail; refactor into a single
+// component.
 export default function ImportExportPage() {
   const dataContext = useDataContext();
   const { deleteArtifacts, loadArtifacts, loadBuilds, saveArtifacts, saveBuilds } = useStorageContext();
@@ -44,26 +45,18 @@ export default function ImportExportPage() {
     await saveBuilds(builds);
   };
 
-  const handleGOODImport = async (data: unknown) => {
-    const { artifacts: goodArtifacts, characters: goodCharacters, weapons: goodWeapons } = validateGOOD(data);
+  const handleGameDataImport = async (data: unknown) => {
     const plan = await loadPlan();
-    const { artifacts: updatedArtifacts, builds: updatedBuilds } = updateBuildsWithGameData({
-      artifacts: plan.artifacts,
-      builds: plan.builds,
-      dataContext,
-      goodArtifacts,
-      goodCharacters,
-      goodWeapons,
-    });
-    await saveBuilds(updatedBuilds);
+    const { artifacts, builds } = updatePlan({ data, dataContext, plan });
     await deleteArtifacts();
-    await saveArtifacts(updatedArtifacts);
+    await saveArtifacts(artifacts);
+    await saveBuilds(builds);
   };
 
   return (
     <main className="p-8">
       <ImportExportComponent onExport={handleExport} onImport={handleImport} />
-      <ImportGameDataComponent onImport={handleGOODImport} />
+      <ImportGameDataComponent onImport={handleGameDataImport} />
     </main>
   );
 }

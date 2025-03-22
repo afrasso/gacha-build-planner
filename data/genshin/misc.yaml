@@ -456,25 +456,33 @@ overallStats:
     key: ELEMENTAL_MASTERY
   - iconUrl: /genshin/icons/crit_rate.png
     key: CRIT_RATE
-  - iconUrl: /genshin/icons/crit_dmg.png
+  - css: brightness-0 dark:brightness-100 dark:invert
+    iconUrl: /genshin/icons/crit_rate.png
     key: CRIT_DMG
   - iconUrl: /genshin/icons/healing.png
     key: HEALING_BONUS
   - iconUrl: /genshin/icons/energy_recharge.png
     key: ENERGY_RECHARGE
-  - iconUrl: /genshin/icons/pyro.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/pyro.svg
     key: DMG_BONUS_PYRO
-  - iconUrl: /genshin/icons/hydro.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/hydro.svg
     key: DMG_BONUS_HYDRO
-  - iconUrl: /genshin/icons/dendro.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/dendro.svg
     key: DMG_BONUS_DENDRO
-  - iconUrl: /genshin/icons/electro.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/electro.svg
     key: DMG_BONUS_ELECTRO
-  - iconUrl: /genshin/icons/anemo.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/anemo.svg
     key: DMG_BONUS_ANEMO
-  - iconUrl: /genshin/icons/cryo.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/cryo.svg
     key: DMG_BONUS_CRYO
-  - iconUrl: /genshin/icons/geo.png
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/geo.svg
     key: DMG_BONUS_GEO
   - iconUrl: /genshin/icons/physical.png
     key: DMG_BONUS_PHYSICAL
@@ -485,7 +493,7 @@ stats:
   - iconUrl: /genshin/icons/attack.png
     key: ATK_PERCENT
     overallStatKey: ATK
-  - iconUrl: /genshin/icons/crit_dmg.png
+  - iconUrl: /genshin/icons/crit_rate.png
     key: CRIT_DMG
     overallStatKey: CRIT_DMG
   - iconUrl: /genshin/icons/crit_rate.png

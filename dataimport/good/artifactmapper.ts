@@ -2,7 +2,7 @@ import crypto from "crypto";
 
 import { Artifact, ArtifactData, ArtifactSet, ICharacter, Stat } from "@/types";
 
-import { mapEnumToKey } from "./mapenumtokey";
+import { mapEnumToKey } from "../mapenumtokey";
 import { Artifact as GOODArtifact, Slot as GOODSlot, Stat as GOODStat } from "./types";
 
 const calculateArtifactHash = ({

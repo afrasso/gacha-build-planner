@@ -56,7 +56,15 @@ const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMa
     <div className="flex flex-col items-center justify-center h-full">
       {getArtifactTypesWithVariableMainStats().map((artifactType) => (
         <div className="flex items-center gap-2 mb-2" key={artifactType.key}>
-          <Image alt={artifactType.key} height={32} src={artifactType.iconUrl} width={32} />
+          {/* <div className="filter drop-shadow-[2px_0_1px_black,_-2px_0_1px_black,_0_2px_1px_black,_0_-2px_1px_black]"> */}
+          <Image
+            alt={artifactType.key}
+            className={artifactType.css}
+            height={32}
+            src={artifactType.iconUrl}
+            width={32}
+          />
+          {/* </div> */}
           <SatisfactionIcon
             isSatisfied={!!mainStatSatisfactions[artifactType.key]?.satisfaction}
             tooltipText={`${artifactType.key}: ${mainStatSatisfactions[artifactType.key]?.desiredMainStatKeys}`}
@@ -74,12 +82,14 @@ const StatsDisplay: React.FC<{ result: SatisfactionResult<StatSatisfactionDetail
     <div className="flex flex-col items-center justify-center h-full">
       {result.details.map((statSatisfaction) => {
         const comparatorSymbol = statSatisfaction.currentStatValue >= statSatisfaction.targetStatValue ? ">=" : "<";
+        const statDefinition = getOverallStatDefinition(statSatisfaction.statKey);
         return (
           <div className="flex items-center gap-2 mb-2" key={statSatisfaction.statKey}>
             <ImageWithTooltip
               alt={statSatisfaction.statKey}
+              className={statDefinition.css}
               height={32}
-              src={getOverallStatDefinition(statSatisfaction.statKey).iconUrl}
+              src={statDefinition.iconUrl}
               tooltipText={`${statSatisfaction.statKey}: ${statSatisfaction.currentStatValue} ${comparatorSymbol} ${statSatisfaction.targetStatValue}`}
               width={32}
             />

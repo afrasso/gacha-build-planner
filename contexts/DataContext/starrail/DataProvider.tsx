@@ -1,5 +1,6 @@
 "use client";
 
+import { validateImport } from "@/dataimport/hsrscanner";
 import { ArtifactData, ArtifactSet, ArtifactSetBonus, DesiredOverallStat, ICharacter, IWeapon } from "@/types";
 import { Misc } from "@/types/misc";
 import { Character, CharacterData, Weapon, WeaponData } from "@/types/starrail";
@@ -63,6 +64,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
     constructBuild,
     gamePathSegment: "starrail",
     misc,
+    validateImport,
     weapons,
   });
 };

@@ -47,10 +47,8 @@ export type CharacterData = {
   statTraces: Record<string, number>;
 };
 
-type MaxLvlStats = {
+export type MaxLvlStats = {
   ATK: number;
-  CRIT_DMG: number;
-  CRIT_RATE: number;
   DEF: number;
   HP: number;
   SPD: number;

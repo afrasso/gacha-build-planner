@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface ImageWithTooltipProps {
   alt: string;
+  className?: string;
   height: number;
   src: string;
   tooltipText?: string;

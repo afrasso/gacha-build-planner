@@ -39,7 +39,7 @@ export function MainStatsDialogContent({ artifactTypeKey, mainStatKeys, onUpdate
   return (
     <DialogContent className="sm:max-w-[600px] md:max-w-[800px] w-11/12">
       <DialogHeader>
-        <DialogTitle>Select main stats for ${artifactTypeKey}</DialogTitle>
+        <DialogTitle>Select main stats for {artifactTypeKey}</DialogTitle>
       </DialogHeader>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 justify-items-center">
         {getPossibleArtifactMainStats({ artifactTypeKey }).map((statKey) => (
