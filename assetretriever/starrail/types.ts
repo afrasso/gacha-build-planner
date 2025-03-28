@@ -1,10 +1,12 @@
 export type ArtifactSet = {
+  category?: ArtifactSetCategory;
   hasArtifactTypes: Record<ArtifactType, boolean>;
   iconUrl: string;
   iconUrls: Record<ArtifactType, string>;
   id: string;
   name: string;
   rarities: number[];
+  setBonusCounts: number[];
 };
 
 export enum ArtifactType {
@@ -14,6 +16,11 @@ export enum ArtifactType {
   HEAD = "HEAD",
   NECK = "NECK",
   OBJECT = "OBJECT",
+}
+
+export enum ArtifactSetCategory {
+  CAVERN_RELIC = "CAVERN_RELIC",
+  PLANAR_ORNAMENT = "PLANAR_ORNAMENT",
 }
 
 export type FailedCharacterIconDownload = {
@@ -36,9 +43,4 @@ export type FailedRelicSetIconDownload = {
 export type FailedLightConeIconDownload = {
   id: string;
   name: string;
-};
-
-export type Stat = {
-  key: string;
-  value: number;
 };

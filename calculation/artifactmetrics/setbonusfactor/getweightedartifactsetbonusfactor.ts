@@ -1,5 +1,5 @@
 import { IDataContext } from "@/contexts/DataContext";
-import { IArtifact, ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
+import { ArtifactSetBonus, IArtifact } from "@/types";
 
 import calculateOddsOfOnSetPieces from "./calculateoddsofonsetpieces";
 import getArtifactTypeCombinations from "./getartifacttypecombinations";
@@ -29,7 +29,7 @@ const getWeightedArtifactSetBonusFactor = ({
 
   // First, determine how many pieces are needed to be on set.
   const onSetArtifactCount = desiredArtifactSetBonuses.reduce((result, bonus) => {
-    result += bonus.bonusType === ArtifactSetBonusType.FOUR_PIECE ? 4 : 2;
+    result += bonus.bonusCount;
     return result;
   }, 0);
 

@@ -55,7 +55,7 @@ export interface InitialArtifactSubStatCountOddsByRarity {
 }
 
 export interface Misc {
-  artifactLevelsPerSubstatRoll: number;
+  artifactLevelsPerSubStatRoll: number;
   artifactMainStatMaxValuesByRarity: ArtifactMainStatMaxValuesByRarity[];
   artifactMainStatOddsByType: ArtifactMainStatOddsByType[];
   artifactMaxLevelByRarity: ArtifactMaxLevelByRarity[];

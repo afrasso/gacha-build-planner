@@ -2,8 +2,8 @@ import { Misc } from "@/types";
 
 type retFn = () => number;
 
-export const buildGetArtifactLevelsPerSubstatRoll = (misc: Misc): retFn => {
+export const buildGetArtifactLevelsPerSubStatRoll = (misc: Misc): retFn => {
   return (): number => {
-    return misc.artifactLevelsPerSubstatRoll;
+    return misc.artifactLevelsPerSubStatRoll;
   };
 };

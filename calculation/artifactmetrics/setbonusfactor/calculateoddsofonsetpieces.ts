@@ -22,6 +22,10 @@ const calculateOddsOfOnSetPieces = ({
   dataContext: IDataContext;
   desiredArtifactMainStats: Record<string, string[]>;
 }): number => {
+  const { getArtifactTypes } = dataContext;
+
+  const numArtifactTypes = getArtifactTypes().length;
+
   // Total odds are the odds that all of the specified artifacts are on-set.
   const initialOdds = artifactTypeKeys.reduce((acc, artifactTypeKey) => {
     const odds = getCumulativeMainStatOdds({
@@ -29,9 +33,9 @@ const calculateOddsOfOnSetPieces = ({
       dataContext,
       mainStatKeys: desiredArtifactMainStats[artifactTypeKey],
     });
-    // Divide by five due to the raw odds of even getting this artifact type.
+    // Divide by the number of artifact types due to the raw odds of even getting this artifact type.
     acc = acc * odds;
-    return acc / 5;
+    return acc / numArtifactTypes;
   }, 1);
 
   return initialOdds * calculateFactorial(artifactTypeKeys.length);

@@ -6,14 +6,12 @@ import { getRandomMainStat } from "./getrandommainstat";
 
 export const rollNewArtifact = ({
   dataContext,
-  level,
   mainStatKeys,
   rarity,
   setId,
   typeKey,
 }: {
   dataContext: IDataContext;
-  level: number;
   mainStatKeys?: string[];
   rarity: number;
   setId: string;
@@ -21,5 +19,6 @@ export const rollNewArtifact = ({
 }): IArtifact => {
   const mainStatKey = getRandomMainStat({ artifactTypeKey: typeKey, dataContext, mainStatKeys });
   const subStats = getRandomInitialSubStats({ dataContext, mainStatKey, rarity });
-  return new Artifact({ level, mainStatKey, rarity, setId, subStats, typeKey });
+  const artifact = new Artifact({ level: 0, mainStatKey, rarity, setId, subStats, typeKey });
+  return artifact;
 };

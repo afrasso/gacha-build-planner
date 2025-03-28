@@ -22,7 +22,7 @@ const BuildDetails: React.FC<BuildDetailsProps> = ({ characterId }) => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
   const dataContext = useDataContext();
   const { constructBuild } = dataContext;
-  const { loadArtifacts, loadBuild, saveBuild } = useStorageContext();
+  const { loadArtifacts, loadBuild, saveArtifacts, saveBuild } = useStorageContext();
 
   const [artifacts, setArtifacts] = useState<ArtifactData[]>([]);
   const [build, setBuild] = useState<BuildData>();
@@ -64,10 +64,11 @@ const BuildDetails: React.FC<BuildDetailsProps> = ({ characterId }) => {
   ]);
 
   useEffect(() => {
-    if (!isLoading && build) {
+    if (!isLoading && artifacts && build) {
+      saveArtifacts(artifacts);
       saveBuild(build);
     }
-  }, [authFetch, build, isAuthenticated, isLoading, saveBuild, user]);
+  }, [artifacts, authFetch, build, isAuthenticated, isLoading, saveArtifacts, saveBuild, user]);
 
   const lastUpdateTimeRef = useRef<number>(0);
 
@@ -118,7 +119,7 @@ const BuildDetails: React.FC<BuildDetailsProps> = ({ characterId }) => {
         callback: async (p) => await callback((index + p) / artifacts.length),
         dataContext,
         forceRecalculate: true,
-        iterations: 1000,
+        iterations: 100,
       });
       setCalculationCount(index + 1);
     }

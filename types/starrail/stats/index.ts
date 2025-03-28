@@ -114,7 +114,7 @@ export const calculateStats = ({
   };
 
   const calculateDef = () => {
-    const initial = character.maxLvlStats.DEF;
+    const initial = character.maxLvlStats.DEF + (weapon?.maxLvlStats.DEF || 0);
     const bonusPercent = calculateStandardStat({
       artifacts,
       dataContext,
@@ -144,7 +144,7 @@ export const calculateStats = ({
   };
 
   const calculateHp = () => {
-    const initial = character.maxLvlStats.HP;
+    const initial = character.maxLvlStats.HP + (weapon?.maxLvlStats.HP || 0);
     const bonusPercent = calculateStandardStat({
       artifacts,
       dataContext,
@@ -158,6 +158,11 @@ export const calculateStats = ({
     });
 
     return round(initial * (1 + bonusPercent / 100) + bonusFlat);
+  };
+
+  const calculateSpd = () => {
+    const initial = character.maxLvlStats.SPD;
+    return initial + round(calculateStandardStat({ artifacts, dataContext, statKey: StatKey.SPD, weapon }));
   };
 
   const result = {
@@ -247,6 +252,7 @@ export const calculateStats = ({
       })
     ),
     [OverallStatKey.MAX_HP]: calculateHp(),
+    [OverallStatKey.SPD]: calculateSpd(),
   } as Record<OverallStatKey, number>;
 
   return result;

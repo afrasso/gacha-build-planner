@@ -5,7 +5,7 @@ import { ArtifactData, ArtifactSet, ArtifactSetBonus, DesiredOverallStat, IBuild
 import { Misc } from "@/types/misc";
 
 import {
-  buildGetArtifactLevelsPerSubstatRoll,
+  buildGetArtifactLevelsPerSubStatRoll,
   buildGetArtifactMainStatMaxValue,
   buildGetArtifactMainStatOdds,
   buildGetArtifactMaxLevel,
@@ -67,7 +67,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({
   validateImport,
   weapons,
 }) => {
-  const getArtifactLevelsPerSubStatRoll = buildGetArtifactLevelsPerSubstatRoll(misc);
+  const getArtifactLevelsPerSubStatRoll = buildGetArtifactLevelsPerSubStatRoll(misc);
   const getArtifactMainStatMaxValue = buildGetArtifactMainStatMaxValue(misc);
   const getArtifactMainStatOdds = buildGetArtifactMainStatOdds(misc);
   const getArtifactMaxLevel = buildGetArtifactMaxLevel(misc);

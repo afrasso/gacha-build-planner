@@ -25,14 +25,14 @@ const ArtifactSetBonusesDisplay: React.FC<{ result: SatisfactionResult<ArtifactS
   return (
     <div className="flex flex-col items-center justify-center h-full">
       {result.details.map((setBonusSatisfaction) => {
-        const artifactSet = getArtifactSet(setBonusSatisfaction.desiredSetId);
+        const artifactSet = getArtifactSet(setBonusSatisfaction.desiredSetBonus.setId);
         return (
-          <div className="flex items-center gap-2 mb-2" key={setBonusSatisfaction.desiredSetId}>
+          <div className="flex items-center gap-2 mb-2" key={setBonusSatisfaction.desiredSetBonus.setId}>
             <ImageWithTooltip
               alt={artifactSet.name}
               height={32}
               src={artifactSet.iconUrl}
-              tooltipText={`${artifactSet.name}, ${setBonusSatisfaction.desiredBonusType}`}
+              tooltipText={`${artifactSet.name}, ${setBonusSatisfaction.desiredSetBonus.bonusCount}`}
               width={32}
             />
             <SatisfactionIcon isSatisfied={setBonusSatisfaction.satisfaction} />

@@ -1,4 +1,4 @@
-import { IArtifact, ArtifactMetric, IBuild } from "@/types";
+import { ArtifactMetric, IArtifact, IBuild } from "@/types";
 
 export const getTopArtifacts = ({
   artifacts,

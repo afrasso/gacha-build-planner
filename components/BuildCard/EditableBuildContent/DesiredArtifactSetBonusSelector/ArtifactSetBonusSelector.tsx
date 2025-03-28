@@ -7,23 +7,28 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useDataContext } from "@/contexts/DataContext";
-import { ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
+import { ArtifactSet, ArtifactSetBonus } from "@/types";
 
-interface DesiredArtifactSetBonusSelectorProps {
-  desiredArtifactSetBonuses: ArtifactSetBonus[];
-  onChange: (desiredArtifactSetBonuses: ArtifactSetBonus[]) => void;
+interface ArtifactSetBonusSelectorProps {
+  artifactSetBonuses: ArtifactSetBonus[];
+  artifactTypeCount: number;
+  getArtifactSet: (id: string) => ArtifactSet;
+  getArtifactSets: () => ArtifactSet[];
+  onChange: (artifactSetBonuses: ArtifactSetBonus[]) => void;
+  title: string;
 }
 
-const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorProps> = ({
-  desiredArtifactSetBonuses = [],
+const ArtifactSetBonusSelector: React.FC<ArtifactSetBonusSelectorProps> = ({
+  artifactSetBonuses = [],
+  artifactTypeCount,
+  getArtifactSet,
+  getArtifactSets,
   onChange,
+  title,
 }) => {
-  const { getArtifactSet, getArtifactSets } = useDataContext();
-
   const [isAddingSetBonus, setIsAddingSetBonus] = useState(false);
   const [setId, setSetId] = useState<string | undefined>(undefined);
-  const [bonusType, setBonusType] = useState<ArtifactSetBonusType | undefined>(undefined);
+  const [bonusCount, setBonusCount] = useState<number | undefined>(undefined);
   const [isSetValid, setIsSetValid] = useState(true);
   const [isBonusTypeValid, setIsBonusTypeValid] = useState(true);
 
@@ -36,15 +41,16 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
     setIsSetValid(true);
   };
 
-  const updateBonusType = (artifactSetBonusType: ArtifactSetBonusType) => {
-    setBonusType(artifactSetBonusType);
+  const updateBonusCount = (bonusCountString: string) => {
+    const bonusCount = !!bonusCountString ? parseInt(bonusCountString) : undefined;
+    setBonusCount(bonusCount);
     setIsBonusTypeValid(true);
   };
 
   const cancel = () => {
     setSetId(undefined);
     setIsSetValid(true);
-    setBonusType(undefined);
+    setBonusCount(undefined);
     setIsBonusTypeValid(true);
     setIsAddingSetBonus(false);
   };
@@ -52,52 +58,44 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   const validate = () => {
     const newIsSetValid = !!setId;
     setIsSetValid(newIsSetValid);
-    const newIsBonusTypeValid = !!bonusType;
+    const newIsBonusTypeValid = !!bonusCount;
     setIsBonusTypeValid(newIsBonusTypeValid);
     return newIsSetValid && newIsBonusTypeValid;
   };
 
   const confirm = () => {
     if (validate()) {
-      const bonus: ArtifactSetBonus = { bonusType: bonusType!, setId: setId! };
+      const bonus: ArtifactSetBonus = { bonusCount: bonusCount!, setId: setId! };
       setSetId(undefined);
-      setBonusType(undefined);
+      setBonusCount(undefined);
       setIsAddingSetBonus(false);
-      onChange([...desiredArtifactSetBonuses, bonus]);
+      onChange([...artifactSetBonuses, bonus]);
     }
   };
 
   const remove = (setId: string) => {
-    onChange(desiredArtifactSetBonuses.filter((bonus) => bonus.setId !== setId));
-  };
-
-  const MAX_TOTAL_BONUS_PIECE_COUNT = 4;
-
-  const getPieceCount = (bonusType: ArtifactSetBonusType) => {
-    return bonusType === ArtifactSetBonusType.TWO_PIECE ? 2 : 4;
+    onChange(artifactSetBonuses.filter((bonus) => bonus.setId !== setId));
   };
 
   const getTotalBonusPieceCount = () => {
-    return desiredArtifactSetBonuses.reduce((total, bonus) => total + getPieceCount(bonus.bonusType), 0);
+    return artifactSetBonuses.reduce((total, bonus) => total + bonus.bonusCount, 0);
   };
 
   const canAddBonus = () => {
-    return getTotalBonusPieceCount() < MAX_TOTAL_BONUS_PIECE_COUNT;
+    return getTotalBonusPieceCount() < artifactTypeCount;
   };
 
-  const shouldDisableBonusType = (bonusType: ArtifactSetBonusType) => {
-    return MAX_TOTAL_BONUS_PIECE_COUNT - getTotalBonusPieceCount() < getPieceCount(bonusType);
+  const shouldDisableBonusType = (bonusCount: number) => {
+    return artifactTypeCount - getTotalBonusPieceCount() < bonusCount;
   };
 
   return (
     <div className={`${!isSetValid || !isBonusTypeValid ? "mb-8" : "mb-2"}`}>
       <div className="flex flex-grow items-center justify-between gap-2">
-        <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">Set Bonuses:</Label>
+        <Label className="text-md font-semibold text-primary whitespace-nowrap w-24">{title}</Label>
         <div className="flex-grow flex items-center">
           <div className="flex items-center flex-grow h-8 px-3 text-left text-sm">
-            {!(desiredArtifactSetBonuses?.length > 0) && (
-              <span className="text-sm text-muted-foreground">None selected</span>
-            )}
+            {!(artifactSetBonuses?.length > 0) && <span className="text-sm text-muted-foreground">None selected</span>}
           </div>
           <div className="flex ml-2 gap-1">
             <Button
@@ -113,14 +111,14 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
         </div>
       </div>
       <div className="flex flex-col justify-between">
-        {desiredArtifactSetBonuses.map((bonus) => {
+        {artifactSetBonuses.map((bonus) => {
           const artifactSet = getArtifactSet(bonus.setId);
           return (
             <div className="flex-grow flex items-center" key={bonus.setId}>
               <div className="h-8 px-3 text-left text-sm flex items-center flex-grow">
                 <Image alt={artifactSet.name} class-name="mr-2" height={32} src={artifactSet.iconUrl} width={32} />
                 {artifactSet.name}
-                <span className="text-muted-foreground ml-1">({bonus.bonusType})</span>
+                <span className="text-muted-foreground ml-1">({bonus.bonusCount})</span>
               </div>
               <div className="flex ml-2 gap-1">
                 <Button
@@ -173,7 +171,7 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
               )}
             </div>
             <div className="flex-grow relative">
-              <Select onValueChange={updateBonusType}>
+              <Select onValueChange={updateBonusCount}>
                 <SelectTrigger
                   aria-describedby={!isBonusTypeValid ? "bonus-type-error" : undefined}
                   aria-invalid={!isBonusTypeValid}
@@ -183,14 +181,14 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
                   <SelectValue placeholder="Select a bonus type" />
                 </SelectTrigger>
                 <SelectContent>
-                  {[ArtifactSetBonusType.TWO_PIECE, ArtifactSetBonusType.FOUR_PIECE].map((bonusType) => (
+                  {(setId ? getArtifactSet(setId).setBonusCounts : []).map((bonusCount) => (
                     <SelectItem
                       className="flex items-center"
-                      disabled={shouldDisableBonusType(bonusType)}
-                      key={bonusType}
-                      value={bonusType}
+                      disabled={shouldDisableBonusType(bonusCount)}
+                      key={bonusCount}
+                      value={String(bonusCount)}
                     >
-                      {bonusType}
+                      {bonusCount}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -216,4 +214,4 @@ const DesiredArtifactSetBonusSelector: React.FC<DesiredArtifactSetBonusSelectorP
   );
 };
 
-export default DesiredArtifactSetBonusSelector;
+export default ArtifactSetBonusSelector;

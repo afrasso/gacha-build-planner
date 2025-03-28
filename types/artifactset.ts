@@ -1,15 +1,18 @@
 export interface ArtifactSet {
+  category?: string;
   hasArtifactTypes: Record<string, boolean>;
   iconUrl: string;
   iconUrls: Record<string, string>;
   id: string;
   name: string;
   rarities: number[];
+  setBonusCounts: number[];
 }
 
 export const ArtifactSetSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/ArtifactSet",
   properties: {
+    category: { type: "string" },
     hasArtifactTypes: {
       additionalProperties: { type: "boolean" },
       type: "object",
@@ -22,13 +25,14 @@ export const ArtifactSetSchema = {
     id: { type: "string" },
     name: { type: "string" },
     rarities: { items: { type: "integer" }, type: "array" },
+    setBonusCounts: { items: { type: "integer" }, type: "array" },
   },
-  required: ["hasArtifactTypes", "iconUrl", "iconUrls", "id", "name", "rarities"],
+  required: ["hasArtifactTypes", "iconUrl", "iconUrls", "id", "name", "rarities", "setBonusCounts"],
   type: "object",
 };
 
 export interface ArtifactSetBonus {
-  bonusType: ArtifactSetBonusType;
+  bonusCount: number;
   setId: string;
 }
 
@@ -36,17 +40,12 @@ export const ArtifactSetBonusSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/ArtifactSetBonus",
   additionalProperties: false,
   properties: {
-    bonusType: { $ref: "https://gacha-build-planner.vercel.app/schemas/ArtifactSetBonusType" },
+    bonusCount: { type: "integer" },
     setId: { type: "string" },
   },
-  required: ["bonusType", "setId"],
+  required: ["bonusCount", "setId"],
   type: "object",
 };
-
-export enum ArtifactSetBonusType {
-  FOUR_PIECE = "FOUR_PIECE",
-  TWO_PIECE = "TWO_PIECE",
-}
 
 export const ArtifactSetBonusTypeSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/ArtifactSetBonusType",

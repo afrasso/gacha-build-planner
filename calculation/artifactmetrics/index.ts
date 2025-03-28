@@ -1,5 +1,5 @@
 import { IDataContext } from "@/contexts/DataContext";
-import { IArtifact, ArtifactMetric, ArtifactMetricResult, IBuild } from "@/types";
+import { ArtifactMetric, ArtifactMetricResult, IArtifact, IBuild } from "@/types";
 import { getEnumValues } from "@/utils/getenumvalues";
 
 import { calculateArtifactBuildSatisfaction } from "./calculateartifactbuildsatisfaction";

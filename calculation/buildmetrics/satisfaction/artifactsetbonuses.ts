@@ -1,4 +1,4 @@
-import { IArtifact, ArtifactSetBonus, ArtifactSetBonusType } from "@/types";
+import { ArtifactSetBonus, IArtifact } from "@/types";
 
 import { ArtifactSetBonusSatisfactionDetails, SatisfactionResult } from "./types";
 
@@ -10,10 +10,7 @@ const calculateArtifactSetBonusSatisfaction = ({
   setBonus: ArtifactSetBonus;
 }): boolean => {
   const matchingArtifacts = Object.values(artifacts).filter((artifact) => artifact.setId === setBonus.setId);
-  if (matchingArtifacts.length >= 4) {
-    return true;
-  }
-  return setBonus.bonusType === ArtifactSetBonusType.TWO_PIECE && matchingArtifacts.length >= 2;
+  return setBonus.bonusCount <= matchingArtifacts.length;
 };
 
 export const calculateArtifactSetBonusesSatisfaction = ({
@@ -23,10 +20,12 @@ export const calculateArtifactSetBonusesSatisfaction = ({
   artifacts: Record<string, IArtifact>;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
 }): SatisfactionResult<ArtifactSetBonusSatisfactionDetails> => {
-  const details = desiredArtifactSetBonuses.map((setBonus) => ({
-    desiredBonusType: setBonus.bonusType,
-    desiredSetId: setBonus.setId,
-    satisfaction: calculateArtifactSetBonusSatisfaction({ artifacts, setBonus }),
+  if (artifacts["BODY"].id === "51125216-2abf-476b-9985-8048a570d690") {
+    console.log(artifacts);
+  }
+  const details = desiredArtifactSetBonuses.map((desiredSetBonus) => ({
+    desiredSetBonus,
+    satisfaction: calculateArtifactSetBonusSatisfaction({ artifacts, setBonus: desiredSetBonus }),
   }));
 
   return {

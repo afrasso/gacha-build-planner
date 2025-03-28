@@ -1,5 +1,5 @@
 import { IDataContext } from "@/contexts/DataContext";
-import { IArtifact, DesiredOverallStat, IBuild, Stat } from "@/types";
+import { DesiredOverallStat, IArtifact, IBuild, Stat } from "@/types";
 
 import { calculateArtifactMainStatsSatisfaction } from "./artifactmainstats";
 import { calculateArtifactSetBonusesSatisfaction } from "./artifactsetbonuses";
@@ -25,7 +25,7 @@ export const calculateBuildSatisfaction = ({
   artifacts,
   build,
   dataContext,
-  targetStatsStrategy = TargetStatsStrategy.CURRENT,
+  targetStatsStrategy = TargetStatsStrategy.DESIRED,
 }: {
   artifacts?: Record<string, IArtifact>;
   build: IBuild;

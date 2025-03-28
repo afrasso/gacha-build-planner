@@ -1,4 +1,4 @@
-import { ArtifactSetBonusType } from "@/types";
+import { ArtifactSetBonus } from "@/types";
 
 export interface ArtifactMainStatSatisfactionDetails {
   artifactTypeKey: string;
@@ -8,8 +8,7 @@ export interface ArtifactMainStatSatisfactionDetails {
 }
 
 export interface ArtifactSetBonusSatisfactionDetails {
-  desiredBonusType: ArtifactSetBonusType;
-  desiredSetId: string;
+  desiredSetBonus: ArtifactSetBonus;
   satisfaction: boolean;
 }
 
