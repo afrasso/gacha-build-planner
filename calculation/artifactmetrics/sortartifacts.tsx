@@ -1,9 +1,9 @@
-import { Artifact, ArtifactMetric } from "@/types";
+import { ArtifactData, ArtifactMetric } from "@/types";
 
 export type ArtifactSort = "LEVEL" | "RARITY" | ArtifactMetric;
 
 const getMetricSort = (metric: ArtifactMetric) => {
-  return (a: Artifact, b: Artifact) => {
+  return (a: ArtifactData, b: ArtifactData) => {
     const aValue = a.metricsResults[metric].maxValue;
     const bValue = b.metricsResults[metric].maxValue;
     if (!aValue && !bValue) {
@@ -19,7 +19,13 @@ const getMetricSort = (metric: ArtifactMetric) => {
   };
 };
 
-export const sortArtifacts = ({ artifacts, sort }: { artifacts: Artifact[]; sort: ArtifactSort }): Artifact[] => {
+export const sortArtifacts = ({
+  artifacts,
+  sort,
+}: {
+  artifacts: ArtifactData[];
+  sort: ArtifactSort;
+}): ArtifactData[] => {
   switch (sort) {
     case ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS:
     case ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS:

@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import DebouncedNumericInput from "@/components/ui/custom/DebouncedNumericInput";
 import { Label } from "@/components/ui/label";
-import { getArtifactMaxLevel } from "@/constants";
+import { useDataContext } from "@/contexts/DataContext";
 
 interface LevelSelectorProps {
   level?: number;
@@ -12,6 +12,8 @@ interface LevelSelectorProps {
 }
 
 const LevelSelector = forwardRef<ISaveableContentHandle, LevelSelectorProps>(({ level, onUpdate, rarity = 5 }, ref) => {
+  const { getArtifactMaxLevel } = useDataContext();
+
   const [isValid, setIsValid] = useState(false);
 
   const cancel = () => {};

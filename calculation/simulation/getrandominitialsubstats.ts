@@ -1,15 +1,24 @@
-import { Stat, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { Stat } from "@/types";
 
 import { getInitialSubStatCount } from "./getinitialsubstatcount";
 import { getRandomNewSubStat } from "./getrandomnewsubstat";
 import { rollSubStat } from "./rollsubstat";
 
-export const getRandomInitialSubStats = ({ mainStat, rarity }: { mainStat: StatKey; rarity: number }) => {
-  const subStatCount = getInitialSubStatCount({ rarity });
-  const subStats: Stat<StatKey>[] = [];
-  for (let i = 0; i < subStatCount; i++) {
-    const statKey = getRandomNewSubStat({ mainStat, subStats: subStats.map((s) => s.key) });
-    subStats.push(rollSubStat({ rarity, statKey }));
+export const getRandomInitialSubStats = ({
+  dataContext,
+  mainStatKey,
+  rarity,
+}: {
+  dataContext: IDataContext;
+  mainStatKey: string;
+  rarity: number;
+}) => {
+  const substatCount = getInitialSubStatCount({ dataContext, rarity });
+  const substats: Stat[] = [];
+  for (let i = 0; i < substatCount; i++) {
+    const statKey = getRandomNewSubStat({ dataContext, mainStatKey, subStatKeys: substats.map((s) => s.key) });
+    substats.push(rollSubStat({ dataContext, rarity, statKey }));
   }
-  return subStats;
+  return substats;
 };

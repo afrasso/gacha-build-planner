@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-import { Artifact, Build } from "@/types";
+import { ArtifactData, BuildData } from "@/types";
 
 import {
   deleteArtifactFromIndexedDB,
@@ -25,14 +25,14 @@ interface StorageContextType {
   deleteArtifacts: () => Promise<void>;
   deleteBuild: (characterId: string) => Promise<void>;
   deleteBuilds: () => Promise<void>;
-  loadArtifact: (id: string) => Promise<StorageRetrievalResult<Artifact>>;
-  loadArtifacts: () => Promise<StorageRetrievalResult<Artifact[]>>;
-  loadBuild: (characterId: string) => Promise<StorageRetrievalResult<Build>>;
-  loadBuilds: () => Promise<StorageRetrievalResult<Build[]>>;
-  saveArtifact: (artifact: Artifact) => Promise<void>;
-  saveArtifacts: (artifacts: Artifact[]) => Promise<void>;
-  saveBuild: (build: Build) => Promise<void>;
-  saveBuilds: (builds: Build[]) => Promise<void>;
+  loadArtifact: (id: string) => Promise<StorageRetrievalResult<ArtifactData>>;
+  loadArtifacts: () => Promise<StorageRetrievalResult<ArtifactData[]>>;
+  loadBuild: (characterId: string) => Promise<StorageRetrievalResult<BuildData>>;
+  loadBuilds: () => Promise<StorageRetrievalResult<BuildData[]>>;
+  saveArtifact: (artifact: ArtifactData) => Promise<void>;
+  saveArtifacts: (artifacts: ArtifactData[]) => Promise<void>;
+  saveBuild: (build: BuildData) => Promise<void>;
+  saveBuilds: (builds: BuildData[]) => Promise<void>;
 }
 
 const StorageContext = createContext<StorageContextType | undefined>(undefined);
@@ -50,9 +50,10 @@ export interface StorageRetrievalResult<T> {
 
 interface StorageProviderProps {
   children: React.ReactNode;
+  game: string;
 }
 
-export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) => {
+export const StorageProvider: React.FC<StorageProviderProps> = ({ children, game }) => {
   const [isClient, setIsClient] = useState(false);
 
   // const { authFetch, isAuthenticated, user } = useAuthContext();
@@ -62,52 +63,52 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
   }, []);
 
   const deleteArtifact = async (id: string): Promise<void> => {
-    await deleteArtifactFromIndexedDB(id);
+    await deleteArtifactFromIndexedDB({ game, id });
   };
 
   const deleteArtifacts = async (): Promise<void> => {
-    await deleteArtifactsFromIndexedDB();
+    await deleteArtifactsFromIndexedDB({ game });
   };
 
   const deleteBuild = async (characterId: string): Promise<void> => {
-    await deleteBuildFromIndexedDB(characterId);
+    await deleteBuildFromIndexedDB({ characterId, game });
   };
 
   const deleteBuilds = async (): Promise<void> => {
-    await deleteBuildsFromIndexedDB();
+    await deleteBuildsFromIndexedDB({ game });
   };
 
-  const loadArtifact = async (id: string): Promise<StorageRetrievalResult<Artifact>> => {
+  const loadArtifact = async (id: string): Promise<StorageRetrievalResult<ArtifactData>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const artifact = await loadArtifactFromIndexedDB(id);
+    const artifact = await loadArtifactFromIndexedDB({ game, id });
     if (!artifact) {
       return { status: StorageRetrievalStatus.NOT_FOUND };
     }
     return { status: StorageRetrievalStatus.FOUND, value: artifact };
   };
 
-  const loadArtifacts = async (): Promise<StorageRetrievalResult<Artifact[]>> => {
+  const loadArtifacts = async (): Promise<StorageRetrievalResult<ArtifactData[]>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const artifacts = await loadArtifactsFromIndexedDB();
+    const artifacts = await loadArtifactsFromIndexedDB({ game });
     return { status: StorageRetrievalStatus.FOUND, value: artifacts };
   };
 
-  const loadBuild = async (characterId: string): Promise<StorageRetrievalResult<Build>> => {
+  const loadBuild = async (characterId: string): Promise<StorageRetrievalResult<BuildData>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
-    const build = await loadBuildFromIndexedDB(characterId);
+    const build = await loadBuildFromIndexedDB({ characterId, game });
     if (!build) {
       return { status: StorageRetrievalStatus.NOT_FOUND };
     }
     return { status: StorageRetrievalStatus.FOUND, value: build };
   };
 
-  const loadBuilds = async (): Promise<StorageRetrievalResult<Build[]>> => {
+  const loadBuilds = async (): Promise<StorageRetrievalResult<BuildData[]>> => {
     if (!isClient) {
       return { status: StorageRetrievalStatus.LOADING };
     }
@@ -134,23 +135,23 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     //   }
     // };
 
-    const builds = await loadBuildsFromIndexedDB();
+    const builds = await loadBuildsFromIndexedDB({ game });
     return { status: StorageRetrievalStatus.FOUND, value: builds };
   };
 
-  const saveArtifact = async (artifact: Artifact): Promise<void> => {
-    await saveArtifactToIndexedDB(artifact);
+  const saveArtifact = async (artifact: ArtifactData): Promise<void> => {
+    await saveArtifactToIndexedDB({ artifact, game });
   };
 
-  const saveArtifacts = async (artifacts: Artifact[]): Promise<void> => {
-    await saveArtifactsToIndexedDB(artifacts);
+  const saveArtifacts = async (artifacts: ArtifactData[]): Promise<void> => {
+    await saveArtifactsToIndexedDB({ artifacts, game });
   };
 
-  const saveBuild = async (build: Build): Promise<void> => {
-    await saveBuildToIndexedDB(build);
+  const saveBuild = async (build: BuildData): Promise<void> => {
+    await saveBuildToIndexedDB({ build, game });
   };
 
-  const saveBuilds = async (builds: Build[]): Promise<void> => {
+  const saveBuilds = async (builds: BuildData[]): Promise<void> => {
     // const savePlan = async () => {
     //   if (isAuthenticated) {
     //     try {
@@ -185,7 +186,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({ children }) =>
     // };
 
     // savePlan();
-    await saveBuildsToIndexedDB(builds);
+    await saveBuildsToIndexedDB({ builds, game });
   };
 
   return (

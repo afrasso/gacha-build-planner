@@ -3,12 +3,11 @@ import * as cheerio from "cheerio";
 import _ from "lodash";
 import path from "path";
 
-import { ArtifactType } from "@/types";
 import { __publicdir } from "@/utils/directoryutils";
 import downloadImage from "@/utils/downloadimage";
 
 import getArtifactIconPath from "../getartifacticonpath";
-import { FailedArtifactIconDownload } from "../types";
+import { ArtifactType, FailedArtifactIconDownload } from "../types";
 
 const mapType = (type: string): ArtifactType => {
   switch (type) {

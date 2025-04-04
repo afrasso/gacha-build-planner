@@ -8,9 +8,9 @@ import ArtifactCard from "@/components/artifacts/ArtifactCard";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
-import { Artifact, Build } from "@/types";
+import { Artifact, ArtifactData, BuildData } from "@/types";
 
 import TopBuilds from "./TopBuilds";
 
@@ -20,11 +20,12 @@ interface ArtifactDetailsProps {
 
 const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
-  const genshinDataContext = useGenshinDataContext();
+  const dataContext = useDataContext();
+  const { constructBuild } = dataContext;
   const { loadArtifact, loadBuilds, saveArtifact } = useStorageContext();
 
-  const [artifact, setArtifact] = useState<Artifact | undefined>();
-  const [builds, setBuilds] = useState<Build[]>([]);
+  const [artifact, setArtifact] = useState<ArtifactData | undefined>();
+  const [builds, setBuilds] = useState<BuildData[]>([]);
   const [inProgress, setInProgress] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isNotFound, setIsNotFound] = useState<boolean>(false);
@@ -80,7 +81,13 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   const updateMetrics = async () => {
     setInProgress(true);
     const startDate = new Date();
-    await updateAllMetrics({ artifact, builds, callback, genshinDataContext, iterations: 10000 });
+    await updateAllMetrics({
+      artifact: new Artifact(artifact),
+      builds: builds.map(constructBuild),
+      callback,
+      dataContext,
+      iterations: 1000,
+    });
     const endDate = new Date();
     const time = endDate.getTime() - startDate.getTime();
     console.log(`Calculation of metrics for artifact ${artifact.id} complete. Took ${time} ms.`);
@@ -103,7 +110,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
           <h1 className="text-3xl font-bold mt-6 mb-6">Artifact Details</h1>
           <ArtifactCard
             artifact={artifact}
-            artifactType={artifact!.type}
+            artifactTypeKey={artifact!.typeKey}
             showInfoButton={false}
             showMetrics={true}
             size="large"

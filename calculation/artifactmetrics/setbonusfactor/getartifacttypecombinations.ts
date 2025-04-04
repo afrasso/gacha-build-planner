@@ -1,30 +1,28 @@
-import { ArtifactType } from "@/types";
-
 const getArtifactTypeCombinations = ({
-  artifactTypes,
+  artifactTypeKeys,
   combinations = [],
   count,
   currentCombination = [],
   startIndex = 0,
 }: {
-  artifactTypes: ArtifactType[];
-  combinations?: ArtifactType[][];
+  artifactTypeKeys: string[];
+  combinations?: string[][];
   count: number;
-  currentCombination?: ArtifactType[];
+  currentCombination?: string[];
   startIndex?: number;
-}): ArtifactType[][] => {
-  if (count > artifactTypes.length) {
+}): string[][] => {
+  if (count > artifactTypeKeys.length) {
     throw new Error(
-      `The number of requested Artifact Types in a combination (${count}) cannot exceed the number of provided Artifact Types (${artifactTypes.length}).`
+      `The number of requested Artifact Types in a combination (${count}) cannot exceed the number of provided Artifact Types (${artifactTypeKeys.length}).`
     );
   }
   if (currentCombination.length === count) {
     combinations.push([...currentCombination]);
     return combinations;
   }
-  for (let i = startIndex; i < artifactTypes.length; i++) {
-    currentCombination.push(artifactTypes[i]);
-    getArtifactTypeCombinations({ artifactTypes, combinations, count, currentCombination, startIndex: i + 1 });
+  for (let i = startIndex; i < artifactTypeKeys.length; i++) {
+    currentCombination.push(artifactTypeKeys[i]);
+    getArtifactTypeCombinations({ artifactTypeKeys, combinations, count, currentCombination, startIndex: i + 1 });
     currentCombination.pop();
   }
   return combinations;

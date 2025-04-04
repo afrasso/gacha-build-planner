@@ -120,6 +120,7 @@ describe("Max Metric Value Calculation Tests", () => {
         "10000103": { calculatedOn: "2025-01-20T23:48:03.904Z", iterations: 5, result: 0 },
       },
     },
+    [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
     [ArtifactMetric.RATING]: {
       buildResults: {
         "10000002": { calculatedOn: "2025-01-20T23:48:03.904Z", iterations: 5, result: 0 },

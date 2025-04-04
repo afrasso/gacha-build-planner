@@ -8,7 +8,7 @@ import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedCharacterIconDownload } from "../types";
 import calculateStatValue from "./calculatestatvalue";
-import mapStat from "./mapstat";
+import mapStat from "./mapdbstatkey";
 
 const extractCharacters = async ({
   downloadIcons = false,

@@ -2,13 +2,12 @@ import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
 
-import { ArtifactType } from "@/types";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
 import downloadImage from "@/utils/downloadimage";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import getArtifactIconPath from "../getartifacticonpath";
-import { FailedArtifactIconDownload } from "../types";
+import { ArtifactSet, ArtifactType, FailedArtifactIconDownload } from "../types";
 
 const downloadArtifactIcon = async ({
   setId,
@@ -53,7 +52,7 @@ const extractArtifactSets = async ({
 }) => {
   console.log("Extracting artifact sets...");
 
-  const artifactSets = [];
+  const artifactSets: ArtifactSet[] = [];
   const failures: FailedArtifactIconDownload[] = [];
 
   const dbArtifactSets: genshindb.Artifact[] = _.uniq(genshindb.artifacts("names", { matchCategories: true }))
@@ -63,6 +62,16 @@ const extractArtifactSets = async ({
   for (const dbArtifactSet of dbArtifactSets) {
     const id = String(dbArtifactSet.id);
     const name = dbArtifactSet.name;
+    const setBonusCounts: number[] = [];
+    if (dbArtifactSet.effect1Pc) {
+      setBonusCounts.push(1);
+    }
+    if (dbArtifactSet.effect2Pc) {
+      setBonusCounts.push(2);
+    }
+    if (dbArtifactSet.effect4Pc) {
+      setBonusCounts.push(4);
+    }
 
     artifactSets.push({
       hasArtifactTypes: {
@@ -80,6 +89,7 @@ const extractArtifactSets = async ({
       id,
       name: dbArtifactSet.name,
       rarities: dbArtifactSet.rarityList,
+      setBonusCounts,
     });
 
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {

@@ -1,14 +1,13 @@
 import _ from "lodash";
 import path from "path";
-import { CharacterData, SkillLevel, StarRail } from "starrail.js";
+import { CharacterData as DBCharacterData, SkillLevel, StarRail } from "starrail.js";
 
-import { __datadir, __publicdir } from "@/utils/directoryutils";
-import downloadImage from "@/utils/downloadimage";
+import { CharacterData, MaxLvlStats } from "@/types/starrail";
+import { __datadir } from "@/utils/directoryutils";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedCharacterIconDownload } from "../types";
-import mapDbBaseStat from "./mapdbbasestat";
-import mapDbTraceStat from "./mapdbtracestat";
+import mapDbStatKey from "./mapdbstatkey";
 
 const extractCharacters = async ({
   downloadIcons = false,
@@ -21,11 +20,13 @@ const extractCharacters = async ({
 }): Promise<FailedCharacterIconDownload[]> => {
   console.log("Extracting characters...");
 
-  const characters = [];
+  const characters: CharacterData[] = [];
   const failures: FailedCharacterIconDownload[] = [];
 
   const client = new StarRail({});
-  const dbCharacters: CharacterData[] = client.getAllCharacters();
+  const dbCharacters: DBCharacterData[] = client.getAllCharacters();
+
+  const pathIdToNameMap: Record<string, string> = {};
 
   // Skip Stelle and get data for Caelus only since it's identical.
   for (const dbCharacter of dbCharacters.filter(
@@ -34,24 +35,41 @@ const extractCharacters = async ({
     const id = String(dbCharacter.id);
     const rawName = dbCharacter.name.get("en");
     const name = rawName === "{NICKNAME}" ? `Trailblazer` : rawName;
+    const pathId = dbCharacter.path.id;
     const pathName = dbCharacter.path.name.get("en");
+    if (!pathIdToNameMap[pathId]) {
+      pathIdToNameMap[pathId] = pathName;
+    }
 
-    const maxLvlStats = dbCharacter.getStatsByLevel(6, 80).reduce((acc, dbStat) => {
-      const stat = mapDbBaseStat(dbStat);
-      acc[stat.key] = stat.value;
-      return acc;
-    }, {} as Record<string, number>);
+    const dbMaxLvlStats = dbCharacter.getStatsByLevel(6, 80);
+    const ATK = dbMaxLvlStats.find((dbStat) => dbStat.type === "BaseAttack")?.value;
+    if (!ATK) {
+      throw new Error(`Character ${name} (${id}) does not have a defined Base ATK.`);
+    }
+    const DEF = dbMaxLvlStats.find((dbStat) => dbStat.type === "BaseDefence")?.value;
+    if (!DEF) {
+      throw new Error(`Character ${name} (${id}) does not have a defined Base DEF.`);
+    }
+    const HP = dbMaxLvlStats.find((dbStat) => dbStat.type === "BaseHP")?.value;
+    if (!HP) {
+      throw new Error(`Character ${name} (${id}) does not have a defined Base HP.`);
+    }
+    const SPD = dbMaxLvlStats.find((dbStat) => dbStat.type === "BaseSpeed")?.value;
+    if (!SPD) {
+      throw new Error(`Character ${name} (${id}) does not have a defined Base SPD.`);
+    }
+    const maxLvlStats: MaxLvlStats = { ATK, DEF, HP, SPD };
 
     const statTraces = dbCharacter.skillTreeNodes
       .flatMap((node) => node.getSkillTreeNodeByLevel(new SkillLevel(node.maxLevel, 0)).stats)
       .reduce((acc, dbStat) => {
-        const stat = mapDbTraceStat(dbStat);
-        acc[stat.key] = (acc[stat.key] || 0) + stat.value;
+        const statKey = mapDbStatKey(dbStat.type);
+        acc[statKey] = (acc[statKey] || 0) + dbStat.value;
         return acc;
       }, {} as Record<string, number>);
 
     const character = {
-      combatTypeId: dbCharacter.combatType.id,
+      combatType: dbCharacter.combatType.id,
       iconUrl: `/starrail/characters/${id}.png`,
       id,
       maxLvlStats,
@@ -64,22 +82,21 @@ const extractCharacters = async ({
     characters.push(character);
 
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
-      if (name !== "Trailblazer") {
-        const url = dbCharacter.icon.url;
-        const savePath = path.join(__publicdir, "starrail", "characters", `${id}.png`);
-        if (verbose) {
-          console.log(`Downloading icon for ${name} of path ${pathName} (${id}) from ${url}.`);
-        }
-        try {
-          await downloadImage({ savePath, url, verbose });
-        } catch (err) {
-          console.warn(`Error downloading icon for ${name} of path ${pathName} (${id}): ${err}`);
-          failures.push({ id, name, pathName });
-        }
-      } else {
-        // Ensure we download the Trailblazer's character icon from the wiki since that shows both Caelus and Stelle on it.
-        failures.push({ id, name, pathName });
-      }
+      // Download all images from the wiki.
+      failures.push({ id, name, pathName });
+    }
+  }
+
+  const nameCounts: Record<string, number> = {};
+  for (const character of characters) {
+    if (!nameCounts[character.name]) {
+      nameCounts[character.name] = 0;
+    }
+    nameCounts[character.name]++;
+  }
+  for (const character of characters) {
+    if (nameCounts[character.name] > 1) {
+      character.name = `${character.name} (${pathIdToNameMap[character.path]})`;
     }
   }
 

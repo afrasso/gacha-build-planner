@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import StarSelector from "@/components/ui/custom/StarSelector";
 import { DialogTrigger } from "@/components/ui/dialog";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Artifact, ArtifactType } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { ArtifactData } from "@/types";
 
 import MetricChart from "../ArtifactDetails/MetricChart";
 
 interface ArtifactCardProps {
-  artifact?: Artifact;
-  artifactType: ArtifactType;
+  artifact?: ArtifactData;
+  artifactTypeKey: string;
   characterId?: string;
   onEdit?: () => void;
   showInfoButton: boolean;
@@ -24,7 +24,7 @@ interface ArtifactCardProps {
 
 const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
   (
-    { artifact, artifactType, characterId, onEdit, showInfoButton = true, showMetrics = false, size = "small" },
+    { artifact, artifactTypeKey, characterId, onEdit, showInfoButton = true, showMetrics = false, size = "small" },
     ref
   ) => {
     const artifactImageHeight = size === "large" ? 120 : 64;
@@ -35,7 +35,9 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
     const sizeClasses = size === "large" ? "w-96 h-120" : "w-48 h-92";
     const textSize1 = size === "large" ? "text-xl" : "text-sm";
     const textSize2 = size === "large" ? "text-base" : "text-xs";
-    const { getArtifactSet, getCharacter } = useGenshinDataContext();
+
+    const { getArtifactSet, getCharacter, resolvePath } = useDataContext();
+
     const artifactSet = artifact?.setId ? getArtifactSet(artifact.setId) : undefined;
     const character = artifact?.characterId ? getCharacter(artifact?.characterId) : undefined;
 
@@ -49,7 +51,7 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                 <div className={`w-6 h-8 ${!onEdit && !showInfoButton && "invisible"}`} />
                 <div className={`w-6 h-8 ${(!onEdit || !showInfoButton) && "invisible"}`} />
               </div>
-              <p className={`${textSize2} text-muted-foreground mb-1 text-center`}>{artifactType}</p>
+              <p className={`${textSize2} text-muted-foreground mb-1 text-center`}>{artifactTypeKey}</p>
               <div className="flex">
                 {onEdit ? (
                   <DialogTrigger asChild>
@@ -70,7 +72,7 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                 )}
                 {showInfoButton ? (
                   <Button asChild className="p-0 w-6 h-8 flex-shrink-0" size="sm" variant="ghost">
-                    <Link href={`/genshin/artifacts/${artifact.id}`}>
+                    <Link href={resolvePath(`/artifacts/${artifact.id}`)}>
                       <Info size={16} />
                     </Link>
                   </Button>
@@ -88,14 +90,14 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
                 alt={artifactSet.name}
                 className="rounded-md"
                 height={artifactImageHeight}
-                src={artifactSet.iconUrls[artifact.type]}
+                src={artifactSet.iconUrls[artifact.typeKey]}
                 width={artifactImageWidth}
               />
             </div>
             <div className="flex justify-center items-center">
               <StarSelector max={5} value={artifact.rarity} />
             </div>
-            <p className={`font-medium ${textSize1} text-center mb-2 rounded p-1`}>{artifact.mainStat}</p>
+            <p className={`font-medium ${textSize1} text-center mb-2 rounded p-1`}>{artifact.mainStatKey}</p>
             <div className="flex-grow">
               <div className="grid grid-cols-5 gap-x-1 gap-y-1 text-xs">
                 <div className="col-span-4 space-y-1">
@@ -150,7 +152,7 @@ const ArtifactCard = forwardRef<HTMLDivElement, ArtifactCardProps>(
             <div className="w-16 h-16 bg-muted rounded-full mb-2 flex items-center justify-center">
               <span className="text-2xl text-muted-foreground">+</span>
             </div>
-            <p className="text-sm font-medium">{artifactType}</p>
+            <p className="text-sm font-medium">{artifactTypeKey}</p>
             <p className="text-xs text-muted-foreground">Click to add</p>
           </div>
         </CardContent>

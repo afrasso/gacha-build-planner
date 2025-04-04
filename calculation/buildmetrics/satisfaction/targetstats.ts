@@ -1,4 +1,4 @@
-import { OverallStatKey, Stat } from "@/types";
+import { Stat } from "@/types";
 
 import { SatisfactionResult, StatSatisfactionDetails } from "./types";
 
@@ -6,8 +6,8 @@ export const calculateTargetStatsSatisfaction = ({
   stats,
   targetStats,
 }: {
-  stats: Record<OverallStatKey, number>;
-  targetStats: Stat<OverallStatKey>[];
+  stats: Record<string, number>;
+  targetStats: Stat[];
 }): SatisfactionResult<StatSatisfactionDetails> => {
   const details = targetStats.map((targetStat) => ({
     currentStatValue: stats[targetStat.key],

@@ -8,7 +8,7 @@ import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedWeaponIconDownload } from "../types";
 import calculateStatValue from "./calculatestatvalue";
-import mapStat from "./mapstat";
+import mapStat from "./mapdbstatkey";
 
 const extractWeapons = async ({
   downloadIcons = false,

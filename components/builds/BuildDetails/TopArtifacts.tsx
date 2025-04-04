@@ -8,26 +8,33 @@ import {
   isInFilter,
 } from "@/components/artifacts/ArtifactManager/ArtifactFilterDialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Artifact, ArtifactMetric, Build } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { Artifact, ArtifactData, ArtifactMetric, BuildData } from "@/types";
 
 interface TopBuildsProps {
-  artifacts: Artifact[];
-  build: Build;
+  artifacts: ArtifactData[];
+  build: BuildData;
   count?: number;
   showMetrics: boolean;
 }
 
 const TopArtifacts: React.FC<TopBuildsProps> = ({ artifacts, build, count = 12, showMetrics }) => {
+  const { constructBuild } = useDataContext();
+
   const [filter, setFilter] = useState<ArtifactFilter>();
   const [topArtifactsMetric, setTopArtifactsMetric] = useState<ArtifactMetric | undefined>();
 
-  const topArtifacts = useMemo(() => {
+  const topArtifacts = useMemo((): ArtifactData[] => {
     if (!topArtifactsMetric) {
       return [];
     }
     const filteredArtifacts = artifacts.filter((artifact) => isInFilter({ artifact, filter }));
-    return getTopArtifacts({ artifacts: filteredArtifacts, build, metric: topArtifactsMetric });
-  }, [artifacts, build, filter, topArtifactsMetric]);
+    return getTopArtifacts({
+      artifacts: filteredArtifacts.map((artifact) => new Artifact(artifact)),
+      build: constructBuild(build),
+      metric: topArtifactsMetric,
+    }).map((artifact) => artifact.toArtifactData());
+  }, [artifacts, build, constructBuild, filter, topArtifactsMetric]);
 
   return (
     <div>
@@ -53,7 +60,7 @@ const TopArtifacts: React.FC<TopBuildsProps> = ({ artifacts, build, count = 12, 
           {topArtifacts.slice(0, count).map((artifact) => (
             <ArtifactCard
               artifact={artifact}
-              artifactType={artifact.type}
+              artifactTypeKey={artifact.typeKey}
               characterId={build.characterId}
               key={artifact.id}
               showInfoButton={true}

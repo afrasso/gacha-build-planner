@@ -1,7 +1,6 @@
-import { GenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Build, BuildArtifacts, DesiredOverallStat, OverallStatKey, Stat } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { DesiredOverallStat, IArtifact, IBuild, Stat } from "@/types";
 
-import { calculateStats } from "../../stats";
 import { calculateArtifactMainStatsSatisfaction } from "./artifactmainstats";
 import { calculateArtifactSetBonusesSatisfaction } from "./artifactsetbonuses";
 import { calculateTargetStatsSatisfaction } from "./targetstats";
@@ -14,8 +13,8 @@ const getTargetStats = ({
   stats,
 }: {
   desiredOverallStats: DesiredOverallStat[];
-  stats: Record<OverallStatKey, number>;
-}): Stat<OverallStatKey>[] => {
+  stats: Record<string, number>;
+}): Stat[] => {
   return desiredOverallStats.map((desiredOverallStat) => ({
     key: desiredOverallStat.stat.key,
     value: stats[desiredOverallStat.stat.key],
@@ -25,12 +24,12 @@ const getTargetStats = ({
 export const calculateBuildSatisfaction = ({
   artifacts,
   build,
-  genshinDataContext,
-  targetStatsStrategy = TargetStatsStrategy.CURRENT,
+  dataContext,
+  targetStatsStrategy = TargetStatsStrategy.DESIRED,
 }: {
-  artifacts?: BuildArtifacts;
-  build: Build;
-  genshinDataContext: GenshinDataContext;
+  artifacts?: Record<string, IArtifact>;
+  build: IBuild;
+  dataContext: IDataContext;
   targetStatsStrategy?: TargetStatsStrategy;
 }): BuildSatisfactionResult => {
   const artifactMainStatsSatisfaction = calculateArtifactMainStatsSatisfaction({
@@ -43,7 +42,7 @@ export const calculateBuildSatisfaction = ({
     desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
   });
 
-  const stats = calculateStats({ artifacts, build, genshinDataContext });
+  const stats = build.calculateStats({ artifacts, dataContext });
   const targetStats =
     targetStatsStrategy === TargetStatsStrategy.CURRENT
       ? getTargetStats({ desiredOverallStats: build.desiredOverallStats, stats })

@@ -1,16 +1,8 @@
 "use client";
 
-import { calculateStats } from "@/calculation/stats";
 import { CardContent } from "@/components/ui/card";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import {
-  ArtifactSet,
-  ArtifactSetBonus,
-  Build,
-  BuildArtifacts,
-  DesiredArtifactMainStats,
-  DesiredOverallStat,
-} from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { ArtifactData, ArtifactSet, ArtifactSetBonus, BuildData, DesiredOverallStat } from "@/types";
 
 import ArtifactCollection from "./ArtifactCollection";
 import DesiredArtifactMainStatsSelector from "./DesiredArtifactMainStatsSelector";
@@ -20,16 +12,18 @@ import WeaponSelector from "./WeaponSelector";
 
 interface EditableBuildContentProps {
   artifactSets: ArtifactSet[];
-  build: Build;
-  onUpdate: (buildId: string, build: Partial<Build>) => void;
+  build: BuildData;
+  onUpdate: (buildId: string, build: Partial<BuildData>) => void;
 }
 
 const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUpdate }) => {
-  const genshinDataContext = useGenshinDataContext();
-  const currentStats = calculateStats({ build, genshinDataContext });
+  const dataContext = useDataContext();
+  const { constructBuild } = dataContext;
 
-  const onUpdateInternal = (updatedBuild: Partial<Build>) => {
-    onUpdate(build.characterId, { ...updatedBuild, lastUpdatedDate: new Date().toISOString() });
+  const currentStats = constructBuild(build).calculateStats({ dataContext });
+
+  const onUpdateInternal = (updatedBuild: Partial<BuildData>) => {
+    onUpdate(build.characterId, { ...updatedBuild });
   };
 
   const updateWeapon = (weaponId: string) => {
@@ -40,7 +34,7 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUp
     onUpdateInternal({ desiredArtifactSetBonuses });
   };
 
-  const updateDesiredArtifactMainStats = (desiredArtifactMainStats: DesiredArtifactMainStats) => {
+  const updateDesiredArtifactMainStats = (desiredArtifactMainStats: Record<string, string[]>) => {
     onUpdateInternal({ desiredArtifactMainStats });
   };
 
@@ -48,7 +42,7 @@ const EditableBuildContent: React.FC<EditableBuildContentProps> = ({ build, onUp
     onUpdateInternal({ desiredOverallStats });
   };
 
-  const updateArtifacts = (artifacts: BuildArtifacts) => {
+  const updateArtifacts = (artifacts: Record<string, ArtifactData>) => {
     onUpdateInternal({ artifacts });
   };
 

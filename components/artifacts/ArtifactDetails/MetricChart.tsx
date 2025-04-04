@@ -51,6 +51,14 @@ interface MetricChartProps {
 }
 
 const MetricChart: React.FC<MetricChartProps> = ({ characterId, metricsResults }) => {
+  const transform = (x: number) => {
+    if (x === 0) {
+      return 0;
+    }
+
+    return Math.pow(2, Math.log10(x));
+  };
+
   return (
     <div className="w-full mx-auto">
       {Object.values(ArtifactMetric).map((metric) => {
@@ -69,8 +77,8 @@ const MetricChart: React.FC<MetricChartProps> = ({ characterId, metricsResults }
           return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
         } else {
           const value = rawValue || 0;
-          const displayValue = rawValue ? `${Math.round((rawValue || 0) * 100) / 100}` : "N/A";
-          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
+          const displayValue = rawValue ? `${Math.round((rawValue || 0) * 1000000) / 1000000}` : "N/A";
+          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={transform(value)} />;
         }
       })}
     </div>

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { useDataContext } from "@/contexts/DataContext";
 
 interface WeaponSelectorProps {
   onChange: (selectedWeaponId: string) => void;
@@ -15,7 +15,7 @@ interface WeaponSelectorProps {
 }
 
 const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeaponId }) => {
-  const { getWeapon, weapons } = useGenshinDataContext();
+  const { getWeapon, getWeapons } = useDataContext();
 
   const [isEditing, setIsEditing] = useState(false);
   const [internalSelectedWeaponId, setInternalSelectedWeaponId] = useState<string | undefined>(selectedWeaponId);
@@ -62,7 +62,7 @@ const WeaponSelector: React.FC<WeaponSelectorProps> = ({ onChange, selectedWeapo
             <SelectValue placeholder={"Select a weapon"} />
           </SelectTrigger>
           <SelectContent>
-            {weapons.map((weapon) => (
+            {getWeapons().map((weapon) => (
               <SelectItem key={weapon.id} value={weapon.id}>
                 <div className="flex items-center">
                   <Image alt={weapon.name} className="mr-2" height={32} src={weapon.iconUrl} width={32} />

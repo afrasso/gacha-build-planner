@@ -1,14 +1,14 @@
-import { Artifact, ArtifactMetric, Build } from "@/types";
+import { ArtifactMetric, IArtifact, IBuild } from "@/types";
 
 export const getTopArtifacts = ({
   artifacts,
   build,
   metric,
 }: {
-  artifacts: Artifact[];
-  build: Build;
+  artifacts: IArtifact[];
+  build: IBuild;
   metric: ArtifactMetric;
-}): Artifact[] => {
+}): IArtifact[] => {
   return artifacts
     .filter((artifact) => {
       const results = artifact.metricsResults[metric].buildResults[build.characterId];

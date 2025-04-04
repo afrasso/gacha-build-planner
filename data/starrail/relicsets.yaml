@@ -20,6 +20,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -42,6 +46,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -64,6 +72,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -86,6 +98,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -108,6 +124,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -130,6 +150,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -152,6 +176,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -174,6 +202,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -196,6 +228,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -218,6 +254,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -240,6 +280,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -262,6 +306,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -284,6 +332,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -306,6 +358,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -328,6 +384,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -350,6 +410,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -372,6 +436,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -394,6 +462,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -416,6 +488,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -438,6 +514,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -460,6 +540,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -482,6 +566,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -504,6 +592,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: true
     FOOT: true
@@ -526,6 +618,10 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -548,6 +644,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -570,6 +669,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -592,6 +694,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -614,6 +719,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -636,6 +744,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -658,6 +769,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -680,6 +794,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -702,6 +819,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -724,6 +844,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -746,6 +869,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -768,6 +894,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -790,6 +919,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -812,6 +944,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -834,6 +969,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -856,6 +994,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -878,6 +1019,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -900,6 +1044,9 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
 - hasArtifactTypes:
     BODY: false
     FOOT: false
@@ -922,3 +1069,6 @@
     - 3
     - 4
     - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT

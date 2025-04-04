@@ -1,15 +1,14 @@
-import { ArtifactSetBonusType, ArtifactType, OverallStatKey, StatKey } from "@/types";
+import { ArtifactSetBonus } from "@/types";
 
 export interface ArtifactMainStatSatisfactionDetails {
-  artifactType: ArtifactType;
-  desiredMainStats: StatKey[];
-  mainStat: StatKey | undefined;
+  artifactTypeKey: string;
+  currentMainStatKey: string;
+  desiredMainStatKeys: string[];
   satisfaction: boolean;
 }
 
 export interface ArtifactSetBonusSatisfactionDetails {
-  desiredBonusType: ArtifactSetBonusType;
-  desiredSetId: string;
+  desiredSetBonus: ArtifactSetBonus;
   satisfaction: boolean;
 }
 
@@ -28,7 +27,7 @@ export interface SatisfactionResult<T> {
 export interface StatSatisfactionDetails {
   currentStatValue: number;
   satisfaction: boolean;
-  statKey: OverallStatKey;
+  statKey: string;
   targetStatValue: number;
 }
 

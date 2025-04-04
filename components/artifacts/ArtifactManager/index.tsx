@@ -10,20 +10,21 @@ import { getPageOfItems } from "@/components/ui/helpers/getpageofitems";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
+import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
-import { Artifact, ArtifactMetric, Build } from "@/types";
+import { Artifact, ArtifactData, ArtifactMetric, BuildData } from "@/types";
 
 import ArtifactCard from "../ArtifactCard";
 import { ArtifactFilter, ArtifactFilterDialog, isInFilter } from "./ArtifactFilterDialog";
 
 const ArtifactManager: React.FC = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
-  const genshinDataContext = useGenshinDataContext();
+  const dataContext = useDataContext();
+  const { constructBuild } = dataContext;
   const { loadArtifacts, loadBuilds, saveArtifacts } = useStorageContext();
 
-  const [artifacts, setArtifacts] = useState<Artifact[]>([]);
-  const [builds, setBuilds] = useState<Build[]>([]);
+  const [artifacts, setArtifacts] = useState<ArtifactData[]>([]);
+  const [builds, setBuilds] = useState<BuildData[]>([]);
   const [calculationCanceled, setCalculationCanceled] = useState<boolean>(false);
   const [calculationCount, setCalculationCount] = useState<number>(0);
   const [calculationProgress, setCalculationProgress] = useState<number>(0);
@@ -93,11 +94,11 @@ const ArtifactManager: React.FC = () => {
     // TODO: This needs to be a deep copy before performing a side effect on the artifacts!
     for (const [index, artifact] of artifacts.entries()) {
       await updateAllMetrics({
-        artifact,
-        builds,
+        artifact: new Artifact(artifact),
+        builds: builds.map(constructBuild),
         callback: async (p) => await callback((index + p) / artifacts.length),
+        dataContext,
         forceRecalculate: true,
-        genshinDataContext,
         iterations: 25,
       });
       setCalculationCount(index + 1);
@@ -170,7 +171,7 @@ const ArtifactManager: React.FC = () => {
         {getPageOfItems({ currentPage, items: sortedAndFilteredArtifacts, pageSize }).map((artifact) => (
           <ArtifactCard
             artifact={artifact}
-            artifactType={artifact.type}
+            artifactTypeKey={artifact.typeKey}
             key={artifact.id}
             showInfoButton={true}
             showMetrics={!isCalculating}

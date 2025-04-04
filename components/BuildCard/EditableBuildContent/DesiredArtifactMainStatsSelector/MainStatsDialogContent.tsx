@@ -5,49 +5,50 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Toggle } from "@/components/ui/toggle";
-import { getMainStats } from "@/constants";
-import { ArtifactType, StatKey } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
 
 interface MainStatsDialogContentProps {
-  artifactType: ArtifactType;
-  mainStats: StatKey[];
-  onUpdate: (mainStats: StatKey[]) => void;
+  artifactTypeKey: string;
+  mainStatKeys: string[];
+  onUpdate: (mainStatKeys: string[]) => void;
 }
 
-export function MainStatsDialogContent({ artifactType, mainStats, onUpdate }: MainStatsDialogContentProps) {
-  const [internalMainStats, setInternalMainStats] = useState<StatKey[]>(mainStats);
+export function MainStatsDialogContent({ artifactTypeKey, mainStatKeys, onUpdate }: MainStatsDialogContentProps) {
+  const { getPossibleArtifactMainStats } = useDataContext();
+
+  const [internalMainStatKeys, setInternalMainStatKeys] = useState<string[]>(mainStatKeys);
 
   const clear = () => {
-    setInternalMainStats([]);
+    setInternalMainStatKeys([]);
   };
 
-  const onMainStatToggle = ({ mainStat, pressed }: { mainStat: StatKey; pressed: boolean }) => {
-    if (pressed && !internalMainStats.includes(mainStat)) {
-      setInternalMainStats((prev) => [...prev, mainStat]);
-    } else if (!pressed && internalMainStats.includes(mainStat)) {
-      setInternalMainStats((prev) => prev.filter((stat) => stat !== mainStat));
+  const onMainStatToggle = ({ mainStatKey, pressed }: { mainStatKey: string; pressed: boolean }) => {
+    if (pressed && !internalMainStatKeys.includes(mainStatKey)) {
+      setInternalMainStatKeys((prev) => [...prev, mainStatKey]);
+    } else if (!pressed && internalMainStatKeys.includes(mainStatKey)) {
+      setInternalMainStatKeys((prev) => prev.filter((statKey) => statKey !== mainStatKey));
     }
   };
 
-  const isMainStatToggled = (mainStat: StatKey) => internalMainStats.includes(mainStat);
+  const isMainStatToggled = (mainStatKey: string) => internalMainStatKeys.includes(mainStatKey);
 
   const onSubmit = () => {
-    onUpdate(internalMainStats);
+    onUpdate(internalMainStatKeys);
   };
 
   return (
     <DialogContent className="sm:max-w-[600px] md:max-w-[800px] w-11/12">
       <DialogHeader>
-        <DialogTitle>Select main stats for ${artifactType}</DialogTitle>
+        <DialogTitle>Select main stats for {artifactTypeKey}</DialogTitle>
       </DialogHeader>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 justify-items-center">
-        {getMainStats({ artifactType }).map((stat) => (
+        {getPossibleArtifactMainStats({ artifactTypeKey }).map((statKey) => (
           <Toggle
-            key={stat}
-            onPressedChange={(pressed) => onMainStatToggle({ mainStat: stat, pressed })}
-            pressed={isMainStatToggled(stat)}
+            key={statKey}
+            onPressedChange={(pressed) => onMainStatToggle({ mainStatKey: statKey, pressed })}
+            pressed={isMainStatToggled(statKey)}
           >
-            {stat}
+            {statKey}
           </Toggle>
         ))}
       </div>

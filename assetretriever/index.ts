@@ -14,6 +14,7 @@ const argv = yargs(hideBin(process.argv))
   .option("game", {
     alias: "g",
     choices: ["genshin", "starrail"],
+    describe: "Only download data for a specific game",
     type: "string",
   })
   .option("ids", {

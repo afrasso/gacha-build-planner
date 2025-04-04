@@ -1,5 +1,5 @@
 {
-  "name": "genshin-build-planner",
+  "name": "gacha-build-planner",
   "version": "0.1.0",
   "description": "A web application to assist players of gacha games to manage their character builds.",
   "private": true,

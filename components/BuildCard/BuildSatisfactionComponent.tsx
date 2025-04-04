@@ -1,4 +1,4 @@
-import { Crown, Hourglass, Wine } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 
 import {
@@ -9,8 +9,7 @@ import {
   StatSatisfactionDetails,
 } from "@/calculation/buildmetrics/satisfaction";
 import ImageWithTooltip from "@/components/ui/custom/ImageWithTooltip";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { ArtifactType, OverallStatKey } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
 
 import SatisfactionIcon from "./SatisfactionIcon";
 
@@ -21,19 +20,19 @@ interface BuildSatisfactionDisplayProps {
 const ArtifactSetBonusesDisplay: React.FC<{ result: SatisfactionResult<ArtifactSetBonusSatisfactionDetails> }> = ({
   result,
 }) => {
-  const { getArtifactSet } = useGenshinDataContext();
+  const { getArtifactSet } = useDataContext();
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
       {result.details.map((setBonusSatisfaction) => {
-        const artifactSet = getArtifactSet(setBonusSatisfaction.desiredSetId);
+        const artifactSet = getArtifactSet(setBonusSatisfaction.desiredSetBonus.setId);
         return (
-          <div className="flex items-center gap-2 mb-2" key={setBonusSatisfaction.desiredSetId}>
+          <div className="flex items-center gap-2 mb-2" key={setBonusSatisfaction.desiredSetBonus.setId}>
             <ImageWithTooltip
               alt={artifactSet.name}
               height={32}
               src={artifactSet.iconUrl}
-              tooltipText={`${artifactSet.name}, ${setBonusSatisfaction.desiredBonusType}`}
+              tooltipText={`${artifactSet.name}, ${setBonusSatisfaction.desiredSetBonus.bonusCount}`}
               width={32}
             />
             <SatisfactionIcon isSatisfied={setBonusSatisfaction.satisfaction} />
@@ -47,76 +46,50 @@ const ArtifactSetBonusesDisplay: React.FC<{ result: SatisfactionResult<ArtifactS
 const ArtifactMainStatsDisplay: React.FC<{ result: SatisfactionResult<ArtifactMainStatSatisfactionDetails> }> = ({
   result,
 }) => {
+  const { getArtifactTypesWithVariableMainStats } = useDataContext();
+
   const mainStatSatisfactions = Object.fromEntries(
-    result.details.map((mainStatSatisfaction) => [mainStatSatisfaction.artifactType, mainStatSatisfaction])
+    result.details.map((mainStatSatisfaction) => [mainStatSatisfaction.artifactTypeKey, mainStatSatisfaction])
   );
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
-      {mainStatSatisfactions[ArtifactType.SANDS] && (
-        <div className="flex items-center gap-2 mb-2">
-          <Hourglass size={32} />
+      {getArtifactTypesWithVariableMainStats().map((artifactType) => (
+        <div className="flex items-center gap-2 mb-2" key={artifactType.key}>
+          {/* <div className="filter drop-shadow-[2px_0_1px_black,_-2px_0_1px_black,_0_2px_1px_black,_0_-2px_1px_black]"> */}
+          <Image
+            alt={artifactType.key}
+            className={artifactType.css}
+            height={32}
+            src={artifactType.iconUrl}
+            width={32}
+          />
+          {/* </div> */}
           <SatisfactionIcon
-            isSatisfied={mainStatSatisfactions[ArtifactType.SANDS].satisfaction}
-            tooltipText={`${ArtifactType.SANDS}: ${mainStatSatisfactions[ArtifactType.SANDS].desiredMainStats}`}
+            isSatisfied={!!mainStatSatisfactions[artifactType.key]?.satisfaction}
+            tooltipText={`${artifactType.key}: ${mainStatSatisfactions[artifactType.key]?.desiredMainStatKeys}`}
           />
         </div>
-      )}
-      {mainStatSatisfactions[ArtifactType.GOBLET] && (
-        <div className="flex items-center gap-2 mb-2">
-          <Wine size={32} />
-          <SatisfactionIcon
-            isSatisfied={mainStatSatisfactions[ArtifactType.GOBLET].satisfaction}
-            tooltipText={`${ArtifactType.GOBLET}: ${mainStatSatisfactions[ArtifactType.GOBLET].desiredMainStats}`}
-          />
-        </div>
-      )}
-      {mainStatSatisfactions[ArtifactType.CIRCLET] && (
-        <div className="flex items-center gap-2 mb-2">
-          <Crown size={32} />
-          <SatisfactionIcon
-            isSatisfied={mainStatSatisfactions[ArtifactType.CIRCLET].satisfaction}
-            tooltipText={`${ArtifactType.CIRCLET}: ${mainStatSatisfactions[ArtifactType.CIRCLET].desiredMainStats}`}
-          />
-        </div>
-      )}
+      ))}
     </div>
   );
 };
 
-const getStatIconUrl = (stat: OverallStatKey): string => {
-  const statToUrlMapping = {
-    [OverallStatKey.ATK]: "/genshin/icons/attack.png",
-    [OverallStatKey.CRIT_DMG]: "/genshin/icons/crit_dmg.png",
-    [OverallStatKey.CRIT_RATE]: "/genshin/icons/crit_rate.png",
-    [OverallStatKey.DEF]: "/genshin/icons/defense.png",
-    [OverallStatKey.DMG_BONUS_ANEMO]: "/genshin/icons/anemo.png",
-    [OverallStatKey.DMG_BONUS_CRYO]: "/genshin/icons/cryo.png",
-    [OverallStatKey.DMG_BONUS_DENDRO]: "/genshin/icons/dendro.png",
-    [OverallStatKey.DMG_BONUS_ELECTRO]: "/genshin/icons/electro.png",
-    [OverallStatKey.DMG_BONUS_GEO]: "/genshin/icons/geo.png",
-    [OverallStatKey.DMG_BONUS_HYDRO]: "/genshin/icons/hydro.png",
-    [OverallStatKey.DMG_BONUS_PHYSICAL]: "/genshin/icons/physical.png",
-    [OverallStatKey.DMG_BONUS_PYRO]: "/genshin/icons/pyro.png",
-    [OverallStatKey.ELEMENTAL_MASTERY]: "/genshin/icons/elemental_mastery.png",
-    [OverallStatKey.ENERGY_RECHARGE]: "/genshin/icons/energy_recharge.png",
-    [OverallStatKey.HEALING_BONUS]: "/genshin/icons/healing_bonus.png",
-    [OverallStatKey.MAX_HP]: "/genshin/icons/hp.png",
-  };
-  return statToUrlMapping[stat];
-};
-
 const StatsDisplay: React.FC<{ result: SatisfactionResult<StatSatisfactionDetails> }> = ({ result }) => {
+  const { getOverallStatDefinition } = useDataContext();
+
   return (
     <div className="flex flex-col items-center justify-center h-full">
       {result.details.map((statSatisfaction) => {
         const comparatorSymbol = statSatisfaction.currentStatValue >= statSatisfaction.targetStatValue ? ">=" : "<";
+        const statDefinition = getOverallStatDefinition(statSatisfaction.statKey);
         return (
           <div className="flex items-center gap-2 mb-2" key={statSatisfaction.statKey}>
             <ImageWithTooltip
               alt={statSatisfaction.statKey}
+              className={statDefinition.css}
               height={32}
-              src={getStatIconUrl(statSatisfaction.statKey)}
+              src={statDefinition.iconUrl}
               tooltipText={`${statSatisfaction.statKey}: ${statSatisfaction.currentStatValue} ${comparatorSymbol} ${statSatisfaction.targetStatValue}`}
               width={32}
             />

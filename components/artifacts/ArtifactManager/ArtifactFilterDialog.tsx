@@ -9,8 +9,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Toggle } from "@/components/ui/toggle";
-import { useGenshinDataContext } from "@/contexts/genshin/GenshinDataContext";
-import { Artifact, ArtifactType, StatKey } from "@/types";
+import { useDataContext } from "@/contexts/DataContext";
+import { ArtifactData } from "@/types";
 
 export enum EquipStatus {
   EQUIPPED = "EQUIPPED",
@@ -25,13 +25,13 @@ export enum LockStatus {
 export interface ArtifactFilter {
   equipStatuses: Partial<Record<EquipStatus, boolean>>;
   lockStatuses: Partial<Record<LockStatus, boolean>>;
-  mainStats: Partial<Record<StatKey, boolean>>;
+  mainStatKeys: Partial<Record<string, boolean>>;
   maxLevel: number;
   maxRarity: number;
   minLevel: number;
   minRarity: number;
   setIds: Partial<Record<string, boolean>>;
-  types: Partial<Record<ArtifactType, boolean>>;
+  typeKeys: Partial<Record<string, boolean>>;
 }
 
 const MIN_LEVEL = 0;
@@ -44,7 +44,7 @@ interface ArtifactFilterDialogProps {
   onFilterChange: (filter: ArtifactFilter) => void;
 }
 
-export const isInFilter = ({ artifact, filter }: { artifact: Artifact; filter: ArtifactFilter | undefined }) => {
+export const isInFilter = ({ artifact, filter }: { artifact: ArtifactData; filter: ArtifactFilter | undefined }) => {
   if (!filter) {
     return true;
   }
@@ -68,43 +68,43 @@ export const isInFilter = ({ artifact, filter }: { artifact: Artifact; filter: A
   if (artifact.rarity < filter.minRarity || artifact.rarity > filter.maxRarity) {
     return false;
   }
-  if (Object.values(filter.mainStats).includes(true) && !filter.mainStats[artifact.mainStat]) {
+  if (Object.values(filter.mainStatKeys).includes(true) && !filter.mainStatKeys[artifact.mainStatKey]) {
     return false;
   }
   if (Object.values(filter.setIds).includes(true) && !filter.setIds[artifact.setId]) {
     return false;
   }
-  if (Object.values(filter.types).includes(true) && !filter.types[artifact.type]) {
+  if (Object.values(filter.typeKeys).includes(true) && !filter.typeKeys[artifact.typeKey]) {
     return false;
   }
   return true;
 };
 
 export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterDialogProps) {
-  const { artifactSets } = useGenshinDataContext();
+  const { getArtifactSets, getArtifactTypes, getStatDefinitions } = useDataContext();
 
   const [equipStatuses, setEquipStatuses] = useState<Partial<Record<EquipStatus, boolean>>>(
     filter?.equipStatuses || {}
   );
   const [lockStatuses, setLockStatuses] = useState<Partial<Record<LockStatus, boolean>>>(filter?.lockStatuses || {});
-  const [mainStats, setMainStats] = useState<Partial<Record<StatKey, boolean>>>(filter?.mainStats || {});
+  const [mainStatKeys, setMainStatKeys] = useState<Partial<Record<string, boolean>>>(filter?.mainStatKeys || {});
   const [maxLevel, setMaxLevel] = useState<number>(MAX_LEVEL);
   const [maxRarity, setMaxRarity] = useState<number>(MAX_RARITY);
   const [minLevel, setMinLevel] = useState<number>(MIN_LEVEL);
   const [minRarity, setMinRarity] = useState<number>(MIN_RARITY);
   const [setIds, setSetIds] = useState<Partial<Record<string, boolean>>>(filter?.setIds || {});
-  const [types, setTypes] = useState<Partial<Record<ArtifactType, boolean>>>(filter?.types || {});
+  const [typeKeys, setTypeKeys] = useState<Partial<Record<string, boolean>>>(filter?.typeKeys || {});
 
   const clearFilters = () => {
     setEquipStatuses({});
     setLockStatuses({});
-    setMainStats({});
+    setMainStatKeys({});
     setMinLevel(MIN_LEVEL);
     setMinRarity(MIN_RARITY);
     setMaxLevel(MAX_LEVEL);
     setMaxRarity(MAX_RARITY);
     setSetIds({});
-    setTypes({});
+    setTypeKeys({});
   };
 
   const onEquipStatusToggle = ({ equipStatus, pressed }: { equipStatus: EquipStatus; pressed: boolean }) => {
@@ -115,24 +115,24 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
     setLockStatuses((prev) => ({ ...prev, [lockStatus]: pressed }));
   };
 
-  const onMainStatToggle = ({ mainStat, pressed }: { mainStat: StatKey; pressed: boolean }) =>
-    setMainStats((prev) => ({ ...prev, [mainStat]: pressed }));
+  const onMainStatToggle = ({ mainStatKey, pressed }: { mainStatKey: string; pressed: boolean }) =>
+    setMainStatKeys((prev) => ({ ...prev, [mainStatKey]: pressed }));
 
   const onSetIdToggle = ({ pressed, setId }: { pressed: boolean; setId: string }) =>
     setSetIds((prev) => ({ ...prev, [setId]: pressed }));
 
-  const onTypeToggle = ({ pressed, type }: { pressed: boolean; type: ArtifactType }) =>
-    setTypes((prev) => ({ ...prev, [type]: pressed }));
+  const onTypeToggle = ({ pressed, typeKey }: { pressed: boolean; typeKey: string }) =>
+    setTypeKeys((prev) => ({ ...prev, [typeKey]: pressed }));
 
   const isEquipStatusToggled = (equipStatus: EquipStatus) => !!equipStatuses[equipStatus];
 
   const isLockStatusToggled = (lockStatus: LockStatus) => !!lockStatuses[lockStatus];
 
-  const isMainStatToggled = (mainStat: StatKey) => !!mainStats[mainStat];
+  const isMainStatToggled = (mainStatKey: string) => !!mainStatKeys[mainStatKey];
 
   const isSetIdToggled = (setId: string) => !!setIds[setId];
 
-  const isTypeToggled = (type: ArtifactType) => !!types[type];
+  const isTypeToggled = (typeKey: string) => !!typeKeys[typeKey];
 
   const onMaxLevelChange = (level?: number) => {
     if (!level) {
@@ -174,13 +174,13 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
     onFilterChange({
       equipStatuses,
       lockStatuses,
-      mainStats,
+      mainStatKeys,
       maxLevel,
       maxRarity,
       minLevel,
       minRarity,
       setIds,
-      types,
+      typeKeys,
     });
   };
 
@@ -233,13 +233,13 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
               <Label className="text-md font-semibold text-primary">Type</Label>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-              {Object.values(ArtifactType).map((type) => (
+              {getArtifactTypes().map((artifactType) => (
                 <Toggle
-                  key={type}
-                  onPressedChange={(pressed) => onTypeToggle({ pressed, type })}
-                  pressed={isTypeToggled(type)}
+                  key={artifactType.key}
+                  onPressedChange={(pressed) => onTypeToggle({ pressed, typeKey: artifactType.key })}
+                  pressed={isTypeToggled(artifactType.key)}
                 >
-                  {type}
+                  {artifactType.key}
                 </Toggle>
               ))}
             </div>
@@ -271,13 +271,13 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
               <Label className="text-md font-semibold text-primary">Main Stat</Label>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 justify-items-center">
-              {Object.values(StatKey).map((stat) => (
+              {getStatDefinitions().map((statDefinition) => (
                 <Toggle
-                  key={stat}
-                  onPressedChange={(pressed) => onMainStatToggle({ mainStat: stat, pressed })}
-                  pressed={isMainStatToggled(stat)}
+                  key={statDefinition.key}
+                  onPressedChange={(pressed) => onMainStatToggle({ mainStatKey: statDefinition.key, pressed })}
+                  pressed={isMainStatToggled(statDefinition.key)}
                 >
-                  {stat}
+                  {statDefinition.key}
                 </Toggle>
               ))}
             </div>
@@ -287,7 +287,7 @@ export function ArtifactFilterDialog({ filter, onFilterChange }: ArtifactFilterD
               <Label className="text-md font-semibold text-primary">Set</Label>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-2">
-              {artifactSets.map((set) => (
+              {getArtifactSets().map((set) => (
                 <Toggle
                   key={set.id}
                   onPressedChange={(pressed) => onSetIdToggle({ pressed, setId: set.id })}

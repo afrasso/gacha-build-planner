@@ -1,19 +1,28 @@
-import { getSubStats, getSubStatWeight } from "@/constants";
-import { StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
 
-export const getRandomNewSubStat = ({ mainStat, subStats }: { mainStat: StatKey; subStats: StatKey[] }): StatKey => {
-  const currentStats = new Set([mainStat, ...subStats]);
-  const remainingStats = getSubStats().filter((subStat) => !currentStats.has(subStat));
-  const remainingSubStatWeights: [StatKey, number][] = remainingStats.map((stat) => {
-    const weight = getSubStatWeight({ subStat: stat });
-    return [stat, weight];
+export const getRandomNewSubStat = ({
+  dataContext,
+  mainStatKey,
+  subStatKeys,
+}: {
+  dataContext: IDataContext;
+  mainStatKey: string;
+  subStatKeys: string[];
+}): string => {
+  const { getArtifactSubStatRelativeLikelihood, getPossibleArtifactSubStats } = dataContext;
+
+  const currentStatKeys = new Set([mainStatKey, ...subStatKeys]);
+  const remainingStatKeys = getPossibleArtifactSubStats().filter((subStatKey) => !currentStatKeys.has(subStatKey));
+  const remainingSubstatWeights: [string, number][] = remainingStatKeys.map((subStatKey) => {
+    const weight = getArtifactSubStatRelativeLikelihood({ subStatKey });
+    return [subStatKey, weight];
   });
-  const total = remainingSubStatWeights.reduce((sum, [, weight]) => sum + weight, 0);
+  const total = remainingSubstatWeights.reduce((sum, [, weight]) => sum + weight, 0);
   const random = Math.random() * total;
   let current = 0;
-  for (const [key, value] of remainingSubStatWeights) {
+  for (const [key, value] of remainingSubstatWeights) {
     if (random < current + value) {
-      return key as StatKey;
+      return key;
     }
     current += value;
   }

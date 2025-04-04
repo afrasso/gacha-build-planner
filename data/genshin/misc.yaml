@@ -1,0 +1,546 @@
+artifactLevelsPerSubStatRoll: 4
+# Source: https://genshin-impact.fandom.com/wiki/Artifact/Stats
+artifactMainStatMaxValuesByRarity:
+  - rarity: 1
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 21
+      - statKey: ATK_PERCENT
+        value: 7.9
+      - statKey: CRIT_DMG
+        value: 10.5
+      - statKey: CRIT_RATE
+        value: 5.3
+      - statKey: DEF_PERCENT
+        value: 9.9
+      - statKey: DMG_BONUS_ANEMO
+        value: 7.9
+      - statKey: DMG_BONUS_CRYO
+        value: 7.9
+      - statKey: DMG_BONUS_DENDRO
+        value: 7.9
+      - statKey: DMG_BONUS_ELECTRO
+        value: 7.9
+      - statKey: DMG_BONUS_GEO
+        value: 7.9
+      - statKey: DMG_BONUS_HYDRO
+        value: 7.9
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 9.9
+      - statKey: DMG_BONUS_PYRO
+        value: 7.9
+      - statKey: ELEMENTAL_MASTERY
+        value: 31.6
+      - statKey: ENERGY_RECHARGE
+        value: 8.8
+      - statKey: HEALING_BONUS
+        value: 6.1
+      - statKey: HP_FLAT
+        value: 324
+      - statKey: HP_PERCENT
+        value: 7.9
+  - rarity: 2
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 36
+      - statKey: ATK_PERCENT
+        value: 9
+      - statKey: CRIT_DMG
+        value: 11.9
+      - statKey: CRIT_RATE
+        value: 6.0
+      - statKey: DEF_PERCENT
+        value: 11.2
+      - statKey: DMG_BONUS_ANEMO
+        value: 9.0
+      - statKey: DMG_BONUS_CRYO
+        value: 9.0
+      - statKey: DMG_BONUS_DENDRO
+        value: 9.0
+      - statKey: DMG_BONUS_ELECTRO
+        value: 9.0
+      - statKey: DMG_BONUS_GEO
+        value: 9.0
+      - statKey: DMG_BONUS_HYDRO
+        value: 9.0
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 11.2
+      - statKey: DMG_BONUS_PYRO
+        value: 9.0
+      - statKey: ELEMENTAL_MASTERY
+        value: 35.8
+      - statKey: ENERGY_RECHARGE
+        value: 9.9
+      - statKey: HEALING_BONUS
+        value: 6.9
+      - statKey: HP_FLAT
+        value: 551
+      - statKey: HP_PERCENT
+        value: 9.0
+  - rarity: 3
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 123
+      - statKey: ATK_PERCENT
+        value: 23.1
+      - statKey: CRIT_DMG
+        value: 30.8
+      - statKey: CRIT_RATE
+        value: 15.4
+      - statKey: DEF_PERCENT
+        value: 28.8
+      - statKey: DMG_BONUS_ANEMO
+        value: 23.1
+      - statKey: DMG_BONUS_CRYO
+        value: 23.1
+      - statKey: DMG_BONUS_DENDRO
+        value: 23.1
+      - statKey: DMG_BONUS_ELECTRO
+        value: 23.1
+      - statKey: DMG_BONUS_GEO
+        value: 23.1
+      - statKey: DMG_BONUS_HYDRO
+        value: 23.1
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 28.8
+      - statKey: DMG_BONUS_PYRO
+        value: 23.1
+      - statKey: ELEMENTAL_MASTERY
+        value: 92.3
+      - statKey: ENERGY_RECHARGE
+        value: 25.6
+      - statKey: HEALING_BONUS
+        value: 17.8
+      - statKey: HP_FLAT
+        value: 1893
+      - statKey: HP_PERCENT
+        value: 23.1
+  - rarity: 4
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 232
+      - statKey: ATK_PERCENT
+        value: 34.8
+      - statKey: CRIT_DMG
+        value: 46.4
+      - statKey: CRIT_RATE
+        value: 23.2
+      - statKey: DEF_PERCENT
+        value: 43.5
+      - statKey: DMG_BONUS_ANEMO
+        value: 34.8
+      - statKey: DMG_BONUS_CRYO
+        value: 34.8
+      - statKey: DMG_BONUS_DENDRO
+        value: 34.8
+      - statKey: DMG_BONUS_ELECTRO
+        value: 34.8
+      - statKey: DMG_BONUS_GEO
+        value: 34.8
+      - statKey: DMG_BONUS_HYDRO
+        value: 34.8
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 43.5
+      - statKey: DMG_BONUS_PYRO
+        value: 34.8
+      - statKey: ELEMENTAL_MASTERY
+        value: 92.3
+      - statKey: ENERGY_RECHARGE
+        value: 38.7
+      - statKey: HEALING_BONUS
+        value: 26.8
+      - statKey: HP_FLAT
+        value: 3571
+      - statKey: HP_PERCENT
+        value: 34.8
+  - rarity: 5
+    mainStatMaxValues:
+      - statKey: ATK_FLAT
+        value: 311
+      - statKey: ATK_PERCENT
+        value: 46.6
+      - statKey: CRIT_DMG
+        value: 62.2
+      - statKey: CRIT_RATE
+        value: 31.1
+      - statKey: DEF_PERCENT
+        value: 58.3
+      - statKey: DMG_BONUS_ANEMO
+        value: 46.6
+      - statKey: DMG_BONUS_CRYO
+        value: 46.6
+      - statKey: DMG_BONUS_DENDRO
+        value: 46.6
+      - statKey: DMG_BONUS_ELECTRO
+        value: 46.6
+      - statKey: DMG_BONUS_GEO
+        value: 46.6
+      - statKey: DMG_BONUS_HYDRO
+        value: 46.6
+      - statKey: DMG_BONUS_PHYSICAL
+        value: 58.3
+      - statKey: DMG_BONUS_PYRO
+        value: 46.6
+      - statKey: ELEMENTAL_MASTERY
+        value: 187
+      - statKey: ENERGY_RECHARGE
+        value: 51.8
+      - statKey: HEALING_BONUS
+        value: 35.9
+      - statKey: HP_FLAT
+        value: 4780
+      - statKey: HP_PERCENT
+        value: 46.6
+# Source: https://genshin-impact.fandom.com/wiki/Artifact/Distribution
+artifactMainStatOddsByType:
+  - typeKey: CIRCLET
+    mainStatOdds:
+      - statKey: ATK_PERCENT
+        odds: 0.22
+      - statKey: CRIT_DMG
+        odds: 0.1
+      - statKey: CRIT_RATE
+        odds: 0.1
+      - statKey: DEF_PERCENT
+        odds: 0.22
+      - statKey: ELEMENTAL_MASTERY
+        odds: 0.04
+      - statKey: HEALING_BONUS
+        odds: 0.1
+      - statKey: HP_PERCENT
+        odds: 0.22
+  - typeKey: FLOWER
+    mainStatOdds:
+      - statKey: HP_FLAT
+        odds: 1
+  - typeKey: GOBLET
+    mainStatOdds:
+      - statKey: ATK_PERCENT
+        odds: 0.1925
+      - statKey: DEF_PERCENT
+        odds: 0.19
+      - statKey: DMG_BONUS_ANEMO
+        odds: 0.05
+      - statKey: DMG_BONUS_CRYO
+        odds: 0.05
+      - statKey: DMG_BONUS_DENDRO
+        odds: 0.05
+      - statKey: DMG_BONUS_ELECTRO
+        odds: 0.05
+      - statKey: DMG_BONUS_GEO
+        odds: 0.05
+      - statKey: DMG_BONUS_HYDRO
+        odds: 0.05
+      - statKey: DMG_BONUS_PHYSICAL
+        odds: 0.05
+      - statKey: DMG_BONUS_PYRO
+        odds: 0.05
+      - statKey: ELEMENTAL_MASTERY
+        odds: 0.025
+      - statKey: HP_PERCENT
+        odds: 0.1925
+  - typeKey: PLUME
+    mainStatOdds:
+      - statKey: ATK_FLAT
+        odds: 1
+  - typeKey: SANDS
+    mainStatOdds:
+      - statKey: ATK_PERCENT
+        odds: 0.2666
+      - statKey: DEF_PERCENT
+        odds: 0.2666
+      - statKey: ELEMENTAL_MASTERY
+        odds: 0.1
+      - statKey: ENERGY_RECHARGE
+        odds: 0.1
+      - statKey: HP_PERCENT
+        odds: 0.2668
+# Source: https://genshin-impact.fandom.com/wiki/Artifact/Stats
+artifactMaxLevelByRarity:
+  - rarity: 1
+    maxLevel: 4
+  - rarity: 2
+    maxLevel: 4
+  - rarity: 3
+    maxLevel: 12
+  - rarity: 4
+    maxLevel: 16
+  - rarity: 5
+    maxLevel: 20
+# Source: https://genshin-impact.fandom.com/wiki/Artifact/Distribution#Minor_Affix_Attribute
+artifactSubStatRelativeLikelihoods:
+  - statKey: ATK_FLAT
+    value: 6
+  - statKey: ATK_PERCENT
+    value: 4
+  - statKey: CRIT_DMG
+    value: 3
+  - statKey: CRIT_RATE
+    value: 3
+  - statKey: DEF_FLAT
+    value: 6
+  - statKey: DEF_PERCENT
+    value: 4
+  - statKey: ELEMENTAL_MASTERY
+    value: 4
+  - statKey: ENERGY_RECHARGE
+    value: 4
+  - statKey: HP_FLAT
+    value: 6
+  - statKey: HP_PERCENT
+    value: 4
+# Source: https://genshin-impact.fandom.com/wiki/Artifact/Stats
+artifactSubStatRollValuesByRarity:
+  - rarity: 1
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [1.56, 1.95]
+      - statKey: ATK_PERCENT
+        values: [1.17, 1.46]
+      - statKey: CRIT_DMG
+        values: [1.55, 1.94]
+      - statKey: CRIT_RATE
+        values: [0.78, 0.97]
+      - statKey: DEF_FLAT
+        values: [1.85, 2.31]
+      - statKey: DEF_PERCENT
+        values: [1.46, 1.82]
+      - statKey: ELEMENTAL_MASTERY
+        values: [4.66, 5.83]
+      - statKey: ENERGY_RECHARGE
+        values: [1.3, 1.62]
+      - statKey: HP_FLAT
+        values: [23.9, 29.88]
+      - statKey: HP_PERCENT
+        values: [1.17, 1.46]
+  - rarity: 2
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [3.27, 3.97, 4.67]
+      - statKey: ATK_PERCENT
+        values: [1.63, 1.98, 2.33]
+      - statKey: CRIT_DMG
+        values: [2.18, 2.64, 3.11]
+      - statKey: CRIT_RATE
+        values: [1.09, 1.32, 1.55]
+      - statKey: DEF_FLAT
+        values: [3.89, 4.72, 5.56]
+      - statKey: DEF_PERCENT
+        values: [2.04, 2.48, 2.91]
+      - statKey: ELEMENTAL_MASTERY
+        values: [6.53, 7.93, 9.33]
+      - statKey: ENERGY_RECHARGE
+        values: [1.81, 2.2, 2.59]
+      - statKey: HP_FLAT
+        values: [50.19, 60.95, 71.7]
+      - statKey: HP_PERCENT
+        values: [1.63, 1.98, 2.33]
+  - rarity: 3
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [6.54, 7.47, 8.4, 9.34]
+      - statKey: ATK_PERCENT
+        values: [2.45, 2.8, 3.15, 3.5]
+      - statKey: CRIT_DMG
+        values: [3.26, 3.73, 4.2, 4.66]
+      - statKey: CRIT_RATE
+        values: [1.63, 1.86, 2.1, 2.33]
+      - statKey: DEF_FLAT
+        values: [7.78, 8.89, 10.0, 11.11]
+      - statKey: DEF_PERCENT
+        values: [3.06, 3.5, 3.93, 4.37]
+      - statKey: ELEMENTAL_MASTERY
+        values: [9.79, 11.19, 12.59, 13.99]
+      - statKey: ENERGY_RECHARGE
+        values: [2.72, 3.11, 3.5, 3.89]
+      - statKey: HP_FLAT
+        values: [100.38, 114.72, 129.06, 143.4]
+      - statKey: HP_PERCENT
+        values: [2.45, 2.8, 3.15, 3.5]
+  - rarity: 4
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [10.89, 12.45, 14.0, 15.56]
+      - statKey: ATK_PERCENT
+        values: [3.26, 3.73, 4.2, 4.66]
+      - statKey: CRIT_DMG
+        values: [4.35, 4.97, 5.6, 6.22]
+      - statKey: CRIT_RATE
+        values: [2.18, 2.49, 2.8, 3.11]
+      - statKey: DEF_FLAT
+        values: [12.96, 14.82, 16.67, 18.52]
+      - statKey: DEF_PERCENT
+        values: [4.08, 4.66, 5.25, 5.83]
+      - statKey: ELEMENTAL_MASTERY
+        values: [13.06, 14.92, 16.79, 18.65]
+      - statKey: ENERGY_RECHARGE
+        values: [3.63, 4.14, 4.66, 5.18]
+      - statKey: HP_FLAT
+        values: [167.3, 191.2, 215.1, 239.0]
+      - statKey: HP_PERCENT
+        values: [3.26, 3.73, 4.2, 4.66]
+  - rarity: 5
+    subStatRollValues:
+      - statKey: ATK_FLAT
+        values: [13.62, 15.56, 17.51, 19.45]
+      - statKey: ATK_PERCENT
+        values: [4.08, 4.66, 5.25, 5.83]
+      - statKey: CRIT_DMG
+        values: [5.44, 6.22, 6.99, 7.77]
+      - statKey: CRIT_RATE
+        values: [2.72, 3.11, 3.5, 3.89]
+      - statKey: DEF_FLAT
+        values: [16.2, 18.52, 20.83, 23.15]
+      - statKey: DEF_PERCENT
+        values: [5.1, 5.83, 6.56, 7.29]
+      - statKey: ELEMENTAL_MASTERY
+        values: [16.32, 18.65, 20.98, 23.31]
+      - statKey: ENERGY_RECHARGE
+        values: [4.53, 5.18, 5.83, 6.48]
+      - statKey: HP_FLAT
+        values: [209.13, 239.0, 268.88, 298.75]
+      - statKey: HP_PERCENT
+        values: [4.08, 4.66, 5.25, 5.83]
+# These must be in canonical order.
+artifactTypes:
+  - iconUrl: /genshin/icons/flower.png
+    key: FLOWER
+  - iconUrl: /genshin/icons/plume.png
+    key: PLUME
+  - iconUrl: /genshin/icons/sands.png
+    key: SANDS
+  - iconUrl: /genshin/icons/goblet.png
+    key: GOBLET
+  - iconUrl: /genshin/icons/circlet.png
+    key: CIRCLET
+# Source: https://keqingmains.com/misc/artifacts/
+initialArtifactSubStatCountOddsByRarity:
+  - rarity: 1
+    subStatCountOdds:
+      - count: 0
+        odds: 1
+  - rarity: 2
+    subStatCountOdds:
+      - count: 0
+        odds: 0.8
+      - count: 1
+        odds: 0.2
+  - rarity: 3
+    subStatCountOdds:
+      - count: 1
+        odds: 0.8
+      - count: 2
+        odds: 0.2
+  - rarity: 4
+    subStatCountOdds:
+      - count: 2
+        odds: 0.8
+      - count: 3
+        odds: 0.2
+  - rarity: 5
+    subStatCountOdds:
+      - count: 3
+        odds: 0.8
+      - count: 4
+        odds: 0.2
+maxArtifactSubStatCount: 4
+# These must be in canonical order.
+overallStats:
+  - iconUrl: /genshin/icons/hp.png
+    key: MAX_HP
+  - iconUrl: /genshin/icons/attack.png
+    key: ATK
+  - iconUrl: /genshin/icons/defense.png
+    key: DEF
+  - iconUrl: /genshin/icons/elemental_mastery.png
+    key: ELEMENTAL_MASTERY
+  - iconUrl: /genshin/icons/crit_rate.png
+    key: CRIT_RATE
+  - css: brightness-0 dark:brightness-100 dark:invert
+    iconUrl: /genshin/icons/crit_rate.png
+    key: CRIT_DMG
+  - iconUrl: /genshin/icons/healing.png
+    key: HEALING_BONUS
+  - iconUrl: /genshin/icons/energy_recharge.png
+    key: ENERGY_RECHARGE
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/pyro.svg
+    key: DMG_BONUS_PYRO
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/hydro.svg
+    key: DMG_BONUS_HYDRO
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/dendro.svg
+    key: DMG_BONUS_DENDRO
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/electro.svg
+    key: DMG_BONUS_ELECTRO
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/anemo.svg
+    key: DMG_BONUS_ANEMO
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/cryo.svg
+    key: DMG_BONUS_CRYO
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /genshin/icons/geo.svg
+    key: DMG_BONUS_GEO
+  - iconUrl: /genshin/icons/physical.png
+    key: DMG_BONUS_PHYSICAL
+stats:
+  # For now, assume flat stats don't contribute to overall stats.
+  - iconUrl: /genshin/icons/attack.png
+    key: ATK_FLAT
+  - iconUrl: /genshin/icons/attack.png
+    key: ATK_PERCENT
+    overallStatKey: ATK
+  - iconUrl: /genshin/icons/crit_rate.png
+    key: CRIT_DMG
+    overallStatKey: CRIT_DMG
+  - iconUrl: /genshin/icons/crit_rate.png
+    key: CRIT_RATE
+    overallStatKey: CRIT_RATE
+  # For now, assume flat stats don't contribute to overall stats.
+  - iconUrl: /genshin/icons/defense.png
+    key: DEF_FLAT
+  - iconUrl: /genshin/icons/defense.png
+    key: DEF_PERCENT
+    overallStatKey: DEF
+  - iconUrl: /genshin/icons/anemo.png
+    key: DMG_BONUS_ANEMO
+    overallStatKey: DMG_BONUS_ANEMO
+  - iconUrl: /genshin/icons/cryo.png
+    key: DMG_BONUS_CRYO
+    overallStatKey: DMG_BONUS_CRYO
+  - iconUrl: /genshin/icons/dendro.png
+    key: DMG_BONUS_DENDRO
+    overallStatKey: DMG_BONUS_DENDRO
+  - iconUrl: /genshin/icons/electro.png
+    key: DMG_BONUS_ELECTRO
+    overallStatKey: DMG_BONUS_ELECTRO
+  - iconUrl: /genshin/icons/geo.png
+    key: DMG_BONUS_GEO
+    overallStatKey: DMG_BONUS_GEO
+  - iconUrl: /genshin/icons/hydro.png
+    key: DMG_BONUS_HYDRO
+    overallStatKey: DMG_BONUS_HYDRO
+  - iconUrl: /genshin/icons/physical.png
+    key: DMG_BONUS_PHYSICAL
+    overallStatKey: DMG_BONUS_PHYSICAL
+  - iconUrl: /genshin/icons/pyro.png
+    key: DMG_BONUS_PYRO
+    overallStatKey: DMG_BONUS_PYRO
+  - iconUrl: /genshin/icons/elemental_mastery.png
+    key: ELEMENTAL_MASTERY
+    overallStatKey: ELEMENTAL_MASTERY
+  - iconUrl: /genshin/icons/energy_recharge.png
+    key: ENERGY_RECHARGE
+    overallStatKey: ENERGY_RECHARGE
+  - iconUrl: /genshin/icons/healing.png
+    key: HEALING_BONUS
+    overallStatKey: HEALING_BONUS
+  # For now, assume flat stats don't contribute to overall stats.
+  - iconUrl: /genshin/icons/hp.png
+    key: HP_FLAT
+  - iconUrl: /genshin/icons/hp.png
+    key: HP_PERCENT
+    overallStatKey: MAX_HP

@@ -17,6 +17,9 @@
     - 1
     - 2
     - 3
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -35,6 +38,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -52,6 +58,9 @@
   name: Berserker
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -71,6 +80,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -89,6 +101,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -106,6 +121,9 @@
   name: Brave Heart
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -125,6 +143,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -143,6 +164,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -160,6 +184,9 @@
   name: Defender's Will
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -179,6 +206,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -197,6 +227,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -215,6 +248,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -233,6 +269,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -251,6 +290,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -268,6 +310,9 @@
   name: Gambler
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -287,6 +332,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -305,6 +353,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -323,6 +374,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -341,6 +395,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -359,6 +416,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -376,6 +436,9 @@
   name: Instructor
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -395,6 +458,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -414,6 +480,9 @@
     - 1
     - 2
     - 3
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -432,6 +501,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -450,6 +522,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -467,6 +542,9 @@
   name: Martial Artist
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -486,6 +564,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -504,6 +585,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -522,6 +606,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -540,6 +627,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -558,6 +648,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -576,6 +669,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: false
@@ -594,6 +690,8 @@
   rarities:
     - 3
     - 4
+  setBonusCounts:
+    - 1
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: false
@@ -612,6 +710,8 @@
   rarities:
     - 3
     - 4
+  setBonusCounts:
+    - 1
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: false
@@ -630,6 +730,8 @@
   rarities:
     - 3
     - 4
+  setBonusCounts:
+    - 1
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: false
@@ -648,6 +750,8 @@
   rarities:
     - 3
     - 4
+  setBonusCounts:
+    - 1
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -665,6 +769,9 @@
   name: Resolution of Sojourner
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -684,6 +791,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -701,6 +811,9 @@
   name: Scholar
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -720,6 +833,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -738,6 +854,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -756,6 +875,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -774,6 +896,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -791,6 +916,9 @@
   name: The Exile
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -810,6 +938,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -828,6 +959,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -845,6 +979,9 @@
   name: Tiny Miracle
   rarities:
     - 3
+    - 4
+  setBonusCounts:
+    - 2
     - 4
 - hasArtifactTypes:
     CIRCLET: true
@@ -865,6 +1002,9 @@
     - 1
     - 2
     - 3
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -883,6 +1023,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -901,6 +1044,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -919,6 +1065,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -937,6 +1086,9 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4
 - hasArtifactTypes:
     CIRCLET: true
     FLOWER: true
@@ -955,3 +1107,6 @@
   rarities:
     - 4
     - 5
+  setBonusCounts:
+    - 2
+    - 4

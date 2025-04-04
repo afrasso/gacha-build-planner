@@ -1,42 +1,24 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
+import { ArtifactArraySchema, ArtifactData, ArtifactSchema } from "./artifact";
 import {
-  Artifact,
-  ArtifactArraySchema,
-  ArtifactSchema,
-  ArtifactSetBonusSchema,
-  ArtifactSetBonusTypeSchema,
-  ArtifactSetSchema,
-  ArtifactType,
-  ArtifactTypeSchema,
-  BuildArtifactsSchema,
-  DesiredArtifactMainStatsSchema,
-} from "./artifact";
-import {
-  ArtifactMetric,
   ArtifactMetricResultSchema,
   ArtifactMetricResultsSchema,
   ArtifactMetricSchema,
   ArtifactMetricsResultsSchema,
 } from "./artifactmetrics";
-import { Build, BuildArraySchema, BuildSchema } from "./build";
-import { CharacterSchema, ElementSchema } from "./character";
+import { ArtifactSetBonusSchema, ArtifactSetBonusTypeSchema, ArtifactSetSchema } from "./artifactset";
+import { BuildArraySchema, BuildData, BuildSchema } from "./build";
 import { Plan, PlanSchema } from "./plan";
-import {
-  DesiredOverallStatSchema,
-  OverallStatKeySchema,
-  OverallStatSchema,
-  StatKey,
-  StatKeySchema,
-  StatSchema,
-} from "./stat";
-import { WeaponSchema, WeaponTypeSchema } from "./weapon";
+import { DesiredOverallStatSchema, StatSchema } from "./stat";
 
 export * from "./artifact";
 export * from "./artifactmetrics";
+export * from "./artifactset";
 export * from "./build";
 export * from "./character";
+export * from "./misc";
 export * from "./plan";
 export * from "./stat";
 export * from "./user";
@@ -50,9 +32,6 @@ ajv.addSchema(ArtifactArraySchema);
 ajv.addSchema(ArtifactSetSchema);
 ajv.addSchema(ArtifactSetBonusSchema);
 ajv.addSchema(ArtifactSetBonusTypeSchema);
-ajv.addSchema(ArtifactTypeSchema);
-ajv.addSchema(BuildArtifactsSchema);
-ajv.addSchema(DesiredArtifactMainStatsSchema);
 
 ajv.addSchema(ArtifactMetricSchema);
 ajv.addSchema(ArtifactMetricResultSchema);
@@ -62,105 +41,25 @@ ajv.addSchema(ArtifactMetricsResultsSchema);
 ajv.addSchema(BuildSchema);
 ajv.addSchema(BuildArraySchema);
 
-ajv.addSchema(CharacterSchema);
-ajv.addSchema(ElementSchema);
-
 ajv.addSchema(PlanSchema);
 
 ajv.addSchema(DesiredOverallStatSchema);
-ajv.addSchema(OverallStatKeySchema);
-ajv.addSchema(OverallStatSchema);
-ajv.addSchema(StatKeySchema);
 ajv.addSchema(StatSchema);
 
-ajv.addSchema(WeaponSchema);
-ajv.addSchema(WeaponTypeSchema);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const initializeArtifact = ({ artifact }: { artifact: any }): void => {
-  if (artifact.isLocked === undefined) {
-    console.log("Artifact missing isLocked field.");
-    artifact.isLocked = false;
-  }
-  if (!artifact.lastUpdatedDate) {
-    console.log("Artifact missing lastUpdatedDate field.");
-    artifact.lastUpdatedDate = new Date().toISOString();
-  }
-  if (artifact.mainStat === "ATK") {
-    console.log("Artifact has main stat of ATK (not ATK_FLAT).");
-    artifact.mainStat = StatKey.ATK_FLAT;
-  }
-  if (!artifact.metricsResults) {
-    console.log("Artifact missing metricsResults field.");
-    artifact.metricsResults = {};
-  }
-  for (const subStat of artifact.subStats) {
-    if (!subStat.key) {
-      console.log(`Artifact ${artifact.id} missing subStat key field.`);
-      subStat.key = subStat.stat;
-      delete subStat.stat;
-    }
-  }
-  for (const artifactMetric of Object.values(ArtifactMetric)) {
-    if (!artifact.metricsResults[artifactMetric]) {
-      console.log(`Artifact missing field for metric ${artifactMetric}.`);
-      artifact.metricsResults[artifactMetric] = {};
-    }
-    if (!artifact.metricsResults[artifactMetric].buildResults) {
-      console.log(`Artifact missing buildResults for metric ${artifactMetric}.`);
-      artifact.metricsResults[artifactMetric].buildResults = {};
-    }
-  }
+  // Initialization logic goes here.
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const initializeBuild = ({ build }: { build: any }): void => {
-  if (!build.artifacts) {
-    console.log("Build missing artifacts field.");
-    build.artifacts = {};
-  }
-  if (!build.lastUpdatedDate) {
-    console.log("Build missing lastUpdatedDate field.");
-    build.lastUpdatedDate = new Date().toISOString();
-  }
-  for (const artifactType of Object.values(ArtifactType)) {
-    if (build.artifacts[artifactType]) {
-      initializeArtifact({ artifact: build.artifacts[artifactType] });
-    }
-  }
-  if (build.desiredArtifactMainStats) {
-    for (const artifactType of Object.values(ArtifactType)) {
-      if (
-        build.desiredArtifactMainStats[artifactType] &&
-        !Array.isArray(build.desiredArtifactMainStats[artifactType])
-      ) {
-        console.log(`Build has desiredArtifactMainStats for ${artifactType} as not an array.`);
-        build.desiredArtifactMainStats[artifactType] = [build.desiredArtifactMainStats[artifactType]];
-      }
-    }
-  }
-  if (build.desiredStats) {
-    console.log("Build has desiredStats field.");
-    delete build.desiredStats;
-  }
-  if (!build.desiredOverallStats) {
-    console.log("Build missing desiredOverallStats field.");
-    build.desiredOverallStats = [];
-  }
-  for (const desiredOverallStat of build.desiredOverallStats) {
-    if (typeof desiredOverallStat.stat === "string") {
-      console.log("Build has desiredOverallStat.stat as a string");
-      desiredOverallStat.stat = { key: desiredOverallStat.stat, value: desiredOverallStat.value };
-      delete desiredOverallStat.value;
-    }
-  }
-  if (build.sortOrder === undefined) {
-    console.log("Build missing sortOrder field.");
-    build.sortOrder = -1;
+  // Initialization logic goes here.
+  for (const artifact of Object.values(build.artifacts)) {
+    initializeArtifact({ artifact });
   }
 };
 
-export const validateArtifact = (data: unknown): Artifact => {
+export const validateArtifact = (data: unknown): ArtifactData => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/Artifact");
 
   if (!validate) {
@@ -176,14 +75,14 @@ export const validateArtifact = (data: unknown): Artifact => {
     throw new Error("Data validation failed.");
   }
 
-  return data as Artifact;
+  return data as ArtifactData;
 };
 
-export const validateArtifacts = (data: unknown): Artifact[] => {
+export const validateArtifacts = (data: unknown): ArtifactData[] => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/ArtifactArray");
 
   if (!validate) {
-    throw new Error("Unpexected error: validateArtifacts is not available.");
+    throw new Error("Unexpected error: validateArtifacts is not available.");
   }
 
   (data as unknown[]).forEach((artifact) => {
@@ -197,14 +96,14 @@ export const validateArtifacts = (data: unknown): Artifact[] => {
     throw new Error("Data validation failed.");
   }
 
-  return data as Artifact[];
+  return data as ArtifactData[];
 };
 
-export const validateBuild = (data: unknown): Build => {
+export const validateBuild = (data: unknown): BuildData => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/Build");
 
   if (!validate) {
-    throw new Error("Unpexected error: validateBuild is not available.");
+    throw new Error("Unexpected error: validateBuild is not available.");
   }
 
   initializeBuild({ build: data });
@@ -216,14 +115,14 @@ export const validateBuild = (data: unknown): Build => {
     throw new Error("Data validation failed.");
   }
 
-  return data as Build;
+  return data as BuildData;
 };
 
-export const validateBuilds = (data: unknown): Build[] => {
+export const validateBuilds = (data: unknown): BuildData[] => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/BuildArray");
 
   if (!validate) {
-    throw new Error("Unpexected error: validateBuilds is not available.");
+    throw new Error("Unexpected error: validateBuilds is not available.");
   }
 
   (data as unknown[]).forEach((build) => {
@@ -237,14 +136,14 @@ export const validateBuilds = (data: unknown): Build[] => {
     throw new Error("Data validation failed.");
   }
 
-  return data as Build[];
+  return data as BuildData[];
 };
 
 export const validatePlan = (data: unknown): Plan => {
   const validate = ajv.getSchema("https://gacha-build-planner.vercel.app/schemas/Plan");
 
   if (!validate) {
-    throw new Error("Unpexected error: validatePlan is not available.");
+    throw new Error("Unexpected error: validatePlan is not available.");
   }
 
   (data as { artifacts: unknown[] }).artifacts.forEach((artifact) => {
