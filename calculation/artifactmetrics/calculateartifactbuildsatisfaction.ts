@@ -86,15 +86,11 @@ const getArtifactsForCalculation = ({
     );
   }
 
-  console.log("build.desiredArtifactSetBonuses", build.desiredArtifactSetBonuses);
-
   const setIds = build.desiredArtifactSetBonuses.reduce<string[]>((acc, setBonus) => {
     const remainingBonusCount = artifact.setId !== setBonus.setId ? setBonus.bonusCount : setBonus.bonusCount - 1;
     acc.push(...Array(remainingBonusCount).fill(setBonus.setId));
     return acc;
   }, []);
-
-  console.log("setIds", setIds);
 
   const artifacts = getArtifactTypes()
     .filter((artifactType) => artifactType.key !== artifact.typeKey)
@@ -151,12 +147,6 @@ export const calculateArtifactBuildSatisfaction = ({
   const setBonusFactor = getSetBonusFactor({ artifact, build, calculationType, dataContext });
   const mainStatsFactor = getMainStatsFactor({ artifact, build, calculationType, dataContext });
 
-  if (artifact.id === "51125216-2abf-476b-9985-8048a570d690") {
-    console.log("targetStatsStrategy", targetStatsStrategy);
-    console.log("setBonusFactor", setBonusFactor);
-    console.log("mainStatsFactor", mainStatsFactor);
-  }
-
   if (setBonusFactor === 0 || mainStatsFactor === 0) {
     // This artifact will never satisfy the requirements of the build.
     return 0;
@@ -170,10 +160,6 @@ export const calculateArtifactBuildSatisfaction = ({
       dataContext,
       targetStatsStrategy,
     });
-
-    if (artifact.id === "51125216-2abf-476b-9985-8048a570d690") {
-      console.log("satisfactionResult", satisfactionResult);
-    }
 
     // Factor in set bonus requirements into satisfaction result (since they basically weren't considered above).
     satisfactionCount += setBonusFactor * mainStatsFactor * (satisfactionResult.overallSatisfaction ? 1 : 0);

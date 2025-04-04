@@ -1,14 +1,28 @@
 import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
 
 import { getRandomInitialSubStats } from "@/calculation/simulation/getrandominitialsubstats";
-import { getSubStatRollValues } from "@/constants";
-import { Stat, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { Stat } from "@/types";
 
 describe("getRandomInitialSubStats()", () => {
   let randomSpy: MockInstance<() => number>;
+  let dataContext: IDataContext;
 
   beforeEach(() => {
     randomSpy = vi.spyOn(Math, "random");
+    dataContext = {
+      getArtifactSubStatRelativeLikelihood: (_) => 1,
+      getInitialArtifactSubStatCountOdds: (_) => [{ count: 0, odds: 1 }],
+      getPossibleArtifactSubStatRollValues: (_) => [1, 2, 3, 4],
+      getPossibleArtifactSubStats: () => [
+        "ATK_FLAT",
+        "ATK_PERCENT",
+        "DEF_FLAT",
+        "DEF_PERCENT",
+        "HP_FLAT",
+        "HP_PERCENT",
+      ],
+    } as IDataContext;
   });
 
   afterEach(() => {
@@ -17,48 +31,54 @@ describe("getRandomInitialSubStats()", () => {
 
   const validateSubStats = ({
     expectedLength,
-    mainStat,
+    mainStatKey,
     rarity,
-    subStatValues,
+    subStats,
   }: {
     expectedLength: number;
-    mainStat: StatKey;
+    mainStatKey: string;
     rarity: number;
-    subStatValues: Stat<StatKey>[];
+    subStats: Stat[];
   }) => {
-    expect(subStatValues.length).toBe(expectedLength);
-    for (const subStatValue of subStatValues) {
-      expect(subStatValue.key).not.toBe(mainStat);
-      const rollValues = getSubStatRollValues({ rarity, statKey: subStatValue.key });
-      expect(subStatValue.value).toBe(rollValues[0]);
+    expect(subStats.length).toBe(expectedLength);
+    for (const subStat of subStats) {
+      expect(subStat.key).not.toBe(mainStatKey);
+      const rollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: subStat.key });
+      expect(subStat.value).toBe(rollValues[0]);
     }
   };
 
   describe("When I get random initial sub-stats for an artifact with a rarity of 1", () => {
     it("should not return any sub-stats", () => {
-      const mainStat = StatKey.ATK_FLAT;
+      const mainStatKey = "ATK_FLAT";
       const rarity = 1;
+
       validateSubStats({
         expectedLength: 0,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
     });
   });
 
   describe("When I get random initial sub-stats for an artifact with a rarity of 2", () => {
     it("should return the appropriate number of distinct sub-stats", () => {
-      const mainStat = StatKey.ATK_FLAT;
+      const mainStatKey = "ATK_FLAT";
       const rarity = 2;
+
+      dataContext.getInitialArtifactSubStatCountOdds = () => [
+        { count: 0, odds: 0.8 },
+        { count: 1, odds: 0.2 },
+      ];
 
       // For determining the sub-stat count.
       randomSpy.mockReturnValueOnce(0);
       validateSubStats({
         expectedLength: 0,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
 
       // For determining the sub-stat count.
@@ -67,17 +87,22 @@ describe("getRandomInitialSubStats()", () => {
       randomSpy.mockReturnValue(0);
       validateSubStats({
         expectedLength: 1,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
     });
   });
 
   describe("When I get random initial sub-stats for an artifact with a rarity of 3", () => {
     it("should return the appropriate number of distinct sub-stats", () => {
-      const mainStat = StatKey.ATK_FLAT;
+      const mainStatKey = "ATK_FLAT";
       const rarity = 3;
+
+      dataContext.getInitialArtifactSubStatCountOdds = () => [
+        { count: 1, odds: 0.8 },
+        { count: 2, odds: 0.2 },
+      ];
 
       // For determining the sub-stat count.
       randomSpy.mockReturnValueOnce(0);
@@ -85,9 +110,9 @@ describe("getRandomInitialSubStats()", () => {
       randomSpy.mockReturnValue(0);
       validateSubStats({
         expectedLength: 1,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
 
       // For determining the sub-stat count.
@@ -96,17 +121,22 @@ describe("getRandomInitialSubStats()", () => {
       randomSpy.mockReturnValue(0);
       validateSubStats({
         expectedLength: 2,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
     });
   });
 
   describe("When I get random initial sub-stats for an artifact with a rarity of 4", () => {
     it("should return the appropriate number of distinct sub-stats", () => {
-      const mainStat = StatKey.ATK_FLAT;
+      const mainStatKey = "ATK_FLAT";
       const rarity = 4;
+
+      dataContext.getInitialArtifactSubStatCountOdds = () => [
+        { count: 2, odds: 0.8 },
+        { count: 3, odds: 0.2 },
+      ];
 
       // For determining the sub-stat count.
       randomSpy.mockReturnValueOnce(0);
@@ -114,9 +144,9 @@ describe("getRandomInitialSubStats()", () => {
       randomSpy.mockReturnValue(0);
       validateSubStats({
         expectedLength: 2,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
 
       // For determining the sub-stat count.
@@ -125,17 +155,22 @@ describe("getRandomInitialSubStats()", () => {
       randomSpy.mockReturnValue(0);
       validateSubStats({
         expectedLength: 3,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
     });
   });
 
   describe("When I get random initial sub-stats for an artifact with a rarity of 5", () => {
     it("should return the appropriate number of distinct sub-stats", () => {
-      const mainStat = StatKey.ATK_FLAT;
+      const mainStatKey = "ATK_FLAT";
       const rarity = 5;
+
+      dataContext.getInitialArtifactSubStatCountOdds = () => [
+        { count: 3, odds: 0.8 },
+        { count: 4, odds: 0.2 },
+      ];
 
       // For determining the sub-stat count.
       randomSpy.mockReturnValueOnce(0);
@@ -143,9 +178,9 @@ describe("getRandomInitialSubStats()", () => {
       randomSpy.mockReturnValue(0);
       validateSubStats({
         expectedLength: 3,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
 
       // For determining the sub-stat count.
@@ -154,9 +189,9 @@ describe("getRandomInitialSubStats()", () => {
       randomSpy.mockReturnValue(0);
       validateSubStats({
         expectedLength: 4,
-        mainStat,
+        mainStatKey,
         rarity,
-        subStatValues: getRandomInitialSubStats({ mainStat, rarity }),
+        subStats: getRandomInitialSubStats({ dataContext, mainStatKey, rarity }),
       });
     });
   });

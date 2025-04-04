@@ -20,9 +20,6 @@ export const calculateArtifactSetBonusesSatisfaction = ({
   artifacts: Record<string, IArtifact>;
   desiredArtifactSetBonuses: ArtifactSetBonus[];
 }): SatisfactionResult<ArtifactSetBonusSatisfactionDetails> => {
-  if (artifacts["BODY"].id === "51125216-2abf-476b-9985-8048a570d690") {
-    console.log(artifacts);
-  }
   const details = desiredArtifactSetBonuses.map((desiredSetBonus) => ({
     desiredSetBonus,
     satisfaction: calculateArtifactSetBonusSatisfaction({ artifacts, setBonus: desiredSetBonus }),

@@ -1,57 +1,33 @@
-import { v4 as uuidv4 } from "uuid";
 import { describe, expect, it } from "vitest";
 
+import { generateArtifact } from "@/__tests__/generators";
 import { rollArtifact } from "@/calculation/simulation";
-import { getArtifactMaxLevel } from "@/constants";
-import { IArtifact, ArtifactMetric, ArtifactType, StatKey, Stat } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { Stat } from "@/types";
 
 describe("rollArtifact()", () => {
-  const generateArtifact = ({
-    level,
-    rarity,
-    subStats,
-  }: {
-    level: number;
-    rarity: number;
-    subStats: Stat<StatKey>[];
-  }): IArtifact => {
-    const artifact: IArtifact = {
-      id: uuidv4(),
-      isLocked: false,
-      lastUpdatedDate: new Date().toISOString(),
-      level,
-      mainStat: StatKey.ATK_FLAT,
-      metricsResults: {
-        [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.PLUS_MINUS]: { buildResults: {} },
-        [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
-        [ArtifactMetric.RATING]: { buildResults: {} },
-      },
-      rarity,
-      setId: uuidv4(),
-      subStats,
-      type: ArtifactType.FLOWER,
-    };
-    return artifact;
-  };
+  const dataContext = {
+    getArtifactLevelsPerSubStatRoll: () => 4,
+    getArtifactMaxLevel: (_) => 20,
+    getArtifactMaxSubStatCount: () => 4,
+    getArtifactSubStatRelativeLikelihood: (_) => 1,
+    getPossibleArtifactSubStatRollValues: (_) => [1, 2, 3, 4],
+    getPossibleArtifactSubStats: () => ["ATK_FLAT", "ATK_PERCENT", "DEF_FLAT", "DEF_PERCENT", "HP_FLAT", "HP_PERCENT"],
+  } as IDataContext;
 
   describe("When I roll an artifact", () => {
     it("should have all of the same values except for the level and sub-stats", () => {
       const level = 1;
       const rarity = 1;
-      const subStats: Stat<StatKey>[] = [];
+      const subStats: Stat[] = [];
       const artifact = generateArtifact({ level, rarity, subStats });
-      const rolledArtifact = rollArtifact({ artifact });
+      const rolledArtifact = rollArtifact({ artifact, dataContext });
       expect(rolledArtifact.id).toBe(artifact.id);
-      expect(rolledArtifact.lastUpdatedDate).toBe(rolledArtifact.lastUpdatedDate);
-      expect(rolledArtifact.level).toBe(getArtifactMaxLevel({ rarity }));
-      expect(rolledArtifact.mainStat).toBe(artifact.mainStat);
+      expect(rolledArtifact.level).toBe(dataContext.getArtifactMaxLevel({ rarity }));
+      expect(rolledArtifact.mainStatKey).toBe(artifact.mainStatKey);
       expect(rolledArtifact.rarity).toBe(artifact.rarity);
       expect(rolledArtifact.setId).toBe(artifact.setId);
-      expect(rolledArtifact.type).toBe(artifact.type);
+      expect(rolledArtifact.typeKey).toBe(artifact.typeKey);
     });
   });
 });

@@ -39,7 +39,7 @@ export interface ArtifactSubStatRollValuesByRarity {
 }
 
 export interface ArtifactType {
-  css: string;
+  css?: string;
   iconUrl: string;
   key: string;
 }

@@ -1,26 +1,27 @@
 import { v4 as uuidv4 } from "uuid";
 import { describe, expect, it } from "vitest";
 
+import { generateArtifact } from "@/__tests__/generators";
 import { getWeightedArtifactSetBonusFactor } from "@/calculation/artifactmetrics/setbonusfactor";
-import { getMainStatOdds } from "@/constants";
-import { IArtifact, ArtifactSetBonus, ArtifactSetBonusType, ArtifactType, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { ArtifactSetBonus } from "@/types";
 
 describe("getWeightedArtifactSetBonusFactor()", () => {
-  const generateArtifact = ({
-    mainStat,
-    setId,
-    type,
-  }: {
-    mainStat: StatKey;
-    setId: string;
-    type: ArtifactType;
-  }): IArtifact => {
-    return {
-      mainStat,
-      setId,
-      type,
-    } as IArtifact;
-  };
+  const dataContext = {
+    getArtifactMainStatOdds: ({ artifactTypeKey }) => {
+      if (artifactTypeKey === "FLOWER" || artifactTypeKey === "PLUME") {
+        return 1;
+      }
+      return 0.2;
+    },
+    getArtifactTypes: () => [
+      { key: "CIRCLET" },
+      { key: "FLOWER" },
+      { key: "GOBLET" },
+      { key: "PLUME" },
+      { key: "SANDS" },
+    ],
+  } as IDataContext;
 
   describe("When there are no main stat requirements", () => {
     const desiredArtifactMainStats = {};
@@ -29,13 +30,10 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
       const desiredArtifactSetBonuses: ArtifactSetBonus[] = [];
 
       it("should return 1", () => {
-        const artifact = generateArtifact({
-          mainStat: StatKey.ATK_PERCENT,
-          setId: uuidv4(),
-          type: ArtifactType.CIRCLET,
-        });
+        const artifact = generateArtifact({});
         const factor = getWeightedArtifactSetBonusFactor({
           artifact,
+          dataContext,
           desiredArtifactMainStats,
           desiredArtifactSetBonuses,
         });
@@ -45,13 +43,14 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
     describe("and a two-piece bonus is specified", () => {
       const setId = uuidv4();
-      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusType: ArtifactSetBonusType.TWO_PIECE, setId }];
+      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusCount: 2, setId }];
 
       describe("and the artifact matches the set bonus", () => {
         it("should return 1", () => {
-          const artifact = generateArtifact({ mainStat: StatKey.ATK_PERCENT, setId, type: ArtifactType.CIRCLET });
+          const artifact = generateArtifact({ setId });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -61,13 +60,10 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
       describe("and the artifact does not match the set bonus", () => {
         it("should return 0.6", () => {
-          const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: uuidv4(),
-            type: ArtifactType.CIRCLET,
-          });
+          const artifact = generateArtifact({});
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -80,19 +76,16 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
       const setId1 = uuidv4();
       const setId2 = uuidv4();
       const desiredArtifactSetBonuses: ArtifactSetBonus[] = [
-        { bonusType: ArtifactSetBonusType.TWO_PIECE, setId: setId1 },
-        { bonusType: ArtifactSetBonusType.TWO_PIECE, setId: setId2 },
+        { bonusCount: 2, setId: setId1 },
+        { bonusCount: 2, setId: setId2 },
       ];
 
       describe("and the artifact matches the first set bonus", () => {
         it("should return 1", () => {
-          const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: setId1,
-            type: ArtifactType.CIRCLET,
-          });
+          const artifact = generateArtifact({ setId: setId1 });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -102,13 +95,10 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
       describe("and the artifact matches the second set bonus", () => {
         it("should return 1", () => {
-          const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: setId2,
-            type: ArtifactType.CIRCLET,
-          });
+          const artifact = generateArtifact({ setId: setId2 });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -118,13 +108,10 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
       describe("and the artifact matches neither set bonus", () => {
         it("should return 0.2", () => {
-          const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: uuidv4(),
-            type: ArtifactType.CIRCLET,
-          });
+          const artifact = generateArtifact({});
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -135,13 +122,14 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
     describe("and a four-piece bonuses is specified", () => {
       const setId = uuidv4();
-      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusType: ArtifactSetBonusType.FOUR_PIECE, setId }];
+      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusCount: 4, setId }];
 
       describe("and the artifact matches the set bonus", () => {
         it("should return 1", () => {
-          const artifact = generateArtifact({ mainStat: StatKey.ATK_PERCENT, setId, type: ArtifactType.CIRCLET });
+          const artifact = generateArtifact({ setId });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -151,13 +139,10 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
       describe("and the artifact does not match the set bonus", () => {
         it("should return 0.2", () => {
-          const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: uuidv4(),
-            type: ArtifactType.CIRCLET,
-          });
+          const artifact = generateArtifact({});
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -169,9 +154,9 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
   describe("When there are main stat requirements", () => {
     const desiredArtifactMainStats = {
-      [ArtifactType.CIRCLET]: [StatKey.ATK_PERCENT],
-      [ArtifactType.GOBLET]: [StatKey.ATK_PERCENT],
-      [ArtifactType.SANDS]: [StatKey.ATK_PERCENT],
+      CIRCLET: ["ATK_PERCENT"],
+      GOBLET: ["ATK_PERCENT"],
+      SANDS: ["ATK_PERCENT"],
     };
 
     describe("and no set bonuses are specified", () => {
@@ -179,12 +164,12 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
       it("should return 1", () => {
         const artifact = generateArtifact({
-          mainStat: StatKey.ATK_PERCENT,
-          setId: uuidv4(),
-          type: ArtifactType.CIRCLET,
+          mainStatKey: "ATK_PERCENT",
+          typeKey: "CIRCLET",
         });
         const factor = getWeightedArtifactSetBonusFactor({
           artifact,
+          dataContext,
           desiredArtifactMainStats,
           desiredArtifactSetBonuses,
         });
@@ -194,13 +179,14 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
     describe("and a two-piece bonus is specified", () => {
       const setId = uuidv4();
-      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusType: ArtifactSetBonusType.TWO_PIECE, setId }];
+      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusCount: 2, setId }];
 
       describe("and the artifact matches the set bonus", () => {
         it("should return 1", () => {
-          const artifact = generateArtifact({ mainStat: StatKey.ATK_PERCENT, setId, type: ArtifactType.CIRCLET });
+          const artifact = generateArtifact({ setId });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -211,47 +197,50 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
       describe("and the artifact does not match the set bonus", () => {
         it("should return the expected value", () => {
           const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: uuidv4(),
-            type: ArtifactType.CIRCLET,
+            mainStatKey: "ATK_PERCENT",
+            typeKey: "CIRCLET",
           });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
 
+          const getOdds = dataContext.getArtifactMainStatOdds;
+          const numTypes = dataContext.getArtifactTypes().length;
           const circletFlowerOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes);
           const circletGobletOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const circletPlumeOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes);
           const circletSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const flowerGobletOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const flowerPlumeOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5);
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes);
           const flowerSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const gobletPlumeOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5);
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes);
           const gobletSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const plumeSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
 
+          // The total weight is the sum of all odds.
           const totalWeight =
             circletFlowerOdds +
             circletGobletOdds +
@@ -264,6 +253,7 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
             gobletSandsOdds +
             plumeSandsOdds;
 
+          // The artifact weight is the sum of the odds for combinations that don't include the circlet.
           const artifactWeight =
             flowerGobletOdds + flowerPlumeOdds + flowerSandsOdds + gobletPlumeOdds + gobletSandsOdds + plumeSandsOdds;
 
@@ -277,19 +267,20 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
       const setId1 = uuidv4();
       const setId2 = uuidv4();
       const desiredArtifactSetBonuses: ArtifactSetBonus[] = [
-        { bonusType: ArtifactSetBonusType.TWO_PIECE, setId: setId1 },
-        { bonusType: ArtifactSetBonusType.TWO_PIECE, setId: setId2 },
+        { bonusCount: 2, setId: setId1 },
+        { bonusCount: 2, setId: setId2 },
       ];
 
       describe("and the artifact matches the first set bonus", () => {
         it("should return 1", () => {
           const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
+            mainStatKey: "ATK_PERCENT",
             setId: setId1,
-            type: ArtifactType.CIRCLET,
+            typeKey: "CIRCLET",
           });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -300,12 +291,13 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
       describe("and the artifact matches the second set bonus", () => {
         it("should return 1", () => {
           const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
+            mainStatKey: "ATK_PERCENT",
             setId: setId2,
-            type: ArtifactType.CIRCLET,
+            typeKey: "CIRCLET",
           });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -316,41 +308,43 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
       describe("and the artifact matches neither set bonus", () => {
         it("should return the expected value", () => {
           const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: uuidv4(),
-            type: ArtifactType.CIRCLET,
+            mainStatKey: "ATK_PERCENT",
+            typeKey: "CIRCLET",
           });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
 
+          const getOdds = dataContext.getArtifactMainStatOdds;
+          const numTypes = dataContext.getArtifactTypes().length;
           const circletFlowerGobletPlumeOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes);
           const circletFlowerGobletSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const circletFlowerPlumeSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const circletGobletPlumeSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const flowerGobletPlumeSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
 
           const totalWeight =
             circletFlowerGobletPlumeOdds +
@@ -369,13 +363,14 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
 
     describe("and a four-piece bonuses is specified", () => {
       const setId = uuidv4();
-      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusType: ArtifactSetBonusType.FOUR_PIECE, setId }];
+      const desiredArtifactSetBonuses: ArtifactSetBonus[] = [{ bonusCount: 4, setId }];
 
       describe("and the artifact matches the set bonus", () => {
         it("should return 1", () => {
-          const artifact = generateArtifact({ mainStat: StatKey.ATK_PERCENT, setId, type: ArtifactType.CIRCLET });
+          const artifact = generateArtifact({ mainStatKey: "ATK_PERCENT", setId, typeKey: "CIRCLET" });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
@@ -386,41 +381,43 @@ describe("getWeightedArtifactSetBonusFactor()", () => {
       describe("and the artifact does not match the set bonus", () => {
         it("should return the expected value", () => {
           const artifact = generateArtifact({
-            mainStat: StatKey.ATK_PERCENT,
-            setId: uuidv4(),
-            type: ArtifactType.CIRCLET,
+            mainStatKey: "ATK_PERCENT",
+            typeKey: "CIRCLET",
           });
           const factor = getWeightedArtifactSetBonusFactor({
             artifact,
+            dataContext,
             desiredArtifactMainStats,
             desiredArtifactSetBonuses,
           });
 
+          const getOdds = dataContext.getArtifactMainStatOdds;
+          const numTypes = dataContext.getArtifactTypes().length;
           const circletFlowerGobletPlumeOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes);
           const circletFlowerGobletSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const circletFlowerPlumeSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const circletGobletPlumeSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.CIRCLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "CIRCLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
           const flowerGobletPlumeSandsOdds =
-            (getMainStatOdds({ artifactType: ArtifactType.FLOWER, mainStat: StatKey.HP_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.GOBLET, mainStat: StatKey.ATK_PERCENT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.PLUME, mainStat: StatKey.ATK_FLAT }) / 5) *
-            (getMainStatOdds({ artifactType: ArtifactType.SANDS, mainStat: StatKey.ATK_PERCENT }) / 5);
+            (getOdds({ artifactTypeKey: "FLOWER", mainStatKey: "HP_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "GOBLET", mainStatKey: "ATK_PERCENT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "PLUME", mainStatKey: "ATK_FLAT" }) / numTypes) *
+            (getOdds({ artifactTypeKey: "SANDS", mainStatKey: "ATK_PERCENT" }) / numTypes);
 
           const totalWeight =
             circletFlowerGobletPlumeOdds +

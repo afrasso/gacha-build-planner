@@ -11,7 +11,6 @@ export const buildGetCharacter = (characters: ICharacter[]): retFn => {
   return (id: string): ICharacter => {
     const character = lookup[id];
     if (!character) {
-      console.log(lookup);
       throw new Error(`Could not find character with ID ${id}.`);
     }
     return character;

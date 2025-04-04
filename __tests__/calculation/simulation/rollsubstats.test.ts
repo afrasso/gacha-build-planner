@@ -1,270 +1,329 @@
-import { v4 as uuidv4 } from "uuid";
 import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
 
+import { generateArtifact } from "@/__tests__/generators";
 import { rollSubStats } from "@/calculation/simulation/rollsubstats";
-import { getSubStatRollValues } from "@/constants";
-import { IArtifact, ArtifactMetric, ArtifactType, Stat, StatKey } from "@/types";
+import { IDataContext } from "@/contexts/DataContext";
+import { Stat } from "@/types";
 
 describe("rollSubStats()", () => {
   let randomSpy: MockInstance<() => number>;
+  let dataContext: IDataContext;
 
   beforeEach(() => {
     randomSpy = vi.spyOn(Math, "random");
+    dataContext = {
+      getArtifactLevelsPerSubStatRoll: () => 4,
+      getArtifactMaxLevel: (_) => 20,
+      getArtifactMaxSubStatCount: () => 4,
+      getArtifactSubStatRelativeLikelihood: (_) => 1,
+      getPossibleArtifactSubStatRollValues: (_) => [1, 2, 3, 4],
+      getPossibleArtifactSubStats: () => [
+        "ATK_FLAT",
+        "ATK_PERCENT",
+        "DEF_FLAT",
+        "DEF_PERCENT",
+        "HP_FLAT",
+        "HP_PERCENT",
+      ],
+    } as IDataContext;
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  const generateArtifact = ({
-    level,
-    rarity,
-    subStats,
-  }: {
-    level: number;
-    rarity: number;
-    subStats: Stat<StatKey>[];
-  }): IArtifact => {
-    const artifact: IArtifact = {
-      id: uuidv4(),
-      isLocked: false,
-      lastUpdatedDate: new Date().toISOString(),
-      level,
-      mainStat: StatKey.ATK_FLAT,
-      metricsResults: {
-        [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
-        [ArtifactMetric.PLUS_MINUS]: { buildResults: {} },
-        [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
-        [ArtifactMetric.RATING]: { buildResults: {} },
-      },
-      rarity,
-      setId: uuidv4(),
-      subStats,
-      type: ArtifactType.FLOWER,
-    };
-    return artifact;
-  };
-
   describe("When I roll sub-stats for an artifact with a rarity of 1", () => {
     it("should return the appropriate number of new sub-stats", () => {
-      const level = 1;
+      dataContext.getArtifactMaxLevel = (_) => 4;
+
+      const level = 0;
       const rarity = 1;
-      const initialSubStats: Stat<StatKey>[] = [];
+      const initialSubStats: Stat[] = [];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(1);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 2 with 0 initial substats", () => {
     it("should return the appropriate number of new sub-stats", () => {
-      const level = 1;
+      dataContext.getArtifactMaxLevel = (_) => 4;
+
+      const level = 0;
       const rarity = 2;
-      const initialSubStats: Stat<StatKey>[] = [];
+      const initialSubStats: Stat[] = [];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(1);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 2 with 1 initial substat", () => {
     it("should return the appropriate number of new sub-stats", () => {
-      const level = 1;
+      dataContext.getArtifactMaxLevel = (_) => 4;
+
+      const level = 0;
       const rarity = 2;
-      const atkPercentRollValues = getSubStatRollValues({ rarity, statKey: StatKey.ATK_PERCENT });
-      const initialSubStats: Stat<StatKey>[] = [{ key: StatKey.ATK_PERCENT, value: atkPercentRollValues[0] }];
+      const atkPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "ATK_PERCENT",
+      });
+      const initialSubStats: Stat[] = [{ key: "ATK_PERCENT", value: atkPercentRollValues[0] }];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
       randomSpy.mockReturnValue(0);
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(2);
-      expect(newSubStats[0].key).toBe(StatKey.ATK_PERCENT);
+      expect(newSubStats[0].key).toBe("ATK_PERCENT");
       expect(newSubStats[0].value).toBe(atkPercentRollValues[0]);
 
-      const critDmgRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_DMG });
-      expect(newSubStats[1].key).toBe(StatKey.CRIT_DMG);
-      expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
+      const atkFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: "ATK_FLAT" });
+      expect(newSubStats[1].key).toBe("ATK_FLAT");
+      expect(newSubStats[1].value).toBe(atkFlatRollValues[0]);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 3 with 1 initial substat", () => {
     it("should return the appropriate number of new sub-stats", () => {
-      const level = 1;
+      dataContext.getArtifactMaxLevel = (_) => 12;
+
+      const level = 0;
       const rarity = 3;
-      const atkPercentRollValues = getSubStatRollValues({ rarity, statKey: StatKey.ATK_PERCENT });
-      const initialSubStats: Stat<StatKey>[] = [{ key: StatKey.ATK_PERCENT, value: atkPercentRollValues[0] }];
+      const atkPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "ATK_PERCENT",
+      });
+      const initialSubStats: Stat[] = [{ key: "ATK_PERCENT", value: atkPercentRollValues[0] }];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
       randomSpy.mockReturnValue(0);
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(4);
-      expect(newSubStats[0].key).toBe(StatKey.ATK_PERCENT);
+      expect(newSubStats[0].key).toBe("ATK_PERCENT");
       expect(newSubStats[0].value).toBe(atkPercentRollValues[0]);
 
-      const critDmgRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_DMG });
-      expect(newSubStats[1].key).toBe(StatKey.CRIT_DMG);
-      expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
+      const atkFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: "ATK_FLAT" });
+      expect(newSubStats[1].key).toBe("ATK_FLAT");
+      expect(newSubStats[1].value).toBe(atkFlatRollValues[0]);
 
-      const critRateRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_RATE });
-      expect(newSubStats[2].key).toBe(StatKey.CRIT_RATE);
-      expect(newSubStats[2].value).toBe(critRateRollValues[0]);
+      const defFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_FLAT",
+      });
+      expect(newSubStats[2].key).toBe("DEF_FLAT");
+      expect(newSubStats[2].value).toBe(defFlatRollValues[0]);
 
-      const defFlatRollValues = getSubStatRollValues({ rarity, statKey: StatKey.DEF_FLAT });
-      expect(newSubStats[3].key).toBe(StatKey.DEF_FLAT);
-      expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
+      const defPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_PERCENT",
+      });
+      expect(newSubStats[3].key).toBe("DEF_PERCENT");
+      expect(newSubStats[3].value).toBe(defPercentRollValues[0]);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 3 with 2 initial substats", () => {
     it("should return the appropriate number of new sub-stats", () => {
+      dataContext.getArtifactMaxLevel = (_) => 12;
+
       const level = 1;
       const rarity = 3;
-      const atkPercentRollValues = getSubStatRollValues({ rarity, statKey: StatKey.ATK_PERCENT });
-      const critDmgRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_DMG });
-      const initialSubStats: Stat<StatKey>[] = [
-        { key: StatKey.ATK_PERCENT, value: atkPercentRollValues[0] },
-        { key: StatKey.CRIT_DMG, value: critDmgRollValues[0] },
+      const atkPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "ATK_PERCENT",
+      });
+      const atkFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: "ATK_FLAT" });
+      const initialSubStats: Stat[] = [
+        { key: "ATK_PERCENT", value: atkPercentRollValues[0] },
+        { key: "ATK_FLAT", value: atkFlatRollValues[0] },
       ];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
       randomSpy.mockReturnValue(0);
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(4);
-      expect(newSubStats[0].key).toBe(StatKey.ATK_PERCENT);
+      expect(newSubStats[0].key).toBe("ATK_PERCENT");
       expect(Math.abs(newSubStats[0].value - atkPercentRollValues[0] * 2)).toBeLessThan(1e-10);
-      expect(newSubStats[1].key).toBe(StatKey.CRIT_DMG);
-      expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
+      expect(newSubStats[1].key).toBe("ATK_FLAT");
+      expect(newSubStats[1].value).toBe(atkFlatRollValues[0]);
 
-      const critRateRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_RATE });
-      expect(newSubStats[2].key).toBe(StatKey.CRIT_RATE);
-      expect(newSubStats[2].value).toBe(critRateRollValues[0]);
+      const defFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_FLAT",
+      });
+      expect(newSubStats[2].key).toBe("DEF_FLAT");
+      expect(newSubStats[2].value).toBe(defFlatRollValues[0]);
 
-      const defFlatRollValues = getSubStatRollValues({ rarity, statKey: StatKey.DEF_FLAT });
-      expect(newSubStats[3].key).toBe(StatKey.DEF_FLAT);
-      expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
+      const defPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_PERCENT",
+      });
+      expect(newSubStats[3].key).toBe("DEF_PERCENT");
+      expect(newSubStats[3].value).toBe(defPercentRollValues[0]);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 4 with 2 initial substats", () => {
     it("should return the appropriate number of new sub-stats", () => {
+      dataContext.getArtifactMaxLevel = (_) => 16;
+
       const level = 1;
       const rarity = 4;
-      const atkPercentRollValues = getSubStatRollValues({ rarity, statKey: StatKey.ATK_PERCENT });
-      const critDmgRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_DMG });
-      const initialSubStats: Stat<StatKey>[] = [
-        { key: StatKey.ATK_PERCENT, value: atkPercentRollValues[0] },
-        { key: StatKey.CRIT_DMG, value: critDmgRollValues[0] },
+      const atkPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "ATK_PERCENT",
+      });
+      const atkFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: "ATK_FLAT" });
+      const initialSubStats: Stat[] = [
+        { key: "ATK_PERCENT", value: atkPercentRollValues[0] },
+        { key: "ATK_FLAT", value: atkFlatRollValues[0] },
       ];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
       randomSpy.mockReturnValue(0);
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(4);
-      expect(newSubStats[0].key).toBe(StatKey.ATK_PERCENT);
+      expect(newSubStats[0].key).toBe("ATK_PERCENT");
       expect(Math.abs(newSubStats[0].value - atkPercentRollValues[0] * 3)).toBeLessThan(1e-10);
-      expect(newSubStats[1].key).toBe(StatKey.CRIT_DMG);
-      expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
+      expect(newSubStats[1].key).toBe("ATK_FLAT");
+      expect(newSubStats[1].value).toBe(atkFlatRollValues[0]);
 
-      const critRateRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_RATE });
-      expect(newSubStats[2].key).toBe(StatKey.CRIT_RATE);
-      expect(newSubStats[2].value).toBe(critRateRollValues[0]);
+      const defFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_FLAT",
+      });
+      expect(newSubStats[2].key).toBe("DEF_FLAT");
+      expect(newSubStats[2].value).toBe(defFlatRollValues[0]);
 
-      const defFlatRollValues = getSubStatRollValues({ rarity, statKey: StatKey.DEF_FLAT });
-      expect(newSubStats[3].key).toBe(StatKey.DEF_FLAT);
-      expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
+      const defPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_PERCENT",
+      });
+      expect(newSubStats[3].key).toBe("DEF_PERCENT");
+      expect(newSubStats[3].value).toBe(defPercentRollValues[0]);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 4 with 3 initial substats", () => {
     it("should return the appropriate number of new sub-stats", () => {
+      dataContext.getArtifactMaxLevel = (_) => 16;
+
       const level = 1;
       const rarity = 4;
-      const atkPercentRollValues = getSubStatRollValues({ rarity, statKey: StatKey.ATK_PERCENT });
-      const critDmgRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_DMG });
-      const critRateRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_RATE });
-      const initialSubStats: Stat<StatKey>[] = [
-        { key: StatKey.ATK_PERCENT, value: atkPercentRollValues[0] },
-        { key: StatKey.CRIT_DMG, value: critDmgRollValues[0] },
-        { key: StatKey.CRIT_RATE, value: critRateRollValues[0] },
+      const atkPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "ATK_PERCENT",
+      });
+      const atkFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: "ATK_FLAT" });
+      const defFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_FLAT",
+      });
+      const initialSubStats: Stat[] = [
+        { key: "ATK_PERCENT", value: atkPercentRollValues[0] },
+        { key: "ATK_FLAT", value: atkFlatRollValues[0] },
+        { key: "DEF_FLAT", value: defFlatRollValues[0] },
       ];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
       randomSpy.mockReturnValue(0);
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(4);
-      expect(newSubStats[0].key).toBe(StatKey.ATK_PERCENT);
+      expect(newSubStats[0].key).toBe("ATK_PERCENT");
       expect(Math.abs(newSubStats[0].value - atkPercentRollValues[0] * 4)).toBeLessThan(1e-10);
-      expect(newSubStats[1].key).toBe(StatKey.CRIT_DMG);
-      expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
-      expect(newSubStats[2].key).toBe(StatKey.CRIT_RATE);
-      expect(newSubStats[2].value).toBe(critRateRollValues[0]);
+      expect(newSubStats[1].key).toBe("ATK_FLAT");
+      expect(newSubStats[1].value).toBe(atkFlatRollValues[0]);
+      expect(newSubStats[2].key).toBe("DEF_FLAT");
+      expect(newSubStats[2].value).toBe(defFlatRollValues[0]);
 
-      const defFlatRollValues = getSubStatRollValues({ rarity, statKey: StatKey.DEF_FLAT });
-      expect(newSubStats[3].key).toBe(StatKey.DEF_FLAT);
-      expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
+      const defPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_PERCENT",
+      });
+      expect(newSubStats[3].key).toBe("DEF_PERCENT");
+      expect(newSubStats[3].value).toBe(defPercentRollValues[0]);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 5 with 3 initial substats", () => {
     it("should return the appropriate number of new sub-stats", () => {
+      dataContext.getArtifactMaxLevel = (_) => 20;
+
       const level = 1;
       const rarity = 5;
-      const atkPercentRollValues = getSubStatRollValues({ rarity, statKey: StatKey.ATK_PERCENT });
-      const critDmgRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_DMG });
-      const critRateRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_RATE });
-      const initialSubStats: Stat<StatKey>[] = [
-        { key: StatKey.ATK_PERCENT, value: atkPercentRollValues[0] },
-        { key: StatKey.CRIT_DMG, value: critDmgRollValues[0] },
-        { key: StatKey.CRIT_RATE, value: critRateRollValues[0] },
+      const atkPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "ATK_PERCENT",
+      });
+      const atkFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: "ATK_FLAT" });
+      const defFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_FLAT",
+      });
+      const initialSubStats: Stat[] = [
+        { key: "ATK_PERCENT", value: atkPercentRollValues[0] },
+        { key: "ATK_FLAT", value: atkFlatRollValues[0] },
+        { key: "DEF_FLAT", value: defFlatRollValues[0] },
       ];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
       randomSpy.mockReturnValue(0);
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(4);
-      expect(newSubStats[0].key).toBe(StatKey.ATK_PERCENT);
+      expect(newSubStats[0].key).toBe("ATK_PERCENT");
       expect(Math.abs(newSubStats[0].value - atkPercentRollValues[0] * 5)).toBeLessThan(1e-10);
-      expect(newSubStats[1].key).toBe(StatKey.CRIT_DMG);
-      expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
-      expect(newSubStats[2].key).toBe(StatKey.CRIT_RATE);
-      expect(newSubStats[2].value).toBe(critRateRollValues[0]);
+      expect(newSubStats[1].key).toBe("ATK_FLAT");
+      expect(newSubStats[1].value).toBe(atkFlatRollValues[0]);
+      expect(newSubStats[2].key).toBe("DEF_FLAT");
+      expect(newSubStats[2].value).toBe(defFlatRollValues[0]);
 
-      const defFlatRollValues = getSubStatRollValues({ rarity, statKey: StatKey.DEF_FLAT });
-      expect(newSubStats[3].key).toBe(StatKey.DEF_FLAT);
-      expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
+      const defPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_PERCENT",
+      });
+      expect(newSubStats[3].key).toBe("DEF_PERCENT");
+      expect(newSubStats[3].value).toBe(defPercentRollValues[0]);
     });
   });
 
   describe("When I roll sub-stats for an artifact with a rarity of 5 with 3 initial substats", () => {
     it("should return the appropriate number of new sub-stats", () => {
+      dataContext.getArtifactMaxLevel = (_) => 20;
+
       const level = 1;
       const rarity = 5;
-      const atkPercentRollValues = getSubStatRollValues({ rarity, statKey: StatKey.ATK_PERCENT });
-      const critDmgRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_DMG });
-      const critRateRollValues = getSubStatRollValues({ rarity, statKey: StatKey.CRIT_RATE });
-      const defFlatRollValues = getSubStatRollValues({ rarity, statKey: StatKey.DEF_FLAT });
-      const initialSubStats: Stat<StatKey>[] = [
-        { key: StatKey.ATK_PERCENT, value: atkPercentRollValues[0] },
-        { key: StatKey.CRIT_DMG, value: critDmgRollValues[0] },
-        { key: StatKey.CRIT_RATE, value: critRateRollValues[0] },
-        { key: StatKey.DEF_FLAT, value: defFlatRollValues[0] },
+      const atkPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "ATK_PERCENT",
+      });
+      const atkFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({ rarity, subStatKey: "ATK_FLAT" });
+      const defFlatRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_FLAT",
+      });
+      const defPercentRollValues = dataContext.getPossibleArtifactSubStatRollValues({
+        rarity,
+        subStatKey: "DEF_PERCENT",
+      });
+      const initialSubStats: Stat[] = [
+        { key: "ATK_PERCENT", value: atkPercentRollValues[0] },
+        { key: "ATK_FLAT", value: atkFlatRollValues[0] },
+        { key: "DEF_FLAT", value: defFlatRollValues[0] },
+        { key: "DEF_PERCENT", value: defPercentRollValues[0] },
       ];
       const artifact = generateArtifact({ level, rarity, subStats: initialSubStats });
 
       randomSpy.mockReturnValue(0);
-      const newSubStats = rollSubStats({ artifact });
+      const newSubStats = rollSubStats({ artifact, dataContext });
       expect(newSubStats.length).toBe(4);
-      expect(newSubStats[0].key).toBe(StatKey.ATK_PERCENT);
+      expect(newSubStats[0].key).toBe("ATK_PERCENT");
       expect(Math.abs(newSubStats[0].value - atkPercentRollValues[0] * 6)).toBeLessThan(1e-10);
-      expect(newSubStats[1].key).toBe(StatKey.CRIT_DMG);
-      expect(newSubStats[1].value).toBe(critDmgRollValues[0]);
-      expect(newSubStats[2].key).toBe(StatKey.CRIT_RATE);
-      expect(newSubStats[2].value).toBe(critRateRollValues[0]);
-      expect(newSubStats[3].key).toBe(StatKey.DEF_FLAT);
-      expect(newSubStats[3].value).toBe(defFlatRollValues[0]);
+      expect(newSubStats[1].key).toBe("ATK_FLAT");
+      expect(newSubStats[1].value).toBe(atkFlatRollValues[0]);
+      expect(newSubStats[2].key).toBe("DEF_FLAT");
+      expect(newSubStats[2].value).toBe(defFlatRollValues[0]);
+      expect(newSubStats[3].key).toBe("DEF_PERCENT");
+      expect(newSubStats[3].value).toBe(defPercentRollValues[0]);
     });
   });
 });
