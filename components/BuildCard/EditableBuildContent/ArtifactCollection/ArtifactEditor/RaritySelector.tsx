@@ -3,10 +3,10 @@ import { Label } from "@/components/ui/label";
 
 interface RaritySelectorProps {
   onUpdate: (rarity: number) => void;
-  rarity?: number;
+  rarity: number;
 }
 
-const RaritySelector: React.FC<RaritySelectorProps> = ({ onUpdate, rarity = 5 }) => {
+const RaritySelector: React.FC<RaritySelectorProps> = ({ onUpdate, rarity }) => {
   return (
     <div className="mb-2">
       <Label className="text-s font-semibold" htmlFor="rarity">

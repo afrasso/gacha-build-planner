@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import ISaveableContentHandle from "@/components/iSaveableContentHandle";
 import { Button } from "@/components/ui/button";
-import { ArtifactData, Stat } from "@/types";
+import { ArtifactData, ArtifactMetric, Stat } from "@/types";
 
 import LevelSelector from "./LevelSelector";
 import MainStatSelector from "./MainStatSelector";
@@ -24,8 +24,30 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
   artifactTypeKey,
   onUpdate,
 }: ArtifactEditorProps) => {
+  // TODO: Max rarity should be part of data context.
+  const defaultRarity = 5;
+
+  // TODO: Constructing a new artifact shouldn't be this hard. Consider changing to have the artifact editor not take a
+  // full artifact, but the components of one, and have the parent component handle turning that into a valid artifact
+  // type.
   const [internalArtifact, setInternalArtifact] = useState<Partial<ArtifactData>>(
-    artifact || { id: uuidv4(), typeKey: artifactTypeKey }
+    artifact || {
+      _typeBrand: "ArtifactData",
+      id: uuidv4(),
+      isLocked: false,
+      lastUpdatedDate: new Date().toISOString(),
+      metricsResults: {
+        [ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
+        [ArtifactMetric.CURRENT_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
+        [ArtifactMetric.DESIRED_STATS_CURRENT_ARTIFACTS]: { buildResults: {} },
+        [ArtifactMetric.DESIRED_STATS_RANDOM_ARTIFACTS]: { buildResults: {} },
+        [ArtifactMetric.PLUS_MINUS]: { buildResults: {} },
+        [ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS]: { buildResults: {} },
+        [ArtifactMetric.RATING]: { buildResults: {} },
+      },
+      rarity: defaultRarity,
+      typeKey: artifactTypeKey,
+    }
   );
 
   const setSelectorRef = useRef<ISaveableContentHandle>(null);
@@ -73,7 +95,7 @@ const ArtifactEditor: React.FC<ArtifactEditorProps> = ({
         ref={setSelectorRef}
         setId={internalArtifact?.setId}
       />
-      <RaritySelector onUpdate={updateRarity} rarity={internalArtifact.rarity} />
+      <RaritySelector onUpdate={updateRarity} rarity={internalArtifact.rarity!} />
       <LevelSelector level={internalArtifact.level} onUpdate={updateLevel} />
       <MainStatSelector
         artifactTypeKey={artifactTypeKey}
