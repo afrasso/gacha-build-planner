@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import IconSelect from "@/components/ui/custom/IconSelect";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArtifactSet, ArtifactSetBonus } from "@/types";
@@ -138,32 +139,12 @@ const ArtifactSetBonusSelector: React.FC<ArtifactSetBonusSelectorProps> = ({
         {isAddingSetBonus && (
           <>
             <div className="flex-grow relative">
-              <Select onValueChange={(value) => updateSetId(value)}>
-                <SelectTrigger
-                  aria-describedby={!isSetValid ? "artifact-set-error" : undefined}
-                  aria-invalid={!isSetValid}
-                  className="h-8 px-3 text-left text-sm border rounded-md bg-background w-full"
-                  isValid={isSetValid}
-                >
-                  <SelectValue placeholder="Select an artifact set" />
-                </SelectTrigger>
-                <SelectContent>
-                  {getArtifactSets().map((artifactSet) => (
-                    <SelectItem key={artifactSet.id} value={artifactSet.id}>
-                      <div className="flex items-center">
-                        <Image
-                          alt={artifactSet.name}
-                          className="mr-2"
-                          height={32}
-                          src={artifactSet.iconUrl}
-                          width={32}
-                        />
-                        {artifactSet.name}
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <IconSelect
+                isValid={isSetValid}
+                items={getArtifactSets().map((set) => ({ iconUrl: set.iconUrl, key: set.id, label: set.name }))}
+                onChange={updateSetId}
+                placeholderText={"Select an artifact set"}
+              />
               {!isSetValid && (
                 <p className="text-red-500 text-sm mt-1 absolute left-0 top-full" id="artifact-set-error">
                   Please select an artifact set.
