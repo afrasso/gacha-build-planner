@@ -9,7 +9,6 @@ export interface Weapon {
 
 export const WeaponSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/GOOD/Weapon",
-  additionalProperties: false,
   properties: {
     ascension: { type: "integer" },
     key: { type: "string" },

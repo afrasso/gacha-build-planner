@@ -12,14 +12,12 @@ export interface Character {
 
 export const CharacterSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/GOOD/Character",
-  additionalProperties: false,
   properties: {
     ascension: { type: "integer" },
     constellation: { type: "integer" },
     key: { type: "string" },
     level: { type: "integer" },
     talent: {
-      additionalProperties: false,
       properties: {
         auto: { type: "number" },
         burst: { type: "number" },
