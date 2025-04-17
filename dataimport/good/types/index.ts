@@ -27,7 +27,6 @@ ajv.addSchema(WeaponSchema);
 
 export const GOODSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/GOOD",
-  additionalProperties: false,
   properties: {
     artifacts: {
       items: {
@@ -112,8 +111,8 @@ export const validateImport = ({ data, dataContext }: { data: unknown; dataConte
   };
 
   return {
-    artifacts: artifacts.map(convertToImportedArtifact),
-    builds: characters.map(convertToImportedBuild),
-    weaponInstances: weapons.map(convertToImportedWeaponInstance),
+    artifacts: (artifacts || []).map(convertToImportedArtifact),
+    builds: (characters || []).map(convertToImportedBuild) || [],
+    weaponInstances: (weapons || []).map(convertToImportedWeaponInstance),
   };
 };

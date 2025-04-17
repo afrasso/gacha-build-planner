@@ -14,7 +14,6 @@ export interface Artifact {
 
 export const ArtifactSchema = {
   $id: "https://gacha-build-planner.vercel.app/schemas/GOOD/Artifact",
-  additionalProperties: false,
   properties: {
     level: { type: "integer" },
     location: { type: "string" },
@@ -25,7 +24,6 @@ export const ArtifactSchema = {
     slotKey: { $ref: "https://gacha-build-planner.vercel.app/schemas/GOOD/Slot" },
     substats: {
       items: {
-        additionalProperties: false,
         properties: {
           key: { $ref: "https://gacha-build-planner.vercel.app/schemas/GOOD/Stat" },
           value: { type: "number" },
