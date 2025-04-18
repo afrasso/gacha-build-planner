@@ -85,7 +85,7 @@ export const validateImport = ({ data, dataContext }: { data: unknown; dataConte
 
   const convertToImportedWeaponInstance = (w: Weapon): ImportedWeaponInstance => {
     return {
-      characterId: w.location !== "" ? lookupCharacter(w.key).id : undefined,
+      characterId: w.location !== "" ? lookupCharacter(w.location).id : undefined,
       id: lookupWeapon(w.key).id,
     };
   };
