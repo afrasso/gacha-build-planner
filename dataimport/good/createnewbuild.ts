@@ -1,7 +1,7 @@
 import { BuildData, ICharacter } from "@/types";
 import { Build } from "@/types/genshin/build";
 
-import { Character as GOODCharacter } from "./types";
+import { Character as GOODCharacter } from "./character";
 
 export const createNewBuild = ({
   goodCharacter,
