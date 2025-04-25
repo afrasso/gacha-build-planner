@@ -38,7 +38,8 @@ const EditableArtifactCard: React.FC<EditableArtifactCardProps> = ({ artifact, a
         />
         <DialogContent
           className="sm:max-w-[425px]"
-          // This prevents the dialog from closing when they click the overlay. Not needed when the modal flag is removed.
+          // This prevents the dialog from closing when they click the overlay. Not needed when the modal flag is
+          // removed.
           onInteractOutside={(event) => {
             event.preventDefault();
           }}
