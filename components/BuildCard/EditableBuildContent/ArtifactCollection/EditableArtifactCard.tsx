@@ -24,7 +24,7 @@ const EditableArtifactCard: React.FC<EditableArtifactCardProps> = ({ artifact, a
 
   return (
     <>
-      {/* This overlay blocks background clicks, since the having modal={true} is broken in firefox. See
+      {/* This overlay blocks background clicks, since the having modal={true} is broken in Firefox. See
       https://github.com/radix-ui/primitives/issues/2390. It can be deleted once that issue is solved. */}
       {isDialogOpen && <div aria-hidden="true" className="fixed inset-0 bg-black/50 z-40" />}
 
@@ -39,7 +39,7 @@ const EditableArtifactCard: React.FC<EditableArtifactCardProps> = ({ artifact, a
         <DialogContent
           className="sm:max-w-[425px]"
           // This prevents the dialog from closing when they click the overlay. Not needed when the modal flag is
-          // removed.
+          // removed once the fix above is available.
           onInteractOutside={(event) => {
             event.preventDefault();
           }}
