@@ -6,7 +6,7 @@ import { ArtifactData } from "@/types";
 import PlaceholderContent from "./PlaceholderContent";
 import PopulatedContent from "./PopulatedContent";
 
-interface ArtifactCard2Props {
+interface ArtifactCardProps {
   artifact?: ArtifactData;
   artifactTypeKey: string;
   onUpdate?: (artifact: ArtifactData) => void;
@@ -15,7 +15,7 @@ interface ArtifactCard2Props {
   size?: "large" | "small";
 }
 
-const ArtifactCard2: React.FC<ArtifactCard2Props> = ({
+const ArtifactCard: React.FC<ArtifactCardProps> = ({
   artifact,
   artifactTypeKey,
   onUpdate,
@@ -50,4 +50,4 @@ const ArtifactCard2: React.FC<ArtifactCard2Props> = ({
   );
 };
 
-export default ArtifactCard2;
+export default ArtifactCard;
