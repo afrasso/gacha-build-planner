@@ -61,7 +61,6 @@ const TopArtifacts: React.FC<TopBuildsProps> = ({ artifacts, build, count = 12, 
             <ArtifactCard
               artifact={artifact}
               artifactTypeKey={artifact.typeKey}
-              characterId={build.characterId}
               key={artifact.id}
               showInfoButton={true}
               showMetrics={showMetrics}
