@@ -2,11 +2,10 @@
 
 import React from "react";
 
+import ArtifactCard from "@/components/artifacts/ArtifactCard";
 import { Label } from "@/components/ui/label";
 import { useDataContext } from "@/contexts/DataContext";
 import { ArtifactData } from "@/types";
-
-import EditableArtifactCard from "./EditableArtifactCard";
 
 interface ArtifactsCollectionProps {
   artifacts: Record<string, ArtifactData>;
@@ -27,11 +26,13 @@ const ArtifactsCollection: React.FC<ArtifactsCollectionProps> = ({ artifacts, on
       <div className="p-4">
         <div className="flex flex-wrap gap-4 mb-4">
           {getArtifactTypes().map((artifactType) => (
-            <EditableArtifactCard
+            <ArtifactCard
               artifact={artifacts[artifactType.key]}
               artifactTypeKey={artifactType.key}
               key={artifactType.key}
               onUpdate={update}
+              showInfoButton={true}
+              showMetrics={false}
             />
           ))}
         </div>
