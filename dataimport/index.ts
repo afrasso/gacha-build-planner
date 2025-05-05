@@ -43,10 +43,14 @@ export const updatePlan = ({
   }
 
   // Assign weapons to builds.
-  console.log("Updating weapons...");
   for (const weaponInstance of importedWeaponInstances) {
     if (weaponInstance.characterId) {
-      buildLookup[weaponInstance.characterId].weaponId = weaponInstance.id;
+      const build = buildLookup[weaponInstance.characterId];
+      if (!build) {
+        console.warn(`Found weapon for missing build associated character ID ${weaponInstance.characterId}`);
+      } else {
+        build.weaponId = weaponInstance.id;
+      }
     }
   }
 
