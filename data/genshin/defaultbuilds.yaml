@@ -1,0 +1,1727 @@
+- name: Traveler (Anemo)
+  characterId: "10000005"
+  artifactSetBonuses:
+    - setId: "15002" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Traveler (Geo)
+  characterId: "10000005"
+  artifactSetBonuses:
+    - setId: "15001" # Gladiator's Finale
+    - setId: "15007" # Noblesse Oblige
+    - setId: "15014" # Archaic Petra
+    - setId: "15019" # Shimenawa's Reminiscence
+    - setId: "15023" # Vermillion Hereafter
+    - setId: "15024" # Echoes of an Offering
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Traveler (Electro)
+  characterId: "10000005"
+  artifactSetBonuses:
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Traveler (Dendro)
+  characterId: "10000005"
+  artifactSetBonuses:
+    - setId: "15025" # Deepwood Memories
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DENDRO_DMG_BONUS]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Traveler (Hydro)
+  characterId: "10000005"
+  artifactSetBonuses:
+    - setId: "15031" # Marechaussee Hunter
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Traveler (Pyro)
+  characterId: "10000005"
+  artifactSetBonuses:
+    - setId: "15037" # Scroll of the Hero of Cinder City
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Albedo
+  characterId: "10000038"
+  artifactSetBonuses:
+    - setId: "15021" # Husk of Opulent Dreams
+    - setId: "15032" # Golden Troupe
+  artifactMainStats:
+    - statKeys: [DEF_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: DEF_PERCENT
+
+- name: Alhaitham
+  characterId: "10000078"
+  artifactSetBonuses:
+    - setId: "15026" # Gilded Dreams
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_DENDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Aloy
+  characterId: "10000062"
+  artifactSetBonuses:
+    - setId: "14001" # Blizzard Strayer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Amber
+  characterId: "10000021"
+  artifactSetBonuses:
+    - setId: "15003" # Wanderer's Troupe
+    - setId: "15006" # Crimson Witch of Flames
+    - setId: "15019" # Shimenawa's Reminiscence
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Arataki Itto
+  characterId: "10000057"
+  artifactSetBonuses:
+    - setId: "15021" # Husk of Opulent Dreams
+  artifactMainStats:
+    - statKeys: [DEF_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: DEF_PERCENT
+
+- name: Arlecchino
+  characterId: "10000096"
+  artifactSetBonuses:
+    - setId: "15035" # Fragment of Harmonic Whimsy
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Baizhu
+  characterId: "10000082"
+  artifactSetBonuses:
+    - setId: "15025" # Deepwood Memories
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS, HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Barbara
+  characterId: "10000014"
+  artifactSetBonuses:
+    - setId: "15022" # Ocean-Hued Clam
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: HP_PERCENT
+
+- name: Beidou
+  characterId: "10000024"
+  artifactSetBonuses:
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Bennett
+  characterId: "10000032"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Candace
+  characterId: "10000072"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO, HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE, HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Charlotte
+  characterId: "10000088"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+    - setId: "15022" # Ocean-Hued Clam
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [ATK_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Chasca
+  characterId: "10000104"
+  artifactSetBonuses:
+    - setId: "15038" # Obsidian Codex
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [ATK_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Chevreuse
+  characterId: "10000090"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Chiori
+  characterId: "10000094"
+  artifactSetBonuses:
+    - setId: "15021" # Husk of Opulent Dreams
+    - setId: "15032" # Golden Troupe
+  artifactMainStats:
+    - statKeys: [DEF_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: DEF_PERCENT
+
+- name: Chongyun
+  characterId: "10000036"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Citlali
+  characterId: "10000107"
+  artifactSetBonuses:
+    - setId: "15037" # Scroll of the Hero of Cinder City
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Clorinde
+  characterId: "10000098"
+  artifactSetBonuses:
+    - setId: "15035" # Fragment of Harmonic Whimsy
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Collei
+  characterId: "10000067"
+  artifactSetBonuses:
+    - setId: "15025" # Deepwood Memories
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DENDRO_DMG_BONUS, ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE, ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Cyno
+  characterId: "10000071"
+  artifactSetBonuses:
+    - setId: "15005" # Thundering Fury
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Dehya
+  characterId: "10000079"
+  artifactSetBonuses:
+    - setId: "15030" # Vourukasha's Glow
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Diluc
+  characterId: "10000016"
+  artifactSetBonuses:
+    - setId: "15006" # Crimson Witch of Flames
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Diona
+  characterId: "10000039"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS, HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Dori
+  characterId: "10000068"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Emilie
+  characterId: "10000099"
+  artifactSetBonuses:
+    - setId: "15036" # Unfinished Reverie
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_DENDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Eula
+  characterId: "10000051"
+  artifactSetBonuses:
+    - setId: "15008" # Pale Flame
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PHYSICAL]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Faruzan
+  characterId: "10000076"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+
+- name: Fischl
+  characterId: "10000031"
+  artifactSetBonuses:
+    - setId: "15032" # Golden Troupe
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Freminet
+  characterId: "10000085"
+  artifactSetBonuses:
+    - setId: "15008" # Pale Flame
+    - setId: "15031" # Marechaussee Hunter
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO, DMG_BONUS_PHYSICAL]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Furina
+  characterId: "10000089"
+  artifactSetBonuses:
+    - setId: "15032" # Golden Troupe
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO, HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: HP_PERCENT
+
+- name: Gaming
+  characterId: "10000092"
+  artifactSetBonuses:
+    - setId: "15006" # Crimson Witch of Flames
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Ganyu (Freeze)
+  characterId: "10000037"
+  artifactSetBonuses:
+    - setId: "14001" # Blizzard Strayer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Ganyu (Melt)
+  characterId: "10000037"
+  artifactSetBonuses:
+    - setId: "15003" # Wanderer's Troupe
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Gorou
+  characterId: "10000055"
+  artifactSetBonuses:
+    - setId: "15021" # Husk of Opulent Dreams
+  artifactMainStats:
+    - statKeys: [DEF_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DEF_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: DEF_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Hu Tao
+  characterId: "10000046"
+  artifactSetBonuses:
+    - setId: "15006" # Crimson Witch of Flames
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: HP_PERCENT
+
+- name: Jean
+  characterId: "10000003"
+  artifactSetBonuses:
+    - setId: "15002" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [ATK_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Kachina
+  characterId: "10000100"
+  artifactSetBonuses:
+    - setId: "15037" # Scroll of the Hero of Cinder City
+  artifactMainStats:
+    - statKeys: [DEF_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: DEF_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Kaedehara Kazuha
+  characterId: "10000047"
+  artifactSetBonuses:
+    - setId: "15002" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Kaeya
+  characterId: "10000015"
+  artifactSetBonuses:
+    - setId: "14001" # Blizzard Strayer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Kamisato Ayaka
+  characterId: "10000002"
+  artifactSetBonuses:
+    - setId: "14001" # Blizzard Strayer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Kamisato Ayato
+  characterId: "10000066"
+  artifactSetBonuses:
+    - setId: "15001" # Gladiator's Finale
+    - setId: "15016" # Heart of Depth
+    - setId: "15024" # Echoes of an Offering
+    - setId: "15029" # Nymph's Dream
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Kaveh
+  characterId: "10000081"
+  artifactSetBonuses:
+    - setId: "15025" # Deepwood Memories
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Keqing
+  characterId: "10000042"
+  artifactSetBonuses:
+    - setId: "15001" # Thundering Fury
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Kinich
+  characterId: "10000101"
+  artifactSetBonuses:
+    - setId: "15038" # Obsidian Codex
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_DENDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Kirara
+  characterId: "10000061"
+  artifactSetBonuses:
+    - setId: "15025" # Deepwood Memories
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Klee
+  characterId: "10000029"
+  artifactSetBonuses:
+    - setId: "15006" # Crimson Witch of Flames
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Kujou Sara
+  characterId: "10000056"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Kuki Shinobu
+  characterId: "10000065"
+  artifactSetBonuses:
+    - setId: "15028" # Flower of Paradise Lost
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Lan Yan
+  characterId: "10000108"
+  artifactSetBonuses:
+    - setId: "15002" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [ATK_PERCENT, DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [ATK_PERCENT, CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Layla
+  characterId: "10000074"
+  artifactSetBonuses:
+    - setId: "15017" # Tenacity of the Millelith
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: HP_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Lisa
+  characterId: "10000006"
+  artifactSetBonuses:
+    - setId: "15005" # Thundering Fury
+    - setId: "15007" # Noblesse Oblige
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Lynette
+  characterId: "10000083"
+  artifactSetBonuses:
+    - setId: "15002" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Lyney
+  characterId: "10000084"
+  artifactSetBonuses:
+    - setId: "15031" # Marechaussee Hunter
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Mavuika
+  characterId: "10000106"
+  artifactSetBonuses:
+    - setId: "15038" # Obsidian Codex
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+
+- name: Mika
+  characterId: "10000080"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+#TODO Finish default builds -- start here
+
+- name: Mona
+  characterId: "10000041"
+  artifactSetBonuses:
+    - setId: "15007" # Noblessed Oblige
+    - setId: "15016" # Heart of Depth
+    - setId: "15020" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+
+- name: Mualani
+  characterId: "10000102"
+  artifactSetBonuses:
+    - setId: "15038" # Obsidian Codex
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY, HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO, HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE, HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: HP_PERCENT
+
+- name: Nahida
+  characterId: "10000073"
+  artifactSetBonuses:
+    - setId: "15025" # Deepwood Memories
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+
+- name: Nahida (EM DPS)
+  characterId: "10000073"
+  artifactSetBonuses:
+    - setId: "15022" # Gilded Dreams (personal EM scaling)
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Navia
+  characterId: "10000091"
+  artifactSetBonuses:
+    - setId: "15028" # Nighttime Whispers in the Echoing Woods
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Neuvillette
+  characterId: "10000087"
+  artifactSetBonuses:
+    - setId: "15026" # Marechaussee Hunter
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+    - statKey: HP_PERCENT
+
+- name: Nilou
+  characterId: "10000070"
+  artifactSetBonuses:
+    - setId: "15025" # Flower of Paradise Lost
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: HP_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Ningguang
+  characterId: "10000027"
+  artifactSetBonuses:
+    - setId: "15019" # Archaic Petra
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+    - statKey: ATK_PERCENT
+
+- name: Noelle
+  characterId: "10000034"
+  artifactSetBonuses:
+    - setId: "15021" # Husk of Opulent Dreams
+  artifactMainStats:
+    - statKeys: [DEF_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DEF_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: DEF_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Qiqi
+  characterId: "10000035"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Raiden Shogun
+  characterId: "10000052"
+  artifactSetBonuses:
+    - setId: "15016" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Raiden Shogun (Hyperbloom Driver)
+  characterId: "10000052"
+  artifactSetBonuses:
+    - setId: "15022" # Gilded Dreams
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Razor
+  characterId: "10000020"
+  artifactSetBonuses:
+    - setId: "15008" # Pale Flame
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [PHYSICAL_DAMAGE_BONUS]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Rosaria
+  characterId: "10000045"
+  artifactSetBonuses:
+    - setId: "15002" # Blizzard Strayer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Sangonomiya Kokomi
+  characterId: "10000054"
+  artifactSetBonuses:
+    - setId: "15013" # Ocean-Hued Clam
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Sayu
+  characterId: "10000053"
+  artifactSetBonuses:
+    - setId: "15001" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Sethos
+  characterId: "10000097"
+  artifactSetBonuses:
+    - setId: "15011" # Thundering Fury
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+
+- name: Shenhe
+  characterId: "10000063"
+  artifactSetBonuses:
+    - setId: "15002" # Blizzard Strayer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Shikanoin Heizou
+  characterId: "10000059"
+  artifactSetBonuses:
+    - setId: "15001" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Sigewinne
+  characterId: "10000095"
+  artifactSetBonuses:
+    - setId: "15013" # Ocean-Hued Clam
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: HP_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Sucrose
+  characterId: "10000043"
+  artifactSetBonuses:
+    - setId: "15001" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Sucrose (ATK Quickswap)
+  characterId: "10000043"
+  artifactSetBonuses:
+    - setId: "15001" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+
+- name: Tartaglia
+  characterId: "10000033"
+  artifactSetBonuses:
+    - setId: "15006" # Heart of Depth
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Thoma
+  characterId: "10000050"
+  artifactSetBonuses:
+    - setId: "15007" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HP_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: HP_PERCENT
+
+- name: Tighnari
+  characterId: "10000069"
+  artifactSetBonuses:
+    - setId: "15022" # Gilded Dreams
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_DENDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+
+- name: Venti
+  characterId: "10000022"
+  artifactSetBonuses:
+    - setId: "15001" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Wanderer
+  characterId: "10000075"
+  artifactSetBonuses:
+    - setId: "15027" # Marechaussee Hunter
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Wanderer (EM Driver)
+  characterId: "10000075"
+  artifactSetBonuses:
+    - setId: "15001" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: GOBLET
+    - statKeys: [ELEMENTAL_MASTERY]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ELEMENTAL_MASTERY
+    - statKey: ENERGY_RECHARGE
+
+- name: Wriothesley
+  characterId: "10000086"
+  artifactSetBonuses:
+    - setId: "15027" # Marechaussee Hunter
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_CRYO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_DMG, CRIT_RATE]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Xiangling
+  characterId: "10000023"
+  artifactSetBonuses:
+    - setId: "15003" # Crimson Witch of Flames
+  artifactMainStats:
+    - statKeys: [ELEMENTAL_MASTERY, ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ENERGY_RECHARGE
+
+- name: Xianyun
+  characterId: "10000093"
+  artifactSetBonuses:
+    - setId: "15001" # Viridescent Venerer
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+    - statKeys: [ATK_PERCENT]
+      typeKey: GOBLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Xiao
+  characterId: "10000026"
+  artifactSetBonuses:
+    - setId: "15005" # Vermillion Hereafter
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ANEMO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Xilonen
+  characterId: "10000103"
+  artifactSetBonuses:
+    - setId: "15028" # Nighttime Whispers in the Echoing Woods
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ATK_PERCENT
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Xingqiu
+  characterId: "10000025"
+  artifactSetBonuses:
+    - setId: "15016" # Emblem of Severed Fate
+  artifactMainStats:
+    - statKeys: [ENERGY_RECHARGE]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: ENERGY_RECHARGE
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+
+- name: Xinyan
+  characterId: "10000044"
+  artifactSetBonuses:
+    - setId: "15008" # Pale Flame
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [PHYSICAL_DAMAGE_BONUS]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+
+- name: Yae Miko
+  characterId: "10000058"
+  artifactSetBonuses:
+    - setId: "15011" # Thundering Fury
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT, ELEMENTAL_MASTERY]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_ELECTRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+    - statKey: ATK_PERCENT
+
+- name: Yanfei
+  characterId: "10000048"
+  artifactSetBonuses:
+    - setId: "15003" # Crimson Witch of Flames
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+    - statKey: ATK_PERCENT
+
+- name: Yanfei (2pc Crimson + Gladiator)
+  characterId: "10000048"
+  artifactSetBonuses:
+    - setId: "2x15003+2x15012"
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_DMG
+    - statKey: CRIT_RATE
+    - statKey: ATK_PERCENT
+
+- name: Yaoyao
+  characterId: "10000077"
+  artifactSetBonuses:
+    - setId: "15023" # Deepwood Memories
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [HP_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [HEALING_BONUS]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: HP_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Yelan
+  characterId: "10000060"
+  artifactSetBonuses:
+    - setId: "15026" # Nymph's Dream
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_HYDRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+    - statKey: HP_PERCENT
+
+- name: Yoimiya
+  characterId: "10000049"
+  artifactSetBonuses:
+    - setId: "15014" # Shimenawa's Reminiscence
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+    - statKey: ATK_PERCENT
+
+- name: Yoimiya (Echoes DPS)
+  characterId: "10000049"
+  artifactSetBonuses:
+    - setId: "15017" # Echoes of an Offering
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_PYRO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+    - statKey: ATK_PERCENT
+
+- name: Yun Jin
+  characterId: "10000064"
+  artifactSetBonuses:
+    - setId: "15019" # Archaic Petra
+  artifactMainStats:
+    - statKeys: [DEF_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DEF_PERCENT]
+      typeKey: GOBLET
+    - statKeys: [DEF_PERCENT]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: DEF_PERCENT
+    - statKey: ENERGY_RECHARGE
+
+- name: Zhongli
+  characterId: "10000030"
+  artifactSetBonuses:
+    - setId: "15019" # Archaic Petra
+  artifactMainStats:
+    - statKeys: [HP_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: HP_PERCENT
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG
+
+- name: Zhongli (Burst DPS)
+  characterId: "10000030"
+  artifactSetBonuses:
+    - setId: "15005" # Noblesse Oblige
+  artifactMainStats:
+    - statKeys: [ATK_PERCENT]
+      typeKey: SANDS
+    - statKeys: [DMG_BONUS_GEO]
+      typeKey: GOBLET
+    - statKeys: [CRIT_RATE, CRIT_DMG]
+      typeKey: CIRCLET
+  artifactSubStats:
+    - statKey: CRIT_RATE
+    - statKey: CRIT_DMG

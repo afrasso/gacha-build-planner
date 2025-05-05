@@ -40,7 +40,7 @@ const HsrScannerSchema = {
       additionalProperties: false,
       properties: {
         trailblazer: { type: "string" },
-        uid: { type: ["null", "string"] },
+        uid: { type: ["null", "integer"] },
       },
       type: "object",
     },

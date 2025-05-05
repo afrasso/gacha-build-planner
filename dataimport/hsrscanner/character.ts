@@ -36,6 +36,14 @@ export const CharacterSchema = {
     eidolon: { type: "integer" },
     id: { type: "string" },
     level: { type: "integer" },
+    memosprite: {
+      additionalProperties: false,
+      properties: {
+        skill: { type: "number" },
+        talent: { type: "number" },
+      },
+      type: "object",
+    },
     name: { type: "string" },
     path: {
       enum: ["Abundance", "Destruction", "Erudition", "Harmony", "Nihility", "Preservation", "Remembrance", "The Hunt"],
