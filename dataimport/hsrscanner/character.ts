@@ -46,7 +46,17 @@ export const CharacterSchema = {
     },
     name: { type: "string" },
     path: {
-      enum: ["Abundance", "Destruction", "Erudition", "Harmony", "Nihility", "Preservation", "Remembrance", "The Hunt"],
+      enum: [
+        "Abundance",
+        "Destruction",
+        "Erudition",
+        "Harmony",
+        "Hunt",
+        "Nihility",
+        "Preservation",
+        "Remembrance",
+        "The Hunt",
+      ],
       type: "string",
     },
     skills: {

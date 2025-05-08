@@ -913,6 +913,66 @@
     DMG_BONUS_LIGHTNING: 0.224
     CRIT_RATE: 0.119999999
     DEF_PERCENT: 0.125
+- combatType: Quantum
+  iconUrl: /starrail/characters/1403.png
+  id: '1403'
+  maxLvlStats:
+    ATK: 523.908
+    DEF: 727.6500000000001
+    HP: 1047.816
+    SPD: 96
+  name: Tribbie
+  path: Shaman
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    CRIT_RATE: 0.119999999
+    HP_PERCENT: 0.1
+- combatType: Imaginary
+  iconUrl: /starrail/characters/1404.png
+  id: '1404'
+  maxLvlStats:
+    ATK: 426.88800000000003
+    DEF: 194.04000000000002
+    HP: 1552.3200000000002
+    SPD: 95
+  name: Mydei
+  path: Warrior
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    HP_PERCENT: 0.18
+    SPD: 5
+- combatType: Wind
+  iconUrl: /starrail/characters/1405.png
+  id: '1405'
+  maxLvlStats:
+    ATK: 756.756
+    DEF: 557.865
+    HP: 970.2
+    SPD: 97
+  name: Anaxa
+  path: Mage
+  rarity: 5
+  statTraces:
+    DMG_BONUS_WIND: 0.224
+    CRIT_RATE: 0.119999999
+    HP_PERCENT: 0.1
+- combatType: Quantum
+  iconUrl: /starrail/characters/1407.png
+  id: '1407'
+  maxLvlStats:
+    ATK: 523.908
+    DEF: 485.1
+    HP: 1629.936
+    SPD: 95
+  name: Castorice
+  path: Memory
+  rarity: 5
+  statTraces:
+    CRIT_RATE: 0.186999998
+    DMG_BONUS_QUANTUM: 0.14400000000000002
+    CRIT_DMG: 0.133
 - combatType: Physical
   iconUrl: /starrail/characters/8001.png
   id: '8001'

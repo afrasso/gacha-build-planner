@@ -257,6 +257,27 @@
     GOBLET: true
     PLUME: true
     SANDS: true
+  iconUrl: /genshin/artifacts/15040_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15040_5.png
+    FLOWER: /genshin/artifacts/15040_1.png
+    GOBLET: /genshin/artifacts/15040_4.png
+    PLUME: /genshin/artifacts/15040_2.png
+    SANDS: /genshin/artifacts/15040_3.png
+  id: '15040'
+  name: Finale of the Deep Galleries
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
   iconUrl: /genshin/artifacts/15028_1.png
   iconUrls:
     CIRCLET: /genshin/artifacts/15028_5.png
@@ -455,6 +476,27 @@
     SANDS: /genshin/artifacts/14003_3.png
   id: '14003'
   name: Lavawalker
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
+  iconUrl: /genshin/artifacts/15039_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15039_5.png
+    FLOWER: /genshin/artifacts/15039_1.png
+    GOBLET: /genshin/artifacts/15039_4.png
+    PLUME: /genshin/artifacts/15039_2.png
+    SANDS: /genshin/artifacts/15039_3.png
+  id: '15039'
+  name: Long Night's Oath
   rarities:
     - 4
     - 5
