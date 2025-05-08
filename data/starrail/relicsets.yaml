@@ -1072,3 +1072,53 @@
   setBonusCounts:
     - 2
   category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/319.png
+  iconUrls:
+    BODY: /starrail/relics/319_3.png
+    FOOT: /starrail/relics/319_4.png
+    HAND: /starrail/relics/319_2.png
+    HEAD: /starrail/relics/319_1.png
+    NECK: /starrail/relics/319_6.png
+    OBJECT: /starrail/relics/319_5.png
+  id: '319'
+  name: Aidonia's Deceased Gravestones
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/320.png
+  iconUrls:
+    BODY: /starrail/relics/320_3.png
+    FOOT: /starrail/relics/320_4.png
+    HAND: /starrail/relics/320_2.png
+    HEAD: /starrail/relics/320_1.png
+    NECK: /starrail/relics/320_6.png
+    OBJECT: /starrail/relics/320_5.png
+  id: '320'
+  name: Grove of Epiphany's Pondering Colossus
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT

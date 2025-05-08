@@ -310,6 +310,18 @@
   name: Emilie
   rarity: 5
   weaponType: WEAPON_POLE
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_CRYO
+  iconUrl: /genshin/characters/10000112.png
+  id: '10000112'
+  maxLvlStats:
+    ascensionStat: 24.2
+    ATK: 346.808651
+    DEF: 731.66376024
+    HP: 13348.0427932
+  name: Escoffier
+  rarity: 5
+  weaponType: WEAPON_POLE
 - ascensionStat: CRIT_DMG
   element: ELEMENT_CRYO
   iconUrl: /genshin/characters/10000051.png
@@ -418,6 +430,30 @@
   name: Hu Tao
   rarity: 5
   weaponType: WEAPON_POLE
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ELECTRO
+  iconUrl: /genshin/characters/10000110.png
+  id: '10000110'
+  maxLvlStats:
+    ascensionStat: 24
+    ATK: 257.00060032
+    DEF: 638.157625875
+    HP: 10657.416864800001
+  name: Iansan
+  rarity: 4
+  weaponType: WEAPON_POLE
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_ANEMO
+  iconUrl: /genshin/characters/10000113.png
+  id: '10000113'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 178.41364328
+    DEF: 605.396592675
+    HP: 10081.0465747
+  name: Ifa
+  rarity: 4
+  weaponType: WEAPON_CATALYST
 - ascensionStat: HEALING_BONUS
   element: ELEMENT_ANEMO
   iconUrl: /genshin/characters/10000003.png
@@ -934,6 +970,18 @@
   name: Tighnari
   rarity: 5
   weaponType: WEAPON_BOW
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_ELECTRO
+  iconUrl: /genshin/characters/10000111.png
+  id: '10000111'
+  maxLvlStats:
+    ascensionStat: 24.2
+    ATK: 356.3757822
+    DEF: 781.6197942900001
+    HP: 12699.00924137
+  name: Varesa
+  rarity: 5
+  weaponType: WEAPON_CATALYST
 - ascensionStat: ENERGY_RECHARGE
   element: ELEMENT_ANEMO
   iconUrl: /genshin/characters/10000022.png
@@ -1102,6 +1150,18 @@
   name: Yoimiya
   rarity: 5
   weaponType: WEAPON_BOW
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_ANEMO
+  iconUrl: /genshin/characters/10000109.png
+  id: '10000109'
+  maxLvlStats:
+    ascensionStat: 115.2
+    ATK: 215.260542
+    DEF: 757.0260544500001
+    HP: 12735.747219200002
+  name: Yumemizuki Mizuki
+  rarity: 5
+  weaponType: WEAPON_CATALYST
 - ascensionStat: ENERGY_RECHARGE
   element: ELEMENT_GEO
   iconUrl: /genshin/characters/10000064.png

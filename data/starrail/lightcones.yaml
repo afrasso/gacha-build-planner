@@ -709,6 +709,15 @@
   name: 'Ninja Record: Sound Hunt'
   path: Destruction
   rarity: 4
+- iconUrl: /starrail/lightcones/22004.png
+  id: '22004'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: The Great Cosmic Enterprise
+  path: Erudition
+  rarity: 4
 - iconUrl: /starrail/lightcones/23000.png
   id: '23000'
   maxLvlStats:
@@ -1051,6 +1060,42 @@
   name: Into the Unreachable Veil
   path: Erudition
   rarity: 5
+- iconUrl: /starrail/lightcones/23038.png
+  id: '23038'
+  maxLvlStats:
+    HP: 1270.08
+    ATK: 529.2
+    DEF: 396.9
+  name: If Time Were a Flower
+  path: Harmony
+  rarity: 5
+- iconUrl: /starrail/lightcones/23039.png
+  id: '23039'
+  maxLvlStats:
+    HP: 1375.92
+    ATK: 476.28
+    DEF: 396.9
+  name: Flame of Blood, Blaze My Path
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23040.png
+  id: '23040'
+  maxLvlStats:
+    HP: 1270.08
+    ATK: 529.2
+    DEF: 396.9
+  name: Make Farewells More Beautiful
+  path: Remembrance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23041.png
+  id: '23041'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: Life Should Be Cast to Flames
+  path: Erudition
+  rarity: 5
 - iconUrl: /starrail/lightcones/24000.png
   id: '24000'
   maxLvlStats:
@@ -1095,4 +1140,13 @@
     DEF: 396.9
   name: Eternal Calculus
   path: Erudition
+  rarity: 5
+- iconUrl: /starrail/lightcones/24005.png
+  id: '24005'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 396.9
+  name: Memory's Curtain Never Falls
+  path: Remembrance
   rarity: 5

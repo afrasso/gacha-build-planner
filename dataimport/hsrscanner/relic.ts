@@ -77,7 +77,9 @@ export const RelicSchema = {
       items: {
         additionalProperties: false,
         properties: {
+          count: { type: "integer" },
           key: { $ref: "https://gacha-build-planner.vercel.app/schemas/HsrScanner/SubStat" },
+          step: { type: "integer" },
           value: { type: "number" },
         },
         required: ["key", "value"],
