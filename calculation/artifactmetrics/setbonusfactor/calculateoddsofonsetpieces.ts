@@ -1,16 +1,12 @@
 import getCumulativeMainStatOdds from "@/calculation/getcumulativemainstatodds";
 import { IDataContext } from "@/contexts/DataContext";
 
-const calculateFactorial = (n: number): number => {
-  if (n < 0) {
-    throw new Error("A factorial is not defined for negative numbers.");
-  }
-
-  let result = 1;
-  for (let i = 2; i <= n; i++) {
-    result *= i;
-  }
-  return result;
+const factorials: Record<number, number> = {
+  1: 1,
+  2: 2,
+  3: 6,
+  4: 24,
+  5: 120,
 };
 
 const calculateOddsOfOnSetPieces = ({
@@ -38,7 +34,7 @@ const calculateOddsOfOnSetPieces = ({
     return acc / numArtifactTypes;
   }, 1);
 
-  return initialOdds * calculateFactorial(artifactTypeKeys.length);
+  return initialOdds * factorials[artifactTypeKeys.length];
 };
 
 export default calculateOddsOfOnSetPieces;

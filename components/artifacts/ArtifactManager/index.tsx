@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { updateAllMetrics } from "@/calculation/artifactmetrics";
+import { updateMetrics } from "@/calculation/artifactmetrics";
 import { sortArtifacts } from "@/calculation/artifactmetrics/sortartifacts";
 import { Button } from "@/components/ui/button";
 import { PaginationComponent } from "@/components/ui/custom/PaginationComponent";
@@ -93,15 +93,17 @@ const ArtifactManager: React.FC = () => {
     setIsCalculating(true);
     // TODO: This needs to be a deep copy before performing a side effect on the artifacts!
     for (const [index, artifact] of artifacts.entries()) {
-      await updateAllMetrics({
+      await updateMetrics({
         artifact: new Artifact(artifact),
         builds: builds.map(constructBuild),
         callback: async (p) => await callback((index + p) / artifacts.length),
         dataContext,
         forceRecalculate: true,
-        iterations: 25,
+        iterations: 1,
+        metric: ArtifactMetric.RATING,
       });
       setCalculationCount(index + 1);
+      break;
     }
     setCalculationProgress(1);
     setArtifacts([...artifacts]);

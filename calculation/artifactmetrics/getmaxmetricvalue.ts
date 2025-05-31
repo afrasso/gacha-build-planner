@@ -1,6 +1,6 @@
 import { ArtifactMetric, ArtifactMetricsResults } from "@/types";
 
-export const getMaxMetricValue = ({
+const getMaxMetricValue = ({
   metric,
   metricsResults,
 }: {
@@ -16,3 +16,5 @@ export const getMaxMetricValue = ({
   }
   return Math.max(...values.map((result) => result.result || 0));
 };
+
+export default getMaxMetricValue;

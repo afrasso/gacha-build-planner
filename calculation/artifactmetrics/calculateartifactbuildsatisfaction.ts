@@ -121,7 +121,7 @@ const getTargetStatsStrategy = ({ calculationType }: { calculationType: Satisfac
   return TargetStatsStrategy.DESIRED;
 };
 
-export const calculateArtifactBuildSatisfaction = ({
+const calculateArtifactBuildSatisfaction = ({
   artifact,
   build,
   calculationType,
@@ -166,3 +166,5 @@ export const calculateArtifactBuildSatisfaction = ({
   }
   return satisfactionCount / iterations;
 };
+
+export default calculateArtifactBuildSatisfaction;
