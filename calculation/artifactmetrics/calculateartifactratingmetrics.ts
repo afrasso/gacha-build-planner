@@ -3,6 +3,7 @@ import { IArtifact, IBuild } from "@/types";
 
 import { rollArtifact } from "../simulation";
 import calculateArtifactRating from "./calculateartifactrating";
+import isArtifactWorthEvaluating from "./isartifactworthevaluating";
 import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
 
 const calculateArtifactRatingMetrics = ({
@@ -20,25 +21,16 @@ const calculateArtifactRatingMetrics = ({
   positivePlusMinusOdds: number;
   rating: number;
 } => {
-  const rawArtifactRating = calculateArtifactRating({ artifact, build, dataContext });
+  // const rawArtifactRating = calculateArtifactRating({ artifact, build, dataContext });
   const buildArtifact = build.artifacts[artifact.typeKey];
-  const buildArtifactRating = buildArtifact.metricsResults.RATING.buildResults[build.characterId];
 
-  if (artifact !== buildArtifact && (!buildArtifactRating.result || buildArtifactRating.iterations !== iterations)) {
-    // We should always have a rating for the build artifact before getting a rating for a non-build artifact for the
-    // given build. If we don't throw an error.
-    throw new Error("Unexpected error: the build artifact doesn't have an available rating.");
-  }
+  // Initialize the build artifact rating to either itself, or if there is no build artifact, to 0.
+  const buildArtifactRating = buildArtifact
+    ? buildArtifact?.metricsResults.RATING.buildResults[build.characterId]
+    : { iterations, result: 0 };
 
-  const rawBuildArtifactRating = buildArtifact ? calculateArtifactRating({ artifact, build, dataContext }) : 0;
-
-  if (
-    // If the rating is 0 (doesn't match a required main stat), no calculations are needed.
-    rawArtifactRating === 0 ||
-    // If there already exists a build artifact that has a rating of, 1 and there's at least one desired main stat, in
-    // order to not skip this artifact it needs to have a rawArtifactRating of greater than 1.
-    (rawBuildArtifactRating > 0 && build.desiredOverallStats.length > 0 && rawArtifactRating === 1)
-  ) {
+  // If the artifact isn't worth evaluating in the context of this build, return 0 for all three metrics.
+  if (!isArtifactWorthEvaluating({ artifact, build, dataContext, iterations })) {
     return {
       plusMinus: 0,
       positivePlusMinusOdds: 0,

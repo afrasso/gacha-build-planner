@@ -3,6 +3,7 @@ import { ArtifactMetric, IArtifact, IBuild, SatisfactionCalculationType } from "
 
 import { calculateBuildSatisfaction, TargetStatsStrategy } from "../buildmetrics/satisfaction";
 import { rollArtifact, rollNewArtifact } from "../simulation";
+import isArtifactWorthEvaluating from "./isartifactworthevaluating";
 import { getArtifactMainStatsFactor } from "./mainstatsfactor";
 import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
 
@@ -134,6 +135,11 @@ const calculateArtifactBuildSatisfaction = ({
   dataContext: IDataContext;
   iterations: number;
 }): number | undefined => {
+  // If the artifact isn't worth evaluating in the context of this build, return 0.
+  if (!isArtifactWorthEvaluating({ artifact, build, dataContext, iterations })) {
+    return 0;
+  }
+
   // If you've defined a required main stat for this artifact type in your build, and this doesn't match, it's a default 0.
   if (
     build.desiredArtifactMainStats[artifact.typeKey] &&

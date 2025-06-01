@@ -6,7 +6,7 @@ import calculateArtifactBuildSatisfaction from "./calculateartifactbuildsatisfac
 import calculateArtifactRatingMetrics from "./calculateartifactratingmetrics";
 import getMaxMetricValue from "./getmaxmetricvalue";
 
-const determineIfMetricNeedsUpdate = ({
+const doesMetricNeedUpdate = ({
   artifact,
   build,
   iterations,
@@ -77,24 +77,21 @@ export const updateMetric = async ({
     clearMetric({ artifact, build, metric });
   }
   const result = artifact.metricsResults[metric].buildResults[build.characterId];
-  const needsUpdate = determineIfMetricNeedsUpdate({ artifact, build, iterations, result });
-  if (needsUpdate) {
+  if (doesMetricNeedUpdate({ artifact, build, iterations, result })) {
+    // We need the rating of the build artifact (if it exists) prior to calculating any metric for the artifact to
+    // determine whether the artifact itself is worth the expense of evaluating.
+    const buildArtifact = build.artifacts[artifact.typeKey];
+    if (buildArtifact && artifact !== buildArtifact) {
+      updateMetric({ artifact: buildArtifact, build, dataContext, iterations, metric: ArtifactMetric.RATING });
+    }
     if (
       metric === ArtifactMetric.RATING ||
       metric === ArtifactMetric.PLUS_MINUS ||
       metric === ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS
     ) {
       const buildArtifact = build.artifacts[artifact.typeKey];
-      if (artifact !== buildArtifact) {
-        console.log("Artifact ID", artifact.id);
-        console.log("Build Artifact ID", buildArtifact.id);
-        console.log("Updating build metric!");
+      if (buildArtifact && artifact !== buildArtifact) {
         updateMetric({ artifact: buildArtifact, build, dataContext, iterations, metric });
-        const buildArtifactRating = buildArtifact.metricsResults.RATING.buildResults[build.characterId];
-        console.log("buildArtifactRating", buildArtifactRating);
-        if (!buildArtifactRating.result || buildArtifactRating.iterations !== iterations) {
-          throw new Error("REALLY Unexpected error: the build artifact doesn't have an available rating.");
-        }
       }
       const { plusMinus, positivePlusMinusOdds, rating } = calculateArtifactRatingMetrics({
         artifact,
