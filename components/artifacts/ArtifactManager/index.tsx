@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { updateAllMetrics } from "@/calculation/artifactmetrics";
-import { skipCount, totalCount } from "@/calculation/artifactmetrics/isartifactworthevaluating";
 import { sortArtifacts } from "@/calculation/artifactmetrics/sortartifacts";
 import { Button } from "@/components/ui/button";
 import { PaginationComponent } from "@/components/ui/custom/PaginationComponent";
@@ -107,8 +106,6 @@ const ArtifactManager: React.FC = () => {
     setCalculationProgress(1);
     setArtifacts([...artifacts]);
     setIsCalculating(false);
-    console.log("skipCount", skipCount);
-    console.log("totalCount", totalCount);
   };
 
   const cancelCalculation = async () => {

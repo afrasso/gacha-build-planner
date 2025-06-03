@@ -86,6 +86,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       builds: builds.map(constructBuild),
       callback,
       dataContext,
+      forceRecalculate: true,
       iterations: 1000,
     });
     const endDate = new Date();
