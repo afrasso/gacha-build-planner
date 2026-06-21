@@ -1,6 +1,7 @@
 ---
 description: Core conventions for gacha-build-planner
-alwaysApply: true
+globs: "**/*"
+alwaysApply: false
 ---
 
 # Gacha Build Planner — Core Rules

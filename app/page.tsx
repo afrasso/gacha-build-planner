@@ -3,13 +3,19 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { getHelpMessages } from "@/constants/messages";
 
 export default function Home() {
   return (
     <main className="p-8">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8">Welcome to the Gacha Build Planner!</h1>
-        <p className="text-xl text-center mb-12">Choose your game to start planning your builds.</p>
+        <p className="text-xl text-center mb-4">Choose your game to start planning your builds.</p>
+        <p className="text-center mb-12">
+          <Link className="text-primary underline hover:no-underline" href="/help">
+            {getHelpMessages().homeLink}
+          </Link>
+        </p>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <Card className="w-full">
