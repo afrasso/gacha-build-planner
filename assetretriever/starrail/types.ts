@@ -1,3 +1,17 @@
+export enum ArtifactSetCategory {
+  CAVERN_RELIC = "CAVERN_RELIC",
+  PLANAR_ORNAMENT = "PLANAR_ORNAMENT",
+}
+
+export enum ArtifactType {
+  BODY = "BODY",
+  FOOT = "FOOT",
+  HAND = "HAND",
+  HEAD = "HEAD",
+  NECK = "NECK",
+  OBJECT = "OBJECT",
+}
+
 export type ArtifactSet = {
   category?: ArtifactSetCategory;
   hasArtifactTypes: Record<ArtifactType, boolean>;
@@ -9,24 +23,15 @@ export type ArtifactSet = {
   setBonusCounts: number[];
 };
 
-export enum ArtifactType {
-  BODY = "BODY",
-  FOOT = "FOOT",
-  HAND = "HAND",
-  HEAD = "HEAD",
-  NECK = "NECK",
-  OBJECT = "OBJECT",
-}
-
-export enum ArtifactSetCategory {
-  CAVERN_RELIC = "CAVERN_RELIC",
-  PLANAR_ORNAMENT = "PLANAR_ORNAMENT",
-}
-
 export type FailedCharacterIconDownload = {
   id: string;
   name: string;
   pathName: string;
+};
+
+export type FailedLightConeIconDownload = {
+  id: string;
+  name: string;
 };
 
 export type FailedRelicIconDownload = {
@@ -36,11 +41,6 @@ export type FailedRelicIconDownload = {
 };
 
 export type FailedRelicSetIconDownload = {
-  id: string;
-  name: string;
-};
-
-export type FailedLightConeIconDownload = {
   id: string;
   name: string;
 };

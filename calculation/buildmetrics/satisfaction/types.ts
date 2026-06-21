@@ -1,5 +1,10 @@
 import { ArtifactSetBonus } from "@/types";
 
+export enum TargetStatsStrategy {
+  CURRENT = "CURRENT",
+  DESIRED = "DESIRED",
+}
+
 export interface ArtifactMainStatSatisfactionDetails {
   artifactTypeKey: string;
   currentMainStatKey: string;
@@ -29,9 +34,4 @@ export interface StatSatisfactionDetails {
   satisfaction: boolean;
   statKey: string;
   targetStatValue: number;
-}
-
-export enum TargetStatsStrategy {
-  CURRENT = "CURRENT",
-  DESIRED = "DESIRED",
 }

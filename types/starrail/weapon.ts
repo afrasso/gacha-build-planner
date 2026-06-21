@@ -1,12 +1,21 @@
 import { IWeapon } from "../weapon";
 
+export type WeaponData = {
+  iconUrl: string;
+  id: string;
+  maxLvlStats: MaxLvlStats;
+  name: string;
+  path: string;
+  rarity: number;
+};
+
+type MaxLvlStats = {
+  ATK: number;
+  DEF: number;
+  HP: number;
+};
+
 export class Weapon implements IWeapon {
-  private _weaponData;
-
-  constructor(weaponData: WeaponData) {
-    this._weaponData = weaponData;
-  }
-
   get iconUrl(): string {
     return this._weaponData.iconUrl;
   }
@@ -30,19 +39,10 @@ export class Weapon implements IWeapon {
   get type(): string {
     return this._weaponData.path;
   }
+
+  private _weaponData;
+
+  constructor(weaponData: WeaponData) {
+    this._weaponData = weaponData;
+  }
 }
-
-type MaxLvlStats = {
-  ATK: number;
-  DEF: number;
-  HP: number;
-};
-
-export type WeaponData = {
-  iconUrl: string;
-  id: string;
-  maxLvlStats: MaxLvlStats;
-  name: string;
-  path: string;
-  rarity: number;
-};

@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@source inline("brightness-0");
+@source inline("dark:brightness-100");
+@source inline("dark:drop-shadow-none");
+@source inline("dark:invert");
+@source inline("drop-shadow-outline");
 
 body {
   font-family: Arial, Helvetica, sans-serif;
