@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "depcheck": "depcheck --ignores=\"postcss\"",
+    "depcheck": "depcheck --ignores=\"postcss,@vitest/coverage-v8\"",
     "dev": "next dev",
     "lint": "next lint",
     "retrieve-assets": "tsx --tsconfig assetretriever/tsconfig.json assetretriever/index.ts",
