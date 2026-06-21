@@ -1,12 +1,12 @@
 import { IDataContext } from "@/contexts/DataContext";
 import { ArtifactMetric, ArtifactMetricResult, IArtifact, IBuild } from "@/types";
-import { getEnumValues } from "@/utils/getenumvalues";
+import getEnumValues from "@/utils/getenumvalues";
 
-import { calculateArtifactBuildSatisfaction } from "./calculateartifactbuildsatisfaction";
-import { calculateArtifactRatingMetrics } from "./calculateartifactrating";
-import { getMaxMetricValue } from "./getmaxmetricvalue";
+import calculateArtifactBuildSatisfaction from "./calculateartifactbuildsatisfaction";
+import calculateArtifactRatingMetrics from "./calculateartifactratingmetrics";
+import getMaxMetricValue from "./getmaxmetricvalue";
 
-const determineIfMetricNeedsUpdate = ({
+const doesMetricNeedUpdate = ({
   artifact,
   build,
   iterations,
@@ -25,6 +25,39 @@ const determineIfMetricNeedsUpdate = ({
   );
 };
 
+export const clearMetric = ({
+  artifact,
+  build,
+  metric,
+}: {
+  artifact: IArtifact;
+  build: IBuild;
+  metric: ArtifactMetric;
+}): void => {
+  delete artifact.metricsResults[metric].buildResults[build.characterId];
+};
+
+export const clearMetrics = ({
+  artifact,
+  builds,
+  metric,
+}: {
+  artifact: IArtifact;
+  builds: IBuild[];
+  metric: ArtifactMetric;
+}): void => {
+  for (const build of builds) {
+    clearMetric({ artifact, build, metric });
+  }
+};
+
+export const clearAllMetrics = ({ artifact, builds }: { artifact: IArtifact; builds: IBuild[] }): void => {
+  const metrics = getEnumValues(ArtifactMetric);
+  for (const metric of metrics) {
+    clearMetrics({ artifact, builds, metric });
+  }
+};
+
 export const updateMetric = async ({
   artifact,
   build,
@@ -40,14 +73,26 @@ export const updateMetric = async ({
   iterations: number;
   metric: ArtifactMetric;
 }): Promise<void> => {
+  if (forceRecalculate) {
+    clearMetric({ artifact, build, metric });
+  }
   const result = artifact.metricsResults[metric].buildResults[build.characterId];
-  const needsUpdate = determineIfMetricNeedsUpdate({ artifact, build, iterations, result });
-  if (forceRecalculate || needsUpdate) {
+  if (doesMetricNeedUpdate({ artifact, build, iterations, result })) {
+    // We need the rating of the build artifact (if it exists) prior to calculating any metric for the artifact to
+    // determine whether the artifact itself is worth the expense of evaluating.
+    const buildArtifact = build.artifacts[artifact.typeKey];
+    if (buildArtifact && artifact !== buildArtifact) {
+      updateMetric({ artifact: buildArtifact, build, dataContext, iterations, metric: ArtifactMetric.RATING });
+    }
     if (
       metric === ArtifactMetric.RATING ||
       metric === ArtifactMetric.PLUS_MINUS ||
       metric === ArtifactMetric.POSITIVE_PLUS_MINUS_ODDS
     ) {
+      const buildArtifact = build.artifacts[artifact.typeKey];
+      if (buildArtifact && artifact !== buildArtifact) {
+        updateMetric({ artifact: buildArtifact, build, dataContext, iterations, metric });
+      }
       const { plusMinus, positivePlusMinusOdds, rating } = calculateArtifactRatingMetrics({
         artifact,
         build,
@@ -103,9 +148,12 @@ export const updateMetrics = async ({
   iterations: number;
   metric: ArtifactMetric;
 }): Promise<void> => {
+  if (forceRecalculate) {
+    clearMetrics({ artifact, builds, metric });
+  }
   await callback(0);
   for (const [index, build] of builds.entries()) {
-    updateMetric({ artifact, build, dataContext, forceRecalculate, iterations, metric });
+    updateMetric({ artifact, build, dataContext, iterations, metric });
     const progress = (index + 1) / builds.length;
     await callback(progress);
   }
@@ -126,14 +174,16 @@ export const updateAllMetrics = async ({
   forceRecalculate?: boolean;
   iterations: number;
 }): Promise<void> => {
+  if (forceRecalculate) {
+    clearAllMetrics({ artifact, builds });
+  }
   const metrics = getEnumValues(ArtifactMetric);
-  for (const [index, metric] of getEnumValues(ArtifactMetric).entries()) {
+  for (const [index, metric] of metrics.entries()) {
     await updateMetrics({
       artifact,
       builds,
       callback: async (p) => await callback((index + p) / metrics.length),
       dataContext,
-      forceRecalculate,
       iterations,
       metric,
     });

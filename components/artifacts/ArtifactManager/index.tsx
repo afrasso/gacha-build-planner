@@ -99,7 +99,7 @@ const ArtifactManager: React.FC = () => {
         callback: async (p) => await callback((index + p) / artifacts.length),
         dataContext,
         forceRecalculate: true,
-        iterations: 25,
+        iterations: 10,
       });
       setCalculationCount(index + 1);
     }

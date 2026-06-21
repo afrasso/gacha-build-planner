@@ -22,9 +22,11 @@ export interface IBuild {
   calculateStats: ({
     artifacts,
     dataContext,
+    overallStatKeys,
   }: {
     artifacts?: Record<string, IArtifact>;
     dataContext: IDataContext;
+    overallStatKeys?: string[];
   }) => Record<string, number>;
   characterId: string;
   desiredArtifactMainStats: Record<string, string[]>;

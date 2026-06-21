@@ -1,9 +1,6 @@
 import { IDataContext } from "@/contexts/DataContext";
 import { DesiredOverallStat, IArtifact, IBuild } from "@/types";
 
-import { rollArtifact } from "../simulation";
-import { getWeightedArtifactSetBonusFactor } from "./setbonusfactor";
-
 const PRIORITY_WEIGHTS: Record<number, number> = {
   1: 0.25,
   2: 0.5,
@@ -44,7 +41,7 @@ const calculateSubstatRating = ({
   return rating;
 };
 
-const calculateRating = ({
+const calculateArtifactRating = ({
   artifact,
   build,
   dataContext,
@@ -61,56 +58,13 @@ const calculateRating = ({
     return 0;
   }
 
-  const rolledArtifact = rollArtifact({ artifact, dataContext });
-
   // TODO: The max rating is actually based on the build criteria. At some point we can make the rating relative to max
   // possible rating given the build's desired stats.
   const initialRating = 1;
   return build.desiredOverallStats.reduce((total, desiredOverallStat) => {
-    total += calculateSubstatRating({ artifact: rolledArtifact, dataContext, desiredOverallStat });
+    total += calculateSubstatRating({ artifact, dataContext, desiredOverallStat });
     return total;
   }, initialRating);
 };
 
-export interface ArtifactRatingMetricsResults {
-  plusMinus: number;
-  positivePlusMinusOdds: number;
-  rating: number;
-}
-
-export const calculateArtifactRatingMetrics = ({
-  artifact,
-  build,
-  dataContext,
-  iterations,
-}: {
-  artifact: IArtifact;
-  build: IBuild;
-  dataContext: IDataContext;
-  iterations: number;
-}): ArtifactRatingMetricsResults => {
-  const weightedFactor = getWeightedArtifactSetBonusFactor({
-    artifact,
-    dataContext,
-    desiredArtifactMainStats: build.desiredArtifactMainStats,
-    desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
-  });
-
-  let totalRating = 0;
-  let totalPlusMinus = 0;
-  let positivePlusMinusCount = 0;
-  for (let i = 0; i < iterations; i++) {
-    const artifactRating = calculateRating({ artifact, build, dataContext });
-    const buildArtifact = build.artifacts[artifact.typeKey];
-    const buildArtifactRating = buildArtifact ? calculateRating({ artifact: buildArtifact, build, dataContext }) : 0;
-    totalRating += artifactRating;
-    totalPlusMinus += artifactRating - buildArtifactRating;
-    positivePlusMinusCount += artifactRating > buildArtifactRating ? 1 : 0;
-  }
-
-  return {
-    plusMinus: (weightedFactor * totalPlusMinus) / iterations,
-    positivePlusMinusOdds: (weightedFactor * positivePlusMinusCount) / iterations,
-    rating: (weightedFactor * totalRating) / iterations,
-  };
-};
+export default calculateArtifactRating;

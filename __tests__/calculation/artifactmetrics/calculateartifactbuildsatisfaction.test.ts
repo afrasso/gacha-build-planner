@@ -2,15 +2,23 @@ import { v4 as uuidv4 } from "uuid";
 import { describe, expect, it } from "vitest";
 
 import { generateArtifact } from "@/__tests__/generators";
-import { calculateArtifactBuildSatisfaction } from "@/calculation/artifactmetrics/calculateartifactbuildsatisfaction";
-import { IDataContext } from "@/contexts/DataContext";
+import { mockDataContext } from "@/__tests__/testhelpers";
+import calculateArtifactBuildSatisfaction from "@/calculation/artifactmetrics/calculateartifactbuildsatisfaction";
 import { ArtifactMetric, IBuild } from "@/types";
 
 describe("calculateArtifactBuildSatisfaction()", () => {
-  const dataContext = {
+  const dataContext = mockDataContext({
     getArtifactLevelsPerSubStatRoll: () => 0,
-    getArtifactMaxLevel: (_) => 0,
-  } as IDataContext;
+    getArtifactMainStatOdds: () => 1,
+    getArtifactMaxLevel: () => 0,
+    getArtifactTypes: () => [
+      { iconUrl: "", key: "CIRCLET" },
+      { iconUrl: "", key: "FLOWER" },
+      { iconUrl: "", key: "GOBLET" },
+      { iconUrl: "", key: "PLUME" },
+      { iconUrl: "", key: "SANDS" },
+    ],
+  });
 
   const generateBuild = (): IBuild => {
     const build: IBuild = {
@@ -56,6 +64,7 @@ describe("calculateArtifactBuildSatisfaction()", () => {
       describe("and I have a new artifact that is not part of the desired set bonus", () => {
         it("should result in a satisfaction of 0", () => {
           const setId = uuidv4();
+          const iterations = 1;
 
           const build = generateBuild();
           build.artifacts.CIRCLET = generateArtifact({ setId, typeKey: "CIRCLET" });
@@ -67,6 +76,13 @@ describe("calculateArtifactBuildSatisfaction()", () => {
           build.artifacts.SANDS = generateArtifact({ typeKey: "SANDS" });
           build.desiredArtifactSetBonuses.push({ bonusCount: 4, setId });
 
+          // A replacement artifact requires the build's slot artifact to already have a rating for this build.
+          build.artifacts.CIRCLET.metricsResults[ArtifactMetric.RATING].buildResults[build.characterId] = {
+            calculatedOn: new Date().toISOString(),
+            iterations,
+            result: 1,
+          };
+
           const artifact = generateArtifact({ typeKey: "CIRCLET" });
 
           const result = calculateArtifactBuildSatisfaction({
@@ -74,7 +90,7 @@ describe("calculateArtifactBuildSatisfaction()", () => {
             build,
             calculationType: ArtifactMetric.CURRENT_STATS_CURRENT_ARTIFACTS,
             dataContext,
-            iterations: 1,
+            iterations,
           });
 
           expect(result).toBe(0);

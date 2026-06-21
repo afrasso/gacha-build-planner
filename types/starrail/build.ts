@@ -60,11 +60,13 @@ export class Build implements IBuild {
   public calculateStats({
     artifacts,
     dataContext,
+    overallStatKeys,
   }: {
     artifacts?: Record<string, IArtifact>;
     dataContext: IDataContext;
+    overallStatKeys?: string[];
   }): Record<string, number> {
-    return calculateStats({ artifacts: artifacts || this._artifacts, build: this, dataContext });
+    return calculateStats({ artifacts: artifacts || this._artifacts, build: this, dataContext, overallStatKeys });
   }
 
   public toBuildData(): BuildData {
