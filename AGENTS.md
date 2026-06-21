@@ -111,6 +111,7 @@ Add tests in `__tests__/calculation/` when changing calculation logic.
 ## Coding conventions
 
 - **Imports**: sorted by `eslint-plugin-perfectionist`; internal `@/` imports grouped separately.
+- **Optional properties**: prefer `prop?: T` over `prop: T | undefined` on object types.
 - **Unused vars**: prefix with `_` to ignore (e.g. `_unused`).
 - **File naming**: lowercase, no separators in most files (`buildgetartifactset.ts` style in builders).
 - **Minimize scope**: match existing patterns; don't refactor unrelated code in the same change.

@@ -24,6 +24,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isLoggedIn, menuContents, onLog
 
   return (
     <div className="flex flex-col bg-background border-b divide-y border-t overflow-y-auto">
+      <Button className="text-md font-semibold h-14" onClick={() => router.push("/settings")} variant="ghost">
+        {getNavMessages().settings}
+      </Button>
       <Button className="text-md font-semibold h-14" onClick={() => router.push("/help")} variant="ghost">
         {getNavMessages().help}
       </Button>

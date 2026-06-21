@@ -11,3 +11,5 @@ export const getArtifactMetricDisplay = (metric: ArtifactMetric) => messages.art
 export const getHelpMessages = () => messages.help;
 
 export const getNavMessages = () => messages.nav;
+
+export const getSettingsMessages = () => messages.settings;

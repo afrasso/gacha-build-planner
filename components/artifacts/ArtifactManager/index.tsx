@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getArtifactMetricLabel } from "@/constants/messages";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useDataContext } from "@/contexts/DataContext";
+import { useSettingsContext } from "@/contexts/SettingsContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
 import { Artifact, ArtifactData, ArtifactMetric, BuildData } from "@/types";
 
@@ -22,6 +23,7 @@ const ArtifactManager: React.FC = () => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
   const dataContext = useDataContext();
   const { constructBuild } = dataContext;
+  const { enabledArtifactMetrics } = useSettingsContext();
   const { loadArtifacts, loadBuilds, saveArtifacts } = useStorageContext();
 
   const [artifacts, setArtifacts] = useState<ArtifactData[]>([]);
@@ -81,6 +83,12 @@ const ArtifactManager: React.FC = () => {
     setSort(sort);
   };
 
+  useEffect(() => {
+    if (sort !== "LEVEL" && sort !== "RARITY" && !enabledArtifactMetrics.includes(sort)) {
+      setSort("RARITY");
+    }
+  }, [enabledArtifactMetrics, sort]);
+
   const sortedAndFilteredArtifacts = useMemo(() => {
     const filteredArtifacts = artifacts.filter((artifact) => isInFilter({ artifact, filter }));
     return sortArtifacts({ artifacts: filteredArtifacts, sort });
@@ -99,6 +107,7 @@ const ArtifactManager: React.FC = () => {
         builds: builds.map(constructBuild),
         callback: async (p) => await callback((index + p) / artifacts.length),
         dataContext,
+        enabledMetrics: enabledArtifactMetrics,
         forceRecalculate: true,
         iterations: 10,
       });
@@ -133,7 +142,7 @@ const ArtifactManager: React.FC = () => {
               <SelectValue placeholder="Sort artifacts by" />
             </SelectTrigger>
             <SelectContent>
-              {Object.values(ArtifactMetric).map((metric) => (
+              {enabledArtifactMetrics.map((metric) => (
                 <SelectItem key={metric} value={metric}>
                   {getArtifactMetricLabel(metric)}
                 </SelectItem>

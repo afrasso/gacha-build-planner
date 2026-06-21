@@ -2,6 +2,7 @@
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { getArtifactMetricLabel } from "@/constants/messages";
+import { useSettingsContext } from "@/contexts/SettingsContext";
 import { ArtifactMetric, ArtifactMetricsResults } from "@/types";
 
 const colors: string[] = [
@@ -52,6 +53,8 @@ interface MetricChartProps {
 }
 
 const MetricChart: React.FC<MetricChartProps> = ({ characterId, metricsResults }) => {
+  const { enabledArtifactMetrics } = useSettingsContext();
+
   const transform = (x: number) => {
     if (x === 0) {
       return 0;
@@ -62,7 +65,7 @@ const MetricChart: React.FC<MetricChartProps> = ({ characterId, metricsResults }
 
   return (
     <div className="w-full mx-auto">
-      {Object.values(ArtifactMetric).map((metric) => {
+      {enabledArtifactMetrics.map((metric) => {
         const rawValue = characterId
           ? metricsResults[metric].buildResults[characterId].result
           : metricsResults[metric].maxValue;

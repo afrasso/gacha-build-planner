@@ -55,6 +55,9 @@ export default function Header() {
             <Link className="text-sm font-medium text-muted-foreground hover:text-foreground" href="/help">
               {getNavMessages().help}
             </Link>
+            <Link className="text-sm font-medium text-muted-foreground hover:text-foreground" href="/settings">
+              {getNavMessages().settings}
+            </Link>
           </div>
         </div>
         <div className="flex items-center space-x-2">

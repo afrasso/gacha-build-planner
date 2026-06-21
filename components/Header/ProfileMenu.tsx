@@ -1,6 +1,7 @@
 "use client";
 
 import { LogOut, User as UserIcon } from "lucide-react";
+import Link from "next/link";
 import * as React from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -12,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getNavMessages } from "@/constants/messages";
 import { User } from "@/types";
 
 interface ProfileMenuProps {
@@ -38,7 +40,9 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ onLogout, user }) => {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/settings">{getNavMessages().settings}</Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={onLogout}>
             <LogOut className="h-4 w-4" />
