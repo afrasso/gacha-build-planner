@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useDataContext } from "@/contexts/DataContext";
+import { useSettingsContext } from "@/contexts/SettingsContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
 import { Artifact, ArtifactData, BuildData } from "@/types";
 
@@ -22,6 +23,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
   const { authFetch, isAuthenticated, user } = useAuthContext();
   const dataContext = useDataContext();
   const { constructBuild } = dataContext;
+  const { enabledArtifactMetrics } = useSettingsContext();
   const { loadArtifact, loadBuilds, saveArtifact } = useStorageContext();
 
   const [artifact, setArtifact] = useState<ArtifactData | undefined>();
@@ -86,6 +88,7 @@ const ArtifactDetails: React.FC<ArtifactDetailsProps> = ({ artifactId }) => {
       builds: builds.map(constructBuild),
       callback,
       dataContext,
+      enabledMetrics: enabledArtifactMetrics,
       forceRecalculate: true,
       iterations: 1000,
     });

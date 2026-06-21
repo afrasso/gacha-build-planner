@@ -19,6 +19,10 @@ Next.js 14 app for Genshin Impact and Honkai: Star Rail build planning. Read `AG
 - Validate imported data with existing AJV schemas in `dataimport/`.
 - Run `npm run lint` after substantive TS/TSX changes; run `npm test` when touching `calculation/` or `__tests__/`.
 
+## TypeScript
+
+- Prefer optional properties over explicit `| undefined` on object types (e.g. `result?: T` instead of `result: T | undefined`). Return types and non-property positions may still use `T | undefined` when appropriate.
+
 ## Avoid
 
 - Duplicating game logic in components — use `IDataContext` and `IBuild` methods.

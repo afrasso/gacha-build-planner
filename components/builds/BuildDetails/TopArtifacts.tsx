@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { getTopArtifacts } from "@/calculation/artifactmetrics/gettopartifacts";
 import ArtifactCard from "@/components/artifacts/ArtifactCard";
@@ -10,6 +10,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getArtifactMetricLabel } from "@/constants/messages";
 import { useDataContext } from "@/contexts/DataContext";
+import { useSettingsContext } from "@/contexts/SettingsContext";
 import { Artifact, ArtifactData, ArtifactMetric, BuildData } from "@/types";
 
 interface TopBuildsProps {
@@ -21,9 +22,16 @@ interface TopBuildsProps {
 
 const TopArtifacts: React.FC<TopBuildsProps> = ({ artifacts, build, count = 12, showMetrics }) => {
   const { constructBuild } = useDataContext();
+  const { enabledArtifactMetrics } = useSettingsContext();
 
   const [filter, setFilter] = useState<ArtifactFilter>();
   const [topArtifactsMetric, setTopArtifactsMetric] = useState<ArtifactMetric | undefined>();
+
+  useEffect(() => {
+    if (topArtifactsMetric && !enabledArtifactMetrics.includes(topArtifactsMetric)) {
+      setTopArtifactsMetric(undefined);
+    }
+  }, [enabledArtifactMetrics, topArtifactsMetric]);
 
   const topArtifacts = useMemo((): ArtifactData[] => {
     if (!topArtifactsMetric) {
@@ -45,7 +53,7 @@ const TopArtifacts: React.FC<TopBuildsProps> = ({ artifacts, build, count = 12, 
             <SelectValue placeholder="Select a metric" />
           </SelectTrigger>
           <SelectContent>
-            {Object.values(ArtifactMetric).map((metric) => (
+            {enabledArtifactMetrics.map((metric) => (
               <SelectItem key={metric} value={metric}>
                 {getArtifactMetricLabel(metric)}
               </SelectItem>

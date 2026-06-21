@@ -6,6 +6,7 @@ import "./globals.css";
 
 import Header from "@/components/Header";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { SettingsProvider } from "@/contexts/SettingsContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import getEnvVariable from "@/utils/getenvvariable";
 
@@ -37,8 +38,10 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider apiUrl={apiUrl}>
           <ThemeProvider>
-            <Header />
-            {children}
+            <SettingsProvider>
+              <Header />
+              {children}
+            </SettingsProvider>
           </ThemeProvider>
         </AuthProvider>
       </body>

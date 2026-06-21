@@ -20,6 +20,7 @@ export * from "./build";
 export * from "./character";
 export * from "./misc";
 export * from "./plan";
+export * from "./settings";
 export * from "./stat";
 export * from "./user";
 export * from "./weapon";

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { getTopBuilds } from "@/calculation/artifactmetrics/gettopbuilds";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getArtifactMetricLabel } from "@/constants/messages";
 import { useDataContext } from "@/contexts/DataContext";
+import { useSettingsContext } from "@/contexts/SettingsContext";
 import { Artifact, ArtifactData, ArtifactMetric, ArtifactMetricsResults, BuildData } from "@/types";
 
 import MetricChart from "./MetricChart";
@@ -17,8 +18,15 @@ interface TopBuildsProps {
 
 const TopBuilds: React.FC<TopBuildsProps> = ({ artifact, builds }) => {
   const { constructBuild } = useDataContext();
+  const { enabledArtifactMetrics } = useSettingsContext();
 
   const [topBuildsMetric, setTopBuildsMetric] = useState<ArtifactMetric | undefined>();
+
+  useEffect(() => {
+    if (topBuildsMetric && !enabledArtifactMetrics.includes(topBuildsMetric)) {
+      setTopBuildsMetric(undefined);
+    }
+  }, [enabledArtifactMetrics, topBuildsMetric]);
 
   const topBuilds: BuildData[] | undefined =
     topBuildsMetric &&
@@ -33,7 +41,7 @@ const TopBuilds: React.FC<TopBuildsProps> = ({ artifact, builds }) => {
           <SelectValue placeholder="Select a metric" />
         </SelectTrigger>
         <SelectContent>
-          {Object.values(ArtifactMetric).map((metric) => (
+          {enabledArtifactMetrics.map((metric) => (
             <SelectItem key={metric} value={metric}>
               {getArtifactMetricLabel(metric)}
             </SelectItem>

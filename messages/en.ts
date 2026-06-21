@@ -85,5 +85,24 @@ export const en = {
   },
   nav: {
     help: "Help",
+    settings: "Settings",
+  },
+  settings: {
+    artifactMetrics: {
+      atLeastOneRequired: "At least one metric must remain enabled.",
+      buildCompletionMetrics: {
+        title: "Build completion metrics",
+      },
+      description:
+        "Disabled metrics are skipped during calculation and hidden from charts and dropdowns. Changes apply globally to Genshin Impact and Honkai: Star Rail.",
+      ratingMetrics: {
+        sharedSimulationNote:
+          "Rating, Plus/Minus, and Upgrade Odds share the same roll simulation when any of them is enabled.",
+        title: "Rating metrics",
+      },
+      title: "Artifact metrics",
+    },
+    intro: "Configure how the planner calculates and displays artifact metrics.",
+    title: "Settings",
   },
 } as const;
