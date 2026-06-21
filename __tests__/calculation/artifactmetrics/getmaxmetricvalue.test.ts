@@ -1,7 +1,7 @@
 // import { v4 as uuidv4 } from "uuid";
 import { describe, expect, it } from "vitest";
 
-import { getMaxMetricValue } from "@/calculation/artifactmetrics/getmaxmetricvalue";
+import getMaxMetricValue from "@/calculation/artifactmetrics/getmaxmetricvalue";
 import { ArtifactMetric, ArtifactMetricsResults } from "@/types";
 
 describe("Max Metric Value Calculation Tests", () => {

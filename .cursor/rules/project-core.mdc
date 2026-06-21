@@ -1,0 +1,25 @@
+---
+description: Core conventions for gacha-build-planner
+alwaysApply: true
+---
+
+# Gacha Build Planner — Core Rules
+
+## Project context
+
+Next.js 14 app for Genshin Impact and Honkai: Star Rail build planning. Read `AGENTS.md` for architecture and directory layout.
+
+## Must follow
+
+- Use `@/` path alias for imports; respect perfectionist import sort order.
+- Keep `calculation/` free of React — pure functions only.
+- Game-specific logic goes in `types/genshin/` or `types/starrail/` and matching `DataProvider`; share via `types/` interfaces (`IBuild`, `IDataContext`, etc.).
+- Persist user data through `StorageContext` / IndexedDB, not ad-hoc localStorage.
+- Validate imported data with existing AJV schemas in `dataimport/`.
+- Run `npm run lint` after substantive TS/TSX changes; run `npm test` when touching `calculation/` or `__tests__/`.
+
+## Avoid
+
+- Duplicating game logic in components — use `IDataContext` and `IBuild` methods.
+- Broad refactors or unrelated cleanup in focused tasks.
+- Committing `.env` files or secrets.

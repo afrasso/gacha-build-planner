@@ -42,7 +42,11 @@ export const calculateBuildSatisfaction = ({
     desiredArtifactSetBonuses: build.desiredArtifactSetBonuses,
   });
 
-  const stats = build.calculateStats({ artifacts, dataContext });
+  const stats = build.calculateStats({
+    artifacts,
+    dataContext,
+    overallStatKeys: build.desiredOverallStats.map((x) => x.stat.key),
+  });
   const targetStats =
     targetStatsStrategy === TargetStatsStrategy.CURRENT
       ? getTargetStats({ desiredOverallStats: build.desiredOverallStats, stats })

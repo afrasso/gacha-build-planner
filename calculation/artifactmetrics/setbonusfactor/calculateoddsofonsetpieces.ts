@@ -18,6 +18,10 @@ const calculateOddsOfOnSetPieces = ({
   dataContext: IDataContext;
   desiredArtifactMainStats: Record<string, string[]>;
 }): number => {
+  if (artifactTypeKeys.length === 0) {
+    return 1;
+  }
+
   const { getArtifactTypes } = dataContext;
 
   const numArtifactTypes = getArtifactTypes().length;

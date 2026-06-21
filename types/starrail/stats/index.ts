@@ -61,10 +61,12 @@ export const calculateStats = ({
   artifacts,
   build,
   dataContext,
+  overallStatKeys = Object.keys(OverallStatKey),
 }: {
   artifacts: Record<string, IArtifact>;
   build: Build;
   dataContext: IDataContext;
+  overallStatKeys?: string[];
 }): Record<string, number> => {
   const { getCharacter, getWeapon } = dataContext;
   const character = getCharacter(build.characterId) as Character;
@@ -165,95 +167,143 @@ export const calculateStats = ({
     return initial + round(calculateStandardStat({ artifacts, dataContext, statKey: StatKey.SPD, weapon }));
   };
 
-  const result = {
-    [OverallStatKey.ATK]: calculateAtk(),
-    [OverallStatKey.CRIT_DMG]: calculateCritDmg(),
-    [OverallStatKey.CRIT_RATE]: calculateCritRate(),
-    [OverallStatKey.DEF]: calculateDef(),
-    [OverallStatKey.DMG_BONUS_FIRE]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.DMG_BONUS_FIRE,
-        weapon,
-      })
-    ),
-    [OverallStatKey.DMG_BONUS_ICE]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.DMG_BONUS_ICE,
-        weapon,
-      })
-    ),
-    [OverallStatKey.DMG_BONUS_IMAGINARY]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.DMG_BONUS_IMAGINARY,
-        weapon,
-      })
-    ),
-    [OverallStatKey.DMG_BONUS_LIGHTNING]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.DMG_BONUS_LIGHTNING,
-        weapon,
-      })
-    ),
-    [OverallStatKey.DMG_BONUS_PHYSICAL]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.DMG_BONUS_PHYSICAL,
-        weapon,
-      })
-    ),
-    [OverallStatKey.DMG_BONUS_QUANTUM]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.DMG_BONUS_QUANTUM,
-        weapon,
-      })
-    ),
-    [OverallStatKey.DMG_BONUS_WIND]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.DMG_BONUS_WIND,
-        weapon,
-      })
-    ),
-    [OverallStatKey.EFF_HIT_RATE]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.EFF_HIT_RATE,
-        weapon,
-      })
-    ),
-    [OverallStatKey.EFF_RES]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.EFF_HIT_RATE,
-        weapon,
-      })
-    ),
-    [OverallStatKey.ENERGY_RECHARGE]: calculateEr(),
-    [OverallStatKey.HEALING_BONUS]: round(
-      calculateStandardStat({
-        artifacts,
-        dataContext,
-        statKey: StatKey.HEALING_BONUS,
-        weapon,
-      })
-    ),
-    [OverallStatKey.MAX_HP]: calculateHp(),
-    [OverallStatKey.SPD]: calculateSpd(),
-  } as Record<OverallStatKey, number>;
-
-  return result;
+  return overallStatKeys
+    .map((key) => OverallStatKey[key as keyof typeof OverallStatKey])
+    .reduce((acc, key) => {
+      switch (key) {
+        case OverallStatKey.ATK:
+          acc[key] = calculateAtk();
+          return acc;
+        case OverallStatKey.BREAK_EFF:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.BREAK_EFF,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.CRIT_DMG:
+          acc[key] = calculateCritDmg();
+          return acc;
+        case OverallStatKey.CRIT_RATE:
+          acc[key] = calculateCritRate();
+          return acc;
+        case OverallStatKey.DEF:
+          acc[key] = calculateDef();
+          return acc;
+        case OverallStatKey.DMG_BONUS_FIRE:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_FIRE,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.DMG_BONUS_ICE:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_ICE,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.DMG_BONUS_IMAGINARY:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_IMAGINARY,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.DMG_BONUS_LIGHTNING:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_LIGHTNING,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.DMG_BONUS_PHYSICAL:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_PHYSICAL,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.DMG_BONUS_QUANTUM:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_QUANTUM,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.DMG_BONUS_WIND:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_WIND,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.EFF_HIT_RATE:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.EFF_HIT_RATE,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.EFF_RES:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.EFF_HIT_RATE,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.ENERGY_RECHARGE:
+          acc[key] = calculateEr();
+          return acc;
+        case OverallStatKey.HEALING_BONUS:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.HEALING_BONUS,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.MAX_HP:
+          acc[key] = calculateHp();
+          return acc;
+        case OverallStatKey.SPD:
+          acc[key] = calculateSpd();
+          return acc;
+        default:
+          throw new Error(`Unexpected error: the key ${key} is not a valid overall stat key.`);
+      }
+    }, {} as Record<OverallStatKey, number>);
 };
