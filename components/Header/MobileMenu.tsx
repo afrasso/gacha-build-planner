@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
+import { getNavMessages } from "@/constants/messages";
 
 import { MenuContent } from "./MenuContent";
 
@@ -23,6 +24,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isLoggedIn, menuContents, onLog
 
   return (
     <div className="flex flex-col bg-background border-b divide-y border-t overflow-y-auto">
+      <Button className="text-md font-semibold h-14" onClick={() => router.push("/help")} variant="ghost">
+        {getNavMessages().help}
+      </Button>
       {menuContents.map((menuContent) => (
         <div className="flex flex-col divide-y" key={menuContent.key}>
           <Button className="text-md font-semibold h-14" onClick={() => router.push(menuContent.href)} variant="ghost">

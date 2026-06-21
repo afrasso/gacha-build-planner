@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { getTopBuilds } from "@/calculation/artifactmetrics/gettopbuilds";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getArtifactMetricLabel } from "@/constants/messages";
 import { useDataContext } from "@/contexts/DataContext";
 import { Artifact, ArtifactData, ArtifactMetric, ArtifactMetricsResults, BuildData } from "@/types";
 
@@ -34,7 +35,7 @@ const TopBuilds: React.FC<TopBuildsProps> = ({ artifact, builds }) => {
         <SelectContent>
           {Object.values(ArtifactMetric).map((metric) => (
             <SelectItem key={metric} value={metric}>
-              {metric}
+              {getArtifactMetricLabel(metric)}
             </SelectItem>
           ))}
         </SelectContent>

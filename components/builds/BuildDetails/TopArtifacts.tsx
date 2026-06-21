@@ -8,6 +8,7 @@ import {
   isInFilter,
 } from "@/components/artifacts/ArtifactManager/ArtifactFilterDialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getArtifactMetricLabel } from "@/constants/messages";
 import { useDataContext } from "@/contexts/DataContext";
 import { Artifact, ArtifactData, ArtifactMetric, BuildData } from "@/types";
 
@@ -46,7 +47,7 @@ const TopArtifacts: React.FC<TopBuildsProps> = ({ artifacts, build, count = 12, 
           <SelectContent>
             {Object.values(ArtifactMetric).map((metric) => (
               <SelectItem key={metric} value={metric}>
-                {metric}
+                {getArtifactMetricLabel(metric)}
               </SelectItem>
             ))}
           </SelectContent>

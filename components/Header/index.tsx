@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
+import { getNavMessages } from "@/constants/messages";
 import { User } from "@/types";
 
 import { ThemeToggle } from "../ThemeToggle";
@@ -49,8 +50,11 @@ export default function Header() {
           <Link className="mr-6 flex items-center space-x-2" href="/">
             <span className="font-bold">Gacha Build Planner</span>
           </Link>
-          <div className="hidden md:flex">
+          <div className="hidden md:flex items-center gap-4">
             <DesktopMenu menuContents={menuContents} />
+            <Link className="text-sm font-medium text-muted-foreground hover:text-foreground" href="/help">
+              {getNavMessages().help}
+            </Link>
           </div>
         </div>
         <div className="flex items-center space-x-2">

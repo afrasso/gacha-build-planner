@@ -9,6 +9,7 @@ import { PaginationComponent } from "@/components/ui/custom/PaginationComponent"
 import { getPageOfItems } from "@/components/ui/helpers/getpageofitems";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getArtifactMetricLabel } from "@/constants/messages";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useDataContext } from "@/contexts/DataContext";
 import { StorageRetrievalStatus, useStorageContext } from "@/contexts/StorageContext";
@@ -134,7 +135,7 @@ const ArtifactManager: React.FC = () => {
             <SelectContent>
               {Object.values(ArtifactMetric).map((metric) => (
                 <SelectItem key={metric} value={metric}>
-                  {metric}
+                  {getArtifactMetricLabel(metric)}
                 </SelectItem>
               ))}
               {["LEVEL", "RARITY"].map((artifactSort) => (

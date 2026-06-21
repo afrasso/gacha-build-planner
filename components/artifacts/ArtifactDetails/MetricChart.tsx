@@ -1,6 +1,7 @@
 "use client";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { getArtifactMetricLabel } from "@/constants/messages";
 import { ArtifactMetric, ArtifactMetricsResults } from "@/types";
 
 const colors: string[] = [
@@ -70,15 +71,15 @@ const MetricChart: React.FC<MetricChartProps> = ({ characterId, metricsResults }
           // substat rolls.
           const value = (rawValue || 0) / 10;
           const displayValue = rawValue ? `${Math.round(rawValue * 100) / 100}` : "N/A";
-          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
+          return <MetricBar displayValue={displayValue} key={metric} name={getArtifactMetricLabel(metric)} value={value} />;
         } else if (metric === ArtifactMetric.PLUS_MINUS) {
           const value = Math.max(0, (rawValue || 0) / 10);
           const displayValue = rawValue ? `${Math.round(rawValue * 100) / 100}` : "N/A";
-          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={value} />;
+          return <MetricBar displayValue={displayValue} key={metric} name={getArtifactMetricLabel(metric)} value={value} />;
         } else {
           const value = rawValue || 0;
           const displayValue = rawValue ? `${Math.round((rawValue || 0) * 1000000) / 1000000}` : "N/A";
-          return <MetricBar displayValue={displayValue} key={metric} name={metric} value={transform(value)} />;
+          return <MetricBar displayValue={displayValue} key={metric} name={getArtifactMetricLabel(metric)} value={transform(value)} />;
         }
       })}
     </div>
