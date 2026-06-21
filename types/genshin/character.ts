@@ -1,12 +1,24 @@
 import { ICharacter } from "../character";
 
+export type CharacterData = {
+  ascensionStat: string;
+  element: string;
+  iconUrl: string;
+  id: string;
+  maxLvlStats: MaxLvlStats;
+  name: string;
+  rarity: number;
+  weaponType: string;
+};
+
+type MaxLvlStats = {
+  ascensionStat: number;
+  ATK: number;
+  DEF: number;
+  HP: number;
+};
+
 export class Character implements ICharacter {
-  private _characterData;
-
-  constructor(characterData: CharacterData) {
-    this._characterData = characterData;
-  }
-
   get ascensionStat(): string {
     return this._characterData.ascensionStat;
   }
@@ -38,22 +50,10 @@ export class Character implements ICharacter {
   get weaponType(): string {
     return this._characterData.weaponType;
   }
+
+  private _characterData;
+
+  constructor(characterData: CharacterData) {
+    this._characterData = characterData;
+  }
 }
-
-export type CharacterData = {
-  ascensionStat: string;
-  element: string;
-  iconUrl: string;
-  id: string;
-  maxLvlStats: MaxLvlStats;
-  name: string;
-  rarity: number;
-  weaponType: string;
-};
-
-type MaxLvlStats = {
-  ascensionStat: number;
-  ATK: number;
-  DEF: number;
-  HP: number;
-};

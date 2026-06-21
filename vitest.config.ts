@@ -1,33 +1,27 @@
 import react from "@vitejs/plugin-react";
-import tsConfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   build: {
     sourcemap: true,
   },
-  plugins: [react(), tsConfigPaths()],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": new URL("./", import.meta.url).pathname,
     },
+    tsconfigPaths: true,
   },
   test: {
     cache: false,
-    deps: {
-      optimizer: {
-        web: {
-          include: ["react", "react-dom", "@testing-library/react"],
-        },
-      },
-    },
     environment: "jsdom",
     environmentOptions: {
-      NODE_ENV: "development", // Forces React to use the development build
+      NODE_ENV: "development",
     },
+    exclude: [".next/**", "dist/**", "node_modules/**"],
     globals: true,
-    isolate: false, // Run tests in a single process
+    include: ["__tests__/**/*.test.ts"],
+    isolate: false,
     setupFiles: ["./setupTests.ts"],
-    watch: !process.env.CI,
   },
 });

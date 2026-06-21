@@ -51,7 +51,7 @@ const initializeArtifact = ({ artifact }: { artifact: any }): void => {
   // Initialization logic goes here.
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const initializeBuild = ({ build }: { build: any }): void => {
   // Initialization logic goes here.
   for (const artifact of Object.values(build.artifacts)) {

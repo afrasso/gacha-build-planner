@@ -7,16 +7,78 @@ import { DesiredOverallStat } from "../stat";
 import { calculateStats } from "./stats";
 
 export class Build implements IBuild {
-  private _artifacts: Record<string, IArtifact>;
-  private _characterId: string;
-  private _desiredArtifactMainStats: Record<string, string[]>;
-  private _desiredArtifactSetBonuses: ArtifactSetBonus[];
-  private _desiredOverallStats: DesiredOverallStat[];
-  private _lastUpdatedDate: string;
-  private _sortOrder: number;
-  private _weaponId?: string;
-
   public readonly _typeBrand: "IBuild";
+  public get artifacts(): Record<string, IArtifact> {
+    return this._artifacts;
+  }
+  public set artifacts(artifacts: Record<string, IArtifact>) {
+    this._artifacts = artifacts;
+    this.updateLastUpdatedDate();
+  }
+  public get characterId(): string {
+    return this._characterId;
+  }
+  public get desiredArtifactMainStats(): Record<string, string[]> {
+    return this._desiredArtifactMainStats;
+  }
+  public set desiredArtifactMainStats(desiredArtifactMainStats: Record<string, string[]>) {
+    this._desiredArtifactMainStats = desiredArtifactMainStats;
+    this.updateLastUpdatedDate();
+  }
+  public get desiredArtifactSetBonuses(): ArtifactSetBonus[] {
+    return this._desiredArtifactSetBonuses;
+  }
+  public set desiredArtifactSetBonuses(desiredArtifactSetBonuses: ArtifactSetBonus[]) {
+    this._desiredArtifactSetBonuses = desiredArtifactSetBonuses;
+    this.updateLastUpdatedDate();
+  }
+
+  public get desiredOverallStats(): DesiredOverallStat[] {
+    return this._desiredOverallStats;
+  }
+
+  public set desiredOverallStats(desiredOverallStats: DesiredOverallStat[]) {
+    this._desiredOverallStats = desiredOverallStats;
+    this.updateLastUpdatedDate();
+  }
+
+  public get lastUpdatedDate(): string {
+    return this._lastUpdatedDate;
+  }
+
+  public get sortOrder(): number {
+    return this._sortOrder;
+  }
+
+  public set sortOrder(sortOrder: number) {
+    this._sortOrder = sortOrder;
+    this.updateLastUpdatedDate();
+  }
+
+  public get weaponId(): string | undefined {
+    return this._weaponId;
+  }
+
+  public set weaponId(weaponId: string | undefined) {
+    this._weaponId = weaponId;
+    this.updateLastUpdatedDate();
+  }
+
+  private _artifacts: Record<string, IArtifact>;
+
+  private _characterId: string;
+
+  private _desiredArtifactMainStats: Record<string, string[]>;
+
+  private _desiredArtifactSetBonuses: ArtifactSetBonus[];
+
+  private _desiredOverallStats: DesiredOverallStat[];
+
+  private _lastUpdatedDate: string;
+
+  private _sortOrder: number;
+
+  private _weaponId?: string;
 
   constructor({
     artifacts,
@@ -53,10 +115,6 @@ export class Build implements IBuild {
     this._typeBrand = "IBuild";
   }
 
-  private updateLastUpdatedDate(): void {
-    this._lastUpdatedDate = new Date().toISOString();
-  }
-
   public calculateStats({
     artifacts,
     dataContext,
@@ -91,65 +149,7 @@ export class Build implements IBuild {
     };
   }
 
-  public get artifacts(): Record<string, IArtifact> {
-    return this._artifacts;
-  }
-
-  public set artifacts(artifacts: Record<string, IArtifact>) {
-    this._artifacts = artifacts;
-    this.updateLastUpdatedDate();
-  }
-
-  public get characterId(): string {
-    return this._characterId;
-  }
-
-  public get desiredArtifactMainStats(): Record<string, string[]> {
-    return this._desiredArtifactMainStats;
-  }
-
-  public set desiredArtifactMainStats(desiredArtifactMainStats: Record<string, string[]>) {
-    this._desiredArtifactMainStats = desiredArtifactMainStats;
-    this.updateLastUpdatedDate();
-  }
-
-  public get desiredArtifactSetBonuses(): ArtifactSetBonus[] {
-    return this._desiredArtifactSetBonuses;
-  }
-
-  public set desiredArtifactSetBonuses(desiredArtifactSetBonuses: ArtifactSetBonus[]) {
-    this._desiredArtifactSetBonuses = desiredArtifactSetBonuses;
-    this.updateLastUpdatedDate();
-  }
-
-  public get desiredOverallStats(): DesiredOverallStat[] {
-    return this._desiredOverallStats;
-  }
-
-  public set desiredOverallStats(desiredOverallStats: DesiredOverallStat[]) {
-    this._desiredOverallStats = desiredOverallStats;
-    this.updateLastUpdatedDate();
-  }
-
-  public get lastUpdatedDate(): string {
-    return this._lastUpdatedDate;
-  }
-
-  public get sortOrder(): number {
-    return this._sortOrder;
-  }
-
-  public set sortOrder(sortOrder: number) {
-    this._sortOrder = sortOrder;
-    this.updateLastUpdatedDate();
-  }
-
-  public get weaponId(): string | undefined {
-    return this._weaponId;
-  }
-
-  public set weaponId(weaponId: string | undefined) {
-    this._weaponId = weaponId;
-    this.updateLastUpdatedDate();
+  private updateLastUpdatedDate(): void {
+    this._lastUpdatedDate = new Date().toISOString();
   }
 }

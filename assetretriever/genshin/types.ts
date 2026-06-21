@@ -1,3 +1,11 @@
+export enum ArtifactType {
+  CIRCLET = "CIRCLET",
+  FLOWER = "FLOWER",
+  GOBLET = "GOBLET",
+  PLUME = "PLUME",
+  SANDS = "SANDS",
+}
+
 export type ArtifactSet = {
   hasArtifactTypes: Record<ArtifactType, boolean>;
   iconUrl: string;
@@ -7,14 +15,6 @@ export type ArtifactSet = {
   rarities: number[];
   setBonusCounts: number[];
 };
-
-export enum ArtifactType {
-  CIRCLET = "CIRCLET",
-  FLOWER = "FLOWER",
-  GOBLET = "GOBLET",
-  PLUME = "PLUME",
-  SANDS = "SANDS",
-}
 
 export type FailedArtifactIconDownload = {
   setId: string;

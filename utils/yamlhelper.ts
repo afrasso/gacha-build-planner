@@ -1,10 +1,10 @@
 import fs from "fs";
-import yaml from "js-yaml";
+import { dump, load } from "js-yaml";
 
 export function loadYaml<T>(filePath: string): T {
   try {
     const fileContents = fs.readFileSync(filePath, "utf8");
-    return yaml.load(fileContents) as T;
+    return load(fileContents) as T;
   } catch (err) {
     if (err instanceof Error) {
       console.error("Error loading YAML file:", err.message);
@@ -25,7 +25,7 @@ export function saveYaml<T>({
   verbose?: boolean;
 }): void {
   try {
-    const fileContents = yaml.dump(content);
+    const fileContents = dump(content);
     fs.writeFileSync(filePath, fileContents);
     if (verbose) {
       console.log(`Data saved as YAML to ${filePath}`);

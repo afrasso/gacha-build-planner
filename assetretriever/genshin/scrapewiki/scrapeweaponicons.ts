@@ -14,9 +14,9 @@ const scrapeIconsFromSection = async ({
   section,
   verbose,
 }: {
-  $: cheerio.Root;
+  $: cheerio.CheerioAPI;
   failedWeaponIconDownloads: FailedWeaponIconDownload[];
-  section: cheerio.Cheerio;
+  section: ReturnType<cheerio.CheerioAPI>;
   verbose: boolean;
 }) => {
   const rows = section.find("tr").toArray();
@@ -59,9 +59,9 @@ const scrapeWeaponIcons = async ({
 
   try {
     const response = await axios.get(url);
-    const $: cheerio.Root = cheerio.load(response.data);
+    const $: cheerio.CheerioAPI = cheerio.load(response.data);
 
-    const listOfAllWeaponsSection: cheerio.Cheerio = $("h2:has(#List_of_All_Weapons)").nextUntil("h2");
+    const listOfAllWeaponsSection = $("h2:has(#List_of_All_Weapons)").nextUntil("h2");
     await scrapeIconsFromSection({ $, failedWeaponIconDownloads, section: listOfAllWeaponsSection, verbose });
 
     const questExclusiveWeaponsSection = $("h2:has(#Quest-Exclusive_Weapons)").nextUntil("h2");

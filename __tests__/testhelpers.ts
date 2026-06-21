@@ -1,7 +1,8 @@
 import { IDataContext } from "@/contexts/DataContext";
 
-export function mockDataContext(overrides: Partial<IDataContext>): IDataContext {
-  return overrides as unknown as IDataContext;
+export function getRandomElement<T>(arr: Array<T>): T {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
 }
 
 export function getRandomEnumValue<T extends object>(enumObj: T): T[keyof T] {
@@ -10,7 +11,6 @@ export function getRandomEnumValue<T extends object>(enumObj: T): T[keyof T] {
   return values[randomIndex] as T[keyof T];
 }
 
-export function getRandomElement<T>(arr: Array<T>): T {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
+export function mockDataContext(overrides: Partial<IDataContext>): IDataContext {
+  return overrides as unknown as IDataContext;
 }

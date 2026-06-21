@@ -35,19 +35,86 @@ export interface IArtifact {
 }
 
 export class Artifact implements IArtifact {
-  private _characterId?: string;
-  private _id: string;
-  private _isLocked: boolean;
-  private _lastUpdatedDate: string;
-  private _level: number;
-  private _mainStatKey: string;
-  private _metricsResults: ArtifactMetricsResults;
-  private _rarity: number;
-  private _setId: string;
-  private _subStats: Stat[];
-  private _typeKey: string;
-
   public readonly _typeBrand: "IArtifact";
+  public get characterId(): string | undefined {
+    return this._characterId;
+  }
+  public set characterId(characterId: string) {
+    this._characterId = characterId;
+    this.updateLastUpdatedDate();
+  }
+  public get id(): string {
+    return this._id;
+  }
+  public get isLocked(): boolean {
+    return this._isLocked;
+  }
+  public set isLocked(isLocked: boolean) {
+    this._isLocked = isLocked;
+    this.updateLastUpdatedDate();
+  }
+  public get lastUpdatedDate(): string {
+    return this._lastUpdatedDate;
+  }
+  public get level(): number {
+    return this._level;
+  }
+  public set level(level: number) {
+    this._level = level;
+    this.updateLastUpdatedDate();
+  }
+  public get mainStatKey(): string {
+    return this._mainStatKey;
+  }
+  public get metricsResults(): ArtifactMetricsResults {
+    return this._metricsResults;
+  }
+
+  public set metricsResults(metricsResults: ArtifactMetricsResults) {
+    this._metricsResults = metricsResults;
+  }
+
+  public get rarity(): number {
+    return this._rarity;
+  }
+
+  public get setId(): string {
+    return this._setId;
+  }
+
+  public get subStats(): Stat[] {
+    return this._subStats;
+  }
+
+  public set subStats(subStats: Stat[]) {
+    this._subStats = subStats;
+  }
+
+  public get typeKey(): string {
+    return this._typeKey;
+  }
+
+  private _characterId?: string;
+
+  private _id: string;
+
+  private _isLocked: boolean;
+
+  private _lastUpdatedDate: string;
+
+  private _level: number;
+
+  private _mainStatKey: string;
+
+  private _metricsResults: ArtifactMetricsResults;
+
+  private _rarity: number;
+
+  private _setId: string;
+
+  private _subStats: Stat[];
+
+  private _typeKey: string;
 
   constructor({
     characterId,
@@ -96,10 +163,6 @@ export class Artifact implements IArtifact {
     this._typeBrand = "IArtifact";
   }
 
-  private updateLastUpdatedDate(): void {
-    this._lastUpdatedDate = new Date().toISOString();
-  }
-
   public toArtifactData(): ArtifactData {
     return {
       _typeBrand: "ArtifactData",
@@ -117,71 +180,8 @@ export class Artifact implements IArtifact {
     };
   }
 
-  public get characterId(): string | undefined {
-    return this._characterId;
-  }
-
-  public set characterId(characterId: string) {
-    this._characterId = characterId;
-    this.updateLastUpdatedDate();
-  }
-
-  public get id(): string {
-    return this._id;
-  }
-
-  public get isLocked(): boolean {
-    return this._isLocked;
-  }
-
-  public set isLocked(isLocked: boolean) {
-    this._isLocked = isLocked;
-    this.updateLastUpdatedDate();
-  }
-
-  public get lastUpdatedDate(): string {
-    return this._lastUpdatedDate;
-  }
-
-  public get level(): number {
-    return this._level;
-  }
-
-  public set level(level: number) {
-    this._level = level;
-    this.updateLastUpdatedDate();
-  }
-
-  public get mainStatKey(): string {
-    return this._mainStatKey;
-  }
-
-  public get metricsResults(): ArtifactMetricsResults {
-    return this._metricsResults;
-  }
-
-  public set metricsResults(metricsResults: ArtifactMetricsResults) {
-    this._metricsResults = metricsResults;
-  }
-
-  public get rarity(): number {
-    return this._rarity;
-  }
-
-  public get setId(): string {
-    return this._setId;
-  }
-
-  public get subStats(): Stat[] {
-    return this._subStats;
-  }
-
-  public set subStats(subStats: Stat[]) {
-    this._subStats = subStats;
-  }
-
-  public get typeKey(): string {
-    return this._typeKey;
+  private updateLastUpdatedDate(): void {
+    this._lastUpdatedDate = new Date().toISOString();
   }
 }
 
