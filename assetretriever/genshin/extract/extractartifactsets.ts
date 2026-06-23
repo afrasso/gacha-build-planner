@@ -1,10 +1,10 @@
+import { buildArtifactIconUrls } from "@/assetretriever/genshin/buildiconurls";
+import { __datadir, __publicdir } from "@/utils/directoryutils";
+import downloadImageWithFallback from "@/utils/downloadimagewithfallback";
+import { saveYaml } from "@/utils/yamlhelper";
 import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
-
-import { __datadir, __publicdir } from "@/utils/directoryutils";
-import downloadImage from "@/utils/downloadimage";
-import { saveYaml } from "@/utils/yamlhelper";
 
 import getArtifactIconPath from "../getartifacticonpath";
 import { ArtifactSet, ArtifactType, FailedArtifactIconDownload } from "../types";
@@ -13,28 +13,19 @@ const downloadArtifactIcon = async ({
   setId,
   setName,
   type,
-  url,
+  urls,
   verbose = false,
 }: {
   setId: string;
   setName: string;
   type: ArtifactType;
-  url?: string;
+  urls: string[];
   verbose?: boolean;
 }): Promise<FailedArtifactIconDownload[]> => {
-  if (!url) {
-    console.warn(`Icon URL for ${type} of ${setName} (${setId}) does not exist.`);
-    return [{ setId, setName, type }];
-  }
-
   const savePath = path.join(__publicdir, getArtifactIconPath({ id: setId, type }));
-  if (verbose) {
-    console.log(`Downloading icon for ${type} of ${setName} (${setId}) from ${url}.`);
-  }
-  try {
-    await downloadImage({ savePath, url, verbose });
-  } catch (err) {
-    console.warn(`Error downloading icon for ${type} of ${setName} (${setId}): ${err}`);
+  const label = `${type} of ${setName} (${setId})`;
+  const success = await downloadImageWithFallback({ label, savePath, urls, verbose });
+  if (!success) {
     return [{ setId, setName, type }];
   }
 
@@ -94,29 +85,59 @@ const extractArtifactSets = async ({
 
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
       if (dbArtifactSet.circlet) {
-        const url = dbArtifactSet.images.mihoyo_circlet;
-        const type = ArtifactType.CIRCLET;
-        failures.push(...(await downloadArtifactIcon({ setId: id, setName: name, type, url, verbose })));
+        failures.push(
+          ...(await downloadArtifactIcon({
+            setId: id,
+            setName: name,
+            type: ArtifactType.CIRCLET,
+            urls: buildArtifactIconUrls(dbArtifactSet.images, "circlet"),
+            verbose,
+          }))
+        );
       }
       if (dbArtifactSet.flower) {
-        const url = dbArtifactSet.images.mihoyo_flower;
-        const type = ArtifactType.FLOWER;
-        failures.push(...(await downloadArtifactIcon({ setId: id, setName: name, type, url, verbose })));
+        failures.push(
+          ...(await downloadArtifactIcon({
+            setId: id,
+            setName: name,
+            type: ArtifactType.FLOWER,
+            urls: buildArtifactIconUrls(dbArtifactSet.images, "flower"),
+            verbose,
+          }))
+        );
       }
       if (dbArtifactSet.goblet) {
-        const url = dbArtifactSet.images.mihoyo_goblet;
-        const type = ArtifactType.GOBLET;
-        failures.push(...(await downloadArtifactIcon({ setId: id, setName: name, type, url, verbose })));
+        failures.push(
+          ...(await downloadArtifactIcon({
+            setId: id,
+            setName: name,
+            type: ArtifactType.GOBLET,
+            urls: buildArtifactIconUrls(dbArtifactSet.images, "goblet"),
+            verbose,
+          }))
+        );
       }
       if (dbArtifactSet.plume) {
-        const url = dbArtifactSet.images.mihoyo_plume;
-        const type = ArtifactType.PLUME;
-        failures.push(...(await downloadArtifactIcon({ setId: id, setName: name, type, url, verbose })));
+        failures.push(
+          ...(await downloadArtifactIcon({
+            setId: id,
+            setName: name,
+            type: ArtifactType.PLUME,
+            urls: buildArtifactIconUrls(dbArtifactSet.images, "plume"),
+            verbose,
+          }))
+        );
       }
       if (dbArtifactSet.sands) {
-        const url = dbArtifactSet.images.mihoyo_sands;
-        const type = ArtifactType.SANDS;
-        failures.push(...(await downloadArtifactIcon({ setId: id, setName: name, type, url, verbose })));
+        failures.push(
+          ...(await downloadArtifactIcon({
+            setId: id,
+            setName: name,
+            type: ArtifactType.SANDS,
+            urls: buildArtifactIconUrls(dbArtifactSet.images, "sands"),
+            verbose,
+          }))
+        );
       }
     }
   }

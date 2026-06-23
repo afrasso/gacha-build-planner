@@ -10,6 +10,18 @@
   name: Traveler
   rarity: 5
   weaponType: WEAPON_SWORD_ONE_HAND
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_HYDRO
+  iconUrl: /genshin/characters/10000121.png
+  id: '10000121'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 242.13280088
+    DEF: 607.44415725
+    HP: 11201.1621003
+  name: Aino
+  rarity: 4
+  weaponType: WEAPON_CLAYMORE
 - ascensionStat: DMG_BONUS_GEO
   element: ELEMENT_GEO
   iconUrl: /genshin/characters/10000038.png
@@ -238,6 +250,18 @@
   name: Collei
   rarity: 4
   weaponType: WEAPON_BOW
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_HYDRO
+  iconUrl: /genshin/characters/10000125.png
+  id: '10000125'
+  maxLvlStats:
+    ascensionStat: 24.2
+    ATK: 95.67135200000001
+    DEF: 514.9314279
+    HP: 14695.093175999998
+  name: Columbina
+  rarity: 5
+  weaponType: WEAPON_CATALYST
 - ascensionStat: CRIT_DMG
   element: ELEMENT_ELECTRO
   iconUrl: /genshin/characters/10000071.png
@@ -250,6 +274,18 @@
   name: Cyno
   rarity: 5
   weaponType: WEAPON_POLE
+- ascensionStat: HP_PERCENT
+  element: ELEMENT_HYDRO
+  iconUrl: /genshin/characters/10000115.png
+  id: '10000115'
+  maxLvlStats:
+    ascensionStat: 24
+    ATK: 189.03350088000002
+    DEF: 559.6676505
+    HP: 12506.152435299999
+  name: Dahlia
+  rarity: 4
+  weaponType: WEAPON_SWORD_ONE_HAND
 - ascensionStat: HP_PERCENT
   element: ELEMENT_PYRO
   iconUrl: /genshin/characters/10000079.png
@@ -298,6 +334,18 @@
   name: Dori
   rarity: 4
   weaponType: WEAPON_CLAYMORE
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_PYRO
+  iconUrl: /genshin/characters/10000123.png
+  id: '10000123'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 346.808651
+    DEF: 822.3531759000001
+    HP: 12429.5994322
+  name: Durin
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
 - ascensionStat: CRIT_DMG
   element: ELEMENT_DENDRO
   iconUrl: /genshin/characters/10000099.png
@@ -358,6 +406,18 @@
   name: Fischl
   rarity: 4
   weaponType: WEAPON_BOW
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_ELECTRO
+  iconUrl: /genshin/characters/10000120.png
+  id: '10000120'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 351.5922196
+    DEF: 808.51919724
+    HP: 12490.8290496
+  name: Flins
+  rarity: 5
+  weaponType: WEAPON_POLE
 - ascensionStat: ATK_PERCENT
   element: ELEMENT_CRYO
   iconUrl: /genshin/characters/10000085.png
@@ -454,6 +514,42 @@
   name: Ifa
   rarity: 4
   weaponType: WEAPON_CATALYST
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_GEO
+  iconUrl: /genshin/characters/10000127.png
+  id: '10000127'
+  maxLvlStats:
+    ascensionStat: 96
+    ATK: 191.15747280000002
+    DEF: 813.5656577999999
+    HP: 11962.4064649
+  name: Illuga
+  rarity: 4
+  weaponType: WEAPON_POLE
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_ELECTRO
+  iconUrl: /genshin/characters/10000116.png
+  id: '10000116'
+  maxLvlStats:
+    ascensionStat: 24.2
+    ATK: 330.06616240000005
+    DEF: 827.7330564900001
+    HP: 12613.288084400001
+  name: Ineffa
+  rarity: 5
+  weaponType: WEAPON_POLE
+- ascensionStat: HEALING_BONUS
+  element: ELEMENT_ANEMO
+  iconUrl: /genshin/characters/10000124.png
+  id: '10000124'
+  maxLvlStats:
+    ascensionStat: 18.459999999999997
+    ATK: 223.0170516
+    DEF: 580.14329625
+    HP: 9646.0494514
+  name: Jahoda
+  rarity: 4
+  weaponType: WEAPON_BOW
 - ascensionStat: HEALING_BONUS
   element: ELEMENT_ANEMO
   iconUrl: /genshin/characters/10000003.png
@@ -622,6 +718,18 @@
   name: Lan Yan
   rarity: 4
   weaponType: WEAPON_CATALYST
+- ascensionStat: ELEMENTAL_MASTERY
+  element: ELEMENT_DENDRO
+  iconUrl: /genshin/characters/10000119.png
+  id: '10000119'
+  maxLvlStats:
+    ascensionStat: 115.2
+    ATK: 254.96415188000003
+    DEF: 668.6423019
+    HP: 10653.9424276
+  name: Lauma
+  rarity: 5
+  weaponType: WEAPON_CATALYST
 - ascensionStat: HP_PERCENT
   element: ELEMENT_CRYO
   iconUrl: /genshin/characters/10000074.png
@@ -634,6 +742,18 @@
   name: Layla
   rarity: 4
   weaponType: WEAPON_SWORD_ONE_HAND
+- ascensionStat: CRIT_RATE
+  element: ELEMENT_GEO
+  iconUrl: /genshin/characters/10000130.png
+  id: '10000130'
+  maxLvlStats:
+    ascensionStat: 24.2
+    ATK: 143.50702800000002
+    DEF: 906.8941566000001
+    HP: 9894.69552967
+  name: Linnea
+  rarity: 5
+  weaponType: WEAPON_BOW
 - ascensionStat: ELEMENTAL_MASTERY
   element: ELEMENT_ELECTRO
   iconUrl: /genshin/characters/10000006.png
@@ -646,6 +766,18 @@
   name: Lisa
   rarity: 4
   weaponType: WEAPON_CATALYST
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_CRYO
+  iconUrl: /genshin/characters/10000129.png
+  id: '10000129'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 344.4168692
+    DEF: 783.9254574000001
+    HP: 12858.206654000001
+  name: Lohen
+  rarity: 5
+  weaponType: WEAPON_POLE
 - ascensionStat: DMG_BONUS_ANEMO
   element: ELEMENT_ANEMO
   iconUrl: /genshin/characters/10000083.png
@@ -670,6 +802,30 @@
   name: Lyney
   rarity: 5
   weaponType: WEAPON_BOW
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_NONE
+  iconUrl: /genshin/characters/10000117.png
+  id: '10000117'
+  maxLvlStats:
+    ascensionStat: 24
+    ATK: 212.397192
+    DEF: 682.521525
+    HP: 10874.914859
+  name: Manekin
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_NONE
+  iconUrl: /genshin/characters/10000118.png
+  id: '10000118'
+  maxLvlStats:
+    ascensionStat: 24
+    ATK: 212.397192
+    DEF: 682.521525
+    HP: 10874.914859
+  name: Manekina
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
 - ascensionStat: CRIT_DMG
   element: ELEMENT_PYRO
   iconUrl: /genshin/characters/10000106.png
@@ -743,6 +899,18 @@
   rarity: 5
   weaponType: WEAPON_CLAYMORE
 - ascensionStat: CRIT_DMG
+  element: ELEMENT_DENDRO
+  iconUrl: /genshin/characters/10000122.png
+  id: '10000122'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 344.4168692
+    DEF: 799.2965448000001
+    HP: 12703.9082338
+  name: Nefer
+  rarity: 5
+  weaponType: WEAPON_CATALYST
+- ascensionStat: CRIT_DMG
   element: ELEMENT_HYDRO
   iconUrl: /genshin/characters/10000087.png
   id: '10000087'
@@ -752,6 +920,18 @@
     DEF: 576.4157775000001
     HP: 14695.093175999998
   name: Neuvillette
+  rarity: 5
+  weaponType: WEAPON_CATALYST
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_PYRO
+  iconUrl: /genshin/characters/10000131.png
+  id: '10000131'
+  maxLvlStats:
+    ascensionStat: 28.799999999999997
+    ATK: 342.0250874
+    DEF: 562.58179884
+    HP: 10409.023958000002
+  name: Nicole
   rarity: 5
   weaponType: WEAPON_CATALYST
 - ascensionStat: HP_PERCENT
@@ -802,6 +982,18 @@
   name: Ororon
   rarity: 4
   weaponType: WEAPON_BOW
+- ascensionStat: ATK_PERCENT
+  element: ELEMENT_ANEMO
+  iconUrl: /genshin/characters/10000132.png
+  id: '10000132'
+  maxLvlStats:
+    ascensionStat: 24
+    ATK: 220.89308168000002
+    DEF: 580.14329625
+    HP: 9678.674406
+  name: Prune
+  rarity: 4
+  weaponType: WEAPON_CATALYST
 - ascensionStat: HEALING_BONUS
   element: ELEMENT_CRYO
   iconUrl: /genshin/characters/10000035.png
@@ -922,6 +1114,18 @@
   name: Sigewinne
   rarity: 5
   weaponType: WEAPON_BOW
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_CRYO
+  iconUrl: /genshin/characters/10000114.png
+  id: '10000114'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 358.76757
+    DEF: 806.21353413
+    HP: 12417.353843500001
+  name: Skirk
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND
 - ascensionStat: DMG_BONUS_ANEMO
   element: ELEMENT_ANEMO
   iconUrl: /genshin/characters/10000043.png
@@ -982,6 +1186,18 @@
   name: Varesa
   rarity: 5
   weaponType: WEAPON_CATALYST
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_ANEMO
+  iconUrl: /genshin/characters/10000128.png
+  id: '10000128'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 352.78811550000006
+    DEF: 795.45377295
+    HP: 12613.288084400001
+  name: Varka
+  rarity: 5
+  weaponType: WEAPON_CLAYMORE
 - ascensionStat: ENERGY_RECHARGE
   element: ELEMENT_ANEMO
   iconUrl: /genshin/characters/10000022.png
@@ -1186,3 +1402,15 @@
   name: Zhongli
   rarity: 5
   weaponType: WEAPON_POLE
+- ascensionStat: CRIT_DMG
+  element: ELEMENT_GEO
+  iconUrl: /genshin/characters/10000126.png
+  id: '10000126'
+  maxLvlStats:
+    ascensionStat: 88.4
+    ATK: 224.82766920000003
+    DEF: 956.8501906500001
+    HP: 12919.435971400002
+  name: Zibai
+  rarity: 5
+  weaponType: WEAPON_SWORD_ONE_HAND

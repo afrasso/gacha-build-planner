@@ -21,6 +21,7 @@ enum OverallStatKey {
   DMG_BONUS_FIRE = "DMG_BONUS_FIRE",
   DMG_BONUS_ICE = "DMG_BONUS_ICE",
   DMG_BONUS_IMAGINARY = "DMG_BONUS_IMAGINARY",
+  DMG_BONUS_ELATION = "DMG_BONUS_ELATION",
   DMG_BONUS_LIGHTNING = "DMG_BONUS_LIGHTNING",
   DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
   DMG_BONUS_QUANTUM = "DMG_BONUS_QUANTUM",
@@ -44,6 +45,7 @@ enum StatKey {
   DMG_BONUS_FIRE = "DMG_BONUS_FIRE",
   DMG_BONUS_ICE = "DMG_BONUS_ICE",
   DMG_BONUS_IMAGINARY = "DMG_BONUS_IMAGINARY",
+  DMG_BONUS_ELATION = "DMG_BONUS_ELATION",
   DMG_BONUS_LIGHTNING = "DMG_BONUS_LIGHTNING",
   DMG_BONUS_PHYSICAL = "DMG_BONUS_PHYSICAL",
   DMG_BONUS_QUANTUM = "DMG_BONUS_QUANTUM",
@@ -219,6 +221,16 @@ export const calculateStats = ({
               artifacts,
               dataContext,
               statKey: StatKey.DMG_BONUS_IMAGINARY,
+              weapon,
+            })
+          );
+          return acc;
+        case OverallStatKey.DMG_BONUS_ELATION:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_ELATION,
               weapon,
             })
           );

@@ -9,6 +9,7 @@ const mapDbStatKey = (dbStatKey: string): string => {
     CriticalChanceBase: "CRIT_RATE",
     CriticalDamageBase: "CRIT_DMG",
     DefenceAddedRatio: "DEF_PERCENT",
+    ElationDamageAddedRatioBase: "DMG_BONUS_ELATION",
     FireAddedRatio: "DMG_BONUS_FIRE",
     HPAddedRatio: "HP_PERCENT",
     IceAddedRatio: "DMG_BONUS_ICE",

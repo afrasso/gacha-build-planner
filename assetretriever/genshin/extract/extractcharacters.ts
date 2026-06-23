@@ -1,10 +1,10 @@
+import { buildCharacterIconUrls } from "@/assetretriever/genshin/buildiconurls";
+import { __datadir, __publicdir } from "@/utils/directoryutils";
+import downloadImageWithFallback from "@/utils/downloadimagewithfallback";
+import { saveYaml } from "@/utils/yamlhelper";
 import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
-
-import { __datadir, __publicdir } from "@/utils/directoryutils";
-import downloadImage from "@/utils/downloadimage";
-import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedCharacterIconDownload } from "../types";
 import calculateStatValue from "./calculatestatvalue";
@@ -58,18 +58,11 @@ const extractCharacters = async ({
     characters.push(character);
 
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
-      const url =
-        name !== "Traveler"
-          ? dbCharacter.images.mihoyo_icon
-          : "https://static.wikia.nocookie.net/gensin-impact/images/5/59/Traveler_Icon.png";
       const savePath = path.join(__publicdir, "genshin", "characters", `${id}.png`);
-      if (verbose) {
-        console.log(`Downloading icon for ${name} (${id}) from ${url}.`);
-      }
-      try {
-        await downloadImage({ savePath, url, verbose });
-      } catch (err) {
-        console.warn(`Error downloading icon for ${name} (${id}): ${err}`);
+      const urls = buildCharacterIconUrls(dbCharacter.images);
+      const label = `${name} (${id})`;
+      const success = await downloadImageWithFallback({ label, savePath, urls, verbose });
+      if (!success) {
         failures.push({ id, name });
       }
     }

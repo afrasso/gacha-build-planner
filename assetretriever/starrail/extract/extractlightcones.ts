@@ -1,10 +1,10 @@
+import { buildLightConeFallbackUrls } from "@/assetretriever/starrail/buildstaticapiurls";
+import downloadStarrailIcon from "@/assetretriever/starrail/downloadstarrailicon";
+import { __datadir, __publicdir } from "@/utils/directoryutils";
+import { saveYaml } from "@/utils/yamlhelper";
 import _ from "lodash";
 import path from "path";
 import { StarRail } from "starrail.js";
-
-import { __datadir, __publicdir } from "@/utils/directoryutils";
-import downloadImage from "@/utils/downloadimage";
-import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedLightConeIconDownload } from "../types";
 import mapDbStatKey from "./mapdbstatkey";
@@ -47,16 +47,17 @@ const extractLightCones = async ({
 
     lightCones.push(lightCone);
 
-    const url = dbLightCone.icon.url;
-    const savePath = path.join(__publicdir, "starrail", "lightcones", `${id}.png`);
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
-      if (verbose) {
-        console.log(`Downloading icon for ${name} (${id}) from ${url}.`);
-      }
-      try {
-        await downloadImage({ savePath, url, verbose });
-      } catch (err) {
-        console.warn(`Error downloading icon for ${name} (${id}): ${err}`);
+      const savePath = path.join(__publicdir, "starrail", "lightcones", `${id}.png`);
+      const label = `${name} (${id})`;
+      const success = await downloadStarrailIcon({
+        explicitFallbackUrls: buildLightConeFallbackUrls(id),
+        icon: dbLightCone.icon,
+        label,
+        savePath,
+        verbose,
+      });
+      if (!success) {
         failures.push({ id, name });
       }
     }
