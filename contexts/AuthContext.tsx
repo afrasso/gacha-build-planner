@@ -3,17 +3,17 @@
 import { usePathname } from "next/navigation";
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 
-interface User {
-  email: string;
-  id: string;
-}
-
 interface AuthContextType {
   authFetch: (url: string, options?: RequestInit) => Promise<Response>;
   isAuthenticated: boolean;
   login: ({ email, password }: { email: string; password: string }) => Promise<boolean>;
   logout: () => void;
   user: undefined | User;
+}
+
+interface User {
+  email: string;
+  id: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

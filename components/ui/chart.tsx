@@ -33,10 +33,10 @@ function useChart() {
 
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
-  {
+  React.ComponentProps<"div"> & {
     children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
     config: ChartConfig;
-  } & React.ComponentProps<"div">
+  }
 >(({ children, className, config, id, ...props }, ref) => {
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
@@ -93,14 +93,15 @@ const ChartTooltip = RechartsPrimitive.Tooltip;
 
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
-  {
+  React.ComponentProps<"div"> & RechartsPrimitive.TooltipContentProps &
+    {
+    color?: string;
     hideIndicator?: boolean;
     hideLabel?: boolean;
     indicator?: "dashed" | "dot" | "line";
     labelKey?: string;
     nameKey?: string;
-  } & React.ComponentProps<"div"> &
-    React.ComponentProps<typeof RechartsPrimitive.Tooltip>
+  }
 >(
   (
     {
@@ -173,7 +174,7 @@ const ChartTooltipContent = React.forwardRef<
                   "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
                   indicator === "dot" && "items-center"
                 )}
-                key={item.dataKey}
+                key={`${String(item.dataKey ?? item.name ?? index)}-${index}`}
               >
                 {formatter && item?.value !== undefined && item.name ? (
                   formatter(item.value, item.name, item, index, item.payload)
@@ -231,11 +232,12 @@ const ChartLegend = RechartsPrimitive.Legend;
 
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
-  {
+  React.ComponentProps<"div"> & {
     hideIcon?: boolean;
     nameKey?: string;
-  } & Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> &
-    React.ComponentProps<"div">
+    payload?: RechartsPrimitive.LegendPayload[];
+    verticalAlign?: "bottom" | "middle" | "top";
+  }
 >(({ className, hideIcon = false, nameKey, payload, verticalAlign = "bottom" }, ref) => {
   const { config } = useChart();
 

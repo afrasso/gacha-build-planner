@@ -14,7 +14,7 @@ const SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  { isValid?: boolean } & React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & { isValid?: boolean }
 >(({ children, className, isValid = true, ...props }, ref) => (
   <SelectPrimitive.Trigger
     className={cn(

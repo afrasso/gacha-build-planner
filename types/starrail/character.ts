@@ -1,12 +1,24 @@
 import { ICharacter } from "../character";
 
+export type CharacterData = {
+  combatType: string;
+  iconUrl: string;
+  id: string;
+  maxLvlStats: MaxLvlStats;
+  name: string;
+  path: string;
+  rarity: number;
+  statTraces: Record<string, number>;
+};
+
+export type MaxLvlStats = {
+  ATK: number;
+  DEF: number;
+  HP: number;
+  SPD: number;
+};
+
 export class Character implements ICharacter {
-  private _characterData;
-
-  constructor(characterData: CharacterData) {
-    this._characterData = characterData;
-  }
-
   get element(): string {
     return this._characterData.combatType;
   }
@@ -34,22 +46,10 @@ export class Character implements ICharacter {
   get weaponType(): string {
     return this._characterData.path;
   }
+
+  private _characterData;
+
+  constructor(characterData: CharacterData) {
+    this._characterData = characterData;
+  }
 }
-
-export type CharacterData = {
-  combatType: string;
-  iconUrl: string;
-  id: string;
-  maxLvlStats: MaxLvlStats;
-  name: string;
-  path: string;
-  rarity: number;
-  statTraces: Record<string, number>;
-};
-
-export type MaxLvlStats = {
-  ATK: number;
-  DEF: number;
-  HP: number;
-  SPD: number;
-};
