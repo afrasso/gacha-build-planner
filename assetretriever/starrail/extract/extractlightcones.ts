@@ -1,10 +1,11 @@
+import _ from "lodash";
+import path from "path";
+import { StarRail } from "starrail.js";
+
 import { buildLightConeFallbackUrls } from "@/assetretriever/starrail/buildstaticapiurls";
 import downloadStarrailIcon from "@/assetretriever/starrail/downloadstarrailicon";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
 import { saveYaml } from "@/utils/yamlhelper";
-import _ from "lodash";
-import path from "path";
-import { StarRail } from "starrail.js";
 
 import { FailedLightConeIconDownload } from "../types";
 import mapDbStatKey from "./mapdbstatkey";

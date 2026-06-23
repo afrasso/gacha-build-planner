@@ -1,11 +1,12 @@
+import _ from "lodash";
+import path from "path";
+import { CharacterData as DBCharacterData, SkillLevel, StarRail } from "starrail.js";
+
 import { buildCharacterFallbackUrls } from "@/assetretriever/starrail/buildstaticapiurls";
 import downloadStarrailIcon from "@/assetretriever/starrail/downloadstarrailicon";
 import { CharacterData, MaxLvlStats } from "@/types/starrail";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
 import { saveYaml } from "@/utils/yamlhelper";
-import _ from "lodash";
-import path from "path";
-import { CharacterData as DBCharacterData, SkillLevel, StarRail } from "starrail.js";
 
 import { FailedCharacterIconDownload } from "../types";
 import mapDbStatKey from "./mapdbstatkey";

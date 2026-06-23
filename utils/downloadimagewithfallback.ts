@@ -1,5 +1,6 @@
-import downloadImage from "@/utils/downloadimage";
 import fs from "fs";
+
+import downloadImage from "@/utils/downloadimage";
 
 const dedupeUrls = (urls: (string | undefined)[]): string[] => {
   const seen = new Set<string>();

@@ -1,10 +1,11 @@
+import genshindb from "genshin-db";
+import _ from "lodash";
+import path from "path";
+
 import { buildWeaponIconUrls } from "@/assetretriever/genshin/buildiconurls";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
 import downloadImageWithFallback from "@/utils/downloadimagewithfallback";
 import { saveYaml } from "@/utils/yamlhelper";
-import genshindb from "genshin-db";
-import _ from "lodash";
-import path from "path";
 
 import { FailedWeaponIconDownload } from "../types";
 import calculateStatValue from "./calculatestatvalue";

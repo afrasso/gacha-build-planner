@@ -1,5 +1,6 @@
-import downloadImageWithFallback from "@/utils/downloadimagewithfallback";
 import { ImageAssets } from "starrail.js";
+
+import downloadImageWithFallback from "@/utils/downloadimagewithfallback";
 
 const SKIPPED_ICON_URL_PATTERNS = [/yatta\.top/i, /FortOfFans\/HSR/i];
 

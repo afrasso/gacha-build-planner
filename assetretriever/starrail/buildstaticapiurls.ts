@@ -24,16 +24,16 @@ export const buildLightConeStaticApiUrl = (id: string): string => buildStaticApi
 
 const getRelicSlotIndex = (type: ArtifactType): number => {
   switch (type) {
-    case ArtifactType.HEAD:
-    case ArtifactType.NECK:
-      return 0;
-    case ArtifactType.HAND:
-    case ArtifactType.OBJECT:
-      return 1;
     case ArtifactType.BODY:
       return 2;
     case ArtifactType.FOOT:
       return 3;
+    case ArtifactType.HAND:
+    case ArtifactType.OBJECT:
+      return 1;
+    case ArtifactType.HEAD:
+    case ArtifactType.NECK:
+      return 0;
     default:
       throw new Error(`Unexpected artifact type ${type} was encountered.`);
   }
