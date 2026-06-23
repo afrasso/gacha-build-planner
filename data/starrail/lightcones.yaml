@@ -205,6 +205,24 @@
   name: Reminiscence
   path: Remembrance
   rarity: 3
+- iconUrl: /starrail/lightcones/20023.png
+  id: '20023'
+  maxLvlStats:
+    HP: 740.8800000000001
+    ATK: 370.44000000000005
+    DEF: 264.6
+  name: Sneering
+  path: Elation
+  rarity: 3
+- iconUrl: /starrail/lightcones/20024.png
+  id: '20024'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 317.52
+    DEF: 264.6
+  name: Lingering Tear
+  path: Elation
+  rarity: 3
 - iconUrl: /starrail/lightcones/21000.png
   id: '21000'
   maxLvlStats:
@@ -673,6 +691,105 @@
   name: Sweat Now, Cry Less
   path: Remembrance
   rarity: 4
+- iconUrl: /starrail/lightcones/21053.png
+  id: '21053'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 370.44000000000005
+    DEF: 529.2
+  name: Journey, Forever Peaceful
+  path: Preservation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21054.png
+  id: '21054'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 370.44000000000005
+    DEF: 396.9
+  name: The Story's Next Page
+  path: Remembrance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21055.png
+  id: '21055'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 396.9
+  name: Unto Tomorrow's Morrow
+  path: Abundance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21056.png
+  id: '21056'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 476.28
+    DEF: 396.9
+  name: In Pursuit of the Wind
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/21057.png
+  id: '21057'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 330.75
+  name: The Flower Remembers
+  path: Remembrance
+  rarity: 4
+- iconUrl: /starrail/lightcones/21058.png
+  id: '21058'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 330.75
+  name: A Trail of Bygone Blood
+  path: Destruction
+  rarity: 4
+- iconUrl: /starrail/lightcones/21060.png
+  id: '21060'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 529.2
+    DEF: 396.9
+  name: A Dream Scented in Wheat
+  path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/21061.png
+  id: '21061'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 330.75
+  name: Holiday Thermae Escapade
+  path: Nihility
+  rarity: 4
+- iconUrl: /starrail/lightcones/21062.png
+  id: '21062'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 529.2
+    DEF: 396.9
+  name: See You at the End
+  path: The Hunt
+  rarity: 4
+- iconUrl: /starrail/lightcones/21064.png
+  id: '21064'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: Mushy Shroomy's Adventures
+  path: Elation
+  rarity: 4
+- iconUrl: /starrail/lightcones/21065.png
+  id: '21065'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 529.2
+    DEF: 396.9
+  name: Today's Good Luck
+  path: Elation
+  rarity: 4
 - iconUrl: /starrail/lightcones/22000.png
   id: '22000'
   maxLvlStats:
@@ -717,6 +834,33 @@
     DEF: 330.75
   name: The Great Cosmic Enterprise
   path: Erudition
+  rarity: 4
+- iconUrl: /starrail/lightcones/22005.png
+  id: '22005'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: The Forever Victual
+  path: Harmony
+  rarity: 4
+- iconUrl: /starrail/lightcones/22006.png
+  id: '22006'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 476.28
+    DEF: 396.9
+  name: Fly Into a Pink Tomorrow
+  path: Remembrance
+  rarity: 4
+- iconUrl: /starrail/lightcones/22007.png
+  id: '22007'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 476.28
+    DEF: 330.75
+  name: Tomorrow, Together
+  path: Elation
   rarity: 4
 - iconUrl: /starrail/lightcones/23000.png
   id: '23000'
@@ -1096,6 +1240,159 @@
   name: Life Should Be Cast to Flames
   path: Erudition
   rarity: 5
+- iconUrl: /starrail/lightcones/23042.png
+  id: '23042'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 476.28
+    DEF: 529.2
+  name: Long May Rainbows Adorn the Sky
+  path: Remembrance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23043.png
+  id: '23043'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: Lies Dance on the Breeze
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23044.png
+  id: '23044'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 687.96
+    DEF: 396.9
+  name: Thus Burns the Dawn
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23045.png
+  id: '23045'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: A Thankless Coronation
+  path: Destruction
+  rarity: 5
+- iconUrl: /starrail/lightcones/23046.png
+  id: '23046'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 582.1199999999999
+    DEF: 529.2
+  name: The Hell Where Ideals Burn
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23047.png
+  id: '23047'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 635.04
+    DEF: 463.04999999999995
+  name: Why Does the Ocean Sing
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23048.png
+  id: '23048'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 635.04
+    DEF: 463.04999999999995
+  name: Epoch Etched in Golden Blood
+  path: Harmony
+  rarity: 5
+- iconUrl: /starrail/lightcones/23049.png
+  id: '23049'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 529.2
+    DEF: 463.04999999999995
+  name: To Evernight's Stars
+  path: Remembrance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23050.png
+  id: '23050'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 529.2
+    DEF: 463.04999999999995
+  name: Never Forget Her Flame
+  path: Nihility
+  rarity: 5
+- iconUrl: /starrail/lightcones/23051.png
+  id: '23051'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Though Worlds Apart
+  path: Preservation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23052.png
+  id: '23052'
+  maxLvlStats:
+    HP: 1270.08
+    ATK: 476.28
+    DEF: 463.04999999999995
+  name: This Love, Forever
+  path: Remembrance
+  rarity: 5
+- iconUrl: /starrail/lightcones/23053.png
+  id: '23053'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 582.1199999999999
+    DEF: 463.04999999999995
+  name: Dazzled by a Flowery World
+  path: Elation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23054.png
+  id: '23054'
+  maxLvlStats:
+    HP: 1058.4
+    ATK: 529.2
+    DEF: 529.2
+  name: When She Decided to See
+  path: Elation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23056.png
+  id: '23056'
+  maxLvlStats:
+    HP: 846.72
+    ATK: 635.04
+    DEF: 529.2
+  name: The Finale of a Lie
+  path: The Hunt
+  rarity: 5
+- iconUrl: /starrail/lightcones/23057.png
+  id: '23057'
+  maxLvlStats:
+    HP: 1164.2399999999998
+    ATK: 476.28
+    DEF: 529.2
+  name: Welcome to the Cosmic City
+  path: Elation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23058.png
+  id: '23058'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 635.04
+    DEF: 463.04999999999995
+  name: Until the Flowers Bloom Again
+  path: Elation
+  rarity: 5
+- iconUrl: /starrail/lightcones/23059.png
+  id: '23059'
+  maxLvlStats:
+    HP: 1375.92
+    ATK: 423.36
+    DEF: 463.04999999999995
+  name: Reforged in Hellfire
+  path: Nihility
+  rarity: 5
 - iconUrl: /starrail/lightcones/24000.png
   id: '24000'
   maxLvlStats:
@@ -1149,4 +1446,13 @@
     DEF: 396.9
   name: Memory's Curtain Never Falls
   path: Remembrance
+  rarity: 5
+- iconUrl: /starrail/lightcones/24006.png
+  id: '24006'
+  maxLvlStats:
+    HP: 952.56
+    ATK: 529.2
+    DEF: 463.04999999999995
+  name: Elation Brimming With Blessings
+  path: Elation
   rarity: 5

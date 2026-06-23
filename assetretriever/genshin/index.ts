@@ -1,5 +1,4 @@
 import extract from "./extract";
-import scrapeWiki from "./scrapewiki";
 
 export const retrieveAssets = async ({
   downloadIcons,
@@ -10,10 +9,9 @@ export const retrieveAssets = async ({
   ids?: string[];
   verbose: boolean;
 }) => {
-  const { failedArtifactIconDownloads, failedCharacterIconDownloads, failedWeaponIconDownloads } = await extract({
+  await extract({
     downloadIcons,
     ids,
     verbose,
   });
-  await scrapeWiki({ failedArtifactIconDownloads, failedCharacterIconDownloads, failedWeaponIconDownloads, verbose });
 };

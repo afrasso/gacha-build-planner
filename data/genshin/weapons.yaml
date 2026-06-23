@@ -43,6 +43,15 @@
   name: Amos' Bow
   rarity: 5
   type: WEAPON_BOW
+- iconUrl: /genshin/weapons/14523.png
+  id: '14523'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 740.5801544000001
+    mainStat: 16.5384
+  name: Angelos' Heptades
+  rarity: 5
+  type: WEAPON_CATALYST
 - iconUrl: /genshin/weapons/14101.png
   id: '14101'
   maxLvlStats:
@@ -86,6 +95,15 @@
   name: Astral Vulture's Crimson Plumage
   rarity: 5
   type: WEAPON_BOW
+- iconUrl: /genshin/weapons/11518.png
+  id: '11518'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 33.0768
+  name: Athame Artis
+  rarity: 5
+  type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /genshin/weapons/12514.png
   id: '12514'
   mainStat: CRIT_RATE
@@ -104,6 +122,15 @@
   name: A Thousand Floating Dreams
   rarity: 5
   type: WEAPON_CATALYST
+- iconUrl: /genshin/weapons/11517.png
+  id: '11517'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 22.0512
+  name: Azurelight
+  rarity: 5
+  type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /genshin/weapons/14426.png
   id: '14426'
   mainStat: ENERGY_RECHARGE
@@ -183,6 +210,15 @@
   name: Blackcliff Warbow
   rarity: 4
   type: WEAPON_BOW
+- iconUrl: /genshin/weapons/14433.png
+  id: '14433'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 220.512
+  name: Blackmarrow Lantern
+  rarity: 4
+  type: WEAPON_CATALYST
 - iconUrl: /genshin/weapons/13303.png
   id: '13303'
   mainStat: HP_PERCENT
@@ -191,6 +227,15 @@
     mainStat: 46.9199002
   name: Black Tassel
   rarity: 3
+  type: WEAPON_POLE
+- iconUrl: /genshin/weapons/13516.png
+  id: '13516'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 22.0512
+  name: Bloodsoaked Ruins
+  rarity: 5
   type: WEAPON_POLE
 - iconUrl: /genshin/weapons/12302.png
   id: '12302'
@@ -309,6 +354,15 @@
   name: Dark Iron Sword
   rarity: 3
   type: WEAPON_SWORD_ONE_HAND
+- iconUrl: /genshin/weapons/14434.png
+  id: '14434'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 55.128
+  name: Dawning Frost
+  rarity: 4
+  type: WEAPON_CATALYST
 - iconUrl: /genshin/weapons/13405.png
   id: '13405'
   mainStat: CRIT_RATE
@@ -335,6 +389,15 @@
     mainStat: 41.346
   name: Dialogues of the Desert Sages
   rarity: 4
+  type: WEAPON_POLE
+- iconUrl: /genshin/weapons/13517.png
+  id: '13517'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 22.0512
+  name: Disaster and Remorse
+  rarity: 5
   type: WEAPON_POLE
 - iconUrl: /genshin/weapons/14413.png
   id: '14413'
@@ -415,6 +478,15 @@
   name: Engulfing Lightning
   rarity: 5
   type: WEAPON_POLE
+- iconUrl: /genshin/weapons/14432.png
+  id: '14432'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 45.940000000000005
+  name: Etherlight Spindlelute
+  rarity: 4
+  type: WEAPON_CATALYST
 - iconUrl: /genshin/weapons/14506.png
   id: '14506'
   mainStat: HP_PERCENT
@@ -532,6 +604,15 @@
   name: Finale of the Deep
   rarity: 4
   type: WEAPON_SWORD_ONE_HAND
+- iconUrl: /genshin/weapons/12432.png
+  id: '12432'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 165.38400000000001
+  name: Flame-Forged Insight
+  rarity: 4
+  type: WEAPON_CLAYMORE
 - iconUrl: /genshin/weapons/11426.png
   id: '11426'
   mainStat: ENERGY_RECHARGE
@@ -586,6 +667,15 @@
   name: Forest Regalia
   rarity: 4
   type: WEAPON_CLAYMORE
+- iconUrl: /genshin/weapons/13515.png
+  id: '13515'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 66.1536
+  name: Fractured Halo
+  rarity: 5
+  type: WEAPON_POLE
 - iconUrl: /genshin/weapons/11503.png
   id: '11503'
   mainStat: ELEMENTAL_MASTERY
@@ -622,6 +712,24 @@
   name: Fruit of Fulfillment
   rarity: 4
   type: WEAPON_CATALYST
+- iconUrl: /genshin/weapons/12515.png
+  id: '12515'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 608.0745972
+    mainStat: 33.0768
+  name: Gest of the Mighty Wolf
+  rarity: 5
+  type: WEAPON_CLAYMORE
+- iconUrl: /genshin/weapons/15516.png
+  id: '15516'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 88.2048
+  name: Golden Frostbound Oath
+  rarity: 5
+  type: WEAPON_BOW
 - iconUrl: /genshin/weapons/14414.png
   id: '14414'
   mainStat: ENERGY_RECHARGE
@@ -771,6 +879,15 @@
   name: Kitain Cross Spear
   rarity: 4
   type: WEAPON_POLE
+- iconUrl: /genshin/weapons/11519.png
+  id: '11519'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 88.2048
+  name: Lightbearing Moonshard
+  rarity: 5
+  type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /genshin/weapons/11512.png
   id: '11512'
   mainStat: CRIT_DMG
@@ -870,6 +987,15 @@
   name: Mappa Mare
   rarity: 4
   type: WEAPON_CATALYST
+- iconUrl: /genshin/weapons/12433.png
+  id: '12433'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 61.25318020000001
+  name: Master Key
+  rarity: 4
+  type: WEAPON_CLAYMORE
 - iconUrl: /genshin/weapons/14504.png
   id: '14504'
   mainStat: ATK_PERCENT
@@ -924,6 +1050,15 @@
   name: Moonpiercer
   rarity: 4
   type: WEAPON_POLE
+- iconUrl: /genshin/weapons/11434.png
+  id: '11434'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 564.7837244
+    mainStat: 27.564
+  name: Moonweaver's Dawn
+  rarity: 4
+  type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /genshin/weapons/13430.png
   id: '13430'
   mainStat: ENERGY_RECHARGE
@@ -942,6 +1077,24 @@
   name: Mouun's Moon
   rarity: 4
   type: WEAPON_BOW
+- iconUrl: /genshin/weapons/14520.png
+  id: '14520'
+  mainStat: ELEMENTAL_MASTERY
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 264.61440000000005
+  name: Nightweaver's Looking Glass
+  rarity: 5
+  type: WEAPON_CATALYST
+- iconUrl: /genshin/weapons/14522.png
+  id: '14522'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 88.2048
+  name: Nocturne's Curtain Call
+  rarity: 5
+  type: WEAPON_CATALYST
 - iconUrl: /genshin/weapons/14415.png
   id: '14415'
   mainStat: ATK_PERCENT
@@ -1046,6 +1199,15 @@
   name: Prospector's Drill
   rarity: 4
   type: WEAPON_POLE
+- iconUrl: /genshin/weapons/13433.png
+  id: '13433'
+  mainStat: ATK_PERCENT
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 41.346
+  name: Prospector's Shovel
+  rarity: 4
+  type: WEAPON_POLE
 - iconUrl: /genshin/weapons/14406.png
   id: '14406'
   mainStat: HP_PERCENT
@@ -1091,6 +1253,15 @@
   name: Prototype Starglitter
   rarity: 4
   type: WEAPON_POLE
+- iconUrl: /genshin/weapons/15434.png
+  id: '15434'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 509.605949
+    mainStat: 45.940000000000005
+  name: Rainbow Serpent's Rain Bow
+  rarity: 4
+  type: WEAPON_BOW
 - iconUrl: /genshin/weapons/12405.png
   id: '12405'
   mainStat: ELEMENTAL_MASTERY
@@ -1136,6 +1307,15 @@
   name: Redhorn Stonethresher
   rarity: 5
   type: WEAPON_CLAYMORE
+- iconUrl: /genshin/weapons/14521.png
+  id: '14521'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 541.829758
+    mainStat: 88.2048
+  name: Reliquary of Truth
+  rarity: 5
+  type: WEAPON_CATALYST
 - iconUrl: /genshin/weapons/13425.png
   id: '13425'
   mainStat: HP_PERCENT
@@ -1208,6 +1388,15 @@
   name: Rust
   rarity: 4
   type: WEAPON_BOW
+- iconUrl: /genshin/weapons/13434.png
+  id: '13434'
+  mainStat: CRIT_RATE
+  maxLvlStats:
+    ATK: 620.0329535
+    mainStat: 9.188
+  name: Sacrificer's Staff
+  rarity: 4
+  type: WEAPON_POLE
 - iconUrl: /genshin/weapons/15403.png
   id: '15403'
   mainStat: ENERGY_RECHARGE
@@ -1287,6 +1476,15 @@
   name: Sequence of Solitude
   rarity: 4
   type: WEAPON_BOW
+- iconUrl: /genshin/weapons/11433.png
+  id: '11433'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 61.25318020000001
+  name: Serenity's Call
+  rarity: 4
+  type: WEAPON_SWORD_ONE_HAND
 - iconUrl: /genshin/weapons/12409.png
   id: '12409'
   mainStat: CRIT_RATE
@@ -1392,6 +1590,15 @@
     mainStat: 31.239200000000007
   name: Slingshot
   rarity: 3
+  type: WEAPON_BOW
+- iconUrl: /genshin/weapons/15433.png
+  id: '15433'
+  mainStat: ENERGY_RECHARGE
+  maxLvlStats:
+    ATK: 454.36315250000007
+    mainStat: 61.25318020000001
+  name: Snare Hook
+  rarity: 4
   type: WEAPON_BOW
 - iconUrl: /genshin/weapons/12411.png
   id: '12411'
@@ -1582,6 +1789,15 @@
   name: '"The Catch"'
   rarity: 4
   type: WEAPON_POLE
+- iconUrl: /genshin/weapons/15515.png
+  id: '15515'
+  mainStat: CRIT_DMG
+  maxLvlStats:
+    ATK: 674.3345459999999
+    mainStat: 44.1024
+  name: The Daybreak Chronicles
+  rarity: 5
+  type: WEAPON_BOW
 - iconUrl: /genshin/weapons/11427.png
   id: '11427'
   mainStat: HP_PERCENT

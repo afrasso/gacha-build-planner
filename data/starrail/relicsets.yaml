@@ -623,6 +623,214 @@
     - 4
   category: CAVERN_RELIC
 - hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/125.png
+  iconUrls:
+    BODY: /starrail/relics/125_3.png
+    FOOT: /starrail/relics/125_4.png
+    HAND: /starrail/relics/125_2.png
+    HEAD: /starrail/relics/125_1.png
+    NECK: /starrail/relics/125_6.png
+    OBJECT: /starrail/relics/125_5.png
+  id: '125'
+  name: Warrior Goddess's Winged Helm
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/126.png
+  iconUrls:
+    BODY: /starrail/relics/126_3.png
+    FOOT: /starrail/relics/126_4.png
+    HAND: /starrail/relics/126_2.png
+    HEAD: /starrail/relics/126_1.png
+    NECK: /starrail/relics/126_6.png
+    OBJECT: /starrail/relics/126_5.png
+  id: '126'
+  name: Captain's Navigator Hat
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/127.png
+  iconUrls:
+    BODY: /starrail/relics/127_3.png
+    FOOT: /starrail/relics/127_4.png
+    HAND: /starrail/relics/127_2.png
+    HEAD: /starrail/relics/127_1.png
+    NECK: /starrail/relics/127_6.png
+    OBJECT: /starrail/relics/127_5.png
+  id: '127'
+  name: Deliverer's Hood
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/128.png
+  iconUrls:
+    BODY: /starrail/relics/128_3.png
+    FOOT: /starrail/relics/128_4.png
+    HAND: /starrail/relics/128_2.png
+    HEAD: /starrail/relics/128_1.png
+    NECK: /starrail/relics/128_6.png
+    OBJECT: /starrail/relics/128_5.png
+  id: '128'
+  name: Recluse's Wide-Brimmed Fedora
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/129.png
+  iconUrls:
+    BODY: /starrail/relics/129_3.png
+    FOOT: /starrail/relics/129_4.png
+    HAND: /starrail/relics/129_2.png
+    HEAD: /starrail/relics/129_1.png
+    NECK: /starrail/relics/129_6.png
+    OBJECT: /starrail/relics/129_5.png
+  id: '129'
+  name: Magical Girl's Shining Medal
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/130.png
+  iconUrls:
+    BODY: /starrail/relics/130_3.png
+    FOOT: /starrail/relics/130_4.png
+    HAND: /starrail/relics/130_2.png
+    HEAD: /starrail/relics/130_1.png
+    NECK: /starrail/relics/130_6.png
+    OBJECT: /starrail/relics/130_5.png
+  id: '130'
+  name: Diviner's Extrapolation Jade Abacus
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/131.png
+  iconUrls:
+    BODY: /starrail/relics/131_3.png
+    FOOT: /starrail/relics/131_4.png
+    HAND: /starrail/relics/131_2.png
+    HEAD: /starrail/relics/131_1.png
+    NECK: /starrail/relics/131_6.png
+    OBJECT: /starrail/relics/131_5.png
+  id: '131'
+  name: Navigator's Deep Space Mirror
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
+    BODY: true
+    FOOT: true
+    HAND: true
+    HEAD: true
+    NECK: false
+    OBJECT: false
+  iconUrl: /starrail/relicsets/132.png
+  iconUrls:
+    BODY: /starrail/relics/132_3.png
+    FOOT: /starrail/relics/132_4.png
+    HAND: /starrail/relics/132_2.png
+    HEAD: /starrail/relics/132_1.png
+    NECK: /starrail/relics/132_6.png
+    OBJECT: /starrail/relics/132_5.png
+  id: '132'
+  name: Smith's Fire Beast Mask
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+  category: CAVERN_RELIC
+- hasArtifactTypes:
     BODY: false
     FOOT: false
     HAND: false
@@ -1114,6 +1322,156 @@
     OBJECT: /starrail/relics/320_5.png
   id: '320'
   name: Grove of Epiphany's Pondering Colossus
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/321.png
+  iconUrls:
+    BODY: /starrail/relics/321_3.png
+    FOOT: /starrail/relics/321_4.png
+    HAND: /starrail/relics/321_2.png
+    HEAD: /starrail/relics/321_1.png
+    NECK: /starrail/relics/321_6.png
+    OBJECT: /starrail/relics/321_5.png
+  id: '321'
+  name: Membrance Maze's Serene Treehouse
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/322.png
+  iconUrls:
+    BODY: /starrail/relics/322_3.png
+    FOOT: /starrail/relics/322_4.png
+    HAND: /starrail/relics/322_2.png
+    HEAD: /starrail/relics/322_1.png
+    NECK: /starrail/relics/322_6.png
+    OBJECT: /starrail/relics/322_5.png
+  id: '322'
+  name: Warbling Shores' Blazing Beacon
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/323.png
+  iconUrls:
+    BODY: /starrail/relics/323_3.png
+    FOOT: /starrail/relics/323_4.png
+    HAND: /starrail/relics/323_2.png
+    HEAD: /starrail/relics/323_1.png
+    NECK: /starrail/relics/323_6.png
+    OBJECT: /starrail/relics/323_5.png
+  id: '323'
+  name: Last West Wind of Amphoreus
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/324.png
+  iconUrls:
+    BODY: /starrail/relics/324_3.png
+    FOOT: /starrail/relics/324_4.png
+    HAND: /starrail/relics/324_2.png
+    HEAD: /starrail/relics/324_1.png
+    NECK: /starrail/relics/324_6.png
+    OBJECT: /starrail/relics/324_5.png
+  id: '324'
+  name: Livestream's Protean Vistas
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/325.png
+  iconUrls:
+    BODY: /starrail/relics/325_3.png
+    FOOT: /starrail/relics/325_4.png
+    HAND: /starrail/relics/325_2.png
+    HEAD: /starrail/relics/325_1.png
+    NECK: /starrail/relics/325_6.png
+    OBJECT: /starrail/relics/325_5.png
+  id: '325'
+  name: Punklorde's Rainbow City
+  rarities:
+    - 2
+    - 3
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+  category: PLANAR_ORNAMENT
+- hasArtifactTypes:
+    BODY: false
+    FOOT: false
+    HAND: false
+    HEAD: false
+    NECK: true
+    OBJECT: true
+  iconUrl: /starrail/relicsets/326.png
+  iconUrls:
+    BODY: /starrail/relics/326_3.png
+    FOOT: /starrail/relics/326_4.png
+    HAND: /starrail/relics/326_2.png
+    HEAD: /starrail/relics/326_1.png
+    NECK: /starrail/relics/326_6.png
+    OBJECT: /starrail/relics/326_5.png
+  id: '326'
+  name: Astropolis Media Headquarters
   rarities:
     - 2
     - 3

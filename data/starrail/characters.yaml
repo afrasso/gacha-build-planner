@@ -134,6 +134,36 @@
     DEF_PERCENT: 0.225
     CRIT_RATE: 0.066999999
 - combatType: Wind
+  iconUrl: /starrail/characters/1014.png
+  id: '1014'
+  maxLvlStats:
+    ATK: 601.5239999999999
+    DEF: 654.885
+    HP: 1241.8560000000002
+    SPD: 101
+  name: Saber
+  path: Warrior
+  rarity: 5
+  statTraces:
+    DMG_BONUS_WIND: 0.224
+    CRIT_RATE: 0.119999999
+    HP_PERCENT: 0.1
+- combatType: Quantum
+  iconUrl: /starrail/characters/1015.png
+  id: '1015'
+  maxLvlStats:
+    ATK: 620.9280000000001
+    DEF: 485.1
+    HP: 1164.2399999999998
+    SPD: 105
+  name: Archer
+  path: Rogue
+  rarity: 5
+  statTraces:
+    DMG_BONUS_QUANTUM: 0.224
+    ATK_PERCENT: 0.18
+    CRIT_RATE: 0.066999999
+- combatType: Wind
   iconUrl: /starrail/characters/1101.png
   id: '1101'
   maxLvlStats:
@@ -883,6 +913,21 @@
     ATK_PERCENT: 0.28
     SPD: 9
     BREAK_EFF: 0.133
+- combatType: Fire
+  iconUrl: /starrail/characters/1321.png
+  id: '1321'
+  maxLvlStats:
+    ATK: 679.1400000000001
+    DEF: 606.375
+    HP: 1086.624
+    SPD: 96
+  name: The Dahlia
+  path: Warlock
+  rarity: 5
+  statTraces:
+    BREAK_EFF: 0.373
+    EFF_RES: 0.18
+    SPD: 5
 - combatType: Ice
   iconUrl: /starrail/characters/1401.png
   id: '1401'
@@ -959,6 +1004,21 @@
     CRIT_RATE: 0.119999999
     HP_PERCENT: 0.1
 - combatType: Quantum
+  iconUrl: /starrail/characters/1406.png
+  id: '1406'
+  maxLvlStats:
+    ATK: 640.332
+    DEF: 509.355
+    HP: 931.392
+    SPD: 106
+  name: Cipher
+  path: Warlock
+  rarity: 5
+  statTraces:
+    SPD: 14
+    DMG_BONUS_QUANTUM: 0.14400000000000002
+    EFF_HIT_RATE: 0.1
+- combatType: Quantum
   iconUrl: /starrail/characters/1407.png
   id: '1407'
   maxLvlStats:
@@ -973,6 +1033,201 @@
     CRIT_RATE: 0.186999998
     DMG_BONUS_QUANTUM: 0.14400000000000002
     CRIT_DMG: 0.133
+- combatType: Physical
+  iconUrl: /starrail/characters/1408.png
+  id: '1408'
+  maxLvlStats:
+    ATK: 582.1199999999999
+    DEF: 703.395
+    HP: 1435.8960000000002
+    SPD: 94
+  name: Phainon
+  path: Warrior
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    CRIT_RATE: 0.119999999
+    SPD: 5
+- combatType: Wind
+  iconUrl: /starrail/characters/1409.png
+  id: '1409'
+  maxLvlStats:
+    ATK: 388.08000000000004
+    DEF: 630.6300000000001
+    HP: 1086.624
+    SPD: 110
+  name: Hyacine
+  path: Memory
+  rarity: 5
+  statTraces:
+    SPD: 14
+    EFF_RES: 0.18
+    HP_PERCENT: 0.1
+- combatType: Physical
+  iconUrl: /starrail/characters/1410.png
+  id: '1410'
+  maxLvlStats:
+    ATK: 601.5239999999999
+    DEF: 485.1
+    HP: 1203.0479999999998
+    SPD: 102
+  name: Hysilens
+  path: Warlock
+  rarity: 5
+  statTraces:
+    SPD: 14
+    ATK_PERCENT: 0.18
+    EFF_HIT_RATE: 0.1
+- combatType: Wind
+  iconUrl: /starrail/characters/1412.png
+  id: '1412'
+  maxLvlStats:
+    ATK: 620.9280000000001
+    DEF: 485.1
+    HP: 1358.2800000000002
+    SPD: 99
+  name: Cerydra
+  path: Shaman
+  rarity: 5
+  statTraces:
+    DMG_BONUS_WIND: 0.224
+    ATK_PERCENT: 0.18
+    HP_PERCENT: 0.1
+- combatType: Ice
+  iconUrl: /starrail/characters/1413.png
+  id: '1413'
+  maxLvlStats:
+    ATK: 543.312
+    DEF: 582.1199999999999
+    HP: 1319.4720000000002
+    SPD: 99
+  name: Evernight
+  path: Memory
+  rarity: 5
+  statTraces:
+    CRIT_RATE: 0.186999998
+    HP_PERCENT: 0.18
+    CRIT_DMG: 0.133
+- combatType: Physical
+  iconUrl: /starrail/characters/1414.png
+  id: '1414'
+  maxLvlStats:
+    ATK: 582.1199999999999
+    DEF: 776.1600000000001
+    HP: 1047.816
+    SPD: 97
+  name: Dan Heng • Permansor Terrae
+  path: Knight
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    DEF_PERCENT: 0.225
+    SPD: 5
+- combatType: Ice
+  iconUrl: /starrail/characters/1415.png
+  id: '1415'
+  maxLvlStats:
+    ATK: 446.29200000000003
+    DEF: 582.1199999999999
+    HP: 1397.088
+    SPD: 101
+  name: Cyrene
+  path: Memory
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    SPD: 9
+    HP_PERCENT: 0.1
+- combatType: Fire
+  iconUrl: /starrail/characters/1501.png
+  id: '1501'
+  maxLvlStats:
+    ATK: 640.332
+    DEF: 460.845
+    HP: 1047.816
+    SPD: 107
+  name: Sparxie
+  path: Elation
+  rarity: 5
+  statTraces:
+    DMG_BONUS_ELATION: 0.28
+    CRIT_RATE: 0.119999999
+    CRIT_DMG: 0.133
+- combatType: Physical
+  iconUrl: /starrail/characters/1502.png
+  id: '1502'
+  maxLvlStats:
+    ATK: 465.696
+    DEF: 654.885
+    HP: 1241.8560000000002
+    SPD: 101
+  name: Yao Guang
+  path: Elation
+  rarity: 5
+  statTraces:
+    CRIT_RATE: 0.186999998
+    SPD: 9
+    DMG_BONUS_ELATION: 0.1
+- combatType: Thunder
+  iconUrl: /starrail/characters/1504.png
+  id: '1504'
+  maxLvlStats:
+    ATK: 776.1600000000001
+    DEF: 388.08000000000004
+    HP: 853.7760000000001
+    SPD: 106
+  name: Ashveil
+  path: Rogue
+  rarity: 5
+  statTraces:
+    CRIT_DMG: 0.373
+    DMG_BONUS_LIGHTNING: 0.14400000000000002
+    ATK_PERCENT: 0.1
+- combatType: Physical
+  iconUrl: /starrail/characters/1505.png
+  id: '1505'
+  maxLvlStats:
+    ATK: 737.3520000000001
+    DEF: 460.845
+    HP: 1047.816
+    SPD: 104
+  name: Evanescia
+  path: Elation
+  rarity: 5
+  statTraces:
+    CRIT_RATE: 0.186999998
+    DMG_BONUS_ELATION: 0.18
+    SPD: 5
+- combatType: Imaginary
+  iconUrl: /starrail/characters/1506.png
+  id: '1506'
+  maxLvlStats:
+    ATK: 388.08000000000004
+    DEF: 654.885
+    HP: 1047.816
+    SPD: 110
+  name: Silver Wolf LV.<unbreak>999</unbreak>
+  path: Elation
+  rarity: 5
+  statTraces:
+    CRIT_RATE: 0.186999998
+    SPD: 9
+    DMG_BONUS_ELATION: 0.1
+- combatType: Fire
+  iconUrl: /starrail/characters/1507.png
+  id: '1507'
+  maxLvlStats:
+    ATK: 543.312
+    DEF: 485.1
+    HP: 1358.2800000000002
+    SPD: 107
+  name: Mortenax Blade
+  path: Warlock
+  rarity: 5
+  statTraces:
+    DMG_BONUS_FIRE: 0.224
+    CRIT_RATE: 0.119999999
+    HP_PERCENT: 0.1
 - combatType: Physical
   iconUrl: /starrail/characters/8001.png
   id: '8001'
@@ -1033,3 +1288,18 @@
     CRIT_DMG: 0.373
     ATK_PERCENT: 0.14
     HP_PERCENT: 0.14
+- combatType: Thunder
+  iconUrl: /starrail/characters/8009.png
+  id: '8009'
+  maxLvlStats:
+    ATK: 465.696
+    DEF: 630.6300000000001
+    HP: 1086.624
+    SPD: 106
+  name: Trailblazer (Elation)
+  path: Elation
+  rarity: 5
+  statTraces:
+    ATK_PERCENT: 0.28
+    CRIT_RATE: 0.119999999
+    CRIT_DMG: 0.133

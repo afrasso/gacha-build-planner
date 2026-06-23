@@ -18,6 +18,7 @@ enum OverallStatKey {
   CRIT_DMG = "CRIT_DMG",
   CRIT_RATE = "CRIT_RATE",
   DEF = "DEF",
+  DMG_BONUS_ELATION = "DMG_BONUS_ELATION",
   DMG_BONUS_FIRE = "DMG_BONUS_FIRE",
   DMG_BONUS_ICE = "DMG_BONUS_ICE",
   DMG_BONUS_IMAGINARY = "DMG_BONUS_IMAGINARY",
@@ -41,6 +42,7 @@ enum StatKey {
   CRIT_RATE = "CRIT_RATE",
   DEF_FLAT = "DEF_FLAT",
   DEF_PERCENT = "DEF_PERCENT",
+  DMG_BONUS_ELATION = "DMG_BONUS_ELATION",
   DMG_BONUS_FIRE = "DMG_BONUS_FIRE",
   DMG_BONUS_ICE = "DMG_BONUS_ICE",
   DMG_BONUS_IMAGINARY = "DMG_BONUS_IMAGINARY",
@@ -192,6 +194,16 @@ export const calculateStats = ({
           return acc;
         case OverallStatKey.DEF:
           acc[key] = calculateDef();
+          return acc;
+        case OverallStatKey.DMG_BONUS_ELATION:
+          acc[key] = round(
+            calculateStandardStat({
+              artifacts,
+              dataContext,
+              statKey: StatKey.DMG_BONUS_ELATION,
+              weapon,
+            })
+          );
           return acc;
         case OverallStatKey.DMG_BONUS_FIRE:
           acc[key] = round(

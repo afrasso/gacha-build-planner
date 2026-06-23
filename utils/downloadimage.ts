@@ -33,10 +33,12 @@ const downloadImage = async ({
       });
     });
   } catch (err) {
-    if (err instanceof AxiosError && err.status === 404) {
-      console.warn(`File not found at ${url}.`);
-    } else {
-      console.error(`Error downloading image from ${url}: ${err}`);
+    if (verbose) {
+      if (err instanceof AxiosError && err.status === 404) {
+        console.warn(`File not found at ${url}.`);
+      } else {
+        console.error(`Error downloading image from ${url}: ${err}`);
+      }
     }
     throw err;
   }

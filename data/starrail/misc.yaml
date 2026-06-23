@@ -476,6 +476,9 @@ overallStats:
   - css: drop-shadow-outline dark:drop-shadow-none
     iconUrl: /starrail/icons/imaginary.png
     key: DMG_BONUS_IMAGINARY
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/elation.png
+    key: DMG_BONUS_ELATION
 stats:
   # For now, assume flat stats don't contribute to overall stats.
   - css: drop-shadow-outline dark:drop-shadow-none
@@ -517,6 +520,10 @@ stats:
     iconUrl: /starrail/icons/imaginary.png
     key: DMG_BONUS_IMAGINARY
     overallStatKey: DMG_BONUS_IMAGINARY
+  - css: drop-shadow-outline dark:drop-shadow-none
+    iconUrl: /starrail/icons/elation.png
+    key: DMG_BONUS_ELATION
+    overallStatKey: DMG_BONUS_ELATION
   - css: drop-shadow-outline dark:drop-shadow-none
     iconUrl: /starrail/icons/lightning.png
     key: DMG_BONUS_LIGHTNING

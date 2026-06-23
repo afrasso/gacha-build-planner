@@ -4,6 +4,27 @@
     GOBLET: true
     PLUME: true
     SANDS: true
+  iconUrl: /genshin/artifacts/15044_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15044_5.png
+    FLOWER: /genshin/artifacts/15044_1.png
+    GOBLET: /genshin/artifacts/15044_4.png
+    PLUME: /genshin/artifacts/15044_2.png
+    SANDS: /genshin/artifacts/15044_3.png
+  id: '15044'
+  name: A Day Carved From Rising Winds
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
   iconUrl: /genshin/artifacts/10010_1.png
   iconUrls:
     CIRCLET: /genshin/artifacts/10010_5.png
@@ -35,6 +56,27 @@
     SANDS: /genshin/artifacts/15014_3.png
   id: '15014'
   name: Archaic Petra
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
+  iconUrl: /genshin/artifacts/15043_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15043_5.png
+    FLOWER: /genshin/artifacts/15043_1.png
+    GOBLET: /genshin/artifacts/15043_4.png
+    PLUME: /genshin/artifacts/15043_2.png
+    SANDS: /genshin/artifacts/15043_3.png
+  id: '15043'
+  name: Aubade of Morningstar and Moon
   rarities:
     - 4
     - 5
@@ -131,6 +173,27 @@
     GOBLET: true
     PLUME: true
     SANDS: true
+  iconUrl: /genshin/artifacts/15045_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15045_5.png
+    FLOWER: /genshin/artifacts/15045_1.png
+    GOBLET: /genshin/artifacts/15045_4.png
+    PLUME: /genshin/artifacts/15045_2.png
+    SANDS: /genshin/artifacts/15045_3.png
+  id: '15045'
+  name: Celestial Gift
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
   iconUrl: /genshin/artifacts/15006_1.png
   iconUrls:
     CIRCLET: /genshin/artifacts/15006_5.png
@@ -203,6 +266,27 @@
     SANDS: /genshin/artifacts/15027_3.png
   id: '15027'
   name: Desert Pavilion Chronicle
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
+  iconUrl: /genshin/artifacts/15046_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15046_5.png
+    FLOWER: /genshin/artifacts/15046_1.png
+    GOBLET: /genshin/artifacts/15046_4.png
+    PLUME: /genshin/artifacts/15046_2.png
+    SANDS: /genshin/artifacts/15046_3.png
+  id: '15046'
+  name: Disenchantment in Deep Shadow
   rarities:
     - 4
     - 5
@@ -594,6 +678,27 @@
     GOBLET: true
     PLUME: true
     SANDS: true
+  iconUrl: /genshin/artifacts/15041_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15041_5.png
+    FLOWER: /genshin/artifacts/15041_1.png
+    GOBLET: /genshin/artifacts/15041_4.png
+    PLUME: /genshin/artifacts/15041_2.png
+    SANDS: /genshin/artifacts/15041_3.png
+  id: '15041'
+  name: Night of the Sky's Unveiling
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
   iconUrl: /genshin/artifacts/15034_1.png
   iconUrls:
     CIRCLET: /genshin/artifacts/15034_5.png
@@ -893,6 +998,27 @@
     SANDS: /genshin/artifacts/15019_3.png
   id: '15019'
   name: Shimenawa's Reminiscence
+  rarities:
+    - 4
+    - 5
+  setBonusCounts:
+    - 2
+    - 4
+- hasArtifactTypes:
+    CIRCLET: true
+    FLOWER: true
+    GOBLET: true
+    PLUME: true
+    SANDS: true
+  iconUrl: /genshin/artifacts/15042_1.png
+  iconUrls:
+    CIRCLET: /genshin/artifacts/15042_5.png
+    FLOWER: /genshin/artifacts/15042_1.png
+    GOBLET: /genshin/artifacts/15042_4.png
+    PLUME: /genshin/artifacts/15042_2.png
+    SANDS: /genshin/artifacts/15042_3.png
+  id: '15042'
+  name: Silken Moon's Serenade
   rarities:
     - 4
     - 5

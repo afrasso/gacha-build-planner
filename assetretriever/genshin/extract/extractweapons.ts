@@ -2,8 +2,9 @@ import genshindb from "genshin-db";
 import _ from "lodash";
 import path from "path";
 
+import { buildWeaponIconUrls } from "@/assetretriever/genshin/buildiconurls";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
-import downloadImage from "@/utils/downloadimage";
+import downloadImageWithFallback from "@/utils/downloadimagewithfallback";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedWeaponIconDownload } from "../types";
@@ -60,21 +61,12 @@ const extractWeapons = async ({
     weapons.push(weapon);
 
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
-      const url = dbWeapon.images.mihoyo_awakenIcon;
-      if (!url) {
-        console.warn(`Icon URL for ${dbWeapon.name} (${id}) does not exist.`);
+      const savePath = path.join(__publicdir, "genshin", "weapons", `${id}.png`);
+      const urls = buildWeaponIconUrls(dbWeapon.images);
+      const label = `${name} (${id})`;
+      const success = await downloadImageWithFallback({ label, savePath, urls, verbose });
+      if (!success) {
         failures.push({ id, name });
-      } else {
-        const savePath = path.join(__publicdir, "genshin", "weapons", `${id}.png`);
-        if (verbose) {
-          console.log(`Downloading icon for ${dbWeapon.name} (${id}) from ${url}`);
-        }
-        try {
-          await downloadImage({ savePath, url, verbose });
-        } catch (err) {
-          console.warn(`Error downloading icon for ${dbWeapon.name} (${dbWeapon.id}): ${err}`);
-          failures.push({ id, name });
-        }
       }
     }
   }

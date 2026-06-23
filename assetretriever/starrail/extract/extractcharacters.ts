@@ -2,8 +2,10 @@ import _ from "lodash";
 import path from "path";
 import { CharacterData as DBCharacterData, SkillLevel, StarRail } from "starrail.js";
 
+import { buildCharacterFallbackUrls } from "@/assetretriever/starrail/buildstaticapiurls";
+import downloadStarrailIcon from "@/assetretriever/starrail/downloadstarrailicon";
 import { CharacterData, MaxLvlStats } from "@/types/starrail";
-import { __datadir } from "@/utils/directoryutils";
+import { __datadir, __publicdir } from "@/utils/directoryutils";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import { FailedCharacterIconDownload } from "../types";
@@ -82,8 +84,18 @@ const extractCharacters = async ({
     characters.push(character);
 
     if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
-      // Download all images from the wiki.
-      failures.push({ id, name, pathName });
+      const savePath = path.join(__publicdir, "starrail", "characters", `${id}.png`);
+      const label = `${name} (${id})`;
+      const success = await downloadStarrailIcon({
+        explicitFallbackUrls: buildCharacterFallbackUrls(id),
+        icon: dbCharacter.icon,
+        label,
+        savePath,
+        verbose,
+      });
+      if (!success) {
+        failures.push({ id, name, pathName });
+      }
     }
   }
 

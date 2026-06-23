@@ -1,9 +1,10 @@
 import _ from "lodash";
 import path from "path";
-import { StarRail } from "starrail.js";
+import { ImageAssets, StarRail } from "starrail.js";
 
+import { buildRelicFallbackUrls, buildRelicSetFallbackUrls } from "@/assetretriever/starrail/buildstaticapiurls";
+import downloadStarrailIcon from "@/assetretriever/starrail/downloadstarrailicon";
 import { __datadir, __publicdir } from "@/utils/directoryutils";
-import downloadImage from "@/utils/downloadimage";
 import { saveYaml } from "@/utils/yamlhelper";
 
 import {
@@ -34,31 +35,33 @@ const determineCategory = (relicSet: ArtifactSet): ArtifactSet => {
 const downloadRelicIcon = async ({
   downloadIcons,
   failures,
+  icon,
   setId,
   setIds,
   setName,
   type,
-  url,
   verbose,
 }: {
   downloadIcons: boolean;
   failures: FailedRelicIconDownload[];
+  icon: ImageAssets;
   setId: string;
   setIds: string[];
   setName: string;
   type: ArtifactType;
-  url: string;
   verbose: boolean;
 }) => {
   if (downloadIcons && (_.isEmpty(setIds) || setIds.includes(setId))) {
     const savePath = path.join(__publicdir, "starrail", "relics", `${setId}${getRelicIconSuffix(type)}.png`);
-    if (verbose) {
-      console.log(`Downloading icon for ${type} of ${setName} (${setId}) from ${url}.`);
-    }
-    try {
-      await downloadImage({ savePath, url, verbose });
-    } catch (err) {
-      console.warn(`Error downloading icon for ${type} of ${setName} (${setId}).`, err);
+    const label = `${type} of ${setName} (${setId})`;
+    const success = await downloadStarrailIcon({
+      explicitFallbackUrls: buildRelicFallbackUrls({ setId, type }),
+      icon,
+      label,
+      savePath,
+      verbose,
+    });
+    if (!success) {
       failures.push({ setId, setName, type });
     }
   }
@@ -67,32 +70,35 @@ const downloadRelicIcon = async ({
 const downloadRelicSetIcon = async ({
   downloadIcons,
   failures,
+  hasArtifactTypes,
+  icon,
   id,
   ids,
   name,
-  url,
+  type: _type,
   verbose,
 }: {
   downloadIcons: boolean;
   failures: FailedRelicSetIconDownload[];
+  hasArtifactTypes: Partial<Record<ArtifactType, boolean>>;
+  icon: ImageAssets;
   id: string;
   ids: string[];
   name: string;
-  url: string;
+  type: ArtifactType;
   verbose: boolean;
 }) => {
-  if (downloadIcons && (_.isEmpty(ids) || ids.includes(id)) && url) {
-    try {
-      if (verbose) {
-        console.log(`Downloading icon for ${name} (${id}) from ${url}`);
-      }
-      await downloadImage({
-        savePath: path.join(__publicdir, "starrail", "relicsets", `${id}.png`),
-        url,
-        verbose,
-      });
-    } catch (err) {
-      console.warn(`Error downloading icon for ${name} (${id}): ${err}`);
+  if (downloadIcons && (_.isEmpty(ids) || ids.includes(id))) {
+    const savePath = path.join(__publicdir, "starrail", "relicsets", `${id}.png`);
+    const label = `${name} (${id})`;
+    const success = await downloadStarrailIcon({
+      explicitFallbackUrls: buildRelicSetFallbackUrls({ hasArtifactTypes, setId: id }),
+      icon,
+      label,
+      savePath,
+      verbose,
+    });
+    if (!success) {
       failures.push({ id, name });
     }
   }
@@ -128,10 +134,12 @@ const extractRelicSets = async ({
       await downloadRelicSetIcon({
         downloadIcons,
         failures: setFailures,
+        hasArtifactTypes: { [type]: true },
+        icon: set.icon,
         id: setId,
         ids,
         name: setName,
-        url: set.icon.url,
+        type,
         verbose,
       });
     }
@@ -145,11 +153,11 @@ const extractRelicSets = async ({
     await downloadRelicIcon({
       downloadIcons,
       failures,
+      icon: dbRelic.icon,
       setId,
       setIds: ids,
       setName,
       type,
-      url: dbRelic.icon.url,
       verbose,
     });
   }

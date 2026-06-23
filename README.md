@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gacha Build Planner
 
-## Getting Started
+A web app for planning and evaluating character builds in **Genshin Impact** and **Honkai: Star Rail**.
 
-First, run the development server:
+Track artifacts, compare builds, score how well pieces fit your goals, and import/export your inventory. Most of your data stays in the browser; sign in if you want to sync builds to the cloud.
+
+Live app: [gacha-build-planner.vercel.app](https://gacha-build-planner.vercel.app)
+
+Backend API (auth + cloud sync): [gacha-build-planner-api](https://github.com/afrasso/gacha-build-planner-api)
+
+---
+
+## What you can do
+
+- **Plan builds** — Pick a character, weapon/light cone, artifact/relic sets, and target stats.
+- **Manage artifacts** — Add, edit, sort, and rate pieces in your local collection.
+- **Evaluate fit** — See satisfaction scores, top builds, and artifact metrics for a piece.
+- **Import & export** — Genshin GOOD format and Star Rail HSR Scanner format.
+- **Sync (optional)** — Log in with Discord, Google, or Facebook to save one plan per account in the cloud.
+
+Build calculations run entirely in the browser. The API is only needed for login and cloud storage.
+
+---
+
+## Local development
+
+**Requirements:** Node.js 20+ and npm.
+
+```bash
+git clone https://github.com/afrasso/gacha-build-planner.git
+cd gacha-build-planner
+npm install
+```
+
+Create `.env.local` in the project root:
+
+```env
+API_URL=http://localhost:4000
+```
+
+`API_URL` must point at a running [gacha-build-planner-api](https://github.com/afrasso/gacha-build-planner-api) instance if you want login or cloud sync locally. The app still works offline for build planning without it.
+
+Start the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run start` | Run the production build |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run depcheck, lint, and unit tests |
+| `npm run retrieve-assets` | Regenerate game data and icons (maintainers) |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project layout (short tour)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Path | What's there |
+|------|----------------|
+| `app/genshin/`, `app/starrail/` | Game-specific pages |
+| `components/` | UI (builds, artifacts, settings, etc.) |
+| `calculation/` | Build and artifact scoring logic |
+| `data/` | Static game data (characters, sets, stats) |
+| `dataimport/` | Import/export formats |
+| `contexts/` | React providers (storage, auth, settings) |
 
-## Deploy on Vercel
+Game data lives in YAML under `data/`. User builds and artifacts are stored in IndexedDB in the browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+Bug reports and pull requests are welcome on [GitHub](https://github.com/afrasso/gacha-build-planner/issues).
+
+For agent-oriented architecture notes, see [AGENTS.md](./AGENTS.md).
+
+---
+
+## License
+
+UNLICENSED — private project by Anthony Frasso.
