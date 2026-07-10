@@ -20,7 +20,7 @@ export default defineConfig({
     },
     exclude: [".next/**", "dist/**", "node_modules/**"],
     globals: true,
-    include: ["__tests__/**/*.test.ts"],
+    include: ["__tests__/**/*.test.{ts,tsx}"],
     isolate: false,
     setupFiles: ["./setupTests.ts"],
   },
